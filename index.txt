@@ -1,0 +1,4 @@
+发布步骤：
+0、打开本项目的"终端"窗口(或者通过windows的资源管理器定位到本项目setup.py所在的目录)
+1、运行命令 "python setup.py sdist"
+2、运行命令 "twine upload dist/*"
