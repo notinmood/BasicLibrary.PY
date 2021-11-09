@@ -74,10 +74,6 @@ class ObjectHelper:
 
         return False
 
-    # @staticmethod
-    # def is_nan(data):
-    #     return data != data
-
     @staticmethod
     def get_type(data):
         """

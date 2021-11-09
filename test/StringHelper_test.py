@@ -157,3 +157,17 @@ def test_explode():
     actual = StringHelper.explode(whole, ".")
     expected = ["hello,china"]
     assert actual == expected
+
+
+def test_upper():
+    biz_data = "I love China!我爱中国！"
+    actual = StringHelper.upper(biz_data)
+    expected = "I LOVE CHINA!我爱中国！"
+    assert actual == expected
+
+
+def test_lower():
+    biz_data = "I love China!我爱中国！"
+    actual = StringHelper.lower(biz_data)
+    expected = "i love china!我爱中国！"
+    assert actual == expected

@@ -14,10 +14,10 @@ def test_contains_key():
     _dict['a'] = "AA"
     _dict['b'] = "BB"
     _dict['c'] = "CC"
-    actual = DictHelper.contain_key(_dict, 'a')
+    actual = DictHelper.is_contains_key(_dict, 'a')
     expected = True
     assert actual == expected
 
-    actual = DictHelper.contain_key(_dict, 'f')
+    actual = DictHelper.is_contains_key(_dict, 'f')
     expected = False
     assert actual == expected

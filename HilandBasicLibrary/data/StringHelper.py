@@ -148,3 +148,11 @@ class StringHelper:
         :return:
         """
         return original_with_placeholder.format(*args, **kwargs)
+
+    @staticmethod
+    def upper(original_string):
+        return original_string.upper()
+
+    @staticmethod
+    def lower(original_string):
+        return original_string.lower()
