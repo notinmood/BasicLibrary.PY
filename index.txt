@@ -9,3 +9,7 @@
 1、运行命令 "python setup.py sdist"
 2、运行命令 "twine upload dist/*"
 
+【二】其他
+将本项目需求的第三方软件包统一成requirements.txt文件的命令是：pip freeze > requirements.txt
+
+
