@@ -4,6 +4,13 @@ from builtins import *
 class ListHelper:
     @staticmethod
     def get_index(list_data, value, item_property=None):
+        """
+        获取某个元素在list中的index
+        :param list_data:
+        :param value:
+        :param item_property:
+        :return:
+        """
         if type(list_data) is not enumerate:
             list_data = enumerate(list_data)
 
@@ -77,6 +84,8 @@ class ListHelper:
         :return:
         """
         return list(set(list_left) ^ set(list_right))
+
+
 
 # def sort_2d(original_data,sort_info=None,reverse=False):
 #

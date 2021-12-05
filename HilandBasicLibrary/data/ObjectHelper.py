@@ -91,3 +91,13 @@ class ObjectHelper:
         :return:
         """
         return len(data)
+
+    @staticmethod
+    def is_instance(object_data, class_data):
+        """
+
+        :param object_data:
+        :param class_data:
+        :return:
+        """
+        return isinstance(object_data, class_data)

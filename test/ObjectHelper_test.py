@@ -107,3 +107,15 @@ def test_is_number():
     actual = ObjectHelper.is_number(2)
     expected = True
     assert actual == expected
+
+
+def test_get_type():
+    my_data = 123
+    actual = ObjectHelper.get_type(my_data)
+    expected = int
+    assert actual == expected
+
+    my_data = "123"
+    actual = ObjectHelper.get_type(my_data)
+    expected = str
+    assert actual == expected
