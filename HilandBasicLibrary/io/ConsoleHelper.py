@@ -1,3 +1,13 @@
+class ConsoleHelper:
+    @staticmethod
+    def echo(data):
+        """
+        本方法调用系统内部的print方法。本方法的目的是为了平滑PHP的使用体验。
+        :param data:
+        :return:
+        """
+        print(data)
+
 # from builtins import *
 #
 # from hiland import ConfigHelper
