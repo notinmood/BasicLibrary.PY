@@ -13,7 +13,7 @@ from setuptools import find_packages, setup, Command
 
 # Package meta-data.
 NAME = 'HilandBasicLibrary'
-DESCRIPTION = '公司级别的PYTHON库.'
+DESCRIPTION = '企业级的PYTHON库.'
 URL = 'https://github.com/notinmood/BasicLibrary.PY'
 EMAIL = '9727005@qq.com'
 AUTHOR = 'xiedali'
