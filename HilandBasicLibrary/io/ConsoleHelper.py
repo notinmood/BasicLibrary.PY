@@ -1,3 +1,7 @@
+import inspect
+import sys
+
+
 class ConsoleHelper:
     @staticmethod
     def echo(data):
@@ -7,6 +11,31 @@ class ConsoleHelper:
         :return:
         """
         print(data)
+
+    @staticmethod
+    def get_console_args():
+        """
+        获取控制台上输入的所有参数(包括命令本身和传递给命令的参数)
+        :return:
+        """
+        return sys.argv
+
+    @staticmethod
+    def get_console_arg(index=1):
+        """
+        获取控制台上输入的某个参数(默认取第一个参数(因为第0个是命令本身)，也就是除命令名称外的第一个真实的参数)
+        :param index:
+        :return:
+        """
+        args_len = len(sys.argv)
+        if args_len > index:
+            arg_value = sys.argv[index]
+            return arg_value
+        else:
+            return None
+
+
+
 
 # from builtins import *
 #
