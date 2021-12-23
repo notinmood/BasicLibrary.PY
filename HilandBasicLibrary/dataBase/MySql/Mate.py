@@ -1,5 +1,4 @@
 import threading
-from builtins import *
 from timeit import default_timer
 
 import pymysql
