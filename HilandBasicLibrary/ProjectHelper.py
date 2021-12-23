@@ -8,4 +8,4 @@ class ProjectHelper:
         获取项目的物理根目录
         :return:
         """
-        return _ProjectHelper.get_root_physical_path()
+        return _ProjectHelper.ProjectHelper.get_root_physical_path()

@@ -1,36 +1,19 @@
 from builtins import *
 
 
-class Mate(object):
+class DatabaseMate(object):
     """
     TODO 各个继承的子类中，insert_one,insert_many的返回值类型和意义必须统一
     """
-    @staticmethod
-    def hello(name):
-        print("Hello " + name)
 
     def get_name(self):
-        print("mate in DatabaseMate " + __name__)
+        pass
 
     def interact_one(self, data, condition=None, is_exist_update=True):
         pass
-        # if condition is None:
-        #     condition = data
-        #
-        # data_existing = mh.find_one(self.collection, condition)
-        #
-        # if data_existing:
-        #     if is_exist_update:
-        #         return self.collection.update_one(condition, {"$set": data})
-        #     else:
-        #         return self.collection.replace_one(data_existing, data)
-        # else:
-        #     return self.collection.insert_one(data)
 
     def insert_one(self, data):
         pass
-        # res = mh.insert_one(self.collection, data)
-        # return res
 
     def insert_one_non_duplication(self, data, filter_condition=None):
         """
@@ -40,14 +23,6 @@ class Mate(object):
         :return:
         """
         pass
-        # if filter_condition is None:
-        #     filter_condition = data
-        #
-        # is_existing = mh.find_one(self.collection, filter_condition)
-        # if is_existing is None:
-        #     return mh.insert_one(self.collection, data)
-        # else:
-        #     return None
 
     def insert_many(self, data_list):
         pass

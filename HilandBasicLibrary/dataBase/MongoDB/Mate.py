@@ -1,9 +1,10 @@
 from builtins import *
 
-from hiland.dataBase import MongoDBHelper as mh, DatabaseMate
+from HilandBasicLibrary.dataBase.DatabaseMate import DatabaseMate
+from HilandBasicLibrary.dataBase.MongoDB.Helper import Helper as mh
 
 
-class Mate(DatabaseMate.Mate):
+class Mate(DatabaseMate):
     """ 各种query 中的数据 data 和 mongodb 文档中的一样"""
 
     def __init__(self, collection_name, database_name='', host='', port=0):

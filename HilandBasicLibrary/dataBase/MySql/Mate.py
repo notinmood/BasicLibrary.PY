@@ -4,17 +4,18 @@ from timeit import default_timer
 
 import pymysql
 
-from hiland import ConfigHelper as ch
-from hiland.data import StringHelper, ObjectHelper
-from hiland.dataBase import DatabaseMate, DatabaseHelper
-from hiland.dataBase.MysqlPool import MysqlPoolConfig, MysqlPool
-from hiland.io import ConsoleHelper
+from HilandBasicLibrary.ConfigHelper import ConfigHelper as ch
+from HilandBasicLibrary.data.StringHelper import StringHelper
+from HilandBasicLibrary.dataBase.DatabaseHelper import DatabaseHelper
+from HilandBasicLibrary.dataBase.DatabaseMate import DatabaseMate
+from HilandBasicLibrary.dataBase.MySql.Pool import Pool
+from HilandBasicLibrary.io.ConsoleHelper import ConsoleHelper
 
 # TODO find_in find_or 尚未处理
 lock = threading.Lock()
 
 
-class Mate(DatabaseMate.Mate):
+class Mate(DatabaseMate):
     def __init__(self, table_name, prefix_name=None, commit=True, log_time=True, log_label='总用时'):
         """
 
@@ -44,8 +45,7 @@ class Mate(DatabaseMate.Mate):
         return self.cursor
 
     def __connect(self):
-        db_config = MysqlPoolConfig()
-        connections_pool = MysqlPool(db_config)
+        connections_pool = Pool()
         self.conn = connections_pool.get_conn()
         return self.conn
 
@@ -83,7 +83,7 @@ class Mate(DatabaseMate.Mate):
             print('-- %s: %.6f 秒' % (self._log_label, diff))
 
     def get_name(self):
-        print("mate in  DatabaseMate" + __name__)
+        return "mate in  DatabaseMate: " + __name__
 
     def find_one(self, condition_dict, data_field={}):
         sql = DatabaseHelper.build_select_clause(condition_dict, self.table_name, data_field)
@@ -188,6 +188,7 @@ class Mate(DatabaseMate.Mate):
     def insert_many(self, entity_dict_list):
         row_count = 0
         need_execute_count = 0
+        # TODO:配置到ini文件内
         execute_count_once = 100
         sql = ""
         for item in entity_dict_list:
@@ -326,7 +327,7 @@ class Mate(DatabaseMate.Mate):
         try:
             return self.__query_detail(sql, params, fetch_mode)
         except pymysql.ProgrammingError:
-            ConsoleHelper.error("数据库连接错误，重试中...")
+            ConsoleHelper.echo("数据库连接错误，重试中...")
             self.__connect()
             return self.__query_detail(sql, params, fetch_mode)
 

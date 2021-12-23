@@ -3,10 +3,10 @@ from builtins import *
 import pymysql
 from dbutils.pooled_db import PooledDB
 
-from hiland import ConfigHelper as ch
+from HilandBasicLibrary.ConfigHelper import ConfigHelper as ch
 
 
-class MysqlPoolConfig(object):
+class _PoolConfig(object):
     def __init__(self):
         self.host = ch.get_config_item("db_mysql", "host")
         self.port = int(ch.get_config_item("db_mysql", "port", 3306))
@@ -38,8 +38,10 @@ class MysqlPoolConfig(object):
         self.reset = True
 
 
-class MysqlPool(object):
-    def __init__(self, config):
+class Pool(object):
+    def __init__(self):
+        config = _PoolConfig()
+
         self.__pool = PooledDB(creator=pymysql,
                                maxconnections=config.maxConnection,
                                mincached=config.minCached,
