@@ -8,14 +8,14 @@ class Helper:
     @classmethod
     def get_current_db(cls, database_name='', host='', port=0):
         if host == '':
-            host = ConfigHelper.get_config_item("db_mongodb", "host")
+            host = ConfigHelper.get_item("db_mongodb", "host")
 
         if port == 0:
-            port = ConfigHelper.get_config_item("db_mongodb", "port", 27017)
+            port = ConfigHelper.get_item("db_mongodb", "port", 27017)
             port = int(port)
 
         if database_name == '':
-            database_name = ConfigHelper.get_config_item("db_mongodb", "database")
+            database_name = ConfigHelper.get_item("db_mongodb", "database")
 
         _client = pymongo.MongoClient(host, port)
         _currentDB = _client[database_name]

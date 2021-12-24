@@ -1,5 +1,3 @@
-from builtins import *
-
 import pymysql
 from dbutils.pooled_db import PooledDB
 
@@ -8,12 +6,12 @@ from HilandBasicLibrary.ConfigHelper import ConfigHelper as ch
 
 class _PoolConfig(object):
     def __init__(self):
-        self.host = ch.get_config_item("db_mysql", "host")
-        self.port = int(ch.get_config_item("db_mysql", "port", 3306))
-        self.db = ch.get_config_item("db_mysql", "database")
-        self.user = ch.get_config_item("db_mysql", "user", "root")
-        self.password = ch.get_config_item("db_mysql", "password", "")
-        self.charset = ch.get_config_item("db_mysql", "charset", "utf8")
+        self.host = ch.get_item("db_mysql", "host")
+        self.port = int(ch.get_item("db_mysql", "port", 3306))
+        self.db = ch.get_item("db_mysql", "database")
+        self.user = ch.get_item("db_mysql", "user", "root")
+        self.password = ch.get_item("db_mysql", "password", "")
+        self.charset = ch.get_item("db_mysql", "charset", "utf8")
 
         # creator：数据库驱动模块，如常见的pymysql,pymssql,cx_Oracle模块。无默认值
         # mincached：初始化连接池时创建的连接数。默认为0，即初始化时不创建连接。(建议默认0，假如非0的话，在某些数据库不可用时，整个项目会启动不了)
@@ -31,7 +29,7 @@ class _PoolConfig(object):
         self.maxCached = 0
         self.maxShared = 0
         self.maxUsage = 0
-        self.maxConnection = int(ch.get_config_item("project_data", "database_connection_pool_count", 10))
+        self.maxConnection = int(ch.get_item("project_data", "database_connection_pool_count", 10))
 
         self.blocking = True
         self.setSession = None

@@ -27,7 +27,7 @@ class Mate(DatabaseMate):
         self._log_label = log_label
 
         if prefix_name is None:
-            prefix_name = ch.get_config_item("db_mysql", "table_prefix")
+            prefix_name = ch.get_item("db_mysql", "table_prefix")
 
         if prefix_name:
             self.table_name = prefix_name + table_name
@@ -299,7 +299,7 @@ class Mate(DatabaseMate):
         else:
             return None
 
-    def edit(self, sql, params=None, auto_close=True):
+    def exec(self, sql, params=None, auto_close=True):
         try:
             return self.__exec_detail(sql, params)
         except pymysql.ProgrammingError:
@@ -344,4 +344,14 @@ class Mate(DatabaseMate):
 
         lock.release()
 
+        return result
+
+    def ddl_get_table_definition(self, table_name):
+        """
+        获取表的定义语句
+        :param table_name: 数据库表的名称
+        :return:
+        """
+        sql = "show create table {0}".format(table_name)
+        result = self.exec(sql)
         return result

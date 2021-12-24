@@ -20,7 +20,7 @@ class DatabaseHelper:
         """
         result = ""
         last_key = ""
-        result = cls.__build_where_clause(condition_dict, result, last_key)
+        result = cls.__build_where_clause(condition_dict, last_key)
 
         result = StringHelper.remove_head(result, " ")
         result = StringHelper.remove_head(result, "AND")
@@ -28,7 +28,7 @@ class DatabaseHelper:
 
     # TODO 类似$gt等更多的查找条件的处理
     @classmethod
-    def __build_where_clause(cls, condition_dict, result, last_key):
+    def __build_where_clause(cls, condition_dict, last_key):
         result = ""
         if condition_dict:
             for key in condition_dict:
@@ -54,7 +54,7 @@ class DatabaseHelper:
 
                 value = condition_dict[key]
                 if type(value) is dict:
-                    result += cls.__build_where_clause(value, result, last_key)
+                    result += cls.__build_where_clause(value, last_key)
                 else:
                     value = cls.wrap_sql_value(value)
 

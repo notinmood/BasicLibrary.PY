@@ -190,7 +190,7 @@ class Mate(DatabaseMate):
         return res
 
     # --------改变表的结构--------------------------
-    def alter_add_fields(self, fields_name_value_dict, condition_dict={}):
+    def ddl_add_fields(self, fields_name_value_dict, condition_dict={}):
         """
 
         :param fields_name_value_dict: 需要添加的字段名称与值的字典
@@ -199,7 +199,7 @@ class Mate(DatabaseMate):
         """
         self.collection.update_many(condition_dict, {"$set": fields_name_value_dict})
 
-    def alter_remove_fields(self, fields_name_list, condition_dict={}):
+    def ddl_remove_fields(self, fields_name_list, condition_dict={}):
         """
         移除字段
         :param fields_name_list: 需要移除的字段名称信息（数据类型可以是list，set，dict）
@@ -218,7 +218,7 @@ class Mate(DatabaseMate):
 
         self.collection.update_many(condition_dict, {"$unset": fields_dict})
 
-    def alter_rename_fields(self, fields_old_new_name_dict, condition_dict={}):
+    def ddl_rename_fields(self, fields_old_new_name_dict, condition_dict={}):
         self.collection.update_many(condition_dict, {"$rename": fields_old_new_name_dict})
 
     # -----获取某字段中的最大值、最小值-------------------------------------------------

@@ -19,3 +19,10 @@ def test_static_construct():
     result = actual.table_name
     print(result)
     # HilandBasicLibrary.dataBase.MySql.Mate.Mate
+
+
+def test_ddl_get_table_definition():
+    actual = DatabaseClient.get_mate("my_user")
+    actual = actual.ddl_get_table_definition("my_user")
+    expected = ""
+    assert actual == expected

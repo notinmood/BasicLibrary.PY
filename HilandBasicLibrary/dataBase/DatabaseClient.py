@@ -1,8 +1,6 @@
-from builtins import *
-from builtins import __import__
-
 from HilandBasicLibrary.ConfigHelper import ConfigHelper as ch
 from HilandBasicLibrary.data.DictHelper import DictHelper
+from HilandBasicLibrary.dataBase.DatabaseMate import DatabaseMate
 
 
 class _MateContainer(object):
@@ -12,7 +10,7 @@ class _MateContainer(object):
 class DatabaseClient:
     @classmethod
     def __get_db_type_name(cls):
-        type_name = ch.get_config_item("db_type", "type_name", "MySql")
+        type_name = ch.get_item("db_type", "type_name", "MySql")
         return type_name
 
     @classmethod
@@ -37,7 +35,10 @@ class DatabaseClient:
             mate = module.Mate(table_name)
             _MateContainer.mate_dict[table_name] = mate
 
-            return mate
+            if isinstance(mate, DatabaseMate):
+                return mate
+            else:
+                return None
 
 # if __name__ == '__main__':
 #     print(__MateContainer.mate_dict)
