@@ -136,10 +136,10 @@ class DatabaseMate(object):
     def ddl_rename_fields(self, fields_old_new_name_dict, condition={}):
         pass
 
-    def ddl_get_table_definition(self, table_name):
+    def ddl_get_table_definition(self, table_name=None):
         """
         获取表的定义语句
-        :param table_name: 数据库表的名称
+        :param table_name: 数据库表的名称,如果为None的话就直接从mate的构造函数中取数据库表名称
         :return:
         """
         pass

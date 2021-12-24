@@ -9,6 +9,7 @@ from HilandBasicLibrary.dataBase.DatabaseHelper import DatabaseHelper
 from HilandBasicLibrary.dataBase.DatabaseMate import DatabaseMate
 from HilandBasicLibrary.dataBase.MySql.Pool import Pool
 from HilandBasicLibrary.io.ConsoleHelper import ConsoleHelper
+from HilandBasicLibrary.data.DictHelper import DictHelper
 
 # TODO find_in find_or 尚未处理
 lock = threading.Lock()
@@ -346,12 +347,19 @@ class Mate(DatabaseMate):
 
         return result
 
-    def ddl_get_table_definition(self, table_name):
+    def ddl_get_table_definition(self, table_name=None):
         """
         获取表的定义语句
         :param table_name: 数据库表的名称
         :return:
         """
+        if table_name is None:
+            table_name = self.table_name
+
         sql = "show create table {0}".format(table_name)
-        result = self.exec(sql)
+        result = self.query(sql)
+
+        result = DictHelper.get_value(result, "Create Table")
+        # print(type(result))
+        # print(result["Create Table"])
         return result

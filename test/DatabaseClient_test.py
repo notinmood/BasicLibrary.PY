@@ -7,6 +7,8 @@
  * @company: HiLand & RainyTop
 """
 from HilandBasicLibrary.dataBase.DatabaseClient import DatabaseClient
+from HilandBasicLibrary.data.StringHelper import StringHelper
+from HilandBasicLibrary.ConfigHelper import ConfigHelper
 
 
 def test_static_construct():
@@ -16,13 +18,18 @@ def test_static_construct():
     result = actual.get_name()
     print(result)
 
-    result = actual.table_name
-    print(result)
-    # HilandBasicLibrary.dataBase.MySql.Mate.Mate
+    actual = actual.table_name
+    expected = "hello"
+    prefix = ConfigHelper.get_item("db_mysql", "table_prefix")
+    expected = prefix + expected
+    assert actual == expected
 
 
 def test_ddl_get_table_definition():
-    actual = DatabaseClient.get_mate("my_user")
-    actual = actual.ddl_get_table_definition("my_user")
-    expected = ""
+    mate = DatabaseClient.get_mate("my_user")
+    definition = mate.ddl_get_table_definition()
+    prefix = "CREATE TABLE"
+
+    actual = StringHelper.is_start_with(definition, prefix)
+    expected = True
     assert actual == expected
