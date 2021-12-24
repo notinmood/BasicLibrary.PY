@@ -6,15 +6,18 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
+import os
+
 from HilandBasicLibrary.ProjectHelper import *
 
 
 def test_get_root_physical_path():
     """
-    这个目录是否正确需要手工验证
+    验证项目的根目录
     :return:
     """
     actual = ProjectHelper.get_root_physical_path();
-    expected = ""
-    print("当前项目的物理根目录为{}".format(actual))
-    assert actual != expected
+    expected = os.path.dirname(os.getcwd())
+    print("本地获取到的物理根目录为{}".format(expected))
+    print("类库获取到的物理根目录为{}".format(actual))
+    assert actual == expected

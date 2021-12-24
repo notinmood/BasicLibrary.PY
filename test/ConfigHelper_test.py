@@ -14,20 +14,30 @@ def test_get_item():
     expected = "localhost"
     assert actual == expected
 
+    """
+    验证缺省值
+    """
     actual = ConfigHelper.get_item("project_data", "console_information_display_level", 8)
     expected = 100
     assert actual == expected
 
+    """
+    检索被.env覆写 section下的key
+    """
     actual = ConfigHelper.get_item("db_mongodb", "database")
     expected = "stocks"
     assert actual == expected
 
+    """
+    检索不存在的key
+    """
     actual = ConfigHelper.get_item("project_data", "bar", 8)
     expected = 8
     assert actual == expected
 
+    """
+    检索不存在的section
+    """
     actual = ConfigHelper.get_item("project_bar", "bar", 8)
     expected = 8
     assert actual == expected
-
-

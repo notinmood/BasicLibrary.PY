@@ -1,11 +1,15 @@
-import _ProjectHelper
+from _ProjectHelper import ProjectHelper as helper
 
 
 class ProjectHelper:
+    """
+    向外暴露的接口
+    通过调用项目根目录下的_ProjectHelper.py内的逻辑而实现
+    """
     @staticmethod
     def get_root_physical_path():
         """
         获取项目的物理根目录
         :return:
         """
-        return _ProjectHelper.ProjectHelper.get_root_physical_path()
+        return helper.get_root_physical_path()
