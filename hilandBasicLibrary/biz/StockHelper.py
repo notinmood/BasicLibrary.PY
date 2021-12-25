@@ -1,6 +1,6 @@
 import re
 
-from HilandBasicLibrary.data.StringHelper import StringHelper
+from hilandBasicLibrary.data.StringHelper import StringHelper
 
 
 class StockHelper:

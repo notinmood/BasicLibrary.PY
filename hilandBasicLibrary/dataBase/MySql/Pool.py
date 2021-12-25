@@ -1,7 +1,7 @@
 import pymysql
 from dbutils.pooled_db import PooledDB
 
-from HilandBasicLibrary.ConfigHelper import ConfigHelper as ch
+from hilandBasicLibrary.ConfigHelper import ConfigHelper as ch
 
 
 class _PoolConfig(object):

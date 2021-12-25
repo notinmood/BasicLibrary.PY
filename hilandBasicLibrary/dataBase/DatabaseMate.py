@@ -1,9 +1,16 @@
+from hilandBasicLibrary.dataBase.DatabaseEnum import FetchMode, LikeMatchMode
+
+
 class DatabaseMate(object):
     """
     TODO 各个继承的子类中，insert_one,insert_many的返回值类型和意义必须统一
     """
 
-    def get_name(self):
+    def get_real_table_name(self):
+        """
+        获取数据库表真正的名称(如果有数据库表名前缀，则包含前缀在内的完整数据库表名)
+        :return:
+        """
         pass
 
     def interact_one(self, data, condition=None, is_exist_update=True):
@@ -49,10 +56,6 @@ class DatabaseMate(object):
         """ 有多个键值的话就是 AND 的关系"""
         pass
 
-    # def find_all(self, data={}, data_field={}):
-    #     """select * from table"""
-    #     pass
-
     def find_in(self, field, item_list, data_field={}):
         """SELECT * FROM inventory WHERE status in ("A", "D")"""
         pass
@@ -75,7 +78,7 @@ class DatabaseMate(object):
     def find_less(self, field, value, include_border=True, data_field={}):
         pass
 
-    def find_like(self, field, value, match_mode='both', data_field={}):
+    def find_like(self, field, value, match_mode=LikeMatchMode.BOTH, data_field={}):
         """
         相识性查找
         :param field: 待匹配的字段
@@ -113,6 +116,27 @@ class DatabaseMate(object):
 
     def delete_many(self, data):
         """ 删除查到的多个数据 data 是一个字典 """
+        pass
+
+    # --------直接跟数据库交互(业务逻辑内不推荐使用)----
+    def directly_exec(self, sql, params=None, auto_close=True):
+        """
+        直接在数据库上执行sql语句(不推荐在biz的业务逻辑中直接使用)
+        :param sql:
+        :param params:
+        :param auto_close:
+        :return:
+        """
+        pass
+
+    def directly_query(self, sql, params=None, fetch_mode=FetchMode.ONE):
+        """
+        直接在数据库上查询sql语句(不推荐在biz的业务逻辑中直接使用)
+        :param sql:
+        :param params:
+        :param fetch_mode:
+        :return:
+        """
         pass
 
     # --------改变表的结构--------------------------

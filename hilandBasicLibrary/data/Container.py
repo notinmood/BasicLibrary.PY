@@ -1,5 +1,5 @@
-from HilandBasicLibrary.data.DictHelper import *
-from HilandBasicLibrary.data.ObjectHelper import *
+from hilandBasicLibrary.data.DictHelper import *
+from hilandBasicLibrary.data.ObjectHelper import *
 
 
 class Container(object):

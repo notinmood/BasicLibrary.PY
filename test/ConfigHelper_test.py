@@ -6,7 +6,7 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from HilandBasicLibrary.ConfigHelper import *
+from hilandBasicLibrary.ConfigHelper import *
 
 
 def test_get_item():

@@ -8,7 +8,7 @@
 """
 import sys
 
-from HilandBasicLibrary.io.ConsoleHelper import ConsoleHelper
+from hilandBasicLibrary.io.ConsoleHelper import ConsoleHelper
 
 
 def test_get_console_args():

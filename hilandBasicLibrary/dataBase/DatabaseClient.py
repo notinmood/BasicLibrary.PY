@@ -1,6 +1,6 @@
-from HilandBasicLibrary.ConfigHelper import ConfigHelper as ch
-from HilandBasicLibrary.data.DictHelper import DictHelper
-from HilandBasicLibrary.dataBase.DatabaseMate import DatabaseMate
+from hilandBasicLibrary.ConfigHelper import ConfigHelper as ch
+from hilandBasicLibrary.data.DictHelper import DictHelper
+from hilandBasicLibrary.dataBase.DatabaseMate import DatabaseMate
 
 
 class _MateContainer(object):
@@ -25,13 +25,9 @@ class DatabaseClient:
             return _MateContainer.mate_dict[table_name]
         else:
             type_name = cls.__get_db_type_name()
-            package_name = "HilandBasicLibrary.dataBase.{0}.Mate".format(type_name)
+            package_name = "hilandBasicLibrary.dataBase.{0}.Mate".format(type_name)
             module = __import__(package_name, fromlist=["Mate"])
 
-            # print(module)
-
-            # module = getattr(module, type_name)
-            #
             mate = module.Mate(table_name)
             _MateContainer.mate_dict[table_name] = mate
 

@@ -6,7 +6,7 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from HilandBasicLibrary.Environment.ReflectHelper import ReflectHelper
+from hilandBasicLibrary.Environment.ReflectHelper import ReflectHelper
 
 
 def test_get_method_name():

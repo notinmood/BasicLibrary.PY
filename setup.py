@@ -9,20 +9,18 @@ import os
 import sys
 from shutil import rmtree
 
-from HilandBasicLibrary.io.PathHelper import PathHelper
 from setuptools import find_packages, setup, Command
 
 # Package meta-data.
-from HilandBasicLibrary.data.StringHelper import StringHelper
-from _ProjectHelper import ProjectHelper
 
-NAME = 'HilandBasicLibrary'
+
+NAME = 'hilandBasicLibrary'
 DESCRIPTION = '企业级的PYTHON库.'
 URL = 'https://github.com/notinmood/BasicLibrary.PY'
 EMAIL = '9727005@qq.com'
 AUTHOR = 'xiedali'
 REQUIRES_PYTHON = '>=3.6.0'
-VERSION = '0.2.2'
+VERSION = '0.3.3'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
@@ -59,19 +57,19 @@ else:
     about['__version__'] = VERSION
 
 
-def delete_original_dist():
-    physical_root = ProjectHelper.get_root_physical_path()
-    display_data = StringHelper.format("当前项目的根目录为：{0}", physical_root)
-    print(display_data)
-
-    target_dir = "dist"
-    target_dir = PathHelper.combine(physical_root, target_dir)
-    display_data = StringHelper.format("删除目录{0}下的所有内容", target_dir)
-    print(display_data)
-    rmtree(target_dir)
-
-
-delete_original_dist()
+# def delete_original_dist():
+#     physical_root = os.getcwd()
+#     display_data = StringHelper.format("当前项目的根目录为：{0}", physical_root)
+#     print(display_data)
+#
+#     target_dir = "dist"
+#     target_dir = PathHelper.combine(physical_root, target_dir)
+#     display_data = StringHelper.format("删除目录{0}下的所有内容", target_dir)
+#     print(display_data)
+#     rmtree(target_dir)
+#
+#
+# delete_original_dist()
 
 
 class UploadCommand(Command):

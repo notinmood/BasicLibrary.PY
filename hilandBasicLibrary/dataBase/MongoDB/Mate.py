@@ -1,14 +1,23 @@
 from builtins import *
 
-from HilandBasicLibrary.dataBase.DatabaseMate import DatabaseMate
-from HilandBasicLibrary.dataBase.MongoDB.Helper import Helper as mh
+from hilandBasicLibrary.dataBase.DatabaseEnum import FetchMode, LikeMatchMode
+from hilandBasicLibrary.dataBase.DatabaseMate import DatabaseMate
+from hilandBasicLibrary.dataBase.MongoDB.Helper import Helper as mh
 
 
 class Mate(DatabaseMate):
     """ 各种query 中的数据 data 和 mongodb 文档中的一样"""
 
     def __init__(self, collection_name, database_name='', host='', port=0):
+        self.collection_name = collection_name
         self.collection = mh.get_using_collection(collection_name, database_name, host, port)
+
+    def get_real_table_name(self):
+        """
+        获取数据库表真正的名称(如果有数据库表名前缀，则包含前缀在内的完整数据库表名)
+        :return:
+        """
+        return self.collection_name
 
     def interact_one(self, entity_dict, condition_dict=None, is_exist_update=True):
         if condition_dict is None:
@@ -106,7 +115,7 @@ class Mate(DatabaseMate):
         return res
 
     def find_between(self, field, value1, value2, include_border=True, data_field={}):
-        """获取俩个值中间的数据"""
+        """获取两个值中间的数据"""
         condition_dict = dict()
         if include_border:
             condition_dict[field] = {"$gte": value1, "$lte": value2}
@@ -134,7 +143,7 @@ class Mate(DatabaseMate):
         res = self.find_many(self.collection, condition_dict, data_field)
         return res
 
-    def find_like(self, field, value, match_mode='both', data_field={}):
+    def find_like(self, field, value, match_mode=LikeMatchMode.BOTH, data_field={}):
         """
         相识性查找
         :param field: 待匹配的字段
@@ -144,10 +153,10 @@ class Mate(DatabaseMate):
         :return:
         """
         condition_dict = dict()
-        if match_mode == 'before':
+        if match_mode == LikeMatchMode.BEFORE:
             match_value = value + '.*'
         else:
-            if match_mode == 'after':
+            if match_mode == LikeMatchMode.AFTER:
                 match_value = '.*' + value
             else:
                 match_value = '.*' + value + '.*'
@@ -220,6 +229,27 @@ class Mate(DatabaseMate):
 
     def ddl_rename_fields(self, fields_old_new_name_dict, condition_dict={}):
         self.collection.update_many(condition_dict, {"$rename": fields_old_new_name_dict})
+
+    # --------直接跟数据库交互(业务逻辑内不推荐使用)----
+    def directly_exec(self, sql, params=None, auto_close=True):
+        """
+        直接在数据库上执行sql语句(不推荐在biz的业务逻辑中直接使用)
+        :param sql:
+        :param params:
+        :param auto_close:
+        :return:
+        """
+        pass
+
+    def directly_query(self, sql, params=None, fetch_mode=FetchMode.ONE):
+        """
+        直接在数据库上查询sql语句(不推荐在biz的业务逻辑中直接使用)
+        :param sql:
+        :param params:
+        :param fetch_mode:
+        :return:
+        """
+        pass
 
     # -----获取某字段中的最大值、最小值-------------------------------------------------
     def get_max(self, field_name, condition_dict=None):

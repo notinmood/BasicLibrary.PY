@@ -5,8 +5,8 @@
 import os
 from shutil import rmtree
 
-from HilandBasicLibrary.io.PathHelper import PathHelper
-from HilandBasicLibrary.data.StringHelper import StringHelper
+from hilandBasicLibrary.io.PathHelper import PathHelper
+from hilandBasicLibrary.data.StringHelper import StringHelper
 from _ProjectHelper import ProjectHelper
 
 

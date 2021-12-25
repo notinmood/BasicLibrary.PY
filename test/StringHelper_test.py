@@ -6,7 +6,7 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from HilandBasicLibrary.data.StringHelper import *
+from hilandBasicLibrary.data.StringHelper import *
 
 
 def test_is_contains():

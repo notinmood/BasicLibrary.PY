@@ -13,7 +13,7 @@
 
 1. 最外层是整个项目的根目录(本项目中为BasicLibrary.PY)，这个目录作为git的根目录。
 2. 根目录下分布"部署文件""说明文件"等周边辅助文件(比如setup.py、README.md等)
-3. 根目录下用Python包的形式架构项目的业务逻辑代码(本项目下为HilandBasicLibrary)
+3. 根目录下用Python包的形式架构项目的业务逻辑代码(本项目下为hilandBasicLibrary)
    (一般每个项目只架构一个根Python包,然后再根包下决定是否再架构子包，还是在根包下直接写***.py代码)
 
 ## 【一】发布步骤：

@@ -1,4 +1,5 @@
 from _ProjectHelper import ProjectHelper as helper
+# import _ProjectHelper as helper
 
 
 class ProjectHelper:
@@ -6,6 +7,7 @@ class ProjectHelper:
     向外暴露的接口
     通过调用项目根目录下的_ProjectHelper.py内的逻辑而实现
     """
+
     @staticmethod
     def get_root_physical_path():
         """

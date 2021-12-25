@@ -3,13 +3,15 @@ from timeit import default_timer
 
 import pymysql
 
-from HilandBasicLibrary.ConfigHelper import ConfigHelper as ch
-from HilandBasicLibrary.data.StringHelper import StringHelper
-from HilandBasicLibrary.dataBase.DatabaseHelper import DatabaseHelper
-from HilandBasicLibrary.dataBase.DatabaseMate import DatabaseMate
-from HilandBasicLibrary.dataBase.MySql.Pool import Pool
-from HilandBasicLibrary.io.ConsoleHelper import ConsoleHelper
-from HilandBasicLibrary.data.DictHelper import DictHelper
+from hilandBasicLibrary.ConfigHelper import ConfigHelper as ch
+from hilandBasicLibrary.data.DictHelper import DictHelper
+from hilandBasicLibrary.data.ObjectHelper import ObjectHelper
+from hilandBasicLibrary.data.StringHelper import StringHelper
+from hilandBasicLibrary.dataBase.DatabaseEnum import FetchMode, LikeMatchMode
+from hilandBasicLibrary.dataBase.DatabaseHelper import DatabaseHelper
+from hilandBasicLibrary.dataBase.DatabaseMate import DatabaseMate
+from hilandBasicLibrary.dataBase.MySql.Pool import Pool
+from hilandBasicLibrary.io.ConsoleHelper import ConsoleHelper
 
 # TODO find_in find_or 尚未处理
 lock = threading.Lock()
@@ -31,9 +33,9 @@ class Mate(DatabaseMate):
             prefix_name = ch.get_item("db_mysql", "table_prefix")
 
         if prefix_name:
-            self.table_name = prefix_name + table_name
+            self._table_name = prefix_name + table_name
         else:
-            self.table_name = table_name
+            self._table_name = table_name
 
         self.conn = None
         self.cursor = None
@@ -82,18 +84,25 @@ class Mate(DatabaseMate):
             diff = default_timer() - self._start
             print('-- %s: %.6f 秒' % (self._log_label, diff))
 
-    def get_name(self):
+    def __str__(self):
         return "mate in  DatabaseMate: " + __name__
 
+    def get_real_table_name(self):
+        """
+        获取数据库表真正的名称(如果有数据库表名前缀，则包含前缀在内的完整数据库表名)
+        :return:
+        """
+        return self._table_name
+
     def find_one(self, condition_dict, data_field={}):
-        sql = DatabaseHelper.build_select_clause(condition_dict, self.table_name, data_field)
-        return self.query(sql, None, "one")
+        sql = DatabaseHelper.build_select_clause(condition_dict, self._table_name, data_field)
+        return self.directly_query(sql, None, FetchMode.ONE)
 
     def find_many(self, condition_dict, data_field={}):
-        sql = DatabaseHelper.build_select_clause(condition_dict, self.table_name, data_field)
-        return self.query(sql, None, "many")
+        sql = DatabaseHelper.build_select_clause(condition_dict, self._table_name, data_field)
+        return self.directly_query(sql, None, FetchMode.MANY)
 
-    def find_like(self, field, value, match_mode='both', data_field={}):
+    def find_like(self, field, value, match_mode=LikeMatchMode.BOTH, data_field={}):
         """
         相识性查找
         :param field: 待匹配的字段
@@ -103,10 +112,10 @@ class Mate(DatabaseMate):
         :return:
         """
         data = dict()
-        if match_mode == 'before':
+        if match_mode == LikeMatchMode.BEFORE:
             match_value = value + '%'
         else:
-            if match_mode == 'after':
+            if match_mode == LikeMatchMode.AFTER:
                 match_value = '%' + value
             else:
                 match_value = '%' + value + '%'
@@ -152,18 +161,18 @@ class Mate(DatabaseMate):
         :param condition_dict:
         :return:
         """
-        sql = " SELECT count(1) as result FROM `{0}` ".format(self.table_name)
+        sql = " SELECT count(1) as result FROM `{0}` ".format(self._table_name)
         where = DatabaseHelper.build_where_clause(condition_dict)
         if where:
             sql += " WHERE {0};".format(where)
-        result = self.query(sql)
+        result = self.directly_query(sql)
         if result:
             return result["result"]
         else:
             return None
 
     def insert_one(self, entity_dict):
-        sql = DatabaseHelper.build_insert_clause(entity_dict, self.table_name)
+        sql = DatabaseHelper.build_insert_clause(entity_dict, self._table_name)
         return self.edit(sql, None)
 
     def insert_one_non_duplication(self, entity_dict, condition_dict=None):
@@ -173,7 +182,7 @@ class Mate(DatabaseMate):
         :param condition_dict: 是否重复的过滤条件，默认为None时取值data
         :return:
         """
-        if is_empty(entity_dict):
+        if ObjectHelper.is_empty(entity_dict):
             return None
 
         if condition_dict is None:
@@ -192,7 +201,7 @@ class Mate(DatabaseMate):
         execute_count_once = 100
         sql = ""
         for item in entity_dict_list:
-            single_sql = DatabaseHelper.build_insert_clause(item, self.table_name)
+            single_sql = DatabaseHelper.build_insert_clause(item, self._table_name)
             single_sql = StringHelper.remove_tail(single_sql, ";")
             if need_execute_count == 0:
                 sql = single_sql
@@ -241,12 +250,12 @@ class Mate(DatabaseMate):
         return res
 
     def update_one(self, fixing_dict, condition_dict):
-        sql = DatabaseHelper.build_update_clause(fixing_dict, condition_dict, self.table_name)
+        sql = DatabaseHelper.build_update_clause(fixing_dict, condition_dict, self._table_name)
         sql = StringHelper.remove_tail(sql, ";") + " LIMIT 1 ;"
         return self.edit(sql)
 
     def update_many(self, fixing_dict, condition_dict):
-        sql = DatabaseHelper.build_update_clause(fixing_dict, condition_dict, self.table_name)
+        sql = DatabaseHelper.build_update_clause(fixing_dict, condition_dict, self._table_name)
         return self.edit(sql)
 
     def interact_one(self, entity_dict, condition_dict=None, is_exist_update=True):
@@ -268,39 +277,39 @@ class Mate(DatabaseMate):
             return self.insert_one(entity_dict)
 
     def delete_one(self, condition_dict):
-        sql = DatabaseHelper.build_delete_clause(condition_dict, self.table_name)
+        sql = DatabaseHelper.build_delete_clause(condition_dict, self._table_name)
         sql = StringHelper.remove_tail(sql, ";") + " LIMIT 1 ;"
 
         return self.edit(sql)
 
     def delete_many(self, condition_dict):
-        sql = DatabaseHelper.build_delete_clause(condition_dict, self.table_name)
+        sql = DatabaseHelper.build_delete_clause(condition_dict, self._table_name)
         return self.edit(sql)
 
     # -----获取某字段中的最大值、最小值-------------------------------------------------
     def get_max(self, field_name, condition_dict=None):
-        sql = "select MAX({0}) as result from `{1}`".format(field_name, self.table_name)
+        sql = "select MAX({0}) as result from `{1}`".format(field_name, self._table_name)
         where = DatabaseHelper.build_where_clause(condition_dict)
         if where:
             sql += " WHERE {0};".format(where)
-        result = self.query(sql)
+        result = self.directly_query(sql)
         if result:
             return result["result"]
         else:
             return None
 
     def get_min(self, field_name, condition_dict=None):
-        sql = "select MIN({0}) as result from `{1}`".format(field_name, self.table_name)
+        sql = "select MIN({0}) as result from `{1}`".format(field_name, self._table_name)
         where = DatabaseHelper.build_where_clause(condition_dict)
         if where:
             sql += " WHERE {0};".format(where)
-        result = self.query(sql)
+        result = self.directly_query(sql)
         if result:
             return result["result"]
         else:
             return None
 
-    def exec(self, sql, params=None, auto_close=True):
+    def directly_exec(self, sql, params=None, auto_close=True):
         try:
             return self.__exec_detail(sql, params)
         except pymysql.ProgrammingError:
@@ -323,7 +332,7 @@ class Mate(DatabaseMate):
             print(e)
         return count
 
-    def query(self, sql, params=None, fetch_mode="one"):
+    def directly_query(self, sql, params=None, fetch_mode=FetchMode.ONE):
         try:
             return self.__query_detail(sql, params, fetch_mode)
         except pymysql.ProgrammingError:
@@ -331,14 +340,14 @@ class Mate(DatabaseMate):
             self.__connect()
             return self.__query_detail(sql, params, fetch_mode)
 
-    def __query_detail(self, sql, params=None, fetch_mode="one"):
+    def __query_detail(self, sql, params=None, fetch_mode=FetchMode.ONE):
         cursor = self.get_cursor()
         result = None
 
         lock.acquire()
 
         cursor.execute(sql, params)
-        if fetch_mode == "one":
+        if fetch_mode == FetchMode.ONE:
             result = cursor.fetchone()
         else:
             result = cursor.fetchall()
@@ -354,10 +363,10 @@ class Mate(DatabaseMate):
         :return:
         """
         if table_name is None:
-            table_name = self.table_name
+            table_name = self._table_name
 
         sql = "show create table {0}".format(table_name)
-        result = self.query(sql)
+        result = self.directly_query(sql)
 
         result = DictHelper.get_value(result, "Create Table")
         # print(type(result))

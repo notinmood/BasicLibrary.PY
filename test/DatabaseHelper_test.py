@@ -6,7 +6,7 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from HilandBasicLibrary.dataBase.DatabaseHelper import DatabaseHelper
+from hilandBasicLibrary.dataBase.DatabaseHelper import DatabaseHelper
 
 
 def test_build_insert_clause():

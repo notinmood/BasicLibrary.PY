@@ -1,7 +1,7 @@
 """本模块内均为单独执行的方法，具体针对collection的时候请使用MongoOperator内的类型"""
 import pymongo
 
-from HilandBasicLibrary.ConfigHelper import ConfigHelper
+from hilandBasicLibrary.ConfigHelper import ConfigHelper
 
 
 class Helper:

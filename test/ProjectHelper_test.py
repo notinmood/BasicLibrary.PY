@@ -8,7 +8,7 @@
 """
 import os
 
-from HilandBasicLibrary.ProjectHelper import *
+from hilandBasicLibrary.ProjectHelper import *
 
 
 def test_get_root_physical_path():

@@ -1,8 +1,7 @@
 from datetime import datetime, date
-from builtins import *
 
-from HilandBasicLibrary.data.StringHelper import StringHelper
-from HilandBasicLibrary.data.ObjectHelper import ObjectHelper
+from hilandBasicLibrary.data.StringHelper import StringHelper
+from hilandBasicLibrary.data.ObjectHelper import ObjectHelper
 
 
 class DatabaseHelper:

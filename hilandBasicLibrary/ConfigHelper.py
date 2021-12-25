@@ -2,9 +2,9 @@ import configparser
 import os
 import dotenv
 
-from HilandBasicLibrary.ProjectHelper import ProjectHelper as ph
+from hilandBasicLibrary.ProjectHelper import ProjectHelper as ph
 
-from HilandBasicLibrary.data.DictHelper import DictHelper
+from hilandBasicLibrary.data.DictHelper import DictHelper
 
 
 class ConfigHelper:

@@ -6,7 +6,7 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from HilandBasicLibrary.biz.StockHelper import StockHelper as sh
+from hilandBasicLibrary.biz.StockHelper import StockHelper as sh
 
 
 def test_get_stock_exchange_name():

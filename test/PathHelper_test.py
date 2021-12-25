@@ -6,7 +6,7 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from HilandBasicLibrary.io.PathHelper import PathHelper
+from hilandBasicLibrary.io.PathHelper import PathHelper
 
 
 def test_combine():

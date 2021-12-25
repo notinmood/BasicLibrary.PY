@@ -6,7 +6,7 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from HilandBasicLibrary.data.ListHelper import *
+from hilandBasicLibrary.data.ListHelper import *
 
 
 def test_get_union():
