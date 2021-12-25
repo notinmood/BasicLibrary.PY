@@ -5,9 +5,9 @@
 import os
 from shutil import rmtree
 
-from hilandBasicLibrary.io.PathHelper import PathHelper
-from hilandBasicLibrary.data.StringHelper import StringHelper
-from _ProjectHelper import ProjectHelper
+from hilandBasicLibrary.io.pathHelper import PathHelper
+from hilandBasicLibrary.data.stringHelper import StringHelper
+from _projectHelper import ProjectHelper
 
 
 def print_hi(name):
