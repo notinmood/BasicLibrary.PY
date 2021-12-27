@@ -11,7 +11,7 @@ from hilandBasicLibrary.data.stringHelper import StringHelper
 from hilandBasicLibrary.configHelper import ConfigHelper
 
 
-def test_static_construct():
+def test_get_mate():
     mate = DatabaseClient.get_mate("hello")
     actual = mate.__str__()
     expected = "mate in  DatabaseMate: hilandBasicLibrary.dataBase.MySql.mate"
@@ -22,6 +22,16 @@ def test_static_construct():
     prefix = ConfigHelper.get_item("db_mysql", "table_prefix")
     expected = prefix + expected
     assert actual == expected
+
+
+def test_get_ddl():
+    ddl = DatabaseClient.get_ddl()
+    print(ddl)
+    content = ddl.get_content_sql("user")
+    print(content)
+
+    ddl = DatabaseClient.get_ddl()
+    print(ddl)
 
 
 # def test_ddl_create_table():
@@ -36,18 +46,10 @@ def test_static_construct():
 #     mate.directly_exec(sql)
 
 
-def test_ddl_get_table_definition():
-    mate = DatabaseClient.get_mate("user")
-    definition = mate.ddl_get_table_definition()
-    prefix = "CREATE TABLE"
 
-    actual = StringHelper.is_start_with(definition, prefix)
-    expected = True
-    assert actual == expected
 
 
 def test_s():
     sql = 'INSERT INTO `tmp_user__dupl` (`id`,`name`,`birthday`,`postcode`) VALUES (1,"zhangsan","2021-12-24 09:07:05",266000),(4,"lisi","2021-12-15 09:07:26",277521);'
     mate = DatabaseClient.get_mate("user")
     mate.directly_exec(sql)
-

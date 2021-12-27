@@ -18,16 +18,15 @@ lock = threading.Lock()
 
 
 class Mate(DatabaseMate):
-    def __init__(self, table_name, prefix_name=None, commit=True, log_time=True, log_label='总用时'):
+    def __init__(self, table_name, prefix_name=None):
         """
 
-        :param commit: 是否在最后提交事务(设置为False的时候方便单元测试)
-        :param log_time:  是否打印程序运行总时间
-        :param log_label:  自定义log的文字
+        :param table_name:
+        :param prefix_name:
         """
-        self._log_time = log_time
-        self._commit = commit
-        self._log_label = log_label
+        self._log_time = True
+        self._commit = True
+        self._log_label = '总用时'
 
         if prefix_name is None:
             prefix_name = ch.get_item("db_mysql", "table_prefix")
@@ -353,19 +352,4 @@ class Mate(DatabaseMate):
 
         return result
 
-    def ddl_get_table_definition(self, table_name=None):
-        """
-        获取表的定义语句
-        :param table_name: 数据库表的名称
-        :return:
-        """
-        if table_name is None:
-            table_name = self._table_name
 
-        sql = "show create table {0}".format(table_name)
-        result = self.directly_query(sql)
-
-        result = DictHelper.get_value(result, "Create Table")
-        # TODO: 需要加入大小写字母判断
-        result = str.replace(result, "CREATE TABLE", "CREATE TABLE if not exists")
-        return result

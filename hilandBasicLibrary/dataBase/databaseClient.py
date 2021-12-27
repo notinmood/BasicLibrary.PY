@@ -1,5 +1,6 @@
 from hilandBasicLibrary.configHelper import ConfigHelper as ch
 from hilandBasicLibrary.data.dictHelper import DictHelper
+from hilandBasicLibrary.dataBase.databaseDDL import DatabaseDDL
 from hilandBasicLibrary.dataBase.databaseMate import DatabaseMate
 from hilandBasicLibrary.data.container import Container
 
@@ -8,6 +9,7 @@ class DatabaseClient:
     """
     向外暴露的主要类型接口
     """
+
     @classmethod
     def __get_db_type_name(cls):
         type_name = ch.get_item("db_type", "type_name", "MySql")
@@ -35,6 +37,28 @@ class DatabaseClient:
 
             if isinstance(mate, DatabaseMate):
                 return mate
+            else:
+                return None
+
+    @classmethod
+    def get_ddl(cls):
+        """
+        这是向外暴露的操作数据库结构的方法接口
+        :return:
+        """
+        ddl_key = "__database_ddl__"
+        ddl = Container.get_item(ddl_key)
+
+        if ddl is None:
+            type_name = cls.__get_db_type_name()
+            package_name = "hilandBasicLibrary.dataBase.{0}.ddl".format(type_name)
+            module = __import__(package_name, fromlist=["DDL"])
+
+            ddl = module.DDL()
+            Container.set_item(ddl_key, ddl)
+
+            if isinstance(ddl, DatabaseDDL):
+                return ddl
             else:
                 return None
 

@@ -140,33 +140,9 @@ class DatabaseMate(object):
         pass
 
     # --------改变表的结构--------------------------
-    def ddl_add_fields(self, fields_name_value_dict, condition={}):
-        """
-        :param fields_name_value_dict: 需要添加的字段名称与值的字典
-        :param condition:
-        :return:
-        """
-        pass
-
-    def ddl_remove_fields(self, fields_name_list, condition={}):
-        """
-        移除字段
-        :param fields_name_list: 需要移除的字段名称信息（数据类型可以是list，set，dict）
-        :param condition:
-        :return:
-        """
-        pass
-
-    def ddl_rename_fields(self, fields_old_new_name_dict, condition={}):
-        pass
-
-    def ddl_get_table_definition(self, table_name=None):
-        """
-        获取表的定义语句
-        :param table_name: 数据库表的名称,如果为None的话就直接从mate的构造函数中取数据库表名称
-        :return:
-        """
-        pass
+    """
+    改变表结构的语句已经迁移到databaseDLL.py中
+    """
 
     # -----获取某字段中的最大值、最小值-------------------------------------------------
     def get_max(self, field_name, condition=None):

@@ -15,3 +15,11 @@ class DictHelper:
             return whole_dict[key_name]
         else:
             return default_value
+
+    @classmethod
+    def is_contains_value(cls, whole_dict, value):
+        for key in whole_dict:
+            if whole_dict[key] == value:
+                return True
+
+        return False

@@ -21,3 +21,17 @@ def test_contains_key():
     actual = DictHelper.is_contains_key(_dict, 'f')
     expected = False
     assert actual == expected
+
+
+def test_contains_value():
+    _dict = dict()
+    _dict['a'] = "AA"
+    _dict['b'] = "BB"
+    _dict['c'] = "CC"
+    actual = DictHelper.is_contains_value(_dict, 'AA')
+    expected = True
+    assert actual == expected
+
+    actual = DictHelper.is_contains_value(_dict, 'a')
+    expected = False
+    assert actual == expected

@@ -1,21 +1,21 @@
 """
- * @file   : databaseMisc.py
- * @time   : 16:54
- * @date   : 2021/12/24
+ * @file   : ddl.py
+ * @time   : 20:20
+ * @date   : 2021/12/27
  * @mail   : 9727005@qq.com
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from hilandBasicLibrary.dataBase.databaseClient import DatabaseClient as client
+from hilandBasicLibrary.data.dictHelper import DictHelper
 from hilandBasicLibrary.data.stringHelper import StringHelper
+from hilandBasicLibrary.dataBase.databaseClient import DatabaseClient
+from hilandBasicLibrary.dataBase.databaseDDL import DatabaseDDL
 from hilandBasicLibrary.dataBase.databaseEnum import FetchMode
 from hilandBasicLibrary.dataBase.databaseHelper import DatabaseHelper
 
 
-class DatabaseMisc:
-
-    @classmethod
-    def duplicate_table(cls, original_table_name, new_table_name="", include_data_row_count=0):
+class DDL(DatabaseDDL):
+    def duplicate_table(self, original_table_name, new_table_name="", include_data_row_count=0):
         """
         复制数据表
         :param original_table_name:
@@ -29,27 +29,40 @@ class DatabaseMisc:
         """
         在ddl_get_table_definition方法内完成了目标数据表是否已经存在的判断
         """
-        mate = client.get_mate(original_table_name)
-        create_sql = mate.ddl_get_table_definition()
+
+        create_sql = self.ddl_get_table_definition(original_table_name)
 
         # TODO:需要使用正则表达式替换
         create_sql = str.replace(create_sql, original_table_name, new_table_name)
+
+        mate = DatabaseClient.get_mate(original_table_name)
         mate.directly_exec(create_sql)
 
-        insert_sql = cls.get_content_sql(original_table_name, include_data_row_count)
+        insert_sql = self.get_content_sql(original_table_name, include_data_row_count)
         insert_sql = str.replace(insert_sql, original_table_name, new_table_name)
         if insert_sql:
             mate.directly_exec(insert_sql)
 
-    @staticmethod
-    def get_content_sql(table_name, row_count=-1):
+    def drop_table(self, table_name, both_struct_and_data=True):
+        mate = DatabaseClient.get_mate(table_name)
+        table_name = mate.get_real_table_name()
+
+        sql = ""
+        if both_struct_and_data:
+            sql = "drop table `{0}`".format(table_name)
+        else:
+            sql = "truncate table `{0}`".format(table_name)
+
+        mate.directly_exec(sql)
+
+    def get_content_sql(self, table_name, row_count=-1):
         """
         获取数据表数据内容的插入sql语句
         :param row_count:复制数据的行数(-1表示所有的行数，0-n表示具体行数)
         :param table_name:
         :return:
         """
-        mate = client.get_mate(table_name)
+        mate = DatabaseClient.get_mate(table_name)
         real_table_name = mate.get_real_table_name()
 
         if row_count < 0:
@@ -77,14 +90,38 @@ class DatabaseMisc:
 
         return result
 
-    @staticmethod
-    def drop_table(table_name, both_struct_and_data=True):
-        mate = client.get_mate(table_name)
-        table_name = mate.get_real_table_name()
-        sql = ""
-        if both_struct_and_data:
-            sql = "drop table `{0}`".format(table_name)
-        else:
-            sql = "truncate table `{0}`".format(table_name)
+    def is_exist_table(self, table_name):
+        """
+        判断某个表是否存在
+        :param table_name:
+        :return:
+        """
 
-        mate.directly_exec(sql)
+        mate = DatabaseClient.get_mate(table_name)
+        real_table_name = mate.get_real_table_name()
+        sql = "SHOW TABLES like '{0}';".format(real_table_name)
+        result = mate.directly_query(sql)
+
+        if result is None:
+            return False
+        else:
+            return DictHelper.is_contains_value(result, real_table_name)
+
+    def ddl_get_table_definition(self, table_name):
+        """
+        获取表的定义语句
+        :param table_name: 数据库表的名称
+        :return:
+        """
+        # if table_name is None:
+        #     table_name = self._table_name
+        mate = DatabaseClient.get_mate(table_name)
+        real_table_name = mate.get_real_table_name()
+
+        sql = "show create table {0}".format(real_table_name)
+        result = mate.directly_query(sql)
+
+        result = DictHelper.get_value(result, "Create Table")
+        # TODO: 需要加入大小写字母判断
+        result = str.replace(result, "CREATE TABLE", "CREATE TABLE if not exists")
+        return result
