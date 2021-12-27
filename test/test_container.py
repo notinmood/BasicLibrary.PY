@@ -17,6 +17,8 @@ def test_get_dict():
 
     my_dict_a['k-a'] = "v-a"
     # assert my_dict_a == my_dict_b
-    print(ConsoleHelper.get_new_line_symbol())
+    # print(ConsoleHelper.get_new_line_symbol())
+    print("")
+    print("显示数据：")
     print(Container.get_dict("a"))
-
+    assert my_dict_a != my_dict_b

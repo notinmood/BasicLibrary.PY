@@ -1,6 +1,3 @@
-from builtins import *
-
-
 class ListHelper:
     @staticmethod
     def get_index(list_data, value, item_property=None):
@@ -84,8 +81,6 @@ class ListHelper:
         :return:
         """
         return list(set(list_left) ^ set(list_right))
-
-
 
 # def sort_2d(original_data,sort_info=None,reverse=False):
 #

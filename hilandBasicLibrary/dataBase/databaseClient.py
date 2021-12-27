@@ -4,11 +4,10 @@ from hilandBasicLibrary.dataBase.databaseMate import DatabaseMate
 from hilandBasicLibrary.data.container import Container
 
 
-class _MateContainer(object):
-    mate_dict = {}
-
-
 class DatabaseClient:
+    """
+    向外暴露的主要类型接口
+    """
     @classmethod
     def __get_db_type_name(cls):
         type_name = ch.get_item("db_type", "type_name", "MySql")
@@ -17,13 +16,12 @@ class DatabaseClient:
     @classmethod
     def get_mate(cls, table_name):
         """
-        这是向外暴露的主要接口
+        这是向外暴露的主要方法接口
         获取跟数据库（表信息）交互的对象
         :param table_name:
         :return:
         """
-        # mate_dict = Container.get_dict("mate_dict")
-        mate_dict = _MateContainer.mate_dict
+        mate_dict = Container.get_dict("mate_dict")
 
         if DictHelper.is_contains_key(mate_dict, table_name):
             return mate_dict[table_name]

@@ -20,7 +20,11 @@ class ReflectHelper:
         获取当前运行的方法名称
         :return:
         """
-        return inspect.stack()[1].function
+        result = inspect.stack()[1].function
+        if result == "<module>":
+            return None
+        else:
+            return result
 
     @staticmethod
     def get_current_file_name():
@@ -28,4 +32,5 @@ class ReflectHelper:
         获取当前运行的文件名称
         :return:
         """
-        return inspect.stack()[1].filename
+        result = inspect.stack()[1].filename
+        return result

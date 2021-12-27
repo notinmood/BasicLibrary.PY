@@ -24,7 +24,9 @@
 
 ## 【二】其他
 
-将本项目需求的第三方软件包统一成requirements.txt文件的命令是：pip freeze > requirements.txt
+将本项目需求的第三方软件包统一组织在requirements.txt文件内。
+1. 组织第三方软件包进入文件的命令是：pip freeze > requirements.txt
+2. 重新安装所需的各第三方包的命令为: pip install -r requirements.txt
 
 ## 【三】部署
 
