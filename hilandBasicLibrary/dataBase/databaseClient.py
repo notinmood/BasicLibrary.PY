@@ -50,17 +50,21 @@ class DatabaseClient:
         ddl = Container.get_item(ddl_key)
 
         if ddl is None:
-            type_name = cls.__get_db_type_name()
-            package_name = "hilandBasicLibrary.dataBase.{0}.ddl".format(type_name)
-            module = __import__(package_name, fromlist=["DDL"])
-
-            ddl = module.DDL()
+            ddl = cls.__get_ddl_detail()
             Container.set_item(ddl_key, ddl)
 
-            if isinstance(ddl, DatabaseDDL):
-                return ddl
-            else:
-                return None
+        if isinstance(ddl, DatabaseDDL):
+            return ddl
+        else:
+            return None
+
+    @classmethod
+    def __get_ddl_detail(cls):
+        type_name = cls.__get_db_type_name()
+        package_name = "hilandBasicLibrary.dataBase.{0}.ddl".format(type_name)
+        module = __import__(package_name, fromlist=["DDL"])
+        ddl = module.DDL()
+        return ddl
 
 # if __name__ == '__main__':
 #     print(__MateContainer.mate_dict)
