@@ -3,7 +3,7 @@ import os
 import dotenv
 
 from hilandBasicLibrary.projectHelper import ProjectHelper as ph
-
+from hilandBasicLibrary.data.container import Container
 from hilandBasicLibrary.data.dictHelper import DictHelper
 
 
@@ -15,13 +15,20 @@ class ConfigHelper:
     3、.ini文件是可以按照 section/node的方式进行二级设置的，但.env只能设置一级。
         那么妥协的方式是将.ini文件中section/node按照 section.node的方式作为.env的key进行使用
     """
+
     @staticmethod
     def __build_parser():
-        cp = configparser.ConfigParser()
-        root_path = ph.get_root_physical_path()
+        configparser_key = "__configparser__"
+        cp = Container.get_item(configparser_key)
 
-        file = os.path.join(root_path, "_projectConfig.ini")
-        cp.read(file, encoding='utf-8')
+        if cp is None:
+            cp = configparser.ConfigParser()
+            root_path = ph.get_root_physical_path()
+
+            file = os.path.join(root_path, "_projectConfig.ini")
+            cp.read(file, encoding='utf-8')
+
+            Container.set_item(configparser_key, cp)
 
         return cp
 

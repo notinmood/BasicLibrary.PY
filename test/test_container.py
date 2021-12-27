@@ -6,8 +6,9 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
+from pprint import pprint
+
 from hilandBasicLibrary.data.container import Container
-from hilandBasicLibrary.environment.consoleHelper import ConsoleHelper
 
 
 def test_get_dict():
@@ -16,9 +17,8 @@ def test_get_dict():
     assert my_dict_a == my_dict_b
 
     my_dict_a['k-a'] = "v-a"
-    # assert my_dict_a == my_dict_b
-    # print(ConsoleHelper.get_new_line_symbol())
+
     print("")
-    print("显示数据：")
+    pprint("显示数据：")
     print(Container.get_dict("a"))
     assert my_dict_a != my_dict_b
