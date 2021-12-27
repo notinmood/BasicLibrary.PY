@@ -14,24 +14,32 @@ from hilandBasicLibrary.dataBase.databaseHelper import DatabaseHelper
 
 class DatabaseMisc:
 
-    @staticmethod
-    def create_table_duplicate(original_table_name, new_table_name="", include_data_row_count=0):
+    @classmethod
+    def duplicate_table(cls, original_table_name, new_table_name="", include_data_row_count=0):
         """
         复制数据表
         :param original_table_name:
         :param new_table_name:
-        :param include_data_row_count:复制数据的行数(缺省0，表示不复制数据行)
+        :param include_data_row_count:复制数据的行数(缺省0，表示不复制数据行;-1表示复制所有行)
         :return:
+        """
+        if StringHelper.is_empty(new_table_name):
+            new_table_name = original_table_name + "__dupl"
+
+        """
+        在ddl_get_table_definition方法内完成了目标数据表是否已经存在的判断
         """
         mate = client.get_mate(original_table_name)
         create_sql = mate.ddl_get_table_definition()
-        if StringHelper.is_empty(new_table_name):
-            new_table_name = original_table_name + "__dupl"
 
         # TODO:需要使用正则表达式替换
         create_sql = str.replace(create_sql, original_table_name, new_table_name)
         mate.directly_exec(create_sql)
-        # TODO:include_data为True到时候，导入数据
+
+        insert_sql = cls.get_content_sql(original_table_name, include_data_row_count)
+        insert_sql = str.replace(insert_sql, original_table_name, new_table_name)
+        if insert_sql:
+            mate.directly_exec(insert_sql)
 
     @staticmethod
     def get_content_sql(table_name, row_count=-1):
@@ -58,7 +66,14 @@ class DatabaseMisc:
         result = ""
         if rows:
             for item in rows:
-                result += DatabaseHelper.build_insert_clause(item, real_table_name)
+                single_sql = DatabaseHelper.build_insert_clause(item, real_table_name)
+                single_sql = StringHelper.remove_tail(single_sql, ";")
+
+                if result:
+                    values_sql = StringHelper.get_after_content(single_sql, "VALUES")
+                    result += "," + values_sql
+                else:
+                    result = single_sql
 
         return result
 

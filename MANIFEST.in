@@ -1,0 +1,2 @@
+include hilandBasicLibrary/README.md
+recursive-include hilandBasicLibrary *.ini

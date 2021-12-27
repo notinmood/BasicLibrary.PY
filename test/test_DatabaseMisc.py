@@ -10,7 +10,7 @@ from hilandBasicLibrary.dataBase.databaseMisc import DatabaseMisc as misc
 
 
 def test_create_table_duplicate():
-    misc.create_table_duplicate("user", "")
+    misc.duplicate_table("user", "", -1)
 
 
 def test_drop_table():
@@ -19,4 +19,5 @@ def test_drop_table():
 
 def test_get_content_sql():
     result = misc.get_content_sql("user")
+    print()
     print(result)

@@ -44,3 +44,10 @@ def test_ddl_get_table_definition():
     actual = StringHelper.is_start_with(definition, prefix)
     expected = True
     assert actual == expected
+
+
+def test_s():
+    sql = 'INSERT INTO `tmp_user__dupl` (`id`,`name`,`birthday`,`postcode`) VALUES (1,"zhangsan","2021-12-24 09:07:05",266000),(4,"lisi","2021-12-15 09:07:26",277521);'
+    mate = DatabaseClient.get_mate("user")
+    mate.directly_exec(sql)
+

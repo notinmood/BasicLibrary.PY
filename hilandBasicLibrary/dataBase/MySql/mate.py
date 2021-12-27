@@ -320,14 +320,11 @@ class Mate(DatabaseMate):
     def __exec_detail(self, sql, params):
         cursor = self.get_cursor()
         count = 0
-        # lock = threading.Lock()
         try:
             lock.acquire()
             count = cursor.execute(sql, params)
             self.conn.commit()
             lock.release()
-            # new_id = cursor.lastrowid
-            # print("最新插入的数据id为：{0}".format(new_id))
         except Exception as e:
             print(e)
         return count
@@ -369,6 +366,6 @@ class Mate(DatabaseMate):
         result = self.directly_query(sql)
 
         result = DictHelper.get_value(result, "Create Table")
-        # print(type(result))
-        # print(result["Create Table"])
+        # TODO: 需要加入大小写字母判断
+        result = str.replace(result, "CREATE TABLE", "CREATE TABLE if not exists")
         return result
