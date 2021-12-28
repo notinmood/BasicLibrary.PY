@@ -52,8 +52,10 @@ class DDL(DatabaseDDL):
         real_table_name = mate.get_real_table_name()
         is_exist = self.is_exist_table(table_name)
 
+        """
+        在不存在的表上，执行删除操作，系统会报错。因此本处需要做出是否存在的判断。
+        """
         if is_exist:
-            sql = ""
             if both_struct_and_data:
                 sql = "drop table `{0}`".format(real_table_name)
             else:
@@ -111,12 +113,10 @@ class DDL(DatabaseDDL):
         :param table_name: 数据库表的名称
         :return:
         """
-        # if table_name is None:
-        #     table_name = self._table_name
         mate = DatabaseClient.get_mate(table_name)
         real_table_name = mate.get_real_table_name()
 
-        sql = "show create table {0}".format(real_table_name)
+        sql = "show create table `{0}`".format(real_table_name)
         result = mate.directly_query(sql)
 
         result = DictHelper.get_value(result, "Create Table")

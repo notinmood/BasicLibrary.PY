@@ -150,12 +150,12 @@ class DatabaseHelper:
         return sql
 
     @classmethod
-    def build_select_clause(cls, table_name, condition_dict, data_field_collection={}):
+    def build_select_clause(cls, table_name, condition_dict, data_field_collection=None):
         """
         构建数据提取语句
         :param condition_dict: 包含在Where内的过滤条件实体
         :param table_name: 待操作的数据库的表名称
-        :param data_field_collection: 待提取数据的字段列表信息
+        :param data_field_collection: 待提取数据的字段列表 list或者 集合set信息
         :return:
         """
         if ObjectHelper.is_empty(data_field_collection):

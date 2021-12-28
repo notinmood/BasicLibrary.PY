@@ -62,7 +62,6 @@ def test_drop_table():
     ddl.drop_table("user__dupl__", True)
 
 
-# TODO：这个有错误，需要订正
 def test_get_content_sql():
     ddl = DatabaseClient.get_ddl()
     actual = ddl.get_content_sql("user")
