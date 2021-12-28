@@ -28,7 +28,7 @@ def test_is_exist_table():
 
 def test_ddl_get_table_definition():
     ddl = DatabaseClient.get_ddl()
-    definition = ddl.ddl_get_table_definition("user")
+    definition = ddl.get_table_definition("user")
     prefix = "CREATE TABLE"
 
     actual = StringHelper.is_start_with(definition, prefix)

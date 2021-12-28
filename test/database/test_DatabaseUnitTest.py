@@ -15,7 +15,7 @@ from hilandBasicLibrary.dataBase.databaseUnitTest import DatabaseUnitTest
 """
 
 
-def test_aa():
+def test_is_exist_table():
     table_name = "user"
 
     _user = DatabaseUnitTest(table_name=table_name, duplicate_row_count=2, auto_dispose=False)
@@ -34,11 +34,14 @@ def test_insert():
 
     _user = DatabaseUnitTest(table_name=table_name, duplicate_row_count=2, auto_dispose=False)
     new_table_name = _user.new_table_name
-    actual = _user.ddl.is_exist_table(new_table_name)
-    expected = True
-    assert actual == expected
-    _user.dispose()
-    actual = _user.ddl.is_exist_table(new_table_name)
-    expected = False
-    assert actual == expected
 
+    entity = {'a': "www"}
+    print(entity)
+
+    # actual = _user.ddl.is_exist_table(new_table_name)
+    # expected = True
+    # assert actual == expected
+    # _user.dispose()
+    # actual = _user.ddl.is_exist_table(new_table_name)
+    # expected = False
+    # assert actual == expected
