@@ -79,7 +79,7 @@ class DDL(DatabaseDDL):
         result = ""
         if rows:
             for item in rows:
-                single_sql = DatabaseHelper.build_insert_clause(item, real_table_name)
+                single_sql = DatabaseHelper.build_insert_clause(real_table_name, item)
                 single_sql = StringHelper.remove_tail(single_sql, ";")
 
                 if result:

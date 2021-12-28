@@ -11,7 +11,7 @@ from hilandBasicLibrary.dataBase.databaseHelper import DatabaseHelper
 
 def test_build_insert_clause():
     _entity_dict = {"a": "A", "b": "B", "c": 1}
-    actual = DatabaseHelper.build_insert_clause(_entity_dict, "my_table")
+    actual = DatabaseHelper.build_insert_clause("my_table", _entity_dict)
     expected = 'INSERT INTO `my_table` (`a`,`b`,`c`) VALUES ("A","B",1);'
     assert actual == expected
 

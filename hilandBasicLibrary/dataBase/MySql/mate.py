@@ -94,11 +94,11 @@ class Mate(DatabaseMate):
         return self._table_name
 
     def find_one(self, condition_dict, data_field={}):
-        sql = DatabaseHelper.build_select_clause(condition_dict, self._table_name, data_field)
+        sql = DatabaseHelper.build_select_clause(self._table_name, condition_dict, data_field)
         return self.directly_query(sql, None, FetchMode.ONE)
 
     def find_many(self, condition_dict, data_field={}):
-        sql = DatabaseHelper.build_select_clause(condition_dict, self._table_name, data_field)
+        sql = DatabaseHelper.build_select_clause(self._table_name, condition_dict, data_field)
         return self.directly_query(sql, None, FetchMode.MANY)
 
     def find_like(self, field, value, match_mode=LikeMatchMode.BOTH, data_field={}):
@@ -171,7 +171,7 @@ class Mate(DatabaseMate):
             return None
 
     def insert_one(self, entity_dict):
-        sql = DatabaseHelper.build_insert_clause(entity_dict, self._table_name)
+        sql = DatabaseHelper.build_insert_clause(self._table_name, entity_dict)
         return self.edit(sql, None)
 
     def insert_one_non_duplication(self, entity_dict, condition_dict=None):
@@ -200,7 +200,7 @@ class Mate(DatabaseMate):
         execute_count_once = 100
         sql = ""
         for item in entity_dict_list:
-            single_sql = DatabaseHelper.build_insert_clause(item, self._table_name)
+            single_sql = DatabaseHelper.build_insert_clause(self._table_name, item)
             single_sql = StringHelper.remove_tail(single_sql, ";")
             if need_execute_count == 0:
                 sql = single_sql
@@ -249,12 +249,12 @@ class Mate(DatabaseMate):
         return res
 
     def update_one(self, fixing_dict, condition_dict):
-        sql = DatabaseHelper.build_update_clause(fixing_dict, condition_dict, self._table_name)
+        sql = DatabaseHelper.build_update_clause(self._table_name, fixing_dict, condition_dict)
         sql = StringHelper.remove_tail(sql, ";") + " LIMIT 1 ;"
         return self.edit(sql)
 
     def update_many(self, fixing_dict, condition_dict):
-        sql = DatabaseHelper.build_update_clause(fixing_dict, condition_dict, self._table_name)
+        sql = DatabaseHelper.build_update_clause(self._table_name, fixing_dict, condition_dict)
         return self.edit(sql)
 
     def interact_one(self, entity_dict, condition_dict=None, is_exist_update=True):
@@ -276,13 +276,13 @@ class Mate(DatabaseMate):
             return self.insert_one(entity_dict)
 
     def delete_one(self, condition_dict):
-        sql = DatabaseHelper.build_delete_clause(condition_dict, self._table_name)
+        sql = DatabaseHelper.build_delete_clause(self._table_name, condition_dict)
         sql = StringHelper.remove_tail(sql, ";") + " LIMIT 1 ;"
 
         return self.edit(sql)
 
     def delete_many(self, condition_dict):
-        sql = DatabaseHelper.build_delete_clause(condition_dict, self._table_name)
+        sql = DatabaseHelper.build_delete_clause(self._table_name, condition_dict)
         return self.edit(sql)
 
     # -----获取某字段中的最大值、最小值-------------------------------------------------

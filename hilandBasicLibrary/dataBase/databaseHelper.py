@@ -7,7 +7,7 @@ from hilandBasicLibrary.data.objectHelper import ObjectHelper
 class DatabaseHelper:
     """
         本模块，为各关系型数据库共用。
-        其他非共用的功能，分别放入各种数据库驱动的Helper中，比如MongoDBHelper，MySqlHelper
+        其他非共用的功能，分别放入各种数据库驱动的Helper中，比如MongoDB/Helper，MySql/Helper
     """
 
     @classmethod
@@ -65,7 +65,7 @@ class DatabaseHelper:
         return result
 
     @classmethod
-    def build_insert_clause(cls, entity_dict, table_name):
+    def build_insert_clause(cls, table_name, entity_dict):
         """
         构建Insert语句
         :param entity_dict: 插入的信息实体(Key-Value类型的词典)
@@ -86,7 +86,7 @@ class DatabaseHelper:
         return sql
 
     @classmethod
-    def build_delete_clause(cls, condition_dict, table_name):
+    def build_delete_clause(cls, table_name, condition_dict):
         """
         构建删除语句
         :param condition_dict: 包含在Where内的过滤条件实体
@@ -100,7 +100,7 @@ class DatabaseHelper:
         return sql
 
     @classmethod
-    def build_update_clause(cls, fixing_dict, condition_dict, table_name):
+    def build_update_clause(cls, table_name, fixing_dict, condition_dict):
         """
         构建更新语句
         :param fixing_dict: 待更新的实体数据
@@ -123,7 +123,7 @@ class DatabaseHelper:
         return sql
 
     @classmethod
-    def build_select_clause(cls, condition_dict, table_name, data_field_collection={}):
+    def build_select_clause(cls, table_name, condition_dict, data_field_collection={}):
         """
         构建数据提取语句
         :param condition_dict: 包含在Where内的过滤条件实体
