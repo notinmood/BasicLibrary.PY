@@ -11,7 +11,7 @@ from hilandBasicLibrary.dataBase.databaseClient import DatabaseClient
 
 """
 测试前，请确保数据库内有如下文件内的表和数据：
-1. _database_demo_data.sql
+（具体查看本级目录下的README.md文件）
 """
 
 
@@ -61,9 +61,20 @@ def test_drop_table():
     ddl = DatabaseClient.get_ddl()
     ddl.drop_table("user__dupl__", True)
 
+
 # TODO：这个有错误，需要订正
-# def test_get_content_sql():
-#     ddl = DatabaseClient.get_ddl()
-#     result = ddl.get_content_sql("user")
-#     print()
-#     print(result)
+def test_get_content_sql():
+    ddl = DatabaseClient.get_ddl()
+    actual = ddl.get_content_sql("user")
+    expected = 'INSERT INTO `tmp_user` (`id`,`name`,`birthday`,`email`,`class`,`score`) VALUES (1,"zhangsan","2021-12-24 09:07:05","266000@sina.com","一",66), (2,"lisi","2021-12-15 09:07:26","277521@qq.com","三",93), (3,"zhangsan","2021-12-24 09:07:05","aa@qq.com","二",88), (4,"hah","2021-12-22 10:07:47","wps@foxmail.com","一",97);'
+    assert actual == expected
+
+    ddl = DatabaseClient.get_ddl()
+    actual = ddl.get_content_sql("user", 0)
+    expected = ''
+    assert actual == expected
+
+    ddl = DatabaseClient.get_ddl()
+    actual = ddl.get_content_sql("user", 1)
+    expected = 'INSERT INTO `tmp_user` (`id`,`name`,`birthday`,`email`,`class`,`score`) VALUES (1,"zhangsan","2021-12-24 09:07:05","266000@sina.com","一",66);'
+    assert actual == expected

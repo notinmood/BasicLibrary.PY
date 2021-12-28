@@ -4,13 +4,12 @@ from timeit import default_timer
 import pymysql
 
 from hilandBasicLibrary.configHelper import ConfigHelper as ch
-from hilandBasicLibrary.data.dictHelper import DictHelper
 from hilandBasicLibrary.data.objectHelper import ObjectHelper
 from hilandBasicLibrary.data.stringHelper import StringHelper
+from hilandBasicLibrary.dataBase.MySql.pool import Pool
 from hilandBasicLibrary.dataBase.databaseEnum import FetchMode, LikeMatchMode
 from hilandBasicLibrary.dataBase.databaseHelper import DatabaseHelper
 from hilandBasicLibrary.dataBase.databaseMate import DatabaseMate
-from hilandBasicLibrary.dataBase.MySql.pool import Pool
 from hilandBasicLibrary.environment.consoleHelper import ConsoleHelper
 
 # TODO find_in find_or 尚未处理
@@ -211,7 +210,7 @@ class Mate(DatabaseMate):
             need_execute_count = need_execute_count + 1
 
             if (need_execute_count >= execute_count_once) or item == entity_dict_list[-1]:
-                row_count += self.edit(sql, None)
+                row_count += self.directly_exec(sql, None)  # TODO:此句需要验证
                 need_execute_count = 0
                 sql = ""
 
@@ -340,7 +339,8 @@ class Mate(DatabaseMate):
         cursor = self.get_cursor()
         result = None
 
-        lock.acquire()
+        # TODO:只在exec的时候加锁，此处query的锁取消掉。需要验证正确性。
+        # lock.acquire()
 
         cursor.execute(sql, params)
         if fetch_mode == FetchMode.ONE:
@@ -348,8 +348,6 @@ class Mate(DatabaseMate):
         else:
             result = cursor.fetchall()
 
-        lock.release()
+        # lock.release()
 
         return result
-
-

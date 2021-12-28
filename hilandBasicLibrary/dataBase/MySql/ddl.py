@@ -78,15 +78,7 @@ class DDL(DatabaseDDL):
 
         result = ""
         if rows:
-            for item in rows:
-                single_sql = DatabaseHelper.build_insert_clause(real_table_name, item)
-                single_sql = StringHelper.remove_tail(single_sql, ";")
-
-                if result:
-                    values_sql = StringHelper.get_after_content(single_sql, "VALUES")
-                    result += "," + values_sql
-                else:
-                    result = single_sql
+            result = DatabaseHelper.build_insert_clause(real_table_name, rows)
 
         return result
 

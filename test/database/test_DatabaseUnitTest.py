@@ -11,7 +11,7 @@ from hilandBasicLibrary.dataBase.databaseUnitTest import DatabaseUnitTest
 
 """
 测试前，请确保数据库内有如下文件内的表和数据：
-1. _database_demo_data.sql
+（具体查看本级目录下的README.md文件）
 """
 
 

@@ -6,13 +6,13 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-import pytest
-
-
-@pytest.fixture(scope='function')
-def test_setup():
-    print('setup ing')
-
-
-def test_a(test_setup):
-    print('aaa')
+# import pytest
+#
+#
+# @pytest.fixture(scope='function')
+# def test_setup():
+#     print('setup ing')
+#
+#
+# def test_a(test_setup):
+#     print('aaa')

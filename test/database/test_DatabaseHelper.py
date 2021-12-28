@@ -15,6 +15,19 @@ def test_build_insert_clause():
     expected = 'INSERT INTO `my_table` (`a`,`b`,`c`) VALUES ("A","B",1);'
     assert actual == expected
 
+    _entity_dict = {"a": "A", "b": "B", "c": 1}
+    _entity_list = [_entity_dict]
+    actual = DatabaseHelper.build_insert_clause("my_table", _entity_list)
+    expected = 'INSERT INTO `my_table` (`a`,`b`,`c`) VALUES ("A","B",1);'
+    assert actual == expected
+
+    _entity_dict1 = {"a": "A", "b": "B", "c": 1}
+    _entity_dict2 = {"x": "X", "y": "Y", "z": 1}
+    _entity_list = [_entity_dict1, _entity_dict2]
+    actual = DatabaseHelper.build_insert_clause("my_table", _entity_list)
+    expected = 'INSERT INTO `my_table` (`a`,`b`,`c`) VALUES ("A","B",1), ("X","Y",1);'
+    assert actual == expected
+
 
 def test_build_where_clause():
     _entity_dict = {"a": "A", "b": "B", "c": 1}

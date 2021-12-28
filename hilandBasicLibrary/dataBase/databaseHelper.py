@@ -65,7 +65,34 @@ class DatabaseHelper:
         return result
 
     @classmethod
-    def build_insert_clause(cls, table_name, entity_dict):
+    def build_insert_clause(cls, table_name, entity_dict_or_list):
+        """
+        构建Insert语句
+        :param entity_dict_or_list: 插入的信息实体(Key-Value类型的词典),或者多个实体的list集合
+        :param table_name: 待操作的数据库表名称
+        :return:
+        """
+        if ObjectHelper.get_type(entity_dict_or_list) is dict:
+            return cls.__build_insert_clause_detail(table_name, entity_dict_or_list)
+        else:
+            if ObjectHelper.get_type(entity_dict_or_list) is list:
+                result = ""
+                for item in entity_dict_or_list:
+                    single_sql = cls.__build_insert_clause_detail(table_name, item)
+                    single_sql = StringHelper.remove_tail(single_sql, ";")
+                    if result:
+                        values_sql = StringHelper.get_after_content(single_sql, "VALUES")
+                        result += "," + values_sql
+                    else:
+                        result = single_sql
+
+                result = result + ";"
+                return result
+            else:
+                return ""
+
+    @classmethod
+    def __build_insert_clause_detail(cls, table_name, entity_dict):
         """
         构建Insert语句
         :param entity_dict: 插入的信息实体(Key-Value类型的词典)
