@@ -9,7 +9,13 @@
 from hilandBasicLibrary.configHelper import *
 
 
-def test_get_item():
+def test_get_item0():
+    actual = ConfigHelper.get_item("db_mysql", "insert_count_at_once", 200)
+    expected = 100
+    assert actual == expected
+
+
+def test_get_item1():
     actual = ConfigHelper.get_item("db_mongodb", "host")
     expected = "localhost"
     assert actual == expected

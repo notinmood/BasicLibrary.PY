@@ -8,6 +8,7 @@
 """
 from hilandBasicLibrary.dataBase.databaseClient import DatabaseClient
 from hilandBasicLibrary.dataBase.databaseUnitTest import DatabaseUnitTest
+from hilandBasicLibrary.utils.dataCompare import DataSummary, DataCompare
 
 """
 测试前，请确保数据库内有如下文件内的表和数据：
@@ -29,19 +30,43 @@ def test_is_exist_table():
     assert actual == expected
 
 
+def test_find_one():
+    table_name = "user"
+    biz = DatabaseUnitTest(table_name=table_name)
+    condition = {"class": "一"}
+    result = biz.mate.find_one(condition)
+
+    actual = DataSummary(result)
+    expected = DataSummary(target_length=6, target_type=dict)
+    assert actual.compare(expected)
+
+
+def test_find_many():
+    table_name = "user"
+    biz = DatabaseUnitTest(table_name=table_name)
+    condition = {"class": "一"}
+    result = biz.mate.find_many(condition)
+
+    actual = DataSummary(result)
+    expected = DataSummary(target_length=2, target_type=list)
+    # print(result)
+    assert actual.compare(expected)
+
+
 def test_insert():
     table_name = "user"
 
-    _user = DatabaseUnitTest(table_name=table_name, duplicate_row_count=2, auto_dispose=False)
-    new_table_name = _user.new_table_name
+    biz = DatabaseUnitTest(table_name=table_name)
 
-    entity = {'a': "www"}
-    print(entity)
+    entity = {"id": 20, 'name': "赵六", "birthday": "2010-12-12", "class": "二", "score": 92, "email": "rr@ss.com"}
 
-    # actual = _user.ddl.is_exist_table(new_table_name)
-    # expected = True
-    # assert actual == expected
-    # _user.dispose()
-    # actual = _user.ddl.is_exist_table(new_table_name)
-    # expected = False
-    # assert actual == expected
+    biz.mate.insert_one(entity)
+    selected = biz.mate.find_one({"id": 20})
+
+    actual = selected["name"]
+    expected = "赵六"
+    assert actual == expected
+
+    actual = DataCompare.compare_entity(entity, selected)
+    expected = "birthday|2010-12-12|2010-12-12 00:00:00||"
+    assert actual == expected

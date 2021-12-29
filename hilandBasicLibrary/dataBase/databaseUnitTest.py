@@ -19,7 +19,7 @@ class DatabaseUnitTest:
         """
         self.auto_dispose = auto_dispose
         self.new_table_name = table_name + "__my_dupl__"
-        self.mate = DatabaseClient.get_mate(table_name)
+        self.mate = DatabaseClient.get_mate(self.new_table_name)
         self.ddl = DatabaseClient.get_ddl()
 
         self.ddl.duplicate_table(table_name, self.new_table_name, duplicate_row_count)

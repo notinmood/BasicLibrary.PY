@@ -19,7 +19,7 @@ class Mate(DatabaseMate):
         """
         return self.collection_name
 
-    def interact_one(self, entity_dict, condition_dict=None, is_exist_update=True):
+    def interact_one(self, data_dict, condition_dict=None, is_exist_update=True):
         if condition_dict is None:
             condition_dict = entity_dict
 
@@ -53,21 +53,21 @@ class Mate(DatabaseMate):
         else:
             return None
 
-    def insert_many(self, data_list):
-        res = mh.insert_many(self.collection, data_list)
+    def insert_many(self, data_dict_list):
+        res = mh.insert_many(self.collection, data_dict_list)
         return res
 
-    def insert_many_non_duplication(self, data_list, condition_dict=None):
+    def insert_many_non_duplication(self, data_dict_list, condition_dict=None):
         """
         不重复的插入多行数据
         （目前实现的版本功能是，先查询数据库内是否有符合条件filter_condition的数据，如果有（哪怕只有一条），那么全部的新数据都不插入了；
         如果数据库内没有符合条件的记录，那么就插入新的全部数据data_list）
-        :param data_list:
+        :param data_dict_list:
         :param condition_dict:
         :return:
         """
         if condition_dict is None:
-            condition_dict = data_list
+            condition_dict = data_dict_list
 
         exist_count = self.query_count(condition_dict)
 
@@ -75,19 +75,19 @@ class Mate(DatabaseMate):
             # do nothing;
             res = None
         else:
-            res = mh.insert_many(self.collection, data_list)
+            res = mh.insert_many(self.collection, data_dict_list)
 
         return res
 
     #  ========================= Query Documents Start =========
 
-    def find_one(self, condition_dict, data_field={}):
-        res = mh.find_one(self.collection, condition_dict, data_field)
+    def find_one(self, condition_dict, data_field_collection={}):
+        res = mh.find_one(self.collection, condition_dict, data_field_collection)
         return res
 
-    def find_many(self, condition_dict, data_field={}):
+    def find_many(self, condition_dict, data_field_collection={}):
         """ 有多个键值的话就是 AND 的关系"""
-        res = mh.find_many(self.collection, condition_dict, data_field)
+        res = mh.find_many(self.collection, condition_dict, data_field_collection)
 
         return list(res)
 
@@ -96,14 +96,14 @@ class Mate(DatabaseMate):
     #     res = mh.find_many(self.collection, data, data_field)
     #     return res
 
-    def find_in(self, field, item_list, data_field={}):
+    def find_in(self, field, item_list, data_field_collection={}):
         """SELECT * FROM inventory WHERE status in ("A", "D")"""
         data = dict()
         data[field] = {"$in": item_list}
-        res = self.find_many(self.collection, data, data_field)
+        res = self.find_many(self.collection, data, data_field_collection)
         return res
 
-    def find_or(self, data_list, data_field={}):
+    def find_or(self, data_list, data_field_collection={}):
         """db.inventory.find(
     {"$or": [{"status": "A"}, {"qty": {"$lt": 30}}]})
 
@@ -111,45 +111,45 @@ class Mate(DatabaseMate):
         """
         data = dict()
         data["$or"] = data_list
-        res = self.find_many(self.collection, data, data_field)
+        res = self.find_many(self.collection, data, data_field_collection)
         return res
 
-    def find_between(self, field, value1, value2, include_border=True, data_field={}):
+    def find_between(self, field, value_left, value_right, include_border=True, data_field_collection={}):
         """获取两个值中间的数据"""
         condition_dict = dict()
         if include_border:
-            condition_dict[field] = {"$gte": value1, "$lte": value2}
+            condition_dict[field] = {"$gte": value_left, "$lte": value_right}
         else:
-            condition_dict[field] = {"$gt": value1, "$lt": value2}
+            condition_dict[field] = {"$gt": value_left, "$lt": value_right}
 
-        res = self.find_many(self.collection, condition_dict, data_field)
+        res = self.find_many(self.collection, condition_dict, data_field_collection)
         return res
 
-    def find_more(self, field, value, include_border=True, data_field={}):
+    def find_more(self, field, value, include_border=True, data_field_collection={}):
         condition_dict = dict()
         if include_border:
             condition_dict[field] = {"$gte": value}
         else:
             condition_dict[field] = {"$gt": value}
-        res = self.find_many(self.collection, condition_dict, data_field)
+        res = self.find_many(self.collection, condition_dict, data_field_collection)
         return res
 
-    def find_less(self, field, value, include_border=True, data_field={}):
+    def find_less(self, field, value, include_border=True, data_field_collection={}):
         condition_dict = dict()
         if include_border:
             condition_dict[field] = {"$lte": value}
         else:
             condition_dict[field] = {"$lt": value}
-        res = self.find_many(self.collection, condition_dict, data_field)
+        res = self.find_many(self.collection, condition_dict, data_field_collection)
         return res
 
-    def find_like(self, field, value, match_mode=LikeMatchMode.BOTH, data_field={}):
+    def find_like(self, field, value, match_mode=LikeMatchMode.BOTH, data_field_collection={}):
         """
         相识性查找
         :param field: 待匹配的字段
         :param value: 待匹配的值
         :param match_mode: 匹配模式，共三种 --before匹配前端相识；after匹配后端相识；both匹配中间相识
-        :param data_field:
+        :param data_field_collection:
         :return:
         """
         condition_dict = dict()
@@ -162,7 +162,7 @@ class Mate(DatabaseMate):
                 match_value = '.*' + value + '.*'
 
         condition_dict[field] = {'$regex': match_value}
-        res = self.find_many(self.collection, condition_dict, data_field)
+        res = self.find_many(self.collection, condition_dict, data_field_collection)
 
         return res
 

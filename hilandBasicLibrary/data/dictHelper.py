@@ -23,3 +23,7 @@ class DictHelper:
                 return True
 
         return False
+
+    @classmethod
+    def get_summary(cls, dict_data):
+        pass

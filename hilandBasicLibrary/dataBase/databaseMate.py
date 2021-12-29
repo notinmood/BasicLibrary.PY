@@ -4,6 +4,7 @@ from hilandBasicLibrary.dataBase.databaseEnum import FetchMode, LikeMatchMode
 class DatabaseMate(object):
     """
     TODO 各个继承的子类中，insert_one,insert_many的返回值类型和意义必须统一
+    数据库交互器(跟数据库内数据交互的唯一接口)
     """
 
     def get_real_table_name(self):
@@ -13,30 +14,30 @@ class DatabaseMate(object):
         """
         pass
 
-    def interact_one(self, data, condition=None, is_exist_update=True):
+    def interact_one(self, data_dict, condition_dict=None, is_exist_update=True):
         pass
 
-    def insert_one(self, data):
+    def insert_one(self, data_dict):
         pass
 
-    def insert_one_non_duplication(self, data, filter_condition=None):
+    def insert_one_non_duplication(self, data_dict, filter_condition=None):
         """
-        跟collection内既有数据不重复的插入新数据（如果重复则跳过不插入）
-        :param data: 待插入的document数据
-        :param filter_condition: 是否重复的过滤条件，默认为None时取值data
+        跟 collection 内既有数据不重复的插入新数据（如果重复则跳过不插入）
+        :param data_dict: 待插入的 document 数据
+        :param filter_condition: 是否重复的过滤条件，默认为 None 时取值 data_dict
         :return:
         """
         pass
 
-    def insert_many(self, data_list):
+    def insert_many(self, data_dict_list):
         pass
 
-    def insert_many_non_duplication(self, data_list, filter_condition=None):
+    def insert_many_non_duplication(self, data_dict_list, filter_condition=None):
         """
         不重复的插入多行数据
         （目前实现的版本功能是，先查询数据库内是否有符合条件filter_condition的数据，如果有（哪怕只有一条），那么全部的新数据都不插入了；
         如果数据库内没有符合条件的记录，那么就插入新的全部数据data_list）
-        :param data_list:
+        :param data_dict_list:
         :param filter_condition:
         :return:
         """
@@ -49,42 +50,47 @@ class DatabaseMate(object):
     def update_many(self, fixing_dict, condition_dict):
         pass
 
-    def find_one(self, condition_dict, data_field={}):
+    def find_one(self, condition_dict, data_field_collection=None):
         pass
 
-    def find_many(self, condition_dict, data_field={}):
+    def find_many(self, condition_dict, data_field_collection=None):
         """ 有多个键值的话就是 AND 的关系"""
         pass
 
-    def find_in(self, field, item_list, data_field={}):
+    def find_in(self, field, item_list, data_field_collection=None):
         """SELECT * FROM inventory WHERE status in ("A", "D")"""
         pass
 
-    def find_or(self, data_list, data_field={}):
-        """db.inventory.find(
-    {"$or": [{"status": "A"}, {"qty": {"$lt": 30}}]})
-
-        SELECT * FROM inventory WHERE status = "A" OR qty < 30
+    def find_or(self, data_list, data_field_collection=None):
+        """
         """
         pass
 
-    def find_between(self, field, value1, value2, include_border=True, data_field={}):
-        """获取俩个值中间的数据"""
+    def find_between(self, field, value_left, value_right, include_border=True, data_field_collection=None):
+        """
+        获取两个值中间的数据
+        :param field:
+        :param value_left:
+        :param value_right:
+        :param include_border:
+        :param data_field_collection:
+        :return:
+        """
         pass
 
-    def find_more(self, field, value, include_border=True, data_field={}):
+    def find_more(self, field, value, include_border=True, data_field_collection=None):
         pass
 
-    def find_less(self, field, value, include_border=True, data_field={}):
+    def find_less(self, field, value, include_border=True, data_field_collection=None):
         pass
 
-    def find_like(self, field, value, match_mode=LikeMatchMode.BOTH, data_field={}):
+    def find_like(self, field, value, match_mode=LikeMatchMode.BOTH, data_field_collection=None):
         """
         相识性查找
         :param field: 待匹配的字段
         :param value: 待匹配的值
         :param match_mode: 匹配模式，共三种 --before匹配前端相识；after匹配后端相识；both匹配中间相识
-        :param data_field:
+        :param data_field_collection:
         :return:
         """
         pass
@@ -110,11 +116,11 @@ class DatabaseMate(object):
     #
     # # ================================================================================
 
-    def delete_one(self, data):
+    def delete_one(self, condition_dict):
         """ 删除单行数据 如果有多个 则删除第一个"""
         pass
 
-    def delete_many(self, data):
+    def delete_many(self, condition_dict):
         """ 删除查到的多个数据 data 是一个字典 """
         pass
 
@@ -145,8 +151,8 @@ class DatabaseMate(object):
     """
 
     # -----获取某字段中的最大值、最小值-------------------------------------------------
-    def get_max(self, field_name, condition=None):
+    def get_max(self, field_name, condition_dict=None):
         pass
 
-    def get_min(self, field_name, condition=None):
+    def get_min(self, field_name, condition_dict=None):
         pass

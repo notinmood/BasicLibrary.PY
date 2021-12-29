@@ -9,11 +9,58 @@
 from hilandBasicLibrary.data.collectionHelper import *
 
 
-def test_sort1():
-    my_list = [1, 3, 5, 7, 9]
-    new_list = CollectionHelper.sort(my_list)
-    new_list = sorted(my_list)
-    print(new_list)
+def test_is_contains_1():
+    my_list = [7, 1, 9, 5, 3]
+    actual = CollectionHelper.is_contains(my_list, 5)
+    expected = True
+    assert actual == expected
+
+
+def test_is_contains_2():
+    my_list = [7, 1, 9, 5, 3]
+    actual = CollectionHelper.is_contains(my_list, 6)
+    expected = False
+    assert actual == expected
+
+
+def test_is_contains_3():
+    my_list = (7, 1, 9, 5, 3)
+    actual = CollectionHelper.is_contains(my_list, 5)
+    expected = True
+    assert actual == expected
+
+
+def test_is_contains_4():
+    my_list = (7, 1, 9, 5, 3)
+    actual = CollectionHelper.is_contains(my_list, 6)
+    expected = False
+    assert actual == expected
+
+
+def test_is_contains_5():
+    data = {"name": "zhangsan", "age": 20, "score": 93}
+    actual = CollectionHelper.is_contains(data, "name", "zhangsan")
+    expected = True
+    assert actual == expected
+
+    actual = CollectionHelper.is_contains(data, "name", "lisi")
+    expected = False
+    assert actual == expected
+
+    actual = CollectionHelper.is_contains(data, "school", "")
+    expected = False
+    assert actual == expected
+
+
+def test_sort_1():
+    """
+    测试对 list 排序
+    :return:
+    """
+    my_list = [7, 1, 9, 5, 3]
+    actual = CollectionHelper.sort(my_list)
+    expected = [1, 3, 5, 7, 9]
+    assert actual == expected
 
 
 def test_sort_for_inner_dict():

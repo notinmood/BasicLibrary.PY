@@ -3,7 +3,7 @@ from timeit import default_timer
 
 import pymysql
 
-from hilandBasicLibrary.configHelper import ConfigHelper as ch
+from hilandBasicLibrary.configHelper import ConfigHelper as ch, ConfigHelper
 from hilandBasicLibrary.data.objectHelper import ObjectHelper
 from hilandBasicLibrary.data.stringHelper import StringHelper
 from hilandBasicLibrary.dataBase.MySql.pool import Pool
@@ -38,7 +38,7 @@ class Mate(DatabaseMate):
         self.conn = None
         self.cursor = None
 
-    def get_cursor(self):
+    def __get_cursor(self):
         if self.cursor is None:
             self.__connect()
             self.cursor = self.conn.cursor(cursor=pymysql.cursors.DictCursor)
@@ -49,12 +49,12 @@ class Mate(DatabaseMate):
         self.conn = connections_pool.get_conn()
         return self.conn
 
-    def close(self):
+    def __close(self):
         if self.cursor:
-            self.cursor.close()
+            self.cursor.__close()
 
         if self.conn:
-            self.conn.close()
+            self.conn.__close()
 
     def __enter__(self):
 
@@ -65,7 +65,7 @@ class Mate(DatabaseMate):
         # 在进入的时候自动获取连接和cursor
         conn = self.__connect()
         conn.autocommit = False
-        self.get_cursor()
+        self.__get_cursor()
 
         return self
 
@@ -75,8 +75,8 @@ class Mate(DatabaseMate):
         if self._commit:
             self.conn.commit()
         # 在退出的时候自动关闭连接和cursor
-        self.cursor.close()
-        self.conn.close()
+        self.cursor.__close()
+        self.conn.__close()
 
         if self._log_time is True:
             diff = default_timer() - self._start
@@ -92,21 +92,21 @@ class Mate(DatabaseMate):
         """
         return self._table_name
 
-    def find_one(self, condition_dict, data_field={}):
-        sql = DatabaseHelper.build_select_clause(self._table_name, condition_dict, data_field)
+    def find_one(self, condition_dict, data_field_collection=None):
+        sql = DatabaseHelper.build_select_clause(self._table_name, condition_dict, data_field_collection)
         return self.directly_query(sql, None, FetchMode.ONE)
 
-    def find_many(self, condition_dict, data_field={}):
-        sql = DatabaseHelper.build_select_clause(self._table_name, condition_dict, data_field)
+    def find_many(self, condition_dict, data_field_collection=None):
+        sql = DatabaseHelper.build_select_clause(self._table_name, condition_dict, data_field_collection)
         return self.directly_query(sql, None, FetchMode.MANY)
 
-    def find_like(self, field, value, match_mode=LikeMatchMode.BOTH, data_field={}):
+    def find_like(self, field, value, match_mode=LikeMatchMode.BOTH, data_field_collection={}):
         """
         相识性查找
         :param field: 待匹配的字段
         :param value: 待匹配的值
         :param match_mode: 匹配模式，共三种 --before匹配前端相识；after匹配后端相识；both匹配中间相识
-        :param data_field:
+        :param data_field_collection:
         :return:
         """
         data = dict()
@@ -120,37 +120,37 @@ class Mate(DatabaseMate):
 
         data = {field: {"$like": match_value}}
 
-        return self.find_many(data, data_field)
+        return self.find_many(data, data_field_collection)
 
-    def find_between(self, field, value1, value2, include_border=True, data_field={}):
+    def find_between(self, field, value_left, value_right, include_border=True, data_field_collection={}):
         """获取俩个值中间的数据"""
         condition_dict = dict()
         if include_border:
-            condition_dict[field] = {"$gte": value1, "$lte": value2}
+            condition_dict[field] = {"$gte": value_left, "$lte": value_right}
         else:
-            condition_dict[field] = {"$gt": value1, "$lt": value2}
+            condition_dict[field] = {"$gt": value_left, "$lt": value_right}
 
-        res = self.find_many(condition_dict, data_field)
+        res = self.find_many(condition_dict, data_field_collection)
         return res
 
-    def find_more(self, field, value, include_border=True, data_field={}):
+    def find_more(self, field, value, include_border=True, data_field_collection={}):
         condition_dict = dict()
         if include_border:
             condition_dict[field] = {"$gte": value}
         else:
             condition_dict[field] = {"$gt": value}
 
-        res = self.find_many(condition_dict, data_field)
+        res = self.find_many(condition_dict, data_field_collection)
         return res
 
-    def find_less(self, field, value, include_border=True, data_field={}):
+    def find_less(self, field, value, include_border=True, data_field_collection={}):
         condition_dict = dict()
         if include_border:
             condition_dict[field] = {"$lte": value}
         else:
             condition_dict[field] = {"$lt": value}
 
-        res = self.find_many(condition_dict, data_field)
+        res = self.find_many(condition_dict, data_field_collection)
         return res
 
     def query_count(self, condition_dict={}):
@@ -171,7 +171,7 @@ class Mate(DatabaseMate):
 
     def insert_one(self, entity_dict):
         sql = DatabaseHelper.build_insert_clause(self._table_name, entity_dict)
-        return self.edit(sql, None)
+        return self.directly_exec(sql, None)
 
     def insert_one_non_duplication(self, entity_dict, condition_dict=None):
         """
@@ -195,8 +195,11 @@ class Mate(DatabaseMate):
     def insert_many(self, entity_dict_list):
         row_count = 0
         need_execute_count = 0
-        # TODO:配置到ini文件内
-        execute_count_once = 100
+
+        """
+        到ini文件内读取配置
+        """
+        execute_count_at_once = ConfigHelper.get_item("db_mysql", "insert_count_at_once", 100)
         sql = ""
         for item in entity_dict_list:
             single_sql = DatabaseHelper.build_insert_clause(self._table_name, item)
@@ -209,21 +212,12 @@ class Mate(DatabaseMate):
 
             need_execute_count = need_execute_count + 1
 
-            if (need_execute_count >= execute_count_once) or item == entity_dict_list[-1]:
+            if (need_execute_count >= execute_count_at_once) or item == entity_dict_list[-1]:
                 row_count += self.directly_exec(sql, None)  # TODO:此句需要验证
                 need_execute_count = 0
                 sql = ""
 
         return row_count
-
-        # # 原来单行执行，但效率太低（一个晚上只能插入几万条数据）
-        # row_count = 0
-        # for item in entity_dict_list:
-        #     sql = DatabaseHelper.build_insert_clause(item, self.table_name)
-        #     row_count += self.__edit(sql, None, False)
-        #
-        # self.close()
-        # return row_count
 
     def insert_many_non_duplication(self, entity_dict_list, condition_dict=None):
         """
@@ -250,39 +244,38 @@ class Mate(DatabaseMate):
     def update_one(self, fixing_dict, condition_dict):
         sql = DatabaseHelper.build_update_clause(self._table_name, fixing_dict, condition_dict)
         sql = StringHelper.remove_tail(sql, ";") + " LIMIT 1 ;"
-        return self.edit(sql)
+        return self.directly_exec(sql)
 
     def update_many(self, fixing_dict, condition_dict):
         sql = DatabaseHelper.build_update_clause(self._table_name, fixing_dict, condition_dict)
-        return self.edit(sql)
+        return self.directly_exec(sql)
 
-    def interact_one(self, entity_dict, condition_dict=None, is_exist_update=True):
+    def interact_one(self, data_dict, condition_dict=None, is_exist_update=True):
         """
         跟数据库服务器进行数据交互，如果设定条件的记录存在就更新；如果不存在就插入。
-        :param entity_dict:
         :param condition_dict:
         :param is_exist_update: 在MySql下此参数不可使用
         :return:
         """
         if condition_dict is None:
-            condition_dict = entity_dict
+            condition_dict = data_dict
 
         data_existing = self.find_one(condition_dict)
 
         if data_existing:
-            return self.update_one(entity_dict, condition_dict)
+            return self.update_one(data_dict, condition_dict)
         else:
-            return self.insert_one(entity_dict)
+            return self.insert_one(data_dict)
 
     def delete_one(self, condition_dict):
         sql = DatabaseHelper.build_delete_clause(self._table_name, condition_dict)
         sql = StringHelper.remove_tail(sql, ";") + " LIMIT 1 ;"
 
-        return self.edit(sql)
+        return self.directly_exec(sql)
 
     def delete_many(self, condition_dict):
         sql = DatabaseHelper.build_delete_clause(self._table_name, condition_dict)
-        return self.edit(sql)
+        return self.directly_exec(sql)
 
     # -----获取某字段中的最大值、最小值-------------------------------------------------
     def get_max(self, field_name, condition_dict=None):
@@ -316,7 +309,7 @@ class Mate(DatabaseMate):
             return self.__exec_detail(sql, params)
 
     def __exec_detail(self, sql, params):
-        cursor = self.get_cursor()
+        cursor = self.__get_cursor()
         count = 0
         try:
             lock.acquire()
@@ -336,7 +329,7 @@ class Mate(DatabaseMate):
             return self.__query_detail(sql, params, fetch_mode)
 
     def __query_detail(self, sql, params=None, fetch_mode=FetchMode.ONE):
-        cursor = self.get_cursor()
+        cursor = self.__get_cursor()
         result = None
 
         # TODO:只在exec的时候加锁，此处query的锁取消掉。需要验证正确性。

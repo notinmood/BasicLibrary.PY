@@ -34,3 +34,29 @@ class CollectionHelper:
         :return:
         """
         return sorted(iterable, key=lambda k: k[key_name], reverse=reverse)
+
+    @staticmethod
+    def is_contains(iterable, item, item_value=None):
+        """
+        判断集合中是否存在某个元素
+        如果判断是list,set集合，则自动忽略 item_value
+        如果判断的dict集合，item是指某元素的key,item_value是指元素的value
+        :param item_value:
+        :param iterable:
+        :param item:
+        :return:
+        """
+        _type = type(iterable)
+
+        if _type is dict:
+            for key in iterable:
+                if key == item and iterable[key] == item_value:
+                    return True
+
+            return False
+        else:
+            for key in iterable:
+                if key == item:
+                    return True
+
+            return False
