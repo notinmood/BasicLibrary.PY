@@ -19,12 +19,14 @@
 ## 【一】发布步骤：
 
 0. 打开本项目的"终端"窗口(或者通过windows的资源管理器定位到本项目setup.py所在的目录)
-1. 运行命令 "python setup.py sdist"
-2. 运行命令 "twine upload dist/*"
+1. 打开修改setup.py文件 VERSION = '0.4.3'为新的值
+2. 运行命令 "python setup.py sdist"
+3. 运行命令 "twine upload dist/*"
 
 ## 【二】其他
 
 将本项目需求的第三方软件包统一组织在requirements.txt文件内。
+
 1. 组织第三方软件包进入文件的命令是：pip freeze > requirements.txt
 2. 重新安装所需的各第三方包的命令为: pip install -r requirements.txt
 

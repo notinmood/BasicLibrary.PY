@@ -1,2 +1,3 @@
 include hilandBasicLibrary/README.md
+include hilandBasicLibrary/.env.default
 recursive-include hilandBasicLibrary *.ini
