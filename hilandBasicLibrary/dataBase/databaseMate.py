@@ -1,4 +1,4 @@
-from hilandBasicLibrary.dataBase.databaseEnum import FetchMode, LikeMatchMode
+from hilandBasicLibrary.dataBase.databaseEnum import BatchMode, LikeMatchMode
 
 
 class DatabaseMate(object):
@@ -43,13 +43,19 @@ class DatabaseMate(object):
         """
         pass
 
-    #  ========================= Query Documents Start =========
     def update_one(self, fixing_dict, condition_dict):
+        """
+        更新一条记录
+        :param dict fixing_dict: 更新后的对象
+        :param dict condition_dict: 更新时的匹配条件
+        :return int:更新的数据条数
+        """
         pass
 
     def update_many(self, fixing_dict, condition_dict):
         pass
 
+    #  ========================= Query Documents Start =========
     def find_one(self, condition_dict, data_field_collection=None):
         pass
 
@@ -95,7 +101,7 @@ class DatabaseMate(object):
         """
         pass
 
-    def query_count(self, condition={}):
+    def find_count(self, condition={}):
         pass
 
     # # ==以下几个query方法尚未验证========================================================
@@ -135,7 +141,7 @@ class DatabaseMate(object):
         """
         pass
 
-    def directly_query(self, sql, params=None, fetch_mode=FetchMode.ONE):
+    def directly_query(self, sql, params=None, fetch_mode=BatchMode.ONE):
         """
         直接在数据库上查询sql语句(不推荐在biz的业务逻辑中直接使用)
         :param sql:

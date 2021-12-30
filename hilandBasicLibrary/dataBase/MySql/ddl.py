@@ -10,7 +10,7 @@ from hilandBasicLibrary.data.dictHelper import DictHelper
 from hilandBasicLibrary.data.stringHelper import StringHelper
 from hilandBasicLibrary.dataBase.databaseClient import DatabaseClient
 from hilandBasicLibrary.dataBase.databaseDDL import DatabaseDDL
-from hilandBasicLibrary.dataBase.databaseEnum import FetchMode
+from hilandBasicLibrary.dataBase.databaseEnum import BatchMode
 from hilandBasicLibrary.dataBase.databaseHelper import DatabaseHelper
 
 
@@ -75,14 +75,14 @@ class DDL(DatabaseDDL):
 
         if row_count < 0:
             select_sql = "SELECT * FROM `{0}`".format(real_table_name)
-            rows = mate.directly_query(select_sql, None, FetchMode.MANY)
+            rows = mate.directly_query(select_sql, None, BatchMode.MANY)
 
             # TODO:需要改成参数调用的方式
             # select_sql = "SELECT * FROM %s"
             # rows = mate.directly_query(select_sql, [real_table_name], FetchMode.MANY)
         else:
             select_sql = "SELECT * FROM `{0}` LIMIT {1}".format(real_table_name, row_count)
-            rows = mate.directly_query(select_sql, None, FetchMode.MANY)
+            rows = mate.directly_query(select_sql, None, BatchMode.MANY)
 
         result = ""
         if rows:

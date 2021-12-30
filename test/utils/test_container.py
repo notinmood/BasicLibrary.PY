@@ -17,8 +17,15 @@ def test_get_dict():
     assert my_dict_a == my_dict_b
 
     my_dict_a['k-a'] = "v-a"
-
-    print("")
-    pprint("显示数据：")
-    print(Container.get_dict("a"))
     assert my_dict_a != my_dict_b
+
+
+def tests_get_item():
+    key = "__wps__"
+    item = Container.get_item(key)
+    assert item is None
+
+    value = "qingdao"
+    Container.set_item(key, value)
+    item2 = Container.get_item(key)
+    assert item2 == value

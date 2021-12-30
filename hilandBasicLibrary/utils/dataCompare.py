@@ -38,12 +38,13 @@ class DataSummary:
 
 class DataCompare:
     @classmethod
-    def compare_entity(cls, main_entity, secondary_entity):
+    def compare_entity_single(cls, main_entity, secondary_entity):
         """
-        比较实体数据(左侧视角)
-        TODO:这个方法名需要重新命名一个清晰明了的名字
-        :param dict main_entity:
-        :param dict secondary_entity:
+        单向比较实体数据
+        (从main_entity内遍历每个item,去secondary_entity内匹配，是否存在及相同;
+        而不关注 secondary_entity 内含有的item是否在 main_entity 内存在.)
+        :param any main_entity:
+        :param any secondary_entity:
         :return:
         """
         no_matched = ""

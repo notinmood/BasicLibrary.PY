@@ -23,36 +23,36 @@ def test_data_summary():
 def test_compare_entity():
     entity1 = {"a": "AA", "b": "BB", "c": "CC"}
     entity2 = {"a": "AA", "b": "BB", "c": "CC", "d": "DD"}
-    actual = DataCompare.compare_entity(entity1, entity2)
+    actual = DataCompare.compare_entity_single(entity1, entity2)
     expected = ""
     assert actual == expected
 
     entity1 = {"a": "AA", "b": "BB", "c": "CC"}
     entity2 = {"a": "AA", "b": "BB", "c": "CC", "d": "DD"}
-    actual = DataCompare.compare_entity(entity2, entity1)
+    actual = DataCompare.compare_entity_single(entity2, entity1)
     expected = "d|DD|None||"
     assert actual == expected
 
     entity1 = {"a", "b", "c"}
     entity2 = {"a", "b", "c", "d"}
-    actual = DataCompare.compare_entity(entity1, entity2)
+    actual = DataCompare.compare_entity_single(entity1, entity2)
     expected = ""
     assert actual == expected
 
     entity1 = {"a", "b", "c", "d"}
     entity2 = {"a", "b", "c"}
-    actual = DataCompare.compare_entity(entity1, entity2)
+    actual = DataCompare.compare_entity_single(entity1, entity2)
     expected = "d||"
     assert actual == expected
 
     entity1 = ["a", "b", "c", "d"]
     entity2 = ["a", "b", "c"]
-    actual = DataCompare.compare_entity(entity1, entity2)
+    actual = DataCompare.compare_entity_single(entity1, entity2)
     expected = "d||"
     assert actual == expected
 
     entity1 = ["a", "b", "c", "d"]
     entity2 = {"a", "b", "c"}
-    actual = DataCompare.compare_entity(entity1, entity2)
+    actual = DataCompare.compare_entity_single(entity1, entity2)
     expected = "d||"
     assert actual == expected

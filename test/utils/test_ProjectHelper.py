@@ -17,7 +17,7 @@ def test_get_root_physical_path():
     :return:
     """
     actual = ProjectHelper.get_root_physical_path()
-    expected = os.path.dirname(os.path.dirname(os.getcwd()))
+    expected = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
     print("本地获取到的物理根目录为{}".format(expected))
     print("类库获取到的物理根目录为{}".format(actual))
     assert actual == expected

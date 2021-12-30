@@ -1,6 +1,6 @@
 from builtins import *
 
-from hilandBasicLibrary.dataBase.databaseEnum import FetchMode, LikeMatchMode
+from hilandBasicLibrary.dataBase.databaseEnum import BatchMode, LikeMatchMode
 from hilandBasicLibrary.dataBase.databaseMate import DatabaseMate
 from hilandBasicLibrary.dataBase.MongoDB.helper import Helper as mh
 
@@ -21,17 +21,17 @@ class Mate(DatabaseMate):
 
     def interact_one(self, data_dict, condition_dict=None, is_exist_update=True):
         if condition_dict is None:
-            condition_dict = entity_dict
+            condition_dict = data_dict
 
         data_existing = mh.find_one(self.collection, condition_dict)
 
         if data_existing:
             if is_exist_update:
-                return self.collection.update_one(condition_dict, {"$set": entity_dict})
+                return self.collection.update_one(condition_dict, {"$set": data_dict})
             else:
-                return self.collection.replace_one(data_existing, entity_dict)
+                return self.collection.replace_one(data_existing, data_dict)
         else:
-            return self.collection.insert_one(entity_dict)
+            return self.collection.insert_one(data_dict)
 
     def insert_one(self, entity_dict):
         res = mh.insert_one(self.collection, entity_dict)
@@ -69,7 +69,7 @@ class Mate(DatabaseMate):
         if condition_dict is None:
             condition_dict = data_dict_list
 
-        exist_count = self.query_count(condition_dict)
+        exist_count = self.find_count(condition_dict)
 
         if exist_count and exist_count > 0:
             # do nothing;
@@ -166,7 +166,7 @@ class Mate(DatabaseMate):
 
         return res
 
-    def query_count(self, condition_dict={}):
+    def find_count(self, condition_dict={}):
         res = self.collection.count_documents(condition_dict)
         return res
 
@@ -211,7 +211,7 @@ class Mate(DatabaseMate):
         """
         pass
 
-    def directly_query(self, sql, params=None, fetch_mode=FetchMode.ONE):
+    def directly_query(self, sql, params=None, fetch_mode=BatchMode.ONE):
         """
         直接在数据库上查询sql语句(不推荐在biz的业务逻辑中直接使用)
         :param sql:
@@ -288,5 +288,5 @@ if __name__ == '__main__':
     print(list(f))
 
     _condition = {'name': '开源优测'}
-    count = person.query_count(_condition)
+    count = person.find_count(_condition)
     print(count)

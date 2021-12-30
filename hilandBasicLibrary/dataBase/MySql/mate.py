@@ -7,7 +7,7 @@ from hilandBasicLibrary.configHelper import ConfigHelper as ch, ConfigHelper
 from hilandBasicLibrary.data.objectHelper import ObjectHelper
 from hilandBasicLibrary.data.stringHelper import StringHelper
 from hilandBasicLibrary.dataBase.MySql.pool import Pool
-from hilandBasicLibrary.dataBase.databaseEnum import FetchMode, LikeMatchMode
+from hilandBasicLibrary.dataBase.databaseEnum import BatchMode, LikeMatchMode
 from hilandBasicLibrary.dataBase.databaseHelper import DatabaseHelper
 from hilandBasicLibrary.dataBase.databaseMate import DatabaseMate
 from hilandBasicLibrary.environment.consoleHelper import ConsoleHelper
@@ -69,6 +69,7 @@ class Mate(DatabaseMate):
 
         return self
 
+    # TODO：确认 *exc_info 参数的作用
     def __exit__(self, *exc_info):
 
         # 提交事务
@@ -82,8 +83,8 @@ class Mate(DatabaseMate):
             diff = default_timer() - self._start
             print('-- %s: %.6f 秒' % (self._log_label, diff))
 
-    def __str__(self):
-        return "mate in  DatabaseMate: " + __name__
+    # def __str__(self):
+    #     return "mate in  DatabaseMate: " + __name__
 
     def get_real_table_name(self):
         """
@@ -92,13 +93,14 @@ class Mate(DatabaseMate):
         """
         return self._table_name
 
+    # -----获取数据-------------------------------------------------
     def find_one(self, condition_dict, data_field_collection=None):
         sql = DatabaseHelper.build_select_clause(self._table_name, condition_dict, data_field_collection)
-        return self.directly_query(sql, None, FetchMode.ONE)
+        return self.directly_query(sql, None, BatchMode.ONE)
 
     def find_many(self, condition_dict, data_field_collection=None):
         sql = DatabaseHelper.build_select_clause(self._table_name, condition_dict, data_field_collection)
-        return self.directly_query(sql, None, FetchMode.MANY)
+        return self.directly_query(sql, None, BatchMode.MANY)
 
     def find_like(self, field, value, match_mode=LikeMatchMode.BOTH, data_field_collection={}):
         """
@@ -153,7 +155,7 @@ class Mate(DatabaseMate):
         res = self.find_many(condition_dict, data_field_collection)
         return res
 
-    def query_count(self, condition_dict={}):
+    def find_count(self, condition_dict={}):
         """
         获取符合条件的行数
         :param condition_dict:
@@ -169,6 +171,7 @@ class Mate(DatabaseMate):
         else:
             return None
 
+    # -----交互数据-------------------------------------------------
     def insert_one(self, entity_dict):
         sql = DatabaseHelper.build_insert_clause(self._table_name, entity_dict)
         return self.directly_exec(sql, None)
@@ -222,8 +225,8 @@ class Mate(DatabaseMate):
     def insert_many_non_duplication(self, entity_dict_list, condition_dict=None):
         """
         不重复的插入多行数据
-        （目前实现的版本功能是，先查询数据库内是否有符合条件filter_condition的数据，如果有（哪怕只有一条），那么全部的新数据都不插入了；
-        如果数据库内没有符合条件的记录，那么就插入新的全部数据data_list）
+        （目前实现的版本功能是:先查询数据库内是否有符合条件filter_condition的数据，如果有（哪怕只有一条），那么全部的新数据都不插入了；
+        如果数据库内没有符合条件的记录，那么就插入新的全部数据 entity_dict_list）
         :param entity_dict_list:
         :param condition_dict:
         :return:
@@ -231,7 +234,7 @@ class Mate(DatabaseMate):
         if condition_dict is None:
             condition_dict = entity_dict_list
 
-        exist_count = self.query_count(condition_dict)
+        exist_count = self.find_count(condition_dict)
 
         if exist_count and exist_count > 0:
             # do nothing;
@@ -242,6 +245,12 @@ class Mate(DatabaseMate):
         return res
 
     def update_one(self, fixing_dict, condition_dict):
+        """
+        更新一条记录
+        :param dict fixing_dict: 更新后的对象
+        :param dict condition_dict: 更新时的匹配条件
+        :return int:更新的数据条数
+        """
         sql = DatabaseHelper.build_update_clause(self._table_name, fixing_dict, condition_dict)
         sql = StringHelper.remove_tail(sql, ";") + " LIMIT 1 ;"
         return self.directly_exec(sql)
@@ -253,6 +262,7 @@ class Mate(DatabaseMate):
     def interact_one(self, data_dict, condition_dict=None, is_exist_update=True):
         """
         跟数据库服务器进行数据交互，如果设定条件的记录存在就更新；如果不存在就插入。
+        :param data_dict:
         :param condition_dict:
         :param is_exist_update: 在MySql下此参数不可使用
         :return:
@@ -300,6 +310,7 @@ class Mate(DatabaseMate):
         else:
             return None
 
+    # -----直接执行sql语句的逻辑------------------------------------------------
     def directly_exec(self, sql, params=None, auto_close=True):
         try:
             return self.__exec_detail(sql, params)
@@ -320,7 +331,7 @@ class Mate(DatabaseMate):
             print(e)
         return count
 
-    def directly_query(self, sql, params=None, fetch_mode=FetchMode.ONE):
+    def directly_query(self, sql, params=None, fetch_mode=BatchMode.ONE):
         try:
             return self.__query_detail(sql, params, fetch_mode)
         except pymysql.ProgrammingError:
@@ -328,19 +339,17 @@ class Mate(DatabaseMate):
             self.__connect()
             return self.__query_detail(sql, params, fetch_mode)
 
-    def __query_detail(self, sql, params=None, fetch_mode=FetchMode.ONE):
+    def __query_detail(self, sql, params=None, fetch_mode=BatchMode.ONE):
         cursor = self.__get_cursor()
-        result = None
 
         # TODO:只在exec的时候加锁，此处query的锁取消掉。需要验证正确性。
         # lock.acquire()
 
         cursor.execute(sql, params)
-        if fetch_mode == FetchMode.ONE:
+        if fetch_mode == BatchMode.ONE:
             result = cursor.fetchone()
         else:
             result = cursor.fetchall()
 
         # lock.release()
-
         return result

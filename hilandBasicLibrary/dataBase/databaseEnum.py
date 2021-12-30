@@ -9,7 +9,7 @@
 from enum import Enum
 
 
-class FetchMode(Enum):
+class BatchMode(Enum):
     ONE = 1
     MANY = 0
 

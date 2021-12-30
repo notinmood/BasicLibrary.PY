@@ -18,14 +18,14 @@ from hilandBasicLibrary.utils.dataCompare import DataSummary, DataCompare
 
 def test_is_exist_table():
     table_name = "user"
+    biz = DatabaseUnitTest(table_name=table_name, duplicate_row_count=2, auto_dispose=False)
 
-    _user = DatabaseUnitTest(table_name=table_name, duplicate_row_count=2, auto_dispose=False)
-    new_table_name = _user.new_table_name
-    actual = _user.ddl.is_exist_table(new_table_name)
+    new_table_name = biz.new_table_name
+    actual = biz.ddl.is_exist_table(new_table_name)
     expected = True
     assert actual == expected
-    _user.dispose()
-    actual = _user.ddl.is_exist_table(new_table_name)
+    biz.dispose()
+    actual = biz.ddl.is_exist_table(new_table_name)
     expected = False
     assert actual == expected
 
@@ -33,6 +33,7 @@ def test_is_exist_table():
 def test_find_one():
     table_name = "user"
     biz = DatabaseUnitTest(table_name=table_name)
+
     condition = {"class": "一"}
     result = biz.mate.find_one(condition)
 
@@ -44,6 +45,7 @@ def test_find_one():
 def test_find_many():
     table_name = "user"
     biz = DatabaseUnitTest(table_name=table_name)
+
     condition = {"class": "一"}
     result = biz.mate.find_many(condition)
 
@@ -55,7 +57,6 @@ def test_find_many():
 
 def test_insert():
     table_name = "user"
-
     biz = DatabaseUnitTest(table_name=table_name)
 
     entity = {"id": 20, 'name': "赵六", "birthday": "2010-12-12", "class": "二", "score": 92, "email": "rr@ss.com"}
@@ -67,6 +68,38 @@ def test_insert():
     expected = "赵六"
     assert actual == expected
 
-    actual = DataCompare.compare_entity(entity, selected)
+    actual = DataCompare.compare_entity_single(entity, selected)
     expected = "birthday|2010-12-12|2010-12-12 00:00:00||"
     assert actual == expected
+
+
+def test_update_one():
+    table_name = "user"
+    biz = DatabaseUnitTest(table_name=table_name)
+
+    fixing_data = {"name": "张三"}
+    condition_data = {"name": "zhangsan"}
+    biz.mate.update_one(fixing_data, condition_data)
+    condition1 = {"id": 1}
+    item1 = biz.mate.find_one(condition1)
+    assert item1["name"] == "张三"
+
+    condition1 = {"id": 3}
+    item1 = biz.mate.find_one(condition1)
+    assert item1["name"] == "zhangsan"
+
+
+def test_update_many():
+    table_name = "user"
+    biz = DatabaseUnitTest(table_name=table_name)
+
+    fixing_data = {"name": "张三"}
+    condition_data = {"name": "zhangsan"}
+    biz.mate.update_many(fixing_data, condition_data)
+    condition1 = {"id": 1}
+    item1 = biz.mate.find_one(condition1)
+    assert item1["name"] == "张三"
+
+    condition1 = {"id": 3}
+    item1 = biz.mate.find_one(condition1)
+    assert item1["name"] == "张三"
