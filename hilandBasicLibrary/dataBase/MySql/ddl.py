@@ -75,14 +75,14 @@ class DDL(DatabaseDDL):
 
         if row_count < 0:
             select_sql = "SELECT * FROM `{0}`".format(real_table_name)
-            rows = mate.directly_query(select_sql, None, BatchMode.MANY)
 
             # TODO:需要改成参数调用的方式
             # select_sql = "SELECT * FROM %s"
             # rows = mate.directly_query(select_sql, [real_table_name], FetchMode.MANY)
         else:
             select_sql = "SELECT * FROM `{0}` LIMIT {1}".format(real_table_name, row_count)
-            rows = mate.directly_query(select_sql, None, BatchMode.MANY)
+
+        rows = mate.directly_query(select_sql, None, BatchMode.MANY)
 
         result = ""
         if rows:
