@@ -2,7 +2,7 @@ from hilandBasicLibrary.configHelper import ConfigHelper as ch
 from hilandBasicLibrary.data.dictHelper import DictHelper
 from hilandBasicLibrary.dataBase.databaseDDL import DatabaseDDL
 from hilandBasicLibrary.dataBase.databaseMate import DatabaseMate
-from hilandBasicLibrary.data.container import Container
+from hilandBasicLibrary.model.container import Container
 
 
 class DatabaseClient:

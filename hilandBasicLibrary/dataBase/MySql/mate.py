@@ -135,7 +135,7 @@ class Mate(DatabaseMate):
         res = self.find_many(condition_dict, data_field_collection)
         return res
 
-    def find_more(self, field, value, include_border=True, data_field_collection={}):
+    def find_more(self, field, value, include_border=True, data_field_collection=None):
         condition_dict = dict()
         if include_border:
             condition_dict[field] = {"$gte": value}

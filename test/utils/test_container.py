@@ -6,9 +6,8 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from pprint import pprint
 
-from hilandBasicLibrary.data.container import Container
+from hilandBasicLibrary.model.container import Container
 
 
 def test_get_dict():

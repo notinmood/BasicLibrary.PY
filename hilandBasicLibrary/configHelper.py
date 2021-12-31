@@ -3,7 +3,7 @@ import os
 import dotenv
 
 from hilandBasicLibrary.projectHelper import ProjectHelper as ph
-from hilandBasicLibrary.data.container import Container
+from hilandBasicLibrary.model.container import Container
 from hilandBasicLibrary.data.dictHelper import DictHelper
 
 
