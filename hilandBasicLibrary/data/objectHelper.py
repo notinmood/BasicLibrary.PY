@@ -1,5 +1,7 @@
 from builtins import *
 
+from hilandBasicLibrary.model.dataCompare import DataSummary
+
 
 class ObjectHelper:
     @staticmethod
@@ -101,3 +103,13 @@ class ObjectHelper:
         :return:
         """
         return isinstance(object_data, class_data)
+
+    @staticmethod
+    def get_summary(object_data):
+        """
+        获取目标对象的摘要信息
+        :param object_data:
+        :return:
+        """
+        summary = DataSummary(object_data)
+        return summary

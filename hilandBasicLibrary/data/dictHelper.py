@@ -1,4 +1,4 @@
-from builtins import *
+from hilandBasicLibrary.model.dataCompare import DataSummary
 
 
 class DictHelper:
@@ -26,4 +26,5 @@ class DictHelper:
 
     @classmethod
     def get_summary(cls, dict_data):
-        pass
+        summary = DataSummary(dict_data)
+        return summary
