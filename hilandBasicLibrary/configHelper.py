@@ -2,7 +2,8 @@ import configparser
 import os
 import dotenv
 
-from hilandBasicLibrary.projectHelper import ProjectHelper as ph
+from hilandBasicLibrary.io.pathHelper import PathHelper
+from hilandBasicLibrary.projectHelper import ProjectHelper
 from hilandBasicLibrary.model.container import Container
 from hilandBasicLibrary.data.dictHelper import DictHelper
 
@@ -16,37 +17,50 @@ class ConfigHelper:
         那么妥协的方式是将.ini文件中section/node按照 section.node的方式作为.env的key进行使用
     """
 
-    @staticmethod
-    def __build_parser():
-        configparser_key = "__configparser__"
-        cp = Container.get_item(configparser_key)
-
-        if cp is None:
-            cp = configparser.ConfigParser()
-            root_path = ph.get_root_physical_path()
-
-            file = os.path.join(root_path, "_projectConfig.ini")
-            cp.read(file, encoding='utf-8')
-
-            Container.set_item(configparser_key, cp)
-
-        return cp
-
     @classmethod
     def get_section(cls, section_name):
-        cp = cls.__build_parser()
-        section = cp.options(section_name)
+        """
+        获取 section 组
+        :param section_name:
+        :return:
+        """
+        config_ini_parser = cls.__build_ini_parser()
+        section = config_ini_parser.options(section_name)
         return section
 
     @classmethod
     def get_item(cls, section_name, item_name, default_value=None):
-        cp = cls.__build_parser()
+        """
+        获取 node 节点
+        :param section_name:
+        :param item_name:
+        :param default_value:
+        :return:
+        """
+
+        """
+        1. 读取 _projectConfig.ini 文件
+        """
+        config_ini_parser = cls.__build_ini_parser()
 
         try:
-            item_value = cp.get(section_name, item_name)
+            item_value = config_ini_parser.get(section_name, item_name)
         except:
             item_value = default_value
 
+        """
+        2. 读取环境文件.env 内的配置信息，优先级最高
+        """
+        config_env_parser = cls.__build_env_parser()
+
+        if section_name:
+            item_name = "{0}.{1}".format(section_name, item_name)
+
+        item_value = DictHelper.get_value(config_env_parser, item_name, item_value)
+
+        """
+        转换数据类型为目标类型
+        """
         if item_value is None:
             item_value = default_value
         else:
@@ -54,14 +68,33 @@ class ConfigHelper:
                 item_type = type(default_value)
                 item_value = item_type(item_value)
 
-        """
-        环境文件.env 内的配置信息，优先级最高
-        """
-        env_dict = dotenv.dotenv_values()
-
-        if section_name:
-            item_name = "{0}.{1}".format(section_name, item_name)
-
-        item_value = DictHelper.get_value(env_dict, item_name, item_value)
-
         return item_value
+
+    @staticmethod
+    def __build_ini_parser():
+        config_ini_key = "__config_ini_parser__"
+        config_ini_parser = Container.get_item(config_ini_key)
+
+        if config_ini_parser is None:
+            config_ini_parser = configparser.ConfigParser()
+            root_path = ProjectHelper.get_root_physical_path()
+
+            file = os.path.join(root_path, "_projectConfig.ini")
+            config_ini_parser.read(file, encoding='utf-8')
+
+            Container.set_item(config_ini_key, config_ini_parser)
+
+        return config_ini_parser
+
+    @staticmethod
+    def __build_env_parser():
+        env_parser_key = "__env_parser__"
+        env_parser = Container.get_item(env_parser_key)
+
+        if env_parser is None:
+            root = ProjectHelper.get_root_physical_path()
+            env_path = PathHelper.combine(root, '.env')
+            env_parser = dotenv.dotenv_values(env_path)
+            Container.set_item(env_parser_key, env_parser)
+
+        return env_parser
