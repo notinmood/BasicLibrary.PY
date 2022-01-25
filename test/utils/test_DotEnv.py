@@ -7,10 +7,10 @@
  * @company: HiLand & RainyTop
 """
 import os
-
 import dotenv
-from hilandBasicLibrary.projectHelper import ProjectHelper
+
 from hilandBasicLibrary.io.pathHelper import PathHelper
+from hilandBasicLibrary.projectHelper import ProjectHelper
 
 
 def test_load_type():
