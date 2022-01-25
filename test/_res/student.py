@@ -13,3 +13,6 @@ from hilandBasicLibrary.pattern.singleton import Singleton
 class Student(object):
     def __init__(self):
         pass
+
+    def say_hello(self):
+        print("hello" + self.__class__)

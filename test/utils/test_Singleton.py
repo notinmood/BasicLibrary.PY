@@ -6,16 +6,7 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from hilandBasicLibrary.pattern.singleton import Singleton
-
-
-@Singleton
-class Student(object):
-    def __init__(self):
-        pass
-
-    def say_hi(self):
-        print("hello")
+from _res.student import Student
 
 
 def test_singleton():
