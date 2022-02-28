@@ -2,12 +2,12 @@ import re
 from builtins import *
 from datetime import datetime, timedelta, date
 
-"""
-Python内置两个方法的说明
-    strptime()方法,里面的p是parse的意思，就是把字符串解析成日期时间类型
-    strftime()方法,里面的f是format的意思，就是把日期时间类型格式化为某种格式的字符串
-"""
 
+# +--------------------------------------------------------------------------
+# |::说明：| Python内置两个方法的说明
+# |·······|     strptime()方法,里面的p是parse的意思，就是把字符串解析成日期时间类型
+# |·······|     strftime()方法,里面的f是format的意思，就是把日期时间类型格式化为某种格式的字符串
+# +--------------------------------------------------------------------------
 
 class DateTimeHelper:
     @staticmethod

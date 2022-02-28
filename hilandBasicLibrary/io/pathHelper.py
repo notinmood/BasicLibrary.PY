@@ -32,7 +32,7 @@ class PathHelper:
     def get_dir_name(path):
         """
         获取给定路径的目录部分
-        :param path:
+        :param str path:
         :return:
         """
         return os.path.dirname(path)

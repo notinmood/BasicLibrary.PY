@@ -4,22 +4,22 @@ from builtins import *
 
 class IOHelper:
     @staticmethod
-    def get_illegal_chars_in_file_system(include_seperator=True):
+    def get_illegal_chars_in_file_system(include_separator=True):
         """
         文件系统（文件目录或文件名称）内不使用的字符
-        :param include_seperator: 是否包含目录分割符号 "\\" 和 "/"
+        :param include_separator: 是否包含目录分割符号 "\\" 和 "/"
         :return:
         """
         normal = ["?", "*", '"', ":", "<", ">", "|"]
-        if include_seperator:
+        if include_separator:
             normal.append("\\")
             normal.append("/")
 
         return normal
 
     @classmethod
-    def get_safe_filename(cls, filename, safe_char="_", include_seperator=True):
-        chars = cls.get_illegal_chars_in_file_system(include_seperator)
+    def get_safe_filename(cls, filename, safe_char="_", include_separator=True):
+        chars = cls.get_illegal_chars_in_file_system(include_separator)
         for c in chars:
             filename = filename.replace(c, safe_char)
 
