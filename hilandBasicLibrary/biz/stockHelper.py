@@ -58,7 +58,7 @@ class StockHelper:
             standard_code = stock_code
             biz_code = "{}{}{}".format(prefix, standard_code, postfix)
             stock_exchange_name_upper = StockHelper.get_stock_exchange_name(standard_code)
-            stock_exchange_name_lower = StringHelper.lower(stock_exchange_name_upper)
+            stock_exchange_name_lower = StringHelper.lower_all_chars(stock_exchange_name_upper)
 
             target = biz_code
 

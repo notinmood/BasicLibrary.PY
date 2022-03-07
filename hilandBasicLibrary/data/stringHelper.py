@@ -150,9 +150,49 @@ class StringHelper:
         return original_with_placeholder.format(*args, **kwargs)
 
     @staticmethod
-    def upper(original_string):
+    def upper_all_chars(original_string):
+        """
+        将给定内容中所有的字母大写表示
+        :param original_string:
+        :return:
+        """
         return original_string.upper()
 
     @staticmethod
-    def lower(original_string):
+    def lower_all_chars(original_string):
+        """
+        将给定内容中所有的字母小写表示
+        :param original_string:
+        :return:
+        """
         return original_string.lower()
+
+    @staticmethod
+    def upper_first_char(original_string):
+        """
+        将句子的第一个字母大写
+        :param  original_string:
+        :return:
+        """
+        return original_string[:1].upper() + original_string[1:]
+
+    @staticmethod
+    def lower_first_char(original_string):
+        """
+        将句子的第一个字母小写
+        :param original_string:
+        :return:
+        """
+        return original_string[:1].lower() + original_string[1:]
+
+    @staticmethod
+    def upper_first_char_every_word(original_string):
+        """
+        将每个单词的首字母大写
+        :param original_string:
+        :example:
+            输入："programming is awesome"
+            输出："Programming Is Awesome"
+        :return:
+        """
+        return original_string.title()

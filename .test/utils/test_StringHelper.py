@@ -159,15 +159,36 @@ def test_explode():
     assert actual == expected
 
 
-def test_upper():
+def test_upper_all_chars():
     biz_data = "I love China!我爱中国！"
-    actual = StringHelper.upper(biz_data)
+    actual = StringHelper.upper_all_chars(biz_data)
     expected = "I LOVE CHINA!我爱中国！"
     assert actual == expected
 
 
-def test_lower():
+def test_lower_all_chars():
     biz_data = "I love China!我爱中国！"
-    actual = StringHelper.lower(biz_data)
+    actual = StringHelper.lower_all_chars(biz_data)
     expected = "i love china!我爱中国！"
+    assert actual == expected
+
+
+def test_upper_first_char():
+    biz_data = "i love China!我爱中国！"
+    actual = StringHelper.upper_first_char(biz_data)
+    expected = "I love China!我爱中国！"
+    assert actual == expected
+
+
+def test_lower_first_char():
+    biz_data = "I love China!我爱中国！"
+    actual = StringHelper.lower_first_char(biz_data)
+    expected = "i love China!我爱中国！"
+    assert actual == expected
+
+
+def test_upper_first_char_every_word():
+    biz_data = "i love china!我爱中国！"
+    actual = StringHelper.upper_first_char_every_word(biz_data)
+    expected = "I Love China!我爱中国！"
     assert actual == expected

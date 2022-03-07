@@ -3,6 +3,10 @@ from builtins import *
 
 
 class IOHelper:
+    """
+    TODO 本文件内的逻辑应该细分进入单独的文件中
+    """
+
     @staticmethod
     def get_illegal_chars_in_file_system(include_separator=True):
         """
