@@ -6,6 +6,8 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
+import os.path
+
 from hilandBasicLibrary.io.pathHelper import PathHelper
 
 
@@ -27,9 +29,22 @@ def test_get_dir_name():
     assert actual == expected
 
 
-def test_get_base_name():
-    p = "E:\\workspace\\Project-python\\Comprehensive.PY"
-    actual = PathHelper.get_file_base_name(p)
-    expected = "Comprehensive.PY"
+def test_get_root_path():
+    actual = PathHelper.get_root_path()
+    expected = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
     assert actual == expected
 
+
+def test_get_dir_name():
+    data = "E:\\myworkspace\\BasicLibrary.PY\\.test\\utils\\test_PathHelper.py"
+    actual = PathHelper.get_dir_name(data)
+    expected = "E:\\myworkspace\\BasicLibrary.PY\\.test\\utils"
+    assert actual == expected
+
+    actual = PathHelper.get_dir_name(data, 2)
+    expected = "E:\\myworkspace\\BasicLibrary.PY\\.test"
+    assert actual == expected
+
+    actual = PathHelper.get_dir_name(data, 4)
+    expected = "E:\\myworkspace"
+    assert actual == expected

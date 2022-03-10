@@ -15,7 +15,7 @@ def test_get_safe_filename():
     assert actual == expected
 
     _filename = "我是一:个好|人吗?"
-    _filename = IOHelper.get_safe_filename(_filename)
+    _filename = IOHelper.get_safe_file_system_name(_filename)
     expected = '我是一_个好_人吗_'
     actual = _filename
     assert actual == expected

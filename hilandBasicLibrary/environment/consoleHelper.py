@@ -5,7 +5,7 @@ class ConsoleHelper:
     @staticmethod
     def echo(data):
         """
-        本方法调用系统内部的print方法。本方法的目的是为了平滑 PHP 的使用体验。
+        本方法调用系统内部的 print 方法。本方法的目的是为了平滑 PHP 的使用体验。
         :param data:
         :return:
         """

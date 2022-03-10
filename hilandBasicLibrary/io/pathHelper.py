@@ -8,6 +8,8 @@
 """
 import os.path
 
+from hilandBasicLibrary.projectHelper import ProjectHelper
+
 
 class PathHelper:
     @staticmethod
@@ -19,28 +21,33 @@ class PathHelper:
         """
         return os.path.join(*args)
 
-    @staticmethod
-    def get_file_base_name(path):
-        """
-        获取给定路径的文件名称部分
-        :param path:
-        :return:
-        """
-        return os.path.basename(path)
-
-    @staticmethod
-    def get_dir_name(path):
+    @classmethod
+    def get_dir_name(cls, path, up_level=1):
         """
         获取给定路径的目录部分
+        :param up_level: 求向上多少级的目录
         :param str path:
         :return:
         """
-        return os.path.dirname(path)
+        for key in range(0, up_level):
+            path = os.path.dirname(path)
+
+        return path
 
     @staticmethod
-    def get_current_path():
+    def get_root_path():
         """
         获取当前程序的运行路径
         :return:
         """
-        return os.getcwd()
+        return ProjectHelper.get_root_physical_path()
+
+    @staticmethod
+    def ensure_path(path_name):
+        """
+        取保目录存在，如果不存在就创建
+        :param path_name:
+        :return:
+        """
+        if os.path.exists(path_name) is False:
+            os.makedirs(path_name)
