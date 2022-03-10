@@ -8,6 +8,8 @@
 """
 import os.path
 
+from hilandBasicLibrary.data.stringHelper import StringHelper
+from hilandBasicLibrary.environment.envHelper import EnvHelper
 from hilandBasicLibrary.io.pathHelper import PathHelper
 
 
@@ -47,4 +49,12 @@ def test_get_dir_name():
 
     actual = PathHelper.get_dir_name(data, 4)
     expected = "E:\\myworkspace"
+    assert actual == expected
+
+
+def test_real_path():
+    file_name = "E:/myworkspace/BasicLibrary.PY\\.test\\utils\\test_FileHelper.py"
+    actual = PathHelper.get_formatted_path(file_name)
+    expected = StringHelper.replace(file_name, "/", EnvHelper.get_path_separator())
+    expected = StringHelper.replace(expected, "\\", EnvHelper.get_path_separator())
     assert actual == expected

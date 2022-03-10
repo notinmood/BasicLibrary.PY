@@ -196,3 +196,14 @@ class StringHelper:
         :return:
         """
         return original_string.title()
+
+    @staticmethod
+    def replace(whole_string, old_sub_string, new_sub_string):
+        """
+
+        :param whole_string:
+        :param old_sub_string:
+        :param new_sub_string:
+        :return:
+        """
+        return whole_string.replace(old_sub_string, new_sub_string)

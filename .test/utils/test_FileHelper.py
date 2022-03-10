@@ -6,7 +6,11 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
+import os.path
+
 from hilandBasicLibrary.io.fileHelper import FileHelper
+from hilandBasicLibrary.io.pathHelper import PathHelper
+from hilandBasicLibrary.projectHelper import ProjectHelper
 
 
 def test_get_file_base_name():
@@ -51,10 +55,24 @@ def test_get_path_name():
 
 
 def test_load():
-
-    file_full_name = "../_res/myContent.txt"
+    root_path = ProjectHelper.get_root_physical_path()
+    file_name = ".test\\_res\\myContent.txt"
+    file_full_name = PathHelper.combine(root_path, file_name)
     actual = FileHelper.load(file_full_name)
-    expected = ""
+    expected = '第一行内容\n第二行信息\n"第三行数据"\n\n5th. data'
     assert actual == expected
 
 
+def test_copy():
+    root_path = ProjectHelper.get_root_physical_path()
+    file_name = ".test\\_res\\source\\aa.txt"
+    source = PathHelper.combine(root_path, file_name)
+
+    target_dir = PathHelper.combine(root_path, ".test\\_res\\target")
+    target_base_name = "ww.pp"
+    FileHelper.copy(source, target_dir, target_base_name)
+
+    target_file = PathHelper.combine(target_dir, target_base_name)
+    actual = PathHelper.determine_is_exist(target_file)
+    expected = True
+    assert actual == expected

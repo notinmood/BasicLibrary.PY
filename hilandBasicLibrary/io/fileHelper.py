@@ -8,6 +8,8 @@
 """
 import os
 import pathlib
+import shutil
+import sys
 
 from hilandBasicLibrary.io.pathHelper import PathHelper
 
@@ -85,7 +87,7 @@ class FileHelper:
         :return:
         """
         path_name = cls.get_path_name(file_full_name)
-        PathHelper.ensure_path(path_name)
+        PathHelper.ensure_exist(path_name)
         if is_append:
             mode = 'a+'
         else:
@@ -93,3 +95,24 @@ class FileHelper:
 
         with open(file_full_name, mode, encoding='utf-8') as file_pointer:
             file_pointer.write(content)
+
+    @staticmethod
+    def copy(source_file_full_name, target_dir_name, target_file_base_name=""):
+        """
+        复制文件
+        :param source_file_full_name:带全路径的源文件
+        :param target_dir_name:目标文件夹
+        :param target_file_base_name:复制后的文件名称（默认空，表示使用源文件的名称）
+        :return:
+        """
+        if os.path.isfile(source_file_full_name):
+            file_path_name, file_base_name = os.path.split(source_file_full_name)  # 分离文件名和路径
+            if not os.path.exists(target_dir_name):
+                os.makedirs(target_dir_name)  # 创建路径
+
+            if target_file_base_name == "":
+                target_file_base_name = file_base_name
+
+            target_file_full_name = PathHelper.combine(target_dir_name, target_file_base_name)
+
+            shutil.copy(source_file_full_name, target_file_full_name)  # 复制文件

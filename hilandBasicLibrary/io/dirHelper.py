@@ -8,6 +8,8 @@
 """
 import os
 
+from hilandBasicLibrary.io.pathHelper import PathHelper
+
 
 class DirHelper:
     @classmethod
@@ -31,3 +33,12 @@ class DirHelper:
                     cls.__list_dir(file_path, list_name)
             else:
                 list_name.append(file_path)
+
+    @staticmethod
+    def ensure_exist(path):
+        """
+        取保目录存在，如果不存在就创建
+        :param path:
+        :return:
+        """
+        PathHelper.ensure_exist(path)

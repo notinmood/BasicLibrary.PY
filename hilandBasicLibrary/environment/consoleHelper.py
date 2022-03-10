@@ -1,5 +1,7 @@
 import sys
 
+from hilandBasicLibrary.environment.envHelper import EnvHelper
+
 
 class ConsoleHelper:
     @staticmethod
@@ -15,11 +17,13 @@ class ConsoleHelper:
     def get_new_line_symbol():
         """
         获取换行标志
-        TODO:需要判断不同OS
-        TODO:需要判断是cli还是web
+        TODO:需要判断是 cli 还是 web
         :return:
         """
-        return "\n"
+        if EnvHelper.determine_is_windows():
+            return "\r\n"
+        else:
+            return "\n"
 
     @staticmethod
     def get_console_args():
