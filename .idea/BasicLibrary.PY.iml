@@ -6,6 +6,9 @@
       <excludeFolder url="file://$MODULE_DIR$/HilandBasicLibrary.egg-info" />
       <excludeFolder url="file://$MODULE_DIR$/dist" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
+      <excludeFolder url="file://$MODULE_DIR$/.pytest_cache/v" />
+      <excludeFolder url="file://$MODULE_DIR$/.test/_res/target/ABDXyEXG" />
+      <excludeFolder url="file://$MODULE_DIR$/.test/_res/target/ZuksxiUp" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.10 (BasicLibrary.PY)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
