@@ -1,6 +1,8 @@
 import os
 import sys
-from builtins import *
+
+from hilandBasicLibrary.io.dirHelper import DirHelper
+from hilandBasicLibrary.io.fileHelper import FileHelper
 
 
 class IOHelper:
@@ -41,3 +43,10 @@ class IOHelper:
         :return:
         """
         return sys.getsizeof(data)
+
+    @staticmethod
+    def remove(path):
+        if os.path.isfile(path):
+            FileHelper.remove(path)
+        else:
+            DirHelper.remove(path)

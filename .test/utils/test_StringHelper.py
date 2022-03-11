@@ -8,6 +8,12 @@
 """
 from hilandBasicLibrary.data.stringHelper import *
 
+#
+# def test_ss():
+#     actual = StringHelper.en_lowercase
+#     expected = ""
+#     assert actual == expected
+
 
 def test_is_contains():
     expected = True
