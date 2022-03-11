@@ -7,7 +7,6 @@
  * @company: HiLand & RainyTop
 """
 import os
-from builtins import *
 
 from openpyxl.comments import Comment
 
@@ -51,8 +50,11 @@ class HilandSheet:
         self.original_sheet.Range(sheet_name, range_col_row).value = self.my_range
         return
 
-    # 获取行
     def get_column_count(self):
+        """
+        获取行数
+        :return:
+        """
         col_value = self.original_sheet.used_range.last_cell.column
         return col_value
 

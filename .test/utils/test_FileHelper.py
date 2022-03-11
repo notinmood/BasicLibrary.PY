@@ -6,7 +6,6 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-import os.path
 
 from hilandBasicLibrary.io.fileHelper import FileHelper
 from hilandBasicLibrary.io.pathHelper import PathHelper

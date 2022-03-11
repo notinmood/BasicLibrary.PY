@@ -15,7 +15,7 @@ class DirHelper:
     @classmethod
     def get_files(cls, dir_path, include_sub_dir=True):
         """
-        获取某目录下的文件名称
+        获取某目录下的带完整路径的文件全名称
         :param dir_path:
         :param include_sub_dir: 是否包含子目录（缺省是True，包含）
         :return:

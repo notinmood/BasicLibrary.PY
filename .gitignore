@@ -1,4 +1,4 @@
 /dist/
 /HilandBasicLibrary.egg-info/
 /.env
-/.test/_res/target/
+/.test/_res/target/*.*
