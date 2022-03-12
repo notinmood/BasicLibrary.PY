@@ -1,15 +1,25 @@
+"""
+ * @file   : switch.py
+ * @time   : 14:09
+ * @date   : 2022/3/12
+ * @mail   : 9727005@qq.com
+ * @creator: ShanDong Xiedali
+ * @company: HiLand & RainyTop
+"""
+
+
 # 作者：小鱼二
 # 链接：https: // www.zhihu.com / question / 21123544 / answer / 42957820
 # 来源：知乎
 # 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-from builtins import *
 
 
 class Switch(object):
     """
-    switch 语句。
+    switch 语句。(特别说明：请使用官方正式的表述方式 - Python3.10后已经提供了 match/case 结构。)
     使用用例，参考下面的main方法
     """
+
     def __init__(self, value):
         self.value = value
         self.fall = False

@@ -6,6 +6,14 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
+from hilandBasicLibrary import ConsoleHelper
+
+
+def test_aa():
+    ConsoleHelper.echo(1234)
+    actual = 0
+    expected = 0
+    assert actual == expected
 
 
 def test_get_console_args():

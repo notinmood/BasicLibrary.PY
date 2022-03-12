@@ -31,7 +31,6 @@ def test_remove():
     print(target_file_full_name)
 
     path = "E:\\myworkspace\\BasicLibrary.PY\\.test\\_res\\target\\ABDXyEXG\\aab.txt"
-    # path = "E:\\myworkspace\\BasicLibrary.PY\\.test\\_res\\target\\ZuksxiUp"
     IOHelper.remove(path)
     actual = 0
     expected = 0

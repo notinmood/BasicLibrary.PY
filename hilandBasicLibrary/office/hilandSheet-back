@@ -9,15 +9,20 @@
 import os
 
 from openpyxl.comments import Comment
+from xlwings import Sheet
 
 
-class HilandSheet:
-    def __init__(self, sheet):
-        """
-        从 xlwings 提供的 sheet 创建本地 Sheet
-        :param sheet: xlwings 提供的 sheet 类型实例
-        """
-        self.original_sheet = sheet
+class HilandSheet(Sheet):
+    def __init__(self, sheet=None, file_full_name=None, sheet_marker=0):
+        if sheet:
+            self.original_sheet = sheet
+        else:
+            self.workbook = open(file_full_name)
+            self.original_sheet = self.workbook.sheets[sheet_marker]
+
+        super(HilandSheet, self).__init__()
+
+        # print(self.sheet)
         self.cell = None
         self.my_range = None
         self.style = []
@@ -35,17 +40,17 @@ class HilandSheet:
 
     # 复制
     def copy(self, sheet_name, range_col_row):
-        self.my_range = self.original_sheet.range(sheet_name, range_col_row).value
+        self.my_range = self.original_sheet.Range(sheet_name, range_col_row).value
         return self.my_range
 
     # 粘贴
     def paste(self, sheet_name, range_col_row):
-        self.original_sheet.range(sheet_name, range_col_row).value = self.my_range
+        self.original_sheet.Range(sheet_name, range_col_row).value = self.my_range
         return
 
     # 粘贴数据
     def paste_range(self, sheet_name, range_col_row):
-        self.original_sheet.range(sheet_name, range_col_row).value = self.my_range
+        self.original_sheet.Range(sheet_name, range_col_row).value = self.my_range
         return
 
     def get_column_count(self):
@@ -64,6 +69,17 @@ class HilandSheet:
     # 排序
     def sort(self, cell_pos):
         self.original_sheet.range(cell_pos).api.Sort(Key1=self.original_sheet.range(cell_pos).api, Order1=1)
+        # print(self.sheet.name)
+        # data = self.sheet.range(cell_pos).value
+        # print(data)
+        # key = data.sort()
+        # print(key)
+        # for i in key:
+        #     self.sheet.range(cell_pos).value = i
+        # self.sheet.range(cell_pos).api.Sort(key=key,Order=2)
+        # data = self.sheet.range(cell_pos).value
+        # print(data)
+        # print(data)
         return
 
     # 过滤条件
@@ -104,7 +120,7 @@ class HilandSheet:
         return self.original_sheet
 
     # 删除
-    def delete(self, range_cell):
+    def delete(self, range_cell, insertDirection=None):
         self.original_sheet = self.original_sheet.range(range_cell).delete()
         return self.original_sheet
 
@@ -115,6 +131,7 @@ class HilandSheet:
 
     # 添加图片
     def add_picture(self, file):
+        # self.sheet.Range(col, row).append(file)
         self.original_sheet.pictures.add(os.path.join(os.getcwd(), file))
         return
 
@@ -158,6 +175,7 @@ class HilandSheet:
 
     # 设置指定范围的样式
     def set_style(self, range_cell, fontsize, fontcolor, fontname, bgcolor):
+        # fontsize, fontcolor, fontname, bgcolor
         self.original_sheet.range(range_cell).api.Font.Size = fontsize
         self.original_sheet.range(range_cell).api.Font.ColorIndex = fontcolor
         self.original_sheet.range(range_cell).api.Font.Name = fontname
@@ -179,12 +197,14 @@ class HilandSheet:
     # 替换指定内容
     def replace_data(self, text, replacement, match_case=False):
         data = self.original_sheet.range('A1').expand().value
+        # print(data)
         for i in range(len(data)):
             for j in range(len(data[i])):
                 # print(data[i][j)
                 if text == data[i][j]:
                     self.original_sheet.range(i, j).value = replacement
                     break
+                    # data[i][j]=repalcement
                 else:
                     pass
 

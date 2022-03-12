@@ -1,5 +1,3 @@
-from builtins import *
-
 from hilandBasicLibrary.model.dataCompare import DataSummary
 
 

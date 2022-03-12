@@ -16,3 +16,9 @@ class RandomEnum(Enum):
     Digits = "digits"
     Punctuation = "punctuation"
     All = "all"
+
+
+class OSNameEnum(Enum):
+    Windows = "Windows"
+    Linux = "Linux"
+    Other = "Other"

@@ -6,12 +6,16 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
+
 from hilandBasicLibrary.data.objectHelper import ObjectHelper
 from hilandBasicLibrary.environment.consoleHelper import ConsoleHelper
 
 """
-常用的功能在本子包内做别名处理。
-本包内的功能，以函数的方式提供（不包含在类内部）。
+本部分有两个功能：
+1. 文件最上部的 from hilandBasicLibrary.data.objectHelper import ObjectHelper，实际上为第三方使用 ObjectHelper 引入了简短的方式，
+    现在第三方代码中直接使用 from hilandBasicLibrary import ObjectHelper 导入 ObjectHelper 就可以了。
+    
+2. 下部的代码为类库中常用的功能在文件内做别名处理。（本包内的功能，以不包含在类内部的函数的方式对外提供。）
 """
 
 

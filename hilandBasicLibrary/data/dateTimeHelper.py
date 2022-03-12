@@ -1,5 +1,4 @@
 import re
-from builtins import *
 from datetime import datetime, timedelta, date
 
 

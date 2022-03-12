@@ -14,6 +14,11 @@ from hilandBasicLibrary.office.hilandSheet import HilandSheet
 
 class HilandExcel:
     def __init__(self, filename=None, visible=False):
+        """
+        在内存中打开指定的 excel 文件，或者在内存中新建一个不跟物理文件对应 excel
+        :param filename: 一个物理存在的文件全名称，或者为空（但不能为物理上不存在的文件名称）
+        :param visible:
+        """
         app = xw.App(visible=visible, add_book=False)
         if filename:
             workbook = app.books.open(filename)
@@ -22,40 +27,66 @@ class HilandExcel:
 
         self.workbook = workbook
         self.filename = filename
-        # self.originalSheets = workbook.sheets
-        # self.hilandSheets = None
+        self.app = app
 
-    # 保存
-    def save(self, path):
+    def save(self, path=""):
+        """
+        保存
+        :param path:
+        :return:
+        """
         if path:
             self.workbook.save(path)
         else:
             self.workbook.save()
         return
 
-    # 关闭+默认保存当前
     def close(self, save=True):
-        self.workbook.close(save=True)
+        """
+        关闭 + 默认保存当前
+        :param save:
+        :return:
+        """
+        if save:
+            self.workbook.save()
+
+        self.workbook.close()
+        self.app.quit()
         return
 
-    # sheets列表
-    def get_original_sheets(self):
-        return self.workbook.sheets
+    def get_sheets_count(self):
+        """
+        获取电子表格的数目
+        :return:
+        """
+        return len(self.workbook.sheets)
 
-    def get_hiland_sheets(self):
+    def get_sheets(self):
+        """
+        获取所有的电子表格
+        :return:
+        """
         sheet_list = []
         num = len(self.workbook.sheets)
         for i in range(num):
             sht = self.workbook.sheets[i]
             sheet_list.append(HilandSheet(sht))
+
         return sheet_list
 
-    def get_sheets(self):
+    def get_sheet(self, sheet_marker=None):
         """
-        get_hiland_sheets 的别名
+        获取 Sheet 表格
+        :param sheet_marker:sheet 表格的标识：可以是以 0 为起始的数字索引，也可以是 sheet 的名称字符串。
         :return:
         """
-        return self.get_hiland_sheets()
+        if sheet_marker:
+            original_sheet = self.workbook.sheets[sheet_marker]
+        else:
+            original_sheet = self.workbook.sheets[0]
+
+        hiland_sheet = HilandSheet(original_sheet)
+        return hiland_sheet
 
     # 增加sheet
     def add_sheet(self, sheet_name):
@@ -64,27 +95,6 @@ class HilandExcel:
         else:
             self.workbook.sheets.add()
         return
-
-    # 获取sheet
-    def get_original_sheet(self, sheet_marker=None):
-        if sheet_marker:
-            original_sheet = self.workbook.sheets[sheet_marker]
-        else:
-            original_sheet = self.workbook.activate
-        return original_sheet
-
-    def get_hiland_sheet(self, sheet_marker=None):
-        original_sheet = self.workbook.sheets[sheet_marker]
-        hiland_sheet = HilandSheet(original_sheet)
-        return hiland_sheet
-
-    def get_sheet(self, sheet_marker=None):
-        """
-        get_hiland_sheet 的别名
-        :param sheet_marker:
-        :return:
-        """
-        return self.get_hiland_sheet(sheet_marker)
 
     # 删除sheet
     def remove_sheet(self, sheet_marker):
