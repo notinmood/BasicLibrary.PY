@@ -11,7 +11,7 @@ from xlwings import Sheet
 from hilandBasicLibrary.data.objectHelper import ObjectHelper
 from hilandBasicLibrary.io.fileHelper import FileHelper
 from hilandBasicLibrary.io.pathHelper import PathHelper
-from hilandBasicLibrary.office.excelMate import ExcelMate
+from hilandBasicLibrary.office.excelBookMate import ExcelBookMate
 
 
 def test_open():
@@ -25,8 +25,8 @@ def test_open():
 
 
 def __open_detail(file_full_name):
-    excel = ExcelMate(file_full_name)
-    actual = ObjectHelper.is_instance(excel, ExcelMate)
+    excel = ExcelBookMate(file_full_name)
+    actual = ObjectHelper.is_instance(excel, ExcelBookMate)
     expected = True
     assert actual == expected
 
@@ -53,7 +53,7 @@ def test_save():
 
 def test_get_sheets_count():
     file_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\source\myExcel.xlsx"
-    excel = ExcelMate(file_full_name)
+    excel = ExcelBookMate(file_full_name)
 
     actual = excel.get_sheets_count()
     expected = 3
@@ -62,7 +62,7 @@ def test_get_sheets_count():
 
 def test_get_sheet():
     file_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\source\myExcel.xlsx"
-    excel = ExcelMate(file_full_name)
+    excel = ExcelBookMate(file_full_name)
     my_sheet = excel.get_sheet()
 
     actual = ObjectHelper.is_instance(my_sheet.original_sheet, Sheet)
@@ -82,7 +82,7 @@ def test_get_sheet():
 
 def test_with():
     file_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\source\myExcel.xlsx"
-    with ExcelMate(file_full_name) as excel:
+    with ExcelBookMate(file_full_name) as excel:
         actual = excel.get_sheets_count()
         expected = 3
         assert actual == expected

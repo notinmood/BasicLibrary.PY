@@ -8,13 +8,13 @@
 """
 from hilandBasicLibrary.data.objectHelper import ObjectHelper
 from hilandBasicLibrary.office.excelHelper import ExcelHelper
-from hilandBasicLibrary.office.excelMate import ExcelMate
+from hilandBasicLibrary.office.excelBookMate import ExcelBookMate
 
 
 def test_open():
     file_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\source\myExcel.xlsx"
     excel = ExcelHelper.open(file_full_name)
 
-    actual = ObjectHelper.is_instance(excel, ExcelMate)
+    actual = ObjectHelper.is_instance(excel, ExcelBookMate)
     expected = True
     assert actual == expected

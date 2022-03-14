@@ -9,10 +9,10 @@
 
 import xlwings as xw
 
-from hilandBasicLibrary.office.sheetMate import SheetMate
+from hilandBasicLibrary.office.excelSheetMate import ExcelSheetMate
 
 
-class ExcelMate:
+class ExcelBookMate:
     def __init__(self, filename=None, visible=False):
         """
         在内存中打开指定的 excel 文件，或者在内存中新建一个不跟物理文件对应 excel
@@ -77,7 +77,7 @@ class ExcelMate:
         num = len(self.workbook.sheets)
         for i in range(num):
             sht = self.workbook.sheets[i]
-            sheet_list.append(SheetMate(sht))
+            sheet_list.append(ExcelSheetMate(sht))
 
         return sheet_list
 
@@ -92,7 +92,7 @@ class ExcelMate:
         else:
             original_sheet = self.workbook.sheets[0]
 
-        hiland_sheet = SheetMate(original_sheet)
+        hiland_sheet = ExcelSheetMate(original_sheet)
         return hiland_sheet
 
     # 增加sheet
