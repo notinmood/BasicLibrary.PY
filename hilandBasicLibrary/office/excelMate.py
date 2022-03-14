@@ -9,10 +9,10 @@
 
 import xlwings as xw
 
-from hilandBasicLibrary.office.hilandSheet import HilandSheet
+from hilandBasicLibrary.office.sheetMate import SheetMate
 
 
-class HilandExcel:
+class ExcelMate:
     def __init__(self, filename=None, visible=False):
         """
         在内存中打开指定的 excel 文件，或者在内存中新建一个不跟物理文件对应 excel
@@ -24,10 +24,17 @@ class HilandExcel:
             workbook = app.books.open(filename)
         else:
             workbook = app.books.add()
+        # workbook = xw.Book(filename)
 
         self.workbook = workbook
         self.filename = filename
         self.app = app
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.close()
 
     def save(self, path=""):
         """
@@ -59,7 +66,7 @@ class HilandExcel:
         获取电子表格的数目
         :return:
         """
-        return len(self.workbook.sheets)
+        return self.workbook.sheets.count
 
     def get_sheets(self):
         """
@@ -70,7 +77,7 @@ class HilandExcel:
         num = len(self.workbook.sheets)
         for i in range(num):
             sht = self.workbook.sheets[i]
-            sheet_list.append(HilandSheet(sht))
+            sheet_list.append(SheetMate(sht))
 
         return sheet_list
 
@@ -85,7 +92,7 @@ class HilandExcel:
         else:
             original_sheet = self.workbook.sheets[0]
 
-        hiland_sheet = HilandSheet(original_sheet)
+        hiland_sheet = SheetMate(original_sheet)
         return hiland_sheet
 
     # 增加sheet

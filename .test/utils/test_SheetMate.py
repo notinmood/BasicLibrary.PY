@@ -9,7 +9,7 @@
 from xlwings import Sheet
 
 from hilandBasicLibrary import ObjectHelper
-from hilandBasicLibrary.office.hilandExcel import HilandExcel
+from hilandBasicLibrary.office.excelMate import ExcelMate
 
 
 
