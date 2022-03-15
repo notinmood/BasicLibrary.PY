@@ -152,10 +152,14 @@ class ExcelBookMate:
             position = sheets_count
 
         if sheet_name:
-            self.workbook.sheets.add(sheet_name, after=position)
+            new_sheet = self.workbook.sheets.add(sheet_name, after=position)
         else:
-            self.workbook.sheets.add()
-        return
+            new_sheet = self.workbook.sheets.add()
+
+        if new_sheet:
+            return ExcelSheetMate(new_sheet)
+        else:
+            return None
 
     def remove_sheet(self, sheet_marker):
         """

@@ -112,7 +112,12 @@ def test_add_sheet2():
 
 def test_add_sheet3():
     with UsingCopiedExcel() as excel:
-        excel.add_sheet("我的yop", 4)
+        new_sheet = excel.add_sheet("我的yop", 4)
+
+        actual = new_sheet.get_name()
+        expected = "我的yop"
+        assert actual == expected
+
         for key in excel.get_sheets():
             print(key.original_sheet.name)
 
