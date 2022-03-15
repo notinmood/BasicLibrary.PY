@@ -76,3 +76,19 @@ def test_rename():
         actual = my_sheet.get_name()
         expected = "Table A"
         assert actual == expected
+
+
+def test_get_row_count():
+    with UsingCopiedExcel() as excel:
+        my_sheet = excel.get_sheet()
+        actual = my_sheet.get_row_count()
+        expected = 5
+        assert actual == expected
+
+
+def test_get_column_count():
+    with UsingCopiedExcel() as excel:
+        my_sheet = excel.get_sheet()
+        actual = my_sheet.get_column_count()
+        expected = 4
+        assert actual == expected
