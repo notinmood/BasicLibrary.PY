@@ -9,6 +9,7 @@
 
 import xlwings as xw
 
+from hilandBasicLibrary import ObjectHelper
 from hilandBasicLibrary.office.excelSheetMate import ExcelSheetMate
 
 
@@ -24,6 +25,7 @@ class ExcelBookMate:
             workbook = app.books.open(filename)
         else:
             workbook = app.books.add()
+
         # workbook = xw.Book(filename)
 
         self.workbook = workbook
@@ -54,10 +56,12 @@ class ExcelBookMate:
         :param save:
         :return:
         """
-        if save:
-            self.workbook.save()
+        if self.workbook:
+            if save:
+                self.workbook.save()
 
-        self.workbook.close()
+            self.workbook.close()
+
         self.app.quit()
         return
 
@@ -84,9 +88,20 @@ class ExcelBookMate:
     def get_sheet(self, sheet_marker=None):
         """
         获取 Sheet 表格
-        :param sheet_marker:sheet 表格的标识：可以是以 0 为起始的数字索引，也可以是 sheet 的名称字符串。
+        :param sheet_marker:sheet 表格的标识：
+            1. 可以是 sheet 的名称字符串。
+            2. 可以是以 0 为起始的数字索引.如果索引号超出最大范围，就取最后一个表格。
         :return:
         """
+        marker_type = ObjectHelper.get_type(sheet_marker)
+        if marker_type is int:
+            if sheet_marker < 0:
+                sheet_marker = 0
+            else:
+                sheets_count = self.get_sheets_count()
+                if sheet_marker >= sheets_count:
+                    sheet_marker = sheets_count - 1
+
         if sheet_marker:
             original_sheet = self.workbook.sheets[sheet_marker]
         else:
@@ -95,21 +110,70 @@ class ExcelBookMate:
         hiland_sheet = ExcelSheetMate(original_sheet)
         return hiland_sheet
 
-    # 增加sheet
-    def add_sheet(self, sheet_name):
+    def determine_exist_sheet(self, sheet_marker):
+        """
+        判断是否存在某个 sheet
+        :param sheet_marker:
+        :return:
+        """
+        marker_type = ObjectHelper.get_type(sheet_marker)
+        if marker_type == int:
+            all_count = self.get_sheets_count()
+            if 0 <= sheet_marker < all_count:
+                return True
+
+        if marker_type == str:
+            for sheet in self.get_sheets():
+                if sheet.get_name() == sheet_marker:
+                    return True
+
+        # 其他情况都视为不存在这样的表格
+        return False
+
+    def add_sheet(self, sheet_name, index=0):
+        """
+        增加 sheet
+        :param sheet_name: 新添加表的名称
+        :param index: 新添加表的位置索引号
+        :return:
+        """
+        if index <= 0:
+            position = None
+        else:
+            position = index
+
+        sheets_count = self.get_sheets_count()
+        if (position is not None) and (position >= sheets_count):
+            position = sheets_count
+
         if sheet_name:
-            self.workbook.sheets.add(sheet_name, location=None, relative="before")
+            self.workbook.sheets.add(sheet_name, after=position)
         else:
             self.workbook.sheets.add()
         return
 
-    # 删除sheet
     def remove_sheet(self, sheet_marker):
-        self.workbook = self.workbook.sheets[sheet_marker].delete()
-        self.workbook.save()
-        return self.workbook
+        """
+        删除sheet(由于 Excel 本身的限制，如果一个工作簿仅剩余一个 sheet 的时候，本方法无法将其删除)
+        :param sheet_marker:
+        :return:
+            删除成功返回 True；
+            删除失败返回 False：sheet_marker 不存在或者 一个工作簿仅剩余一个 sheet 的时候继续删除 都会返回失败。
+        """
+        is_exist = self.determine_exist_sheet(sheet_marker)
+        if is_exist and self.get_sheets_count() > 1:
+            self.workbook.sheets[sheet_marker].delete()
+            self.workbook.save()
+            return True
+        else:
+            return False
 
-    # sheet重命名
-    def rename_sheet(self, old_sheet_marker, new_sheet_name):
-        self.workbook.sheets[old_sheet_marker].name = new_sheet_name
+    def rename_sheet(self, sheet_old_marker, sheet_new_name):
+        """
+        sheet重命名
+        :param sheet_old_marker:
+        :param sheet_new_name:
+        :return:
+        """
+        self.workbook.sheets[sheet_old_marker].name = sheet_new_name
         return self.workbook

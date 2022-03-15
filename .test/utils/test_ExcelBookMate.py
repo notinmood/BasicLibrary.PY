@@ -8,6 +8,7 @@
 """
 from xlwings import Sheet
 
+from _res.usingCopiedExcel import UsingCopiedExcel
 from hilandBasicLibrary.data.objectHelper import ObjectHelper
 from hilandBasicLibrary.io.fileHelper import FileHelper
 from hilandBasicLibrary.io.pathHelper import PathHelper
@@ -52,32 +53,28 @@ def test_save():
 
 
 def test_get_sheets_count():
-    file_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\source\myExcel.xlsx"
-    excel = ExcelBookMate(file_full_name)
-
-    actual = excel.get_sheets_count()
-    expected = 3
-    assert actual == expected
+    with UsingCopiedExcel() as excel:
+        actual = excel.get_sheets_count()
+        expected = 3
+        assert actual == expected
 
 
 def test_get_sheet():
-    file_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\source\myExcel.xlsx"
-    excel = ExcelBookMate(file_full_name)
-    my_sheet = excel.get_sheet()
+    with UsingCopiedExcel() as excel:
+        my_sheet = excel.get_sheet()
 
-    actual = ObjectHelper.is_instance(my_sheet.original_sheet, Sheet)
-    expected = True
-    assert actual == expected
+        actual = ObjectHelper.is_instance(my_sheet.original_sheet, Sheet)
+        expected = True
+        assert actual == expected
 
-    actual = my_sheet.original_sheet.name
-    expected = "表A"
-    assert actual == expected
+        actual = my_sheet.original_sheet.name
+        expected = "表A"
+        assert actual == expected
 
-    my_sheet = excel.get_sheet("表B")
-    actual = my_sheet.original_sheet.name
-    expected = "表B"
-    assert actual == expected
-    excel.close()
+        my_sheet = excel.get_sheet("表B")
+        actual = my_sheet.original_sheet.name
+        expected = "表B"
+        assert actual == expected
 
 
 def test_with():
@@ -85,4 +82,108 @@ def test_with():
     with ExcelBookMate(file_full_name) as excel:
         actual = excel.get_sheets_count()
         expected = 3
+        assert actual == expected
+
+
+def test_add_sheet1():
+    with UsingCopiedExcel() as excel:
+        excel.add_sheet("第四个表")
+        actual = excel.get_sheets_count()
+        expected = 4
+        assert actual == expected
+        actual = excel.get_sheet(0).original_sheet.name
+        expected = "第四个表"
+        assert actual == expected
+
+
+def test_add_sheet2():
+    with UsingCopiedExcel() as excel:
+        excel.add_sheet("WPS", 3)
+        for key in excel.get_sheets():
+            print(key.original_sheet.name)
+
+        actual = excel.get_sheets_count()
+        expected = 4
+        assert actual == expected
+        actual = excel.get_sheet(3).original_sheet.name
+        expected = "WPS"
+        assert actual == expected
+
+
+def test_add_sheet3():
+    with UsingCopiedExcel() as excel:
+        excel.add_sheet("我的yop", 4)
+        for key in excel.get_sheets():
+            print(key.original_sheet.name)
+
+        actual = excel.get_sheets_count()
+        expected = 4
+        assert actual == expected
+        actual = excel.get_sheet(3).original_sheet.name
+        expected = "我的yop"
+        assert actual == expected
+
+        actual = excel.get_sheet(4).original_sheet.name
+        expected = "我的yop"
+        assert actual == expected
+
+
+def test_exist_sheet():
+    with UsingCopiedExcel() as excel:
+        actual = excel.determine_exist_sheet(0)
+        expected = True
+        assert actual == expected
+
+        actual = excel.determine_exist_sheet(10)
+        expected = False
+        assert actual == expected
+
+        actual = excel.determine_exist_sheet("表A")
+        expected = True
+        assert actual == expected
+
+        actual = excel.determine_exist_sheet("表C")
+        expected = False
+        assert actual == expected
+
+
+def test_remove_sheet():
+    with UsingCopiedExcel() as excel:
+        excel.remove_sheet("表A")
+        actual = excel.get_sheets_count()
+        expected = 2
+        assert actual == expected
+
+        excel.remove_sheet(0)
+        actual = excel.get_sheets_count()
+        expected = 1
+        assert actual == expected
+
+        excel.remove_sheet(10)
+        actual = excel.get_sheets_count()
+        expected = 1
+        assert actual == expected
+
+        excel.remove_sheet("其他不存在的表名称")
+        actual = excel.get_sheets_count()
+        expected = 1
+        assert actual == expected
+
+        excel.remove_sheet(0)
+        actual = excel.get_sheets_count()
+        expected = 1
+        assert actual == expected
+
+
+def test_rename_sheet():
+    with UsingCopiedExcel() as excel:
+        excel.rename_sheet("表A", "Table A")
+        my_sheet = excel.get_sheet()
+        actual = my_sheet.get_name()
+        expected = "Table A"
+        assert actual == expected
+
+        my_sheet = excel.get_sheet(1)
+        actual = my_sheet.get_name()
+        expected = "表B"
         assert actual == expected

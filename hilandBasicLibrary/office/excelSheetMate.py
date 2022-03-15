@@ -13,6 +13,7 @@ class ExcelSheetMate:
     Excel 工作表
     !!!特别注意，单列数据的写入用二维数组，但单列数据的读出为一维数组。
     """
+
     def __init__(self, sheet):
         """
         从 xlwings 提供的 sheet 创建本地 Sheet
@@ -63,6 +64,18 @@ class ExcelSheetMate:
         """
         self.original_sheet.range(range_marker).value = range_data
         return
+
+    def rename(self, sheet_new_name):
+        """
+        sheet重命名
+        :param sheet_new_name:
+        :return:
+        """
+        self.original_sheet.name = sheet_new_name
+
+    def get_name(self):
+        return self.original_sheet.name
+
 
     # # 复制
     # def copy(self, sheet_name, range_col_row):

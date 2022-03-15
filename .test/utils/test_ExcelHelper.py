@@ -7,14 +7,29 @@
  * @company: HiLand & RainyTop
 """
 from hilandBasicLibrary.data.objectHelper import ObjectHelper
-from hilandBasicLibrary.office.excelHelper import ExcelHelper
+from hilandBasicLibrary.data.randomHelper import RandomHelper
+from hilandBasicLibrary.io.fileHelper import FileHelper
+from hilandBasicLibrary.io.pathHelper import PathHelper
+# from hilandBasicLibrary.office.excelHelper import ExcelHelper
 from hilandBasicLibrary.office.excelBookMate import ExcelBookMate
 
 
-def test_open():
-    file_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\source\myExcel.xlsx"
-    excel = ExcelHelper.open(file_full_name)
+# def get_copied_excel_file():
+#     source_file_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\source\myExcel.xlsx"
+#     target_dir_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\target"
+#     target_file_base_name = RandomHelper.create() + ".xlsx"
+#     target_file_full_name = PathHelper.combine(target_dir_full_name, target_file_base_name)
+#
+#     FileHelper.copy(source_file_full_name, target_dir_full_name, target_file_base_name)
+#     return target_file_full_name
 
-    actual = ObjectHelper.is_instance(excel, ExcelBookMate)
-    expected = True
-    assert actual == expected
+
+
+
+# def test_open():
+#     file_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\source\myExcel.xlsx"
+#     excel = ExcelHelper.open(file_full_name)
+#
+#     actual = ObjectHelper.is_instance(excel, ExcelBookMate)
+#     expected = True
+#     assert actual == expected

@@ -6,9 +6,7 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from xlwings import Sheet
-
-from hilandBasicLibrary import ObjectHelper
+from _res.usingCopiedExcel import UsingCopiedExcel
 from hilandBasicLibrary.data.randomHelper import RandomHelper
 from hilandBasicLibrary.io.fileHelper import FileHelper
 from hilandBasicLibrary.io.pathHelper import PathHelper
@@ -69,3 +67,12 @@ def test_get_set():
 
     my_book.close()
     FileHelper.remove(target_file_full_name)
+
+
+def test_rename():
+    with UsingCopiedExcel() as excel:
+        my_sheet = excel.get_sheet()
+        my_sheet.rename("Table A")
+        actual = my_sheet.get_name()
+        expected = "Table A"
+        assert actual == expected
