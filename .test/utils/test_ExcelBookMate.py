@@ -91,7 +91,7 @@ def test_add_sheet1():
         actual = excel.get_sheets_count()
         expected = 4
         assert actual == expected
-        actual = excel.get_sheet(0).original_sheet.name
+        actual = excel.get_sheet(3).original_sheet.name
         expected = "第四个表"
         assert actual == expected
 
@@ -177,7 +177,10 @@ def test_remove_sheet():
 
 def test_rename_sheet():
     with UsingCopiedExcel() as excel:
-        excel.rename_sheet("表A", "Table A")
+        actual = excel.rename_sheet("表A", "Table A")
+        expected = True
+        assert actual == expected
+
         my_sheet = excel.get_sheet()
         actual = my_sheet.get_name()
         expected = "Table A"
@@ -186,4 +189,8 @@ def test_rename_sheet():
         my_sheet = excel.get_sheet(1)
         actual = my_sheet.get_name()
         expected = "表B"
+        assert actual == expected
+
+        actual = excel.rename_sheet("表P", "Table P")
+        expected = False
         assert actual == expected

@@ -17,7 +17,7 @@ class ExcelBookMate:
     def __init__(self, filename=None, visible=False):
         """
         在内存中打开指定的 excel 文件，或者在内存中新建一个不跟物理文件对应 excel
-        :param filename: 一个物理存在的文件全名称，或者为空（但不能为物理上不存在的文件名称）
+        :param filename: 一个物理存在的文件全名称，或者为空。但不能为物理上不存在的文件名称。
         :param visible:
         """
         app = xw.App(visible=visible, add_book=False)
@@ -26,6 +26,7 @@ class ExcelBookMate:
         else:
             workbook = app.books.add()
 
+        # 不推荐使用 xw.Book(filename)，容易多个线程占用文件
         # workbook = xw.Book(filename)
 
         self.workbook = workbook
@@ -130,19 +131,23 @@ class ExcelBookMate:
         # 其他情况都视为不存在这样的表格
         return False
 
-    def add_sheet(self, sheet_name, index=0):
+    def add_sheet(self, sheet_name, index=-1):
         """
         增加 sheet
         :param sheet_name: 新添加表的名称
-        :param index: 新添加表的位置索引号
+        :param index: 新添加表的位置索引号(默认为 -1：插入点到当前各存量表的最后面)
         :return:
         """
-        if index <= 0:
+        sheets_count = self.get_sheets_count()
+
+        if index == 0:
             position = None
         else:
             position = index
 
-        sheets_count = self.get_sheets_count()
+        if index < 0:
+            position = sheets_count
+
         if (position is not None) and (position >= sheets_count):
             position = sheets_count
 
@@ -175,5 +180,10 @@ class ExcelBookMate:
         :param sheet_new_name:
         :return:
         """
-        self.workbook.sheets[sheet_old_marker].name = sheet_new_name
-        return self.workbook
+        is_exist = self.determine_exist_sheet(sheet_old_marker)
+        if is_exist and self.get_sheets_count() > 1:
+            self.workbook.sheets[sheet_old_marker].name = sheet_new_name
+            self.workbook.save()
+            return True
+        else:
+            return False
