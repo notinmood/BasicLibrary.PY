@@ -199,3 +199,12 @@ def test_rename_sheet():
         actual = excel.rename_sheet("表P", "Table P")
         expected = False
         assert actual == expected
+
+
+def test_copy_paste():
+    with UsingCopiedExcel() as excel:
+        actual = excel.copy(0, "A1:C2")
+        excel.paste("表B", "F10")
+        expected = excel.get_sheet("表B").get("F10:H11")
+        print(expected)
+        assert actual == expected

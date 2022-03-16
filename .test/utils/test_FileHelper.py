@@ -9,7 +9,6 @@
 import os.path
 
 from hilandBasicLibrary.data.randomHelper import RandomHelper
-from hilandBasicLibrary.io.dirHelper import DirHelper
 from hilandBasicLibrary.io.fileHelper import FileHelper
 from hilandBasicLibrary.io.ioHelper import IOHelper
 from hilandBasicLibrary.io.pathHelper import PathHelper
@@ -123,3 +122,19 @@ def test_move():
     actual = PathHelper.determine_is_exist(last_dir_full_name)
     expected = False
     assert actual == expected
+
+
+file_content = ""
+
+
+def test_load_line():
+    file_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\source\aa.txt"
+    FileHelper.load_with_line(file_full_name, __line_callback)
+    actual = file_content
+    expected = "1. 第一行\n2. 第二行\n3. 第三行\n4. 第四行"
+    assert actual == expected
+
+
+def __line_callback(line_content):
+    global file_content
+    file_content = file_content + line_content

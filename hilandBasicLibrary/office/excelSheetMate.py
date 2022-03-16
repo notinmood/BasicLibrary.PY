@@ -21,7 +21,7 @@ class ExcelSheetMate:
         """
         self.original_sheet = sheet
         self.cell = None
-        self.my_range = None
+        self.range_selected = None
         self.style = []
 
     def get_column_count(self):
@@ -40,6 +40,17 @@ class ExcelSheetMate:
         row_value = self.original_sheet.used_range.last_cell.row
         return row_value
 
+    def read(self, range_marker):
+        """
+        获取指定区块内的数值(get方法的别名)
+        :param range_marker:区块的标志信息，可以取值如下几种之一：
+            1. "A1"  # 返回单个单元格内的值信息 '姓名'
+            2. "A1:A2" # 一维数组 ['姓名', '张三']
+            3. "A1:B2" # 二维数组 [['姓名', '年龄'], ['张三', 20.0]]
+        :return:
+        """
+        return self.get(range_marker)
+
     def get(self, range_marker):
         """
         获取指定区块内的数值
@@ -52,13 +63,33 @@ class ExcelSheetMate:
         value = self.original_sheet.range(range_marker).value
         return value
 
-    def set(self, range_marker, range_data):
+    def write(self, range_marker, range_data):
         """
-        写入数据(请必须匹配 range_marker 和 range_data 的格式相同，数据量相同)
+        写入数据(set方法的别名)
+        1. 严格模式：请必须匹配 range_marker 和 range_data 的格式相同，数据量相同。
+        2. 推断模式：如果仅仅给 range_marker 指定一个开始位置，而在 range_data 内给定一个一维数组或者二维数组的区域，
+            那么 xlwings 将会自动推断写入的位置。
         :param range_marker::区块的标志信息，可以取值如下几种之一：
-            1. "A1"  # 返回单个单元格内的值信息 '姓名'
+            1. "A1"  # 设置单个单元格内的值信息 '姓名'
             2. "A1:A2" # 一维数组 ['姓名', '张三']
             3. "A1:B2" # 二维数组 [['姓名', '年龄'], ['张三', 20.0]]
+            4. "A1" # 二维数组 [['姓名', '年龄'], ['张三', 20.0]] （自动启用推断模式）
+        :param range_data:要写入的数据。!!!特别注意，单列数据的写入用二维数组，但单列数据的读出为一维数组。
+        :return:
+        """
+        return self.set(range_marker, range_data)
+
+    def set(self, range_marker, range_data):
+        """
+        写入数据
+        1. 严格模式：请必须匹配 range_marker 和 range_data 的格式相同，数据量相同。
+        2. 推断模式：如果仅仅给 range_marker 指定一个开始位置，而在 range_data 内给定一个一维数组或者二维数组的区域，
+            那么 xlwings 将会自动推断写入的位置。
+        :param range_marker::区块的标志信息，可以取值如下几种之一：
+            1. "A1"  # 设置单个单元格内的值信息 '姓名'
+            2. "A1:A2" # 一维数组 ['姓名', '张三']
+            3. "A1:B2" # 二维数组 [['姓名', '年龄'], ['张三', 20.0]]
+            4. "A1" # 二维数组 [['姓名', '年龄'], ['张三', 20.0]] （自动启用推断模式）
         :param range_data:要写入的数据。!!!特别注意，单列数据的写入用二维数组，但单列数据的读出为一维数组。
         :return:
         """
@@ -76,8 +107,29 @@ class ExcelSheetMate:
     def get_name(self):
         return self.original_sheet.name
 
+    def copy(self, range_marker):
+        """
+        复制
+        :param range_marker:
+        :return:
+        """
+        self.range_selected = self.original_sheet.range(range_marker).value
+        return self.range_selected
 
-    # # 复制
+    def paste(self, range_marker, range_data=None):
+        """
+        粘贴
+        :param range_marker:
+        :param range_data:
+        :return:
+        """
+        if not range_data:
+            range_data = self.range_selected
+
+        self.original_sheet.range(range_marker).value = range_data
+        return
+
+    # # # 复制
     # def copy(self, sheet_name, range_col_row):
     #     self.my_range = self.original_sheet.range(sheet_name, range_col_row).value
     #     return self.my_range
@@ -91,7 +143,6 @@ class ExcelSheetMate:
     # def paste_range(self, sheet_name, range_col_row):
     #     self.original_sheet.range(sheet_name, range_col_row).value = self.my_range
     #     return
-
 
     # # 排序
     # def sort(self, cell_pos):

@@ -32,6 +32,10 @@ class ExcelBookMate:
         self.workbook = workbook
         self.filename = filename
         self.app = app
+        """
+        当前被选中的表格的区域
+        """
+        self.range_selected = None
 
     def __enter__(self):
         return self
@@ -191,3 +195,33 @@ class ExcelBookMate:
             return True
         else:
             return False
+
+    def copy(self, sheet_marker, range_marker):
+        """
+        复制
+        :param sheet_marker:
+        :param range_marker:
+        :return:
+        """
+        sheet = self.get_sheet(sheet_marker)
+        if sheet:
+            self.range_selected = sheet.original_sheet.range(range_marker).value
+
+        return self.range_selected
+
+    def paste(self, sheet_marker, range_marker, range_data=None):
+        """
+        粘贴
+        :param sheet_marker:
+        :param range_marker:
+        :param range_data:
+        :return:
+        """
+        if not range_data:
+            range_data = self.range_selected
+
+        sheet = self.get_sheet(sheet_marker)
+        if sheet:
+            sheet.original_sheet.range(range_marker).value = range_data
+
+        return

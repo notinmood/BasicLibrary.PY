@@ -65,7 +65,7 @@ class FileHelper:
         """
         按行读取文件，每读取一行进行一次处理（调用line_callback）,对大文件尤其有效
         :param str file_full_name:
-        :param function line_callback: 在每行上进行回调的函数
+        :param function line_callback: 在每行上进行回调的函数，类似：line_callback(line),其中参数 line 为读出的每行的内容
         :return:
         """
         with open(file_full_name, "r", encoding='utf-8') as file_pointer:

@@ -92,3 +92,13 @@ def test_get_column_count():
         actual = my_sheet.get_column_count()
         expected = 4
         assert actual == expected
+
+
+def test_copy_paste():
+    with UsingCopiedExcel() as excel:
+        my_sheet = excel.get_sheet()
+        actual = my_sheet.copy("A1:C2")
+        my_sheet.paste("F10")
+        expected = my_sheet.get("F10:H11")
+        print(expected)
+        assert actual == expected
