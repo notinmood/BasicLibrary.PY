@@ -129,6 +129,8 @@ class ExcelSheetMate:
         self.original_sheet.range(range_marker).value = range_data
         return
 
+
+
     # # # 复制
     # def copy(self, sheet_name, range_col_row):
     #     self.my_range = self.original_sheet.range(sheet_name, range_col_row).value

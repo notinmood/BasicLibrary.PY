@@ -87,6 +87,15 @@ class StringHelper:
             return whole
 
     @staticmethod
+    def reverse(original):
+        """
+        翻转字符串
+        :param original:
+        :return:
+        """
+        return original[::-1]
+
+    @staticmethod
     def is_end_with(whole, padding):
         return str.endswith(whole, padding)
 
