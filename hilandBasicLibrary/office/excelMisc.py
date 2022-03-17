@@ -9,7 +9,9 @@
 import re
 
 from hilandBasicLibrary import ObjectHelper
+from hilandBasicLibrary.data.listHelper import ListHelper
 from hilandBasicLibrary.data.numberHelper import NumberHelper
+from hilandBasicLibrary.data.regexHelper import RegexHelper
 from hilandBasicLibrary.data.stringHelper import StringHelper
 
 """
@@ -17,11 +19,45 @@ from hilandBasicLibrary.data.stringHelper import StringHelper
 """
 
 
+def _calc_range_marker(original_range_marker, row_delta, column_delta):
+    original_range_marker = StringHelper.replace(original_range_marker, "：", ":")
+
+    if StringHelper.is_contains(original_range_marker, ":"):
+        marker_begin = StringHelper.get_before_content(original_range_marker, ":")
+        marker_end = StringHelper.get_after_content(original_range_marker, ":")
+
+        new_marker_begin = _calc_cell_marker(marker_begin, row_delta, column_delta)
+        new_marker_end = _calc_cell_marker(marker_end, row_delta, column_delta)
+
+        return f"{new_marker_begin}:{new_marker_end}"
+    else:
+        return _calc_cell_marker(original_range_marker, row_delta, column_delta)
+
+
+def _calc_cell_marker(original_cell_marker, row_delta, column_delta=0):
+    # 先从类似 "A2" 里面分离出 字母和数字
+    column_pattern = r"[a-zA-Z]+"
+    column_matched = RegexHelper.get_matched_items(original_cell_marker, column_pattern)
+
+    row_pattern = r"\d+"
+    row_matched = RegexHelper.get_matched_items(original_cell_marker, row_pattern)
+
+    if ObjectHelper.is_exist(column_matched):
+        column_name = column_matched[0]
+        row_name = ListHelper.get(row_matched, 0, 1)
+        new_column_name = _calc_column_name(column_name, column_delta)
+        new_row_name = int(row_name) + row_delta
+
+        return f"{new_column_name}{new_row_name}"
+    else:
+        return None
+
+
 def _calc_column_name(start_column_name, delta):
     _len = ObjectHelper.get_length(start_column_name)
 
     """
-    列名称的最大长度为2，超过2不接受直接返回 false
+    列名称的最大长度为2，超过2不接受，直接返回 false
     """
     if _len > 2:
         return False

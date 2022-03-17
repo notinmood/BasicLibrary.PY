@@ -1,4 +1,28 @@
+from hilandBasicLibrary import ObjectHelper
+
+
 class ListHelper:
+    @staticmethod
+    def get(list_data, index, default_value=None):
+        """
+        安装索引，安全地从数组中获取元素
+        :param default_value:
+        :param list_data:
+        :param index:元素的索引号
+        :return:返回索引指定的元素；如果指定的索引号在数组内不存在，返回 None。
+        """
+        if ObjectHelper.is_empty(list_data):
+            return default_value
+        else:
+            list_length = ObjectHelper.get_length(list_data)
+            if list_length == 0:
+                return default_value
+            else:
+                if index >= list_length:
+                    return default_value
+                else:
+                    return list_data[index]
+
     @staticmethod
     def get_index(list_data, value, item_property=None):
         """

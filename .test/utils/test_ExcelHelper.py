@@ -9,6 +9,34 @@
 from hilandBasicLibrary.office.excelHelper import ExcelHelper
 
 
+def test_calc_range_marker():
+    actual = ExcelHelper.calc_range_marker("AA12", 1, 2)
+    expected = 'AC13'
+    assert actual == expected
+
+    actual = ExcelHelper.calc_range_marker("AA12:BB1", 1, 2)
+    expected = 'AC13:BD2'
+    assert actual == expected
+
+
+def test_calc_cell_marker():
+    actual = ExcelHelper.calc_cell_marker("AA12", 1, 2)
+    expected = 'AC13'
+    assert actual == expected
+
+    actual = ExcelHelper.calc_cell_marker("A1", 1, 26)
+    expected = 'AA2'
+    assert actual == expected
+
+    actual = ExcelHelper.calc_cell_marker("-A1u4", 1, 26)
+    expected = 'AA2'
+    assert actual == expected
+
+    actual = ExcelHelper.calc_cell_marker("-A1:u4", 1, 26)
+    expected = 'AA2'
+    assert actual == expected
+
+
 def test_calc_column_name():
     actual = ExcelHelper.calc_column_name("A", 3)
     expected = "D"

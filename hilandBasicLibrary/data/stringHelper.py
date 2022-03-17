@@ -1,5 +1,7 @@
 import re
 
+from hilandBasicLibrary.data.regexHelper import RegexHelper
+
 
 class StringHelper:
     @staticmethod
@@ -96,22 +98,22 @@ class StringHelper:
         return original[::-1]
 
     @staticmethod
-    def is_end_with(whole, padding):
-        return str.endswith(whole, padding)
+    def is_end_with(whole, sub_string):
+        return str.endswith(whole, sub_string)
 
     @staticmethod
-    def is_start_with(whole, padding):
-        return str.startswith(whole, padding)
+    def is_start_with(whole, sub_string):
+        return str.startswith(whole, sub_string)
 
     @staticmethod
-    def is_contains(whole, padding):
+    def is_contains(whole, sub_string):
         """
 
         :param whole:
-        :param padding:
+        :param sub_string:
         :return:
         """
-        result = whole.find(padding) >= 0
+        result = whole.find(sub_string) >= 0
         return result
 
     @staticmethod
@@ -208,10 +210,16 @@ class StringHelper:
     @staticmethod
     def replace(whole_string, old_sub_string, new_sub_string):
         """
-
+        字符串替换
         :param whole_string:
-        :param old_sub_string:
-        :param new_sub_string:
-        :return:
+        :param old_sub_string:被替换掉的字符串或者是正则表达式
+        :param new_sub_string:新字符串（可以带由 pattern 形成的分组号，分组号用 \1 \2 这的格式表示）
+        :return:替换后的新字符串
+        :example:
+        text = '今天是：11/28/2018'
+        actual = StringHelper.replace(text, r"(\d{2})/(\d{2})/(\d{4})", r"\3年\1月\2日")
+        expected = '今天是：2018年11月28日'
+        assert actual == expected
         """
-        return whole_string.replace(old_sub_string, new_sub_string)
+        # return whole_string.replace(old_sub_string, new_sub_string)
+        return RegexHelper.replace(whole_string, old_sub_string, new_sub_string)

@@ -9,6 +9,27 @@
 from hilandBasicLibrary.data.listHelper import *
 
 
+def test_get():
+    my_list = []
+    actual = ListHelper.get(my_list, 0)
+    expected = None
+    assert actual == expected
+
+    my_list = None
+    actual = ListHelper.get(my_list, 0)
+    expected = None
+    assert actual == expected
+
+    my_list = [1, 2, 4]
+    actual = ListHelper.get(my_list, 3)
+    expected = None
+    assert actual == expected
+
+    actual = ListHelper.get(my_list, 2)
+    expected = 4
+    assert actual == expected
+
+
 def test_get_union():
     a_list = [1, 2, 3, 4]
     b_list = [1, 4, 5]

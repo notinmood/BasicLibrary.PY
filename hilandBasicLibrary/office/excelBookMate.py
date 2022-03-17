@@ -143,7 +143,6 @@ class ExcelBookMate:
         :return:
         """
         sheets_count = self.get_sheets_count()
-
         position = index
 
         if index < 0:
