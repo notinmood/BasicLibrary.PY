@@ -144,10 +144,7 @@ class ExcelBookMate:
         """
         sheets_count = self.get_sheets_count()
 
-        if index == 0:
-            position = None
-        else:
-            position = index
+        position = index
 
         if index < 0:
             position = sheets_count
@@ -156,7 +153,10 @@ class ExcelBookMate:
             position = sheets_count
 
         if sheet_name:
-            new_sheet = self.workbook.sheets.add(sheet_name, after=position)
+            if position == 0:
+                new_sheet = self.workbook.sheets.add(sheet_name, before=1)
+            else:
+                new_sheet = self.workbook.sheets.add(sheet_name, after=position)
         else:
             new_sheet = self.workbook.sheets.add()
 
