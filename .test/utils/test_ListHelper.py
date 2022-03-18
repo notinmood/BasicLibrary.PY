@@ -9,6 +9,34 @@
 from hilandBasicLibrary.data.listHelper import *
 
 
+def test_sort():
+    cars = [
+        {'car': 'Porsche', 'year': 2023},
+        {'car': 'Audi', 'year': 2010},
+        {'car': 'BMW', 'year': 2019},
+        {'car': 'Volvo', 'year': 2013}
+    ]
+
+    actual = ListHelper.sort(cars, lambda item: item["year"])
+    expected = [{'car': 'Audi', 'year': 2010},
+                {'car': 'Volvo', 'year': 2013},
+                {'car': 'BMW', 'year': 2019},
+                {'car': 'Porsche', 'year': 2023}]
+    assert actual == expected
+
+    actual = ListHelper.sort(cars, lambda item: item["year"], reverse=True)
+    expected = [{'car': 'Porsche', 'year': 2023},
+                {'car': 'BMW', 'year': 2019},
+                {'car': 'Volvo', 'year': 2013},
+                {'car': 'Audi', 'year': 2010}]
+    assert actual == expected
+
+    my_list = [5, 8, 3, 6, 1, 10, 2]
+    actual = ListHelper.sort(my_list, reverse=True)
+    expected = [10, 8, 6, 5, 3, 2, 1]
+    assert actual == expected
+
+
 def test_get():
     my_list = []
     actual = ListHelper.get(my_list, 0)

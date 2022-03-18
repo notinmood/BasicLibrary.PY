@@ -106,5 +106,20 @@ class ListHelper:
         """
         return list(set(list_left) ^ set(list_right))
 
-# def sort_2d(original_data,sort_info=None,reverse=False):
-#
+    @staticmethod
+    def sort(list_data, callback_in__list__item_out__item_property=None, reverse=False):
+        """
+        对数组内的元素进行排序
+        :param reverse:
+        :param list_data:
+        :param callback_in__list__item_out__item_property: 排序规则的回调函数
+            入参为:数组的元素
+            返回值为：数组元素的某个属性名称字符串
+        :return:
+        """
+        if callback_in__list__item_out__item_property:
+            list_data.sort(key=callback_in__list__item_out__item_property, reverse=reverse)
+        else:
+            list_data.sort(reverse=reverse)
+
+        return list_data
