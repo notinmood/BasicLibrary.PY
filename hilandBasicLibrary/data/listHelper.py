@@ -116,6 +116,13 @@ class ListHelper:
             入参为:数组的元素
             返回值为：数组元素的某个属性名称字符串
         :return:
+        :example:
+            actual = ListHelper.sort(cars, lambda item: item["year"])
+            expected = [{'car': 'Audi', 'year': 2010},
+                        {'car': 'Volvo', 'year': 2013},
+                        {'car': 'BMW', 'year': 2019},
+                        {'car': 'Porsche', 'year': 2023}]
+            assert actual == expected
         """
         if callback_in__list__item_out__item_property:
             list_data.sort(key=callback_in__list__item_out__item_property, reverse=reverse)
