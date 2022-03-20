@@ -77,6 +77,16 @@ class FileHelper:
                     break
 
     @classmethod
+    def create(cls, file_full_name, content=""):
+        """
+        在目标位置创建文件
+        :param str content: 待保存内容
+        :param str file_full_name:待创建文件的全路径名称
+        :return:
+        """
+        cls.store(file_full_name, content)
+
+    @classmethod
     def store(cls, file_full_name, content, is_append=True):
         """
         保存文件在磁盘中

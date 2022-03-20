@@ -138,3 +138,12 @@ def test_load_line():
 def __line_callback(line_content):
     global file_content
     file_content = file_content + line_content
+
+
+def test_store():
+    content = "qingdao"
+    file_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\target\abcde.txt"
+    FileHelper.store(file_full_name, content)
+    actual = 0
+    expected = 0
+    assert actual == expected
