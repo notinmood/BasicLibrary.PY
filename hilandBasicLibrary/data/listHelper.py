@@ -130,3 +130,16 @@ class ListHelper:
             list_data.sort(reverse=reverse)
 
         return list_data
+
+    @staticmethod
+    def merge(*args):
+        """
+        合并两个 list
+        :param list args:
+        :return:
+        """
+        result = []
+        for key in args:
+            result += key
+
+        return result

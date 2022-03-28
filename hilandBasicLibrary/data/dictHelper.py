@@ -57,3 +57,16 @@ class DictHelper:
         """
         summary = DataSummary(dict_data)
         return summary
+
+    @staticmethod
+    def merge(*args):
+        """
+
+        :param dict args:
+        :return:
+        """
+        result = {}
+        for key in args:
+            result.update(key)
+
+        return result

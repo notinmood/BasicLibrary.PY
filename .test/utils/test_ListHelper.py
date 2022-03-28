@@ -101,3 +101,12 @@ def test_get_difference_all():
     actual = ListHelper.get_difference_all(a_list, b_list)
     expected = [2, 3, 5]
     assert actual == expected
+
+
+def test_merge():
+    a = [1, 2, 3]
+    b = [4, 5, 6]
+    c = [6, 7, 8]
+    actual = ListHelper.merge(a, b, c)
+    expected = [1, 2, 3, 4, 5, 6, 6, 7, 8]
+    assert actual == expected

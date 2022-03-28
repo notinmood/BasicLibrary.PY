@@ -60,3 +60,9 @@ class CollectionHelper:
                     return True
 
             return False
+
+    # @staticmethod
+    # def merge(*args):
+    #
+    #     pass
+

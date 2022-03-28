@@ -35,3 +35,12 @@ def test_contains_value():
     actual = DictHelper.is_contains_value(_dict, 'a')
     expected = False
     assert actual == expected
+
+
+def test_merge():
+    m = {'a': 1}
+    n = {'b': 2, 'c': 3}
+    l = {'d': 4, 'c': 5}
+    actual = DictHelper.merge(m, n, l)
+    expected = {'a': 1, 'b': 2, 'c': 5, 'd': 4}
+    assert actual == expected
