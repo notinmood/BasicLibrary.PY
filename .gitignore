@@ -2,3 +2,15 @@
 /HilandBasicLibrary.egg-info/
 /.env
 /.test/_res/target/*.*
+*/__pycache__
+__pycache__/
+/hilandBasicLibrary/__pycache__
+/hilandBasicLibrary/*/__pycache__
+*.pyc
+/.test/__pycache__
+/hilandBasicLibrary/model/__pycache__
+/hilandBasicLibrary/io/__pycache__
+/hilandBasicLibrary/environment/__pycache__
+/hilandBasicLibrary/dataBase/__pycache__
+/hilandBasicLibrary/dataBase/MySql/__pycache__
+/hilandBasicLibrary/data/__pycache__
