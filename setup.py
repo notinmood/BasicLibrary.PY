@@ -15,7 +15,7 @@ from setuptools import find_packages, setup, Command
 
 
 NAME = 'hilandBasicLibrary'
-DESCRIPTION = '企业级的 PYTHON 库.'
+DESCRIPTION = '企业级的 PYTHON 库'
 URL = 'https://github.com/notinmood/BasicLibrary.PY'
 EMAIL = '9727005@qq.com'
 AUTHOR = 'xiedali'
@@ -55,6 +55,7 @@ if not VERSION:
         exec(f.read(), about)
 else:
     about['__version__'] = VERSION
+    # DESCRIPTION = DESCRIPTION + "@"
 
 
 # def delete_original_dist():
