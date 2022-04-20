@@ -2,7 +2,5 @@
 /HilandBasicLibrary.egg-info/
 /.env
 /.test/_res/target/*.*
-*/__pycache__
 __pycache__
 *.pyc
-
