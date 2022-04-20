@@ -4,6 +4,10 @@ from hilandBasicLibrary.data.regexHelper import RegexHelper
 
 
 class StringHelper:
+    """
+
+        """
+
     @staticmethod
     def add_padding(original_content, patten, padding, prefix=True):
         """

@@ -6,8 +6,8 @@ from hilandBasicLibrary.data.objectHelper import ObjectHelper
 
 class DatabaseHelper:
     """
-        本模块，为各关系型数据库共用。
-        其他非共用的功能，分别放入各种数据库驱动的Helper中，比如MongoDB/Helper，MySql/Helper
+    本模块，为各关系型数据库共用。
+    其他非共用的功能，分别放入各种数据库驱动的Helper中，比如MongoDB/Helper，MySql/Helper
     """
 
     @classmethod

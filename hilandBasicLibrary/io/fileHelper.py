@@ -14,6 +14,9 @@ from hilandBasicLibrary.io.pathHelper import PathHelper
 
 
 class FileHelper:
+    """
+
+    """
 
     @staticmethod
     def get_base_name(file_name):

@@ -10,6 +10,10 @@ import math
 
 
 class NumberHelper(object):
+    """
+
+    """
+
     def __init__(self):
         pass
 

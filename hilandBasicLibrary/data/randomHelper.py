@@ -13,6 +13,10 @@ from hilandBasicLibrary.enums import RandomEnum
 
 
 class RandomHelper:
+    """
+
+        """
+
     @staticmethod
     def create(size=8, random_type=RandomEnum.AllLetters):
         """

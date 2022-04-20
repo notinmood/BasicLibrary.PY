@@ -3,7 +3,7 @@ from hilandBasicLibrary.dataBase.databaseEnum import BatchMode, LikeMatchMode
 
 class DatabaseMate(object):
     """
-    TODO 各个继承的子类中，insert_one,insert_many的返回值类型和意义必须统一
+    TODO： 各个继承的子类中，insert_one,insert_many的返回值类型和意义必须统一
     数据库交互器(跟数据库内数据交互的唯一接口)
     """
 

@@ -2,6 +2,10 @@ import pandas as pd
 
 
 class PandasHelper:
+    """
+
+        """
+
     @staticmethod
     def is_exist_column(dataframe, column_name):
         if column_name in dataframe.columns:

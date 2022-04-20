@@ -17,6 +17,10 @@ lock = threading.Lock()
 
 
 class Mate(DatabaseMate):
+    """
+
+    """
+
     def __init__(self, table_name, prefix_name=None):
         """
 

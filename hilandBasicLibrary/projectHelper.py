@@ -4,7 +4,7 @@ from _projectHelper import ProjectHelper as helper
 class ProjectHelper:
     """
     向外暴露的接口
-    通过调用项目根目录下的_ProjectHelper.py内的逻辑而实现
+    通过调用项目根目录下的 _ProjectHelper.py 内的逻辑而实现
     """
 
     @staticmethod

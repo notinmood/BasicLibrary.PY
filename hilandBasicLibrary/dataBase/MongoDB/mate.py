@@ -6,7 +6,9 @@ from hilandBasicLibrary.dataBase.MongoDB.helper import Helper as mh
 
 
 class Mate(DatabaseMate):
-    """ 各种query 中的数据 data 和 mongodb 文档中的一样"""
+    """
+    各种 query 中的数据 data 和 mongodb 文档中的一样
+    """
 
     def __init__(self, collection_name, database_name='', host='', port=0):
         self.collection_name = collection_name
@@ -257,23 +259,23 @@ if __name__ == '__main__':
         "weixin": [
             {
                 "name": "开源优测",
-                "uid": "DeepTest",
+                "uid" : "DeepTest",
                 "desc": "分享开源测试技术"
             },
             {
                 "name": "开源优测_demo",
-                "uid": "DeepTest_demo",
+                "uid" : "DeepTest_demo",
                 "desc": "分享开源测试技术_demo"
             }
         ],
-        "web": [
+        "web"   : [
             {
-                "url": "www.testingunion.com",
+                "url" : "www.testingunion.com",
                 "name": "开源优测社区",
                 "desc": "分享各类开源测试技巧"
             },
             {
-                "url": "www.testingunion.com_demo",
+                "url" : "www.testingunion.com_demo",
                 "name": "开源优测社区_demo",
                 "desc": "分享各类开源测试技巧_demo"
             }

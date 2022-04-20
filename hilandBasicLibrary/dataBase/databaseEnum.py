@@ -10,11 +10,17 @@ from enum import Enum
 
 
 class BatchMode(Enum):
+    """
+
+    """
     ONE = 1
     MANY = 0
 
 
 class LikeMatchMode(Enum):
+    """
+
+    """
     BOTH = 0
     BEFORE = 1
     AFTER = 2

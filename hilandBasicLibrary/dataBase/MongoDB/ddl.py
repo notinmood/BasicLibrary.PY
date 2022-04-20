@@ -14,6 +14,10 @@ TODO:这个文件需要处理 collection 从哪里来需要优化思路
 
 
 class DDL(DatabaseDDL):
+    """
+
+        """
+
     def add_fields(self, fields_name_value_dict, condition_dict={}):
         """
 

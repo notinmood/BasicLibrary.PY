@@ -1,3 +1,11 @@
+"""
+ * @file   : databaseDDL.py
+ * @time   : 20:17
+ * @date   : 2021/12/27
+ * @mail   : 9727005@qq.com
+ * @creator: ShanDong Xiedali
+ * @company: HiLand & RainyTop
+"""
 from hilandBasicLibrary.configHelper import ConfigHelper as ch
 from hilandBasicLibrary.data.dictHelper import DictHelper
 from hilandBasicLibrary.dataBase.databaseDDL import DatabaseDDL

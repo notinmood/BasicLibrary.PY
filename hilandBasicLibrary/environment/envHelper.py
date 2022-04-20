@@ -14,6 +14,10 @@ from hilandBasicLibrary.enums import OSNameEnum
 
 
 class EnvHelper:
+    """
+
+    """
+
     @classmethod
     def determine_is_windows(cls):
         return cls.get_os_name() == OSNameEnum.Windows

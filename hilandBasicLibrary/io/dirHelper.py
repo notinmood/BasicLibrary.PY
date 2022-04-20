@@ -13,6 +13,10 @@ from hilandBasicLibrary.io.pathHelper import PathHelper
 
 
 class DirHelper:
+    """
+
+    """
+
     @classmethod
     def get_files(cls, dir_full_path, include_sub_dir=True):
         """

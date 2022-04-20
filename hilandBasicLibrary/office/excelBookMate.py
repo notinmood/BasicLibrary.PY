@@ -14,6 +14,10 @@ from hilandBasicLibrary.office.excelSheetMate import ExcelSheetMate
 
 
 class ExcelBookMate:
+    """
+
+    """
+
     def __init__(self, filename=None, visible=False):
         """
         在内存中打开指定的 excel 文件，或者在内存中新建一个不跟物理文件对应 excel

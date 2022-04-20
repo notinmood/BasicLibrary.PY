@@ -1,10 +1,14 @@
-"""本模块内均为单独执行的方法，具体针对collection的时候请使用MongoOperator内的类型"""
+"""本模块内均为单独执行的方法，具体针对 collection 的时候请使用 MongoOperator内的类型"""
 import pymongo
 
 from hilandBasicLibrary.configHelper import ConfigHelper
 
 
 class Helper:
+    """
+
+        """
+
     @classmethod
     def get_current_db(cls, database_name='', host='', port=0):
         if host == '':

@@ -16,8 +16,8 @@
 
 class Switch(object):
     """
-    switch 语句。(特别说明：请使用官方正式的表述方式 - Python3.10后已经提供了 match/case 结构。)
-    使用用例，参考下面的main方法
+    switch 语句。(特别说明：请使用官方正式的表述方式 - Python3.10 后已经提供了 match/case 结构。)
+    使用用例，参考下面的 main方法
     """
 
     def __init__(self, value):

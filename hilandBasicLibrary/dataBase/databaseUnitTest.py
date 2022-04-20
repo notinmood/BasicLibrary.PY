@@ -10,6 +10,10 @@ from hilandBasicLibrary.dataBase.databaseClient import DatabaseClient
 
 
 class DatabaseUnitTest:
+    """
+
+    """
+
     def __init__(self, table_name, duplicate_row_count=-1, auto_dispose=True):
         """
 

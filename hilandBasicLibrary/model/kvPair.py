@@ -10,6 +10,10 @@ from datetime import datetime, date
 
 
 class KVPair:
+    """
+
+    """
+
     def __init__(self, key, value=None):
         self.key = key
         self.value = value

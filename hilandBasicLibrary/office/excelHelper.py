@@ -10,6 +10,10 @@ from hilandBasicLibrary.office.excelMisc import _calc_range_marker
 
 
 class ExcelHelper:
+    """
+
+    """
+
     @classmethod
     def operate(cls, file_full_name, callback_in__book):
         """

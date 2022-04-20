@@ -1,6 +1,6 @@
 """
  * @file   : singleton.py
- * @time   : 13:55
+ * @time   : 13:56
  * @date   : 2022/1/6
  * @mail   : 9727005@qq.com
  * @creator: ShanDong Xiedali

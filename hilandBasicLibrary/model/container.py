@@ -3,6 +3,10 @@ from hilandBasicLibrary.data.objectHelper import *
 
 
 class Container(object):
+    """
+
+    """
+
     dicts = dict()
 
     @staticmethod

@@ -4,6 +4,10 @@ from hilandBasicLibrary import ObjectHelper
 
 
 class RegexHelper:
+    """
+
+        """
+
     @staticmethod
     def get_patten_of_html_tag():
         """

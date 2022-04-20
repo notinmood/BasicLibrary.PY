@@ -2,6 +2,10 @@ from hilandBasicLibrary.model.dataCompare import DataSummary
 
 
 class ObjectHelper:
+    """
+
+    """
+
     @staticmethod
     def is_empty(data):
         # TODO:xiedali@2022/3/17 改成即时返回的方式，减少时间浪费

@@ -15,6 +15,10 @@ from hilandBasicLibrary.dataBase.databaseHelper import DatabaseHelper
 
 
 class DDL(DatabaseDDL):
+    """
+
+    """
+
     def duplicate_table(self, original_table_name, new_table_name="", include_data_row_count=0,
                         drop_table_if_exist=True):
         """

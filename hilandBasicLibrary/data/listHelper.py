@@ -2,6 +2,10 @@ from hilandBasicLibrary import ObjectHelper
 
 
 class ListHelper:
+    """
+
+    """
+
     @staticmethod
     def get(list_data, index, default_value=None):
         """

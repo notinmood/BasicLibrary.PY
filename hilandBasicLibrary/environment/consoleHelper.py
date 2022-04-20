@@ -4,6 +4,10 @@ from hilandBasicLibrary.environment.envHelper import EnvHelper
 
 
 class ConsoleHelper:
+    """
+
+    """
+
     @staticmethod
     def echo(data):
         """

@@ -10,6 +10,9 @@ from enum import Enum
 
 
 class RandomEnum(Enum):
+    """
+
+    """
     LowerLetters = "ascii_lowercase"
     UpperLetters = "ascii_uppercase"
     AllLetters = "ascii_letters"
@@ -19,6 +22,9 @@ class RandomEnum(Enum):
 
 
 class OSNameEnum(Enum):
+    """
+
+    """
     Windows = "Windows"
     Linux = "Linux"
     Other = "Other"

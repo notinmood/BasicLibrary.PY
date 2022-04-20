@@ -3,6 +3,10 @@ from bs4 import BeautifulSoup
 
 
 class RequestHelper:
+    """
+
+    """
+
     @staticmethod
     def get_content(url, return_formatter='original', **kwargs):
         """

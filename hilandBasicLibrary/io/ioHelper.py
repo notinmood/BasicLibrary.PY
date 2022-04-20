@@ -6,6 +6,10 @@ from hilandBasicLibrary.io.fileHelper import FileHelper
 
 
 class IOHelper:
+    """
+
+    """
+
     @staticmethod
     def get_illegal_chars_in_file_system(include_separator=True):
         """

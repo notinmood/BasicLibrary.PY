@@ -1,6 +1,6 @@
 # 说明
 
-1. 本模块两个类型：
+1. 本模块两个类型，分别如下：
    1. ExcelBookMate 是在 excel 文件这个层面上进行的逻辑包装
    2. ExcelSheetMate 是在 sheet 表格这个层面上进行的逻辑包装
 

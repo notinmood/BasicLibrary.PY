@@ -13,6 +13,10 @@ from hilandBasicLibrary.projectHelper import ProjectHelper
 
 
 class PathHelper:
+    """
+
+    """
+
     @staticmethod
     def combine(*args):
         """

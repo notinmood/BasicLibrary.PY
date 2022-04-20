@@ -10,6 +10,10 @@ from hilandBasicLibrary.data.collectionHelper import CollectionHelper
 
 
 class DataSummary:
+    """
+
+    """
+
     def __init__(self, target=None, target_length=0, target_type=None):
         """
         初始化的时候，提供target_data 或者提供其他data_xxx系列数据,二者选一
