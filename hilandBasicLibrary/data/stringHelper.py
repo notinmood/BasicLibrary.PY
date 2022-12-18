@@ -6,7 +6,7 @@ from hilandBasicLibrary.data.regexHelper import RegexHelper
 class StringHelper:
     """
 
-        """
+    """
 
     @staticmethod
     def add_padding(original_content, patten, padding, prefix=True):
@@ -66,7 +66,7 @@ class StringHelper:
         """
         original = str(original)
         current_length = len(original)
-        result = ""
+
         if current_length >= all_length:
             result = original
         else:
@@ -123,7 +123,7 @@ class StringHelper:
     @staticmethod
     def is_empty(data):
         """
-
+        判断字符串是否为空
         :param data:
         :return:
         """
