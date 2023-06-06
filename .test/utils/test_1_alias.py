@@ -1,4 +1,4 @@
-from hilandBasicLibrary import *
+from BasicLibrary import *
 
 
 def test_alias_top_package():

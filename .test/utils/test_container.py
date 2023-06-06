@@ -7,7 +7,7 @@
  * @company: HiLand & RainyTop
 """
 
-from hilandBasicLibrary.model.container import Container
+from BasicLibrary.model.container import Container
 
 
 def test_get_dict():

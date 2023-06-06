@@ -6,7 +6,7 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from hilandBasicLibrary.data.dateTimeHelper import *
+from BasicLibrary.data.dateTimeHelper import *
 
 
 def test_get_string():

@@ -6,8 +6,8 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from hilandBasicLibrary.data.randomHelper import RandomHelper
-from hilandBasicLibrary.enums import RandomEnum
+from BasicLibrary.data.randomHelper import RandomHelper
+from BasicLibrary.enums import RandomEnum
 
 
 def test_create():

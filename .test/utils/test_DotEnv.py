@@ -9,8 +9,8 @@
 import os
 import dotenv
 
-from hilandBasicLibrary.io.pathHelper import PathHelper
-from hilandBasicLibrary.projectHelper import ProjectHelper
+from BasicLibrary.io.pathHelper import PathHelper
+from BasicLibrary.projectHelper import ProjectHelper
 
 
 def test_load_type():

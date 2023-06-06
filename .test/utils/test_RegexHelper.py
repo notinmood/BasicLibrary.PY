@@ -6,7 +6,7 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from hilandBasicLibrary.data.regexHelper import RegexHelper
+from BasicLibrary.data.regexHelper import RegexHelper
 
 
 def test_get_matched_items():

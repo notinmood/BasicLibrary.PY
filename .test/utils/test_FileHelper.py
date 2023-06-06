@@ -8,11 +8,11 @@
 """
 import os.path
 
-from hilandBasicLibrary.data.randomHelper import RandomHelper
-from hilandBasicLibrary.io.fileHelper import FileHelper
-from hilandBasicLibrary.io.ioHelper import IOHelper
-from hilandBasicLibrary.io.pathHelper import PathHelper
-from hilandBasicLibrary.projectHelper import ProjectHelper
+from BasicLibrary.data.randomHelper import RandomHelper
+from BasicLibrary.io.fileHelper import FileHelper
+from BasicLibrary.io.ioHelper import IOHelper
+from BasicLibrary.io.pathHelper import PathHelper
+from BasicLibrary.projectHelper import ProjectHelper
 
 
 def test_get_file_base_name():

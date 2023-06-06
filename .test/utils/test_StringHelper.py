@@ -6,7 +6,7 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from hilandBasicLibrary.data.stringHelper import *
+from BasicLibrary.data.stringHelper import *
 
 
 def test_reverse():

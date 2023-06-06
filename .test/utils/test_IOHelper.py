@@ -6,9 +6,9 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from hilandBasicLibrary.io.fileHelper import FileHelper
-from hilandBasicLibrary.io.ioHelper import IOHelper
-from hilandBasicLibrary.io.pathHelper import PathHelper
+from BasicLibrary.io.fileHelper import FileHelper
+from BasicLibrary.io.ioHelper import IOHelper
+from BasicLibrary.io.pathHelper import PathHelper
 
 
 def test_get_safe_filename():

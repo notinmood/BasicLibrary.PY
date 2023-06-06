@@ -9,10 +9,10 @@
 from xlwings import Sheet
 
 from _res.usingCopiedExcel import UsingCopiedExcel
-from hilandBasicLibrary.data.objectHelper import ObjectHelper
-from hilandBasicLibrary.io.fileHelper import FileHelper
-from hilandBasicLibrary.io.pathHelper import PathHelper
-from hilandBasicLibrary.office.excelBookMate import ExcelBookMate
+from BasicLibrary.data.objectHelper import ObjectHelper
+from BasicLibrary.io.fileHelper import FileHelper
+from BasicLibrary.io.pathHelper import PathHelper
+from BasicLibrary.office.excelBookMate import ExcelBookMate
 
 
 def test_open():

@@ -6,8 +6,8 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from hilandBasicLibrary.data.stringHelper import StringHelper
-from hilandBasicLibrary.dataBase.databaseClient import DatabaseClient
+from BasicLibrary.data.stringHelper import StringHelper
+from BasicLibrary.dataBase.databaseClient import DatabaseClient
 
 """
 测试前，请确保数据库内有如下文件内的表和数据：

@@ -8,9 +8,9 @@
 """
 import os.path
 
-from hilandBasicLibrary.data.stringHelper import StringHelper
-from hilandBasicLibrary.environment.envHelper import EnvHelper
-from hilandBasicLibrary.io.pathHelper import PathHelper
+from BasicLibrary.data.stringHelper import StringHelper
+from BasicLibrary.environment.envHelper import EnvHelper
+from BasicLibrary.io.pathHelper import PathHelper
 
 
 def test_combine():

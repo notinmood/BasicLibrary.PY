@@ -9,7 +9,7 @@
 import pandas as pd
 import pytest
 
-from hilandBasicLibrary.data.pandasHelper import PandasHelper
+from BasicLibrary.data.pandasHelper import PandasHelper
 
 
 @pytest.fixture

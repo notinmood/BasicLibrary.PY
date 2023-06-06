@@ -6,7 +6,7 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from hilandBasicLibrary.pattern.singleton import Singleton
+from BasicLibrary.pattern.singleton import Singleton
 
 
 @Singleton

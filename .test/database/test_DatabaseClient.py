@@ -6,15 +6,15 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-import hilandBasicLibrary
-from hilandBasicLibrary.configHelper import ConfigHelper
-from hilandBasicLibrary.dataBase.databaseClient import DatabaseClient
+import BasicLibrary
+from BasicLibrary.configHelper import ConfigHelper
+from BasicLibrary.dataBase.databaseClient import DatabaseClient
 
 
 def test_get_mate():
     mate = DatabaseClient.get_mate("hello")
     actual = type(mate)
-    expected = hilandBasicLibrary.dataBase.MySql.mate.Mate
+    expected = BasicLibrary.dataBase.MySql.mate.Mate
     assert actual == expected
 
     actual = mate.get_real_table_name()

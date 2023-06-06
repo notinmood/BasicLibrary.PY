@@ -6,8 +6,8 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from hilandBasicLibrary.configHelper import ConfigHelper
-from hilandBasicLibrary.dataBase.databaseClient import DatabaseClient as client
+from BasicLibrary.configHelper import ConfigHelper
+from BasicLibrary.dataBase.databaseClient import DatabaseClient as client
 
 
 def test_get_real_table_name():

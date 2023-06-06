@@ -14,13 +14,13 @@ from setuptools import find_packages, setup, Command
 # Package meta-data.
 
 
-NAME = 'hilandBasicLibrary'
+NAME = 'BasicLibrary.PY'
 DESCRIPTION = '企业级的 PYTHON 库'
 URL = 'https://github.com/notinmood/BasicLibrary.PY'
 EMAIL = '9727005@qq.com'
 AUTHOR = 'xiedali'
 REQUIRES_PYTHON = '>=3.6.0'
-VERSION = '0.4.23'
+VERSION = '0.5.00'
 
 # What packages are required for this module to be executed?
 REQUIRED = [

@@ -6,7 +6,7 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from hilandBasicLibrary.office.excelHelper import ExcelHelper
+from BasicLibrary.office.excelHelper import ExcelHelper
 
 
 def test_calc_range_marker():

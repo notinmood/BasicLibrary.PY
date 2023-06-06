@@ -6,7 +6,7 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from hilandBasicLibrary.data.randomHelper import RandomHelper
+from BasicLibrary.data.randomHelper import RandomHelper
 
 
 def create():

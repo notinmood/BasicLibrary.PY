@@ -6,7 +6,7 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from hilandBasicLibrary.data.objectHelper import *
+from BasicLibrary.data.objectHelper import *
 
 
 def test_is_number():

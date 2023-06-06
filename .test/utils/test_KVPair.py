@@ -6,7 +6,7 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from hilandBasicLibrary.model.kvPair import KVPair
+from BasicLibrary.model.kvPair import KVPair
 
 
 def test_convert_to_dict_item():

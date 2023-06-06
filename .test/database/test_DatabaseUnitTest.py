@@ -6,8 +6,8 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from hilandBasicLibrary.dataBase.databaseUnitTest import DatabaseUnitTest
-from hilandBasicLibrary.model.dataCompare import DataSummary, DataCompare
+from BasicLibrary.dataBase.databaseUnitTest import DatabaseUnitTest
+from BasicLibrary.model.dataCompare import DataSummary, DataCompare
 
 """
 测试前，请确保数据库内有如下文件内的表和数据：

@@ -6,7 +6,7 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from hilandBasicLibrary.model.dataCompare import *
+from BasicLibrary.model.dataCompare import *
 
 
 def test_data_summary():

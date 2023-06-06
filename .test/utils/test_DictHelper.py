@@ -6,7 +6,7 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from hilandBasicLibrary.data.dictHelper import *
+from BasicLibrary.data.dictHelper import *
 
 
 def test_contains_key():

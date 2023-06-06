@@ -6,7 +6,7 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from hilandBasicLibrary.environment.envHelper import EnvHelper
+from BasicLibrary.environment.envHelper import EnvHelper
 
 
 def get_os_name():

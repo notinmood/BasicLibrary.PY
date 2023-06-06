@@ -6,7 +6,7 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from hilandBasicLibrary.data.numberHelper import NumberHelper
+from BasicLibrary.data.numberHelper import NumberHelper
 
 
 def test_get_division_result_before_dot():

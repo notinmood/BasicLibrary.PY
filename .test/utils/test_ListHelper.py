@@ -6,7 +6,7 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from hilandBasicLibrary.data.listHelper import *
+from BasicLibrary.data.listHelper import *
 
 
 def test_sort():

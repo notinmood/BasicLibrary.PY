@@ -6,7 +6,7 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from hilandBasicLibrary import ConsoleHelper
+from BasicLibrary import ConsoleHelper
 
 
 def test_aa():

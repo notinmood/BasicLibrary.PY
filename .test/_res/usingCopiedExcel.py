@@ -6,10 +6,10 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from hilandBasicLibrary.data.randomHelper import RandomHelper
-from hilandBasicLibrary.io.fileHelper import FileHelper
-from hilandBasicLibrary.io.pathHelper import PathHelper
-from hilandBasicLibrary.office.excelBookMate import ExcelBookMate
+from BasicLibrary.data.randomHelper import RandomHelper
+from BasicLibrary.io.fileHelper import FileHelper
+from BasicLibrary.io.pathHelper import PathHelper
+from BasicLibrary.office.excelBookMate import ExcelBookMate
 
 
 class UsingCopiedExcel:

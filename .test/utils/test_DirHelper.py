@@ -8,11 +8,11 @@
 """
 import os.path
 
-from hilandBasicLibrary.data.randomHelper import RandomHelper
-from hilandBasicLibrary.io.dirHelper import DirHelper
-from hilandBasicLibrary.io.ioHelper import IOHelper
-from hilandBasicLibrary.io.pathHelper import PathHelper
-from hilandBasicLibrary.projectHelper import ProjectHelper
+from BasicLibrary.data.randomHelper import RandomHelper
+from BasicLibrary.io.dirHelper import DirHelper
+from BasicLibrary.io.ioHelper import IOHelper
+from BasicLibrary.io.pathHelper import PathHelper
+from BasicLibrary.projectHelper import ProjectHelper
 
 
 def test_remove():
