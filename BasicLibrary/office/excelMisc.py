@@ -35,6 +35,13 @@ def _calc_range_marker(original_range_marker, row_delta, column_delta):
 
 
 def _calc_cell_marker(original_cell_marker, row_delta, column_delta=0):
+    """
+    通過單元格的標識值和偏移量，計算新單元格的標識值
+    :param original_cell_marker:
+    :param row_delta:
+    :param column_delta:
+    :return:
+    """
     # 先从类似 "A2" 里面分离出 字母和数字
     column_pattern = r"[a-zA-Z]+"
     column_matched = RegexHelper.get_matched_items(original_cell_marker, column_pattern)
@@ -54,6 +61,12 @@ def _calc_cell_marker(original_cell_marker, row_delta, column_delta=0):
 
 
 def _calc_column_name(start_column_name, delta):
+    """
+    通過當前列的名稱和偏移量，計算新列的名稱
+    :param start_column_name:
+    :param delta:
+    :return:
+    """
     _len = ObjectHelper.get_length(start_column_name)
 
     """

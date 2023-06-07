@@ -6,6 +6,10 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
+import string
+
+from BasicLibrary.data.stringHelper import StringHelper
+from BasicLibrary.office.excelMisc import _calc_range_marker, _calc_cell_marker
 
 
 class ExcelSheetMate:
@@ -40,7 +44,7 @@ class ExcelSheetMate:
         row_value = self.original_sheet.used_range.last_cell.row
         return row_value
 
-    def read(self, range_marker):
+    def read(self, range_marker=None):
         """
         获取指定区块内的数值(get方法的别名)
         :param range_marker:区块的标志信息，可以取值如下几种之一：
@@ -51,15 +55,28 @@ class ExcelSheetMate:
         """
         return self.get(range_marker)
 
-    def get(self, range_marker):
+    def get(self, range_marker=None):
         """
         获取指定区块内的数值
         :param range_marker:区块的标志信息，可以取值如下几种之一：
             1. "A1"  # 返回单个单元格内的值信息 '姓名'
             2. "A1:A2" # 一维数组 ['姓名', '张三']
             3. "A1:B2" # 二维数组 [['姓名', '年龄'], ['张三', 20.0]]
+            4. None # 通過二維數組的方式返回全部數據
         :return:
         """
+        if range_marker is None:
+            row_count = self.get_row_count()
+            column_count = self.get_column_count()
+            if row_count > 0:
+                row_count = row_count - 1
+
+            if column_count > 0:
+                column_count = column_count - 1
+
+            last_cell_marker = _calc_cell_marker("A1", row_count, column_count)
+            range_marker = f"A1:{last_cell_marker}"
+
         value = self.original_sheet.range(range_marker).value
         return value
 
@@ -128,7 +145,6 @@ class ExcelSheetMate:
 
         self.original_sheet.range(range_marker).value = range_data
         return
-
 
     # # # 复制
     # def copy(self, sheet_name, range_col_row):

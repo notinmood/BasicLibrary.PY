@@ -86,8 +86,8 @@ def test_operate_book():
     ExcelHelper.operate(file_full_name, __callback_excel)
 
 
-def __callback_excel(excel):
-    sheet_name = excel.get_sheet().get_name()
+def __callback_excel(book_mate):
+    sheet_name = book_mate.get_sheet().get_name()
     actual = sheet_name
     expected = "表A"
     assert actual == expected
@@ -98,8 +98,8 @@ def test_operate_sheet():
     ExcelHelper.operate_sheet(file_full_name, __callback_sheet, 1)
 
 
-def __callback_sheet(sheet):
-    sheet_name = sheet.get_name()
+def __callback_sheet(sheet_mate):
+    sheet_name = sheet_mate.get_name()
     actual = sheet_name
     expected = "表B"
     assert actual == expected

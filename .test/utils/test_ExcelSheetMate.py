@@ -37,6 +37,21 @@ def test_get_row_column_count():
     FileHelper.remove(target_file_full_name)
 
 
+def test_read():
+    source_file_full_name = PathHelper.combine(ph.get_root_physical_path(), r".test\_res\source\yourExcel.xlsx")
+    book_mate = ExcelBookMate(source_file_full_name)
+    sheet_mate = book_mate.get_sheet(0)
+    sheet_content = sheet_mate.read()
+    actual = sheet_content
+    expected = [['姓名', '年龄', '班级', '成绩'],
+                ['张三', 20.0, '一', 88.0],
+                ['李四', 19.0, '二', 89.0],
+                ['王五', 21.0, '一', 59.0],
+                ['赵六', 20.0, '三', 78.0]]
+    assert actual == expected
+    pass
+
+
 def test_get_set():
     source_file_full_name = PathHelper.combine(ph.get_root_physical_path(), r".test\_res\source\myExcel.xlsx")
     target_dir_full_name = PathHelper.combine(ph.get_root_physical_path(), r".test\_res\target")
