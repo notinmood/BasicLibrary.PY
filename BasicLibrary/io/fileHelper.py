@@ -47,7 +47,12 @@ class FileHelper:
         return filepath
 
     @staticmethod
-    def load(file_full_name):
+    def load(file_full_name: str) -> object:
+        """
+
+        :param file_full_name:
+        :return:
+        """
         with open(file_full_name, "r", encoding='utf-8') as file_pointer:
             data = file_pointer.read()
         return data
@@ -161,3 +166,25 @@ class FileHelper:
         """
         cls.copy(source_file_full_name, target_dir_full_name, target_file_base_name)
         cls.remove(source_file_full_name)
+
+    @classmethod
+    def is_exist(cls, file_full_name):
+        """
+        判断为文件是否存在
+        :param file_full_name: 带全路径的文件名称
+        :return:
+        """
+        return os.path.isfile(file_full_name)
+
+    @classmethod
+    def rename(cls, old_file_full_name, new_file_name):
+        """
+
+        :param old_file_full_name: 旧有的带路径的文件全名称
+        :param new_file_name: 要改名的新的名称（不带文件路径）
+        :return:
+        """
+        file_path = cls.get_path_name(old_file_full_name)
+        new_file_full_name = PathHelper.combine(file_path, new_file_name)
+        os.rename(old_file_full_name, new_file_full_name)
+

@@ -9,6 +9,8 @@
 import os.path
 
 from BasicLibrary.data.randomHelper import RandomHelper
+from BasicLibrary.data.stringHelper import StringHelper
+from BasicLibrary.enums import RandomEnum
 from BasicLibrary.io.fileHelper import FileHelper
 from BasicLibrary.io.ioHelper import IOHelper
 from BasicLibrary.io.pathHelper import PathHelper
@@ -124,6 +126,9 @@ def test_move():
     assert actual == expected
 
 
+"""
+用于 load_line 回调使用的全局型变量
+"""
 file_content = ""
 
 
@@ -141,9 +146,44 @@ def __line_callback(line_content):
 
 
 def test_store():
-    content = "qingdao"
+    new_content = RandomHelper.create(6, RandomEnum.AllLetters)
     file_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\target\abcde.txt"
-    FileHelper.store(file_full_name, content)
-    actual = 0
-    expected = 0
+    FileHelper.store(file_full_name, new_content)
+    file_all_content = FileHelper.load(file_full_name)
+
+    actual = StringHelper.is_contains(file_all_content, new_content)
+    expected = True
     assert actual == expected
+
+
+def test_is_exist1():
+    root_path = ProjectHelper.get_root_physical_path()
+
+    file_full_name = PathHelper.combine(root_path, ".test/_res/_README.md")
+    actual = FileHelper.is_exist(file_full_name)
+    expected = True
+    assert actual == expected
+
+
+def test_is_exist2():
+    root_path = ProjectHelper.get_root_physical_path()
+
+    file_full_name = PathHelper.combine(root_path, ".test/_res/_fox-mail.md")
+    actual = FileHelper.is_exist(file_full_name)
+    expected = False
+    assert actual == expected
+
+
+def test_rename():
+    root_path = ProjectHelper.get_root_physical_path()
+    file_name_old = RandomHelper.create() + ".txt"
+    file_full_name_old = PathHelper.combine(root_path, ".test\\_res\\", file_name_old)
+    FileHelper.store(file_full_name_old, "123")
+    file_name_new = RandomHelper.create() + ".txt"
+    file_full_name_new = PathHelper.combine(root_path, ".test\\_res\\", file_name_new)
+    FileHelper.rename(file_full_name_old, file_name_new)
+    actual = FileHelper.is_exist(file_full_name_new)
+    FileHelper.remove(file_full_name_new)
+    expected = True
+    assert actual == expected
+    pass
