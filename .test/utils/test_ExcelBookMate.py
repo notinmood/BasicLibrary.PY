@@ -8,6 +8,7 @@
 """
 from xlwings import Sheet
 
+from BasicLibrary.projectHelper import ProjectHelper
 from _res.usingCopiedExcel import UsingCopiedExcel
 from BasicLibrary.data.objectHelper import ObjectHelper
 from BasicLibrary.io.fileHelper import FileHelper
@@ -16,7 +17,7 @@ from BasicLibrary.office.excelBookMate import ExcelBookMate
 
 
 def test_open():
-    file_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\source\myExcel.xlsx"
+    file_full_name = PathHelper.combine(ProjectHelper.get_root_physical_path(), r".test\_res\source\myExcel.xlsx")
     excel = __open_detail(file_full_name)
     excel.close()
 
@@ -35,9 +36,9 @@ def __open_detail(file_full_name):
 
 
 def test_save():
-    file_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\source\myExcel.xlsx"
+    file_full_name = PathHelper.combine(ProjectHelper.get_root_physical_path(), r".test\_res\source\myExcel.xlsx")
     excel = __open_detail(file_full_name)
-    target_file_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\target\xyz.xlsx"
+    target_file_full_name = PathHelper.combine(ProjectHelper.get_root_physical_path(), r".test\_res\target\xyz.xlsx")
     excel.save(target_file_full_name)
 
     actual = PathHelper.determine_is_exist(target_file_full_name)
@@ -78,7 +79,7 @@ def test_get_sheet():
 
 
 def test_with():
-    file_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\source\myExcel.xlsx"
+    file_full_name = PathHelper.combine(ProjectHelper.get_root_physical_path(), r".test\_res\source\myExcel.xlsx")
     with ExcelBookMate(file_full_name) as excel:
         actual = excel.get_sheets_count()
         expected = 3

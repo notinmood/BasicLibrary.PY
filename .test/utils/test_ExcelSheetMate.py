@@ -11,11 +11,12 @@ from BasicLibrary.data.randomHelper import RandomHelper
 from BasicLibrary.io.fileHelper import FileHelper
 from BasicLibrary.io.pathHelper import PathHelper
 from BasicLibrary.office.excelBookMate import ExcelBookMate
+from BasicLibrary.projectHelper import ProjectHelper as ph
 
 
 def test_get_row_column_count():
-    source_file_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\source\myExcel.xlsx"
-    target_dir_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\target"
+    source_file_full_name = PathHelper.combine(ph.get_root_physical_path(), r".test\_res\source\myExcel.xlsx")
+    target_dir_full_name = PathHelper.combine(ph.get_root_physical_path(), r".test\_res\target")
     target_file_base_name = RandomHelper.create() + ".xlsx"
     target_file_full_name = PathHelper.combine(target_dir_full_name, target_file_base_name)
 
@@ -37,8 +38,8 @@ def test_get_row_column_count():
 
 
 def test_get_set():
-    source_file_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\source\myExcel.xlsx"
-    target_dir_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\target"
+    source_file_full_name = PathHelper.combine(ph.get_root_physical_path(), r".test\_res\source\myExcel.xlsx")
+    target_dir_full_name = PathHelper.combine(ph.get_root_physical_path(), r".test\_res\target")
     target_file_base_name = RandomHelper.create() + ".xlsx"
     target_file_full_name = PathHelper.combine(target_dir_full_name, target_file_base_name)
 

@@ -23,7 +23,7 @@ def test_get_file_base_name():
     expected = "test_FileHelper.py"
     assert actual == expected
 
-    file_name = "E:\\myworkspace\\BasicLibrary.PY\\.test\\utils\\test_FileHelper.py"
+    file_name = PathHelper.combine(ProjectHelper.get_root_physical_path(), ".test\\utils\\test_FileHelper.py")
     actual = FileHelper.get_base_name(file_name)
     expected = "test_FileHelper.py"
     assert actual == expected
@@ -35,7 +35,7 @@ def test_get_file_extension_name():
     expected = ".py"
     assert actual == expected
 
-    file_name = "E:\\myworkspace\\BasicLibrary.PY\\.test\\utils\\test_FileHelper.py"
+    file_name = PathHelper.combine(ProjectHelper.get_root_physical_path(), ".test\\utils\\test_FileHelper.py")
     actual = FileHelper.get_extension_name(file_name)
     expected = ".py"
     assert actual == expected
@@ -47,9 +47,9 @@ def test_get_file_extension_name():
 
 
 def test_get_path_name():
-    file_name = "E:\\myworkspace\\BasicLibrary.PY\\.test\\utils\\test_FileHelper.py"
+    file_name = PathHelper.combine(ProjectHelper.get_root_physical_path(), r".test\\utils\\test_FileHelper.py")
     actual = FileHelper.get_path_name(file_name)
-    expected = "E:\\myworkspace\\BasicLibrary.PY\\.test\\utils"
+    expected = PathHelper.combine(ProjectHelper.get_root_physical_path(), r".test\\utils")
     assert actual == expected
 
     file_name = "test_FileHelper.py"
@@ -83,8 +83,8 @@ def test_copy():
 
 
 def test_remove():
-    source_file_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\source\aa.txt"
-    target_dir_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\target\ABB"
+    source_file_full_name = PathHelper.combine(ProjectHelper.get_root_physical_path(), r".test\_res\source\aa.txt")
+    target_dir_full_name = PathHelper.combine(ProjectHelper.get_root_physical_path(), r".test\_res\target\ABB")
     FileHelper.copy(source_file_full_name, target_dir_full_name)
     target_file_full_name = PathHelper.combine(target_dir_full_name, "aa.txt")
     actual = os.path.isfile(target_file_full_name)
@@ -103,8 +103,8 @@ def test_move():
     # 3. 最后再删除新目录下的文件作为善后工作。
     # 其中第二步是本单元测试的标的
 
-    source_file_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\source\aa.txt"
-    middle_dir_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\target\ABB"
+    source_file_full_name = PathHelper.combine(ProjectHelper.get_root_physical_path(), r".test\_res\source\aa.txt")
+    middle_dir_full_name = PathHelper.combine(ProjectHelper.get_root_physical_path(), r".test\_res\target\ABB")
     FileHelper.copy(source_file_full_name, middle_dir_full_name)
     middle_file_full_name = PathHelper.combine(middle_dir_full_name, "aa.txt")
     actual = os.path.isfile(middle_file_full_name)
@@ -112,7 +112,7 @@ def test_move():
     assert actual == expected
 
     random_string = RandomHelper.create()
-    last_dir_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\target"
+    last_dir_full_name = PathHelper.combine(ProjectHelper.get_root_physical_path(), r".test\_res\target")
     last_dir_full_name = PathHelper.combine(last_dir_full_name, random_string)
     FileHelper.move(middle_file_full_name, last_dir_full_name)
     actual = os.path.isfile(middle_file_full_name)
@@ -133,7 +133,7 @@ file_content = ""
 
 
 def test_load_line():
-    file_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\source\aa.txt"
+    file_full_name = PathHelper.combine(ProjectHelper.get_root_physical_path(), r".test\_res\source\aa.txt")
     FileHelper.load_with_line(file_full_name, __line_callback)
     actual = file_content
     expected = "1. 第一行\n2. 第二行\n3. 第三行\n4. 第四行"
@@ -147,7 +147,7 @@ def __line_callback(line_content):
 
 def test_store():
     new_content = RandomHelper.create(6, RandomEnum.AllLetters)
-    file_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\target\abcde.txt"
+    file_full_name = PathHelper.combine(ProjectHelper.get_root_physical_path(), r".test\_res\target\abcde.txt")
     FileHelper.store(file_full_name, new_content)
     file_all_content = FileHelper.load(file_full_name)
 

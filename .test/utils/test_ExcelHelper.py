@@ -6,7 +6,9 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
+from BasicLibrary.io.pathHelper import PathHelper
 from BasicLibrary.office.excelHelper import ExcelHelper
+from BasicLibrary.projectHelper import ProjectHelper
 
 
 def test_calc_range_marker():
@@ -80,7 +82,7 @@ def test_calc_column_name():
 
 
 def test_operate_book():
-    file_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\source\myExcel.xlsx"
+    file_full_name = PathHelper.combine(ProjectHelper.get_root_physical_path(), r".test\_res\source\myExcel.xlsx")
     ExcelHelper.operate(file_full_name, __callback_excel)
 
 
@@ -92,7 +94,7 @@ def __callback_excel(excel):
 
 
 def test_operate_sheet():
-    file_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\source\myExcel.xlsx"
+    file_full_name = PathHelper.combine(ProjectHelper.get_root_physical_path(), r".test\_res\source\myExcel.xlsx")
     ExcelHelper.operate_sheet(file_full_name, __callback_sheet, 1)
 
 

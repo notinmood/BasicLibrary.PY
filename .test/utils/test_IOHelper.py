@@ -9,6 +9,7 @@
 from BasicLibrary.io.fileHelper import FileHelper
 from BasicLibrary.io.ioHelper import IOHelper
 from BasicLibrary.io.pathHelper import PathHelper
+from BasicLibrary.projectHelper import ProjectHelper
 
 
 def test_get_safe_filename():
@@ -24,13 +25,13 @@ def test_get_safe_filename():
 
 
 def test_remove():
-    source_file_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\source\aa.txt"
-    target_dir_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\target\ABB"
+    source_file_full_name = PathHelper.combine(ProjectHelper.get_root_physical_path(), r".test\_res\source\aa.txt")
+    target_dir_full_name = PathHelper.combine(ProjectHelper.get_root_physical_path(), r".test\_res\target\ABB")
     FileHelper.copy(source_file_full_name, target_dir_full_name)
     target_file_full_name = PathHelper.combine(target_dir_full_name, "aa.txt")
     print(target_file_full_name)
 
-    path = "E:\\myworkspace\\BasicLibrary.PY\\.test\\_res\\target\\ABDXyEXG\\aab.txt"
+    path = PathHelper.combine(ProjectHelper.get_root_physical_path(), r".test\\_res\\target\\ABDXyEXG\\aab.txt")
     IOHelper.remove(path)
     actual = 0
     expected = 0
