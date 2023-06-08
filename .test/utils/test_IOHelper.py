@@ -12,7 +12,7 @@ from BasicLibrary.io.pathHelper import PathHelper
 from BasicLibrary.projectHelper import ProjectHelper
 
 
-def test_get_safe_filename():
+def test_get_file_system_safe_name1():
     expected = IOHelper.get_illegal_chars_in_file_system()
     actual = ['?', '*', '"', ':', '<', '>', '|', '\\', '/']
     assert actual == expected
@@ -22,6 +22,15 @@ def test_get_safe_filename():
     expected = '我是一_个好_人吗_'
     actual = _filename
     assert actual == expected
+
+
+def test_get_file_system_safe_name2():
+    _filename = "我🏮是✔️一:个好|人吗?"
+    _filename = IOHelper.get_file_system_safe_name(_filename)
+    expected = '我_是_一_个好_人吗_'
+    actual = _filename
+    assert actual == expected
+
 
 
 def test_remove():
