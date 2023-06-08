@@ -83,6 +83,7 @@ class ObjectHelper:
     def get_type(data):
         """
         获取目标对象的数据类型
+        使用方法：`if ObjectHelper.get_type(entity_dict_or_list) is dict:`等
         :param data:
         :return:
         """

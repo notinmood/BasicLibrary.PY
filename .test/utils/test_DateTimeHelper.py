@@ -53,6 +53,14 @@ def test_convert_from_string():
     assert actual == expected
 
 
+def test_get_compact_date_time_string():
+    data = "2021-10-11 00:34:25"
+    actual = DateTimeHelper.get_compact_date_time_string(data)
+    expected = "20211011003425"
+    assert actual == expected
+    pass
+
+
 def test_get_format():
     data = "2021-10-11 00:34:25"
     expected = "%Y-%m-%d %H:%M:%S"

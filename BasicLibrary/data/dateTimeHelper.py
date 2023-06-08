@@ -1,6 +1,8 @@
 import re
 from datetime import datetime, timedelta, date
 
+from BasicLibrary import ObjectHelper
+
 
 # +--------------------------------------------------------------------------
 # |::说明：| Python内置两个方法的说明
@@ -41,11 +43,31 @@ class DateTimeHelper:
     @staticmethod
     def get_compact_string(date_time_value=None):
         """
-        获取“20210221”这种类型的日期字符串（在股市交易中常用）
+        获取“20210221”这种类型的日期字符串（在股市交易中常用）;跟get_compact_date_string功能一样
         :param date_time_value:
         :return:
         """
         return DateTimeHelper.get_string(date_time_value, "%Y%m%d")
+
+    @classmethod
+    def get_compact_date_string(cls, date_time_value=None):
+        """
+        获取“20210221”这种类型的日期字符串（在股市交易中常用）;get_compact_string的别名
+        :param date_time_value:
+        :return:
+        """
+        return cls.get_compact_string(date_time_value)
+        pass
+
+    @classmethod
+    def get_compact_date_time_string(cls, date_time_value=None):
+        """
+        获取“20210221030526”这种类型的日期时间字符串
+        :param date_time_value:
+        :return:
+        """
+        return DateTimeHelper.get_string(date_time_value, "%Y%m%d%H%M%S")
+        pass
 
     @staticmethod
     def get_short_string(date_time_value=None, formatter="%Y-%m-%d"):
@@ -66,8 +88,8 @@ class DateTimeHelper:
         """
         return DateTimeHelper.get_string(date_time_value, "%Y-%m-%d %H:%M:%S")
 
-    @staticmethod
-    def get_string(date_time_value=None, formatter="%Y-%m-%d %H:%M:%S"):
+    @classmethod
+    def get_string(cls, date_time_value=None, formatter="%Y-%m-%d %H:%M:%S"):
         """
         获取给定时间的字符串表示形式（默认情况下返回当前的时间数据）
         :param formatter:
@@ -76,6 +98,9 @@ class DateTimeHelper:
         """
         if date_time_value is None:
             date_time_value = datetime.now()
+
+        if ObjectHelper.get_type(date_time_value) is str:
+            date_time_value = cls.convert_from_string(date_time_value)
 
         result = date_time_value.strftime(formatter)
         return result
