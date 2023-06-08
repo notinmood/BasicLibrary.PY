@@ -20,7 +20,7 @@ URL = 'https://github.com/notinmood/BasicLibrary.PY'
 EMAIL = '9727005@qq.com'
 AUTHOR = 'xiedali'
 REQUIRES_PYTHON = '>=3.6.0'
-VERSION = '0.5.6'
+VERSION = '0.5.7'
 
 # What packages are required for this module to be executed?
 REQUIRED = [

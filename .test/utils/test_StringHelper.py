@@ -199,3 +199,13 @@ def test_upper_first_char_every_word():
     actual = StringHelper.upper_first_char_every_word(biz_data)
     expected = "I Love China!我爱中国！"
     assert actual == expected
+
+
+def test_replace():
+    whole = 'C:\\Users\\Administrator\\Downloads\\app_26822737\\db0e400fad35ba8e18fcac06bd9bd99f2752.jpeg'
+    old = r'C:\\Users\\Administrator\\Downloads\\app_26822737'
+    new = r'E:\\MyImages\\美女图片未整理\\app_26822737'
+    actual = StringHelper.replace(whole, old, new)
+    expected = "E:\\MyImages\\美女图片未整理\\app_26822737\\db0e400fad35ba8e18fcac06bd9bd99f2752.jpeg"
+    assert actual == expected
+    pass
