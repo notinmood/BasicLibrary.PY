@@ -25,11 +25,11 @@ class IOHelper:
         return normal
 
     @classmethod
-    def get_safe_file_system_name(cls, filename, safe_char="_", include_separator=True):
+    def get_file_system_safe_name(cls, filename, safe_char="_", include_separator=True):
         """
         在文件系统内获取安全可用的名称
         :param filename:
-        :param safe_char:
+        :param safe_char: 非法支付的替代支付
         :param include_separator:
         :return:
         """
