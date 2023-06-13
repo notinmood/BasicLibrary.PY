@@ -209,3 +209,63 @@ def test_replace():
     expected = "E:\\MyImages\\美女图片未整理\\app_26822737\\db0e400fad35ba8e18fcac06bd9bd99f2752.jpeg"
     assert actual == expected
     pass
+
+
+def test_sub_string1():
+    whole = "男人为什么不能嫖娼？ 人生道路上，有许多迷雾难以剖析。"
+    start = 1
+    length = 1
+    actual = StringHelper.sub_string(whole, start, length)
+    expected = "人"
+    assert actual == expected
+
+
+pass
+
+
+def test_sub_string2():
+    whole = "男人为什么不能嫖娼？ 人生道路上，有许多迷雾难以剖析。"
+    start = 1
+    length = 9
+    actual = StringHelper.sub_string(whole, start, length)
+    expected = "人为什么不能嫖娼？"
+    assert actual == expected
+
+
+pass
+
+
+def test_sub_string3():
+    whole = "男人为什么不能PC?!人生道路上，有许多迷雾难以剖析。"
+    start = 1
+    length = 9
+    actual = StringHelper.sub_string(whole, start, length)
+    expected = "人为什么不能PC?"
+    assert actual == expected
+
+
+pass
+
+
+def test_sub_string4():
+    whole = "男人为什么不能PC??"
+    start = 1
+    length = 20
+    actual = StringHelper.sub_string(whole, start, length)
+    expected = "人为什么不能PC??"
+    assert actual == expected
+
+
+pass
+
+
+def test_sub_string5():
+    whole = "男人为什么不能PC?!人生道路上，有许多迷雾难以剖析。"
+    start = -1
+    length = 2
+    actual = StringHelper.sub_string(whole, start, length)
+    expected = "剖析"
+    assert actual == expected
+
+
+pass

@@ -155,11 +155,26 @@ class StringHelper:
     @staticmethod
     def format(original_with_placeholder, *args, **kwargs):
         """
-        对带有占位符的字符串进行格式化处理
-        :param original_with_placeholder:带有占位符的字符串
+        对带有占位符的字符串进行格式化处理，其中占位符用 {0}、{1}等来表示
+        :param original_with_placeholder:带有占位符的字符串（其中占位符用 {0}、{1}等来表示）
         :param args:
         :param kwargs:
         :return:
+        :example:
+
+        name = "小明"
+        height = 175
+
+        print("────────────────────────PY系统的缺省方法────────────────────────")
+        print(f"{name}的身高是{height}cm")
+
+        print("────────────────────────使用 DIY方法1────────────────────────")
+        whole = StringHelper.format("{name}的身高是{height}", name=name, height=height)
+        print(whole)
+
+        print("────────────────────────使用 DIY方法2────────────────────────")
+        whole = StringHelper.format("{0}的身高是{1}", name, height)
+        print(whole)
         """
         return original_with_placeholder.format(*args, **kwargs)
 
@@ -227,3 +242,30 @@ class StringHelper:
         """
         # return whole_string.replace(old_sub_string, new_sub_string)
         return RegexHelper.replace(whole_string, old_sub_string, new_sub_string)
+
+    @staticmethod
+    def sub_string(whole_string, start_position=0, length=0):
+        """
+        截取字符串
+        :param whole_string:
+        :param start_position:开始位置（如果是负数就从右往左取，但最右侧一个永远取不到，因为最右侧一个的数的index是-1）
+        :param length:截取长度（如果start_position为正数，就表示从左往右取多少个；如果start_position为负数，就表示从右往左取多少个）
+        :return:
+        """
+        all_length = len(whole_string)
+
+        if start_position < 0:
+            end_position = start_position - length
+            if abs(end_position) > all_length + 1:
+                end_position = 0 - all_length
+            pass
+            return whole_string[end_position:start_position]
+        else:
+            end_position = start_position + length
+            if end_position > all_length:
+                end_position = all_length
+            pass
+            return whole_string[start_position: end_position]
+        pass
+
+    pass
