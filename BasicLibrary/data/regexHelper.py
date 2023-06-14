@@ -6,7 +6,7 @@ from BasicLibrary import ObjectHelper
 class RegexHelper:
     """
 
-        """
+    """
 
     @staticmethod
     def get_patten_of_html_tag():
@@ -16,6 +16,18 @@ class RegexHelper:
         """
         patten = r"</?[^>]+>"
         return patten
+
+    @classmethod
+    def get_items(cls, whole, pattern):
+        """
+        获取匹配成功的结果数组(方法 `get_matched_items` 的别名)
+        :param whole:
+        :param pattern:
+        :return:
+        """
+        return cls.get_matched_items(whole, pattern)
+
+    pass
 
     @staticmethod
     def get_matched_items(whole, pattern):
