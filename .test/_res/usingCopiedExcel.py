@@ -6,31 +6,24 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from BasicLibrary.data.randomHelper import RandomHelper
-from BasicLibrary.io.fileHelper import FileHelper
+
 from BasicLibrary.io.pathHelper import PathHelper
-from BasicLibrary.office.excelBookMate import ExcelBookMate
+from BasicLibrary.office.excelShadowUsing import ExcelShadowUsing
 from BasicLibrary.projectHelper import ProjectHelper
 
 
-class UsingCopiedExcel:
+class UsingCopiedExcel(ExcelShadowUsing):
+    """
+    辅助验证Excel操作功能的，具体的Excel文件的影子
+    """
+
     def __init__(self):
-        self.target_file_full_name = self.get_copied_excel_file()
-        self.excel = ExcelBookMate(self.target_file_full_name)
+        source_file_full_name = PathHelper.combine(ProjectHelper.get_root_physical_path(),
+                                                   r".test\_res\source\myExcel.xlsx")
 
-    def __enter__(self):
-        return self.excel
+        super().__init__(source_file_full_name)
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        self.excel.close()
-        FileHelper.remove(self.target_file_full_name)
+    pass
 
-    @staticmethod
-    def get_copied_excel_file():
-        source_file_full_name = PathHelper.combine(ProjectHelper.get_root_physical_path(), r".test\_res\source\myExcel.xlsx")
-        target_dir_full_name = PathHelper.combine(ProjectHelper.get_root_physical_path(), r".test\_res\target")
-        target_file_base_name = RandomHelper.create() + ".xlsx"
-        target_file_full_name = PathHelper.combine(target_dir_full_name, target_file_base_name)
 
-        FileHelper.copy(source_file_full_name, target_dir_full_name, target_file_base_name)
-        return target_file_full_name
+pass

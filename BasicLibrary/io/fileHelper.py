@@ -33,7 +33,7 @@ class FileHelper:
     def get_extension_name(file_name):
         """
         获取文件的扩展名(带符号“.”)
-        :param file_name:可用是文件的全名称也可以是部分名称
+        :param file_name:可用是文件的全名称也可以是基本名称
         :return:
         """
         return pathlib.Path(file_name).suffix

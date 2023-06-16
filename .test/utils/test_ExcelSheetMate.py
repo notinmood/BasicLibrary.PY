@@ -69,14 +69,29 @@ def test_get_set():
     assert actual == expected
 
     new_value = "zhangsan"
-    my_sheet.set(range_marker, new_value)
+    my_sheet.set(new_value, range_marker)
     actual = my_sheet.get(range_marker)
     expected = new_value
     assert actual == expected
 
     range_marker = "A3:A4"
     new_value = [["zhangsan"], ["lisi"]]
-    my_sheet.set(range_marker, new_value)
+    my_sheet.set(new_value, range_marker)
+    actual = my_sheet.get(range_marker)
+    expected = ['zhangsan', 'lisi']
+    assert actual == expected
+
+    # 不指定marker的情况下，会缺省写入 A1
+    new_value = "zhangsan"
+    my_sheet.set(new_value)
+    actual = my_sheet.get("A1")
+    expected = new_value
+    assert actual == expected
+
+    # 不指定marker的情况下，会缺省从 A1 开始往后推断位置并写入
+    range_marker = "A1:A2"
+    new_value = [["zhangsan"], ["lisi"]]
+    my_sheet.set(new_value)
     actual = my_sheet.get(range_marker)
     expected = ['zhangsan', 'lisi']
     assert actual == expected

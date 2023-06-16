@@ -80,7 +80,7 @@ class ExcelSheetMate:
         value = self.original_sheet.range(range_marker).value
         return value
 
-    def write(self, range_marker, range_data):
+    def write(self, range_data, range_marker=None):
         """
         写入数据(set方法的别名)
         1. 严格模式：请必须匹配 range_marker 和 range_data 的格式相同，数据量相同。
@@ -94,9 +94,9 @@ class ExcelSheetMate:
         :param range_data:要写入的数据。!!!特别注意，单列数据的写入用二维数组，但单列数据的读出为一维数组。
         :return:
         """
-        return self.set(range_marker, range_data)
+        return self.set(range_data, range_marker)
 
-    def set(self, range_marker, range_data):
+    def set(self, range_data, range_marker=None):
         """
         写入数据
         1. 严格模式：请必须匹配 range_marker 和 range_data 的格式相同，数据量相同。
@@ -110,6 +110,9 @@ class ExcelSheetMate:
         :param range_data:要写入的数据。!!!特别注意，单列数据的写入用二维数组，但单列数据的读出为一维数组。
         :return:
         """
+        if range_marker is None:
+            range_marker = "A1"
+        pass
         self.original_sheet.range(range_marker).value = range_data
         return
 

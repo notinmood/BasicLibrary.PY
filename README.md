@@ -17,10 +17,10 @@
 
 ## 【一】发布步骤：
 
-0. 打开本项目的"终端"窗口(或者通过 windows 的资源管理器定位到本项目 setup.py 所在的目录)
-1. 打开修改 setup.py 文件 `VERSION = '0.4.3'`为新的值
-2. 运行命令 `python setup.py sdist`
-3. 运行命令 `twine upload dist/*`
+1. 打开本项目的"终端"窗口(或者通过 windows 的资源管理器定位到本项目 setup.py 所在的目录)
+2. 打开修改 setup.py 文件 `VERSION = '0.4.3'`为新的值
+3. 运行命令 `python setup.py sdist`
+4. 运行命令 `twine upload dist/*`
 
 ## 【二】其他
 

@@ -1,7 +1,10 @@
 MANIFEST.in
 README.md
 setup.py
+BasicLibrary/.env.default
+BasicLibrary/README.md
 BasicLibrary/__init__.py
+BasicLibrary/__projectConfig.ini
 BasicLibrary/__projectHelper.py
 BasicLibrary/configHelper.py
 BasicLibrary/enums.py
@@ -27,6 +30,8 @@ BasicLibrary/data/reflectHelper.py
 BasicLibrary/data/regexHelper.py
 BasicLibrary/data/setHelper.py
 BasicLibrary/data/stringHelper.py
+BasicLibrary/data/typeEnum.py
+BasicLibrary/data/typeHelper.py
 BasicLibrary/dataBase/__init__.py
 BasicLibrary/dataBase/databaseClient.py
 BasicLibrary/dataBase/databaseDDL.py
