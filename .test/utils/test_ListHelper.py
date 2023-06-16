@@ -110,3 +110,22 @@ def test_merge():
     actual = ListHelper.merge(a, b, c)
     expected = [1, 2, 3, 4, 5, 6, 6, 7, 8]
     assert actual == expected
+
+
+def test_reverser():
+    a = [4, 5, 6]
+    b = [6, 5, 4]
+
+    c = ListHelper.reverse(a)
+
+    actual = c
+    expected = b
+    assert actual == expected
+
+    # 验证返回的结果，对传入的原值没有影响
+    actual = c
+    expected = a
+    assert actual != expected
+
+
+pass

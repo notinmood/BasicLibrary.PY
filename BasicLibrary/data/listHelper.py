@@ -147,3 +147,14 @@ class ListHelper:
             result += key
 
         return result
+
+    @staticmethod
+    def reverse(list_data):
+        """
+        返回翻转顺序的 list（翻转的list，不影响原来输入的list）
+        :param list_data:
+        :return:
+        """
+        return list(reversed(list_data))
+
+    pass

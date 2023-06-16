@@ -53,6 +53,7 @@ BasicLibrary/environment/envHelper.py
 BasicLibrary/io/__init__.py
 BasicLibrary/io/dirHelper.py
 BasicLibrary/io/fileHelper.py
+BasicLibrary/io/fileShadowUsing.py
 BasicLibrary/io/ioHelper.py
 BasicLibrary/io/pathHelper.py
 BasicLibrary/model/__init__.py
@@ -64,6 +65,7 @@ BasicLibrary/office/__init__.py
 BasicLibrary/office/excelBookMate.py
 BasicLibrary/office/excelHelper.py
 BasicLibrary/office/excelMisc.py
+BasicLibrary/office/excelShadowUsing.py
 BasicLibrary/office/excelSheetMate.py
 BasicLibrary/pattern/__init__.py
 BasicLibrary/pattern/singleton.py

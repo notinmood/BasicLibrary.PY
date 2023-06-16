@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: BasicLibrary.PY
-Version: 0.5.10
+Version: 0.5.11
 Summary: 企业级的 PYTHON 库
 Home-page: https://github.com/notinmood/BasicLibrary.PY
 Author: xiedali
@@ -36,10 +36,10 @@ Description-Content-Type: text/markdown
 
 ## 【一】发布步骤：
 
-0. 打开本项目的"终端"窗口(或者通过 windows 的资源管理器定位到本项目 setup.py 所在的目录)
-1. 打开修改 setup.py 文件 `VERSION = '0.4.3'`为新的值
-2. 运行命令 `python setup.py sdist`
-3. 运行命令 `twine upload dist/*`
+1. 打开本项目的"终端"窗口(或者通过 windows 的资源管理器定位到本项目 setup.py 所在的目录)
+2. 打开修改 setup.py 文件 `VERSION = '0.4.3'`为新的值
+3. 运行命令 `python setup.py sdist`
+4. 运行命令 `twine upload dist/*`
 
 ## 【二】其他
 
