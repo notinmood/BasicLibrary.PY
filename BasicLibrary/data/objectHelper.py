@@ -61,9 +61,18 @@ class ObjectHelper:
                     return True
                 else:
                     return False
+                pass
+            pass
+        pass
+    pass
 
     @staticmethod
     def is_number(data):
+        """
+        判断给定的数据是否为数字
+        :param data:
+        :return:
+        """
         try:
             float(data)
             return True
@@ -78,6 +87,7 @@ class ObjectHelper:
             pass
 
         return False
+    pass
 
     @staticmethod
     def get_type(data):
@@ -117,3 +127,17 @@ class ObjectHelper:
         """
         summary = DataSummary(object_data)
         return summary
+    pass
+
+    @staticmethod
+    def has_member(object_data,member_name):
+        """
+        判断目标对象是否包含指定名称的成员
+        (如果是判断集合内是否存在某成员，请使用 CollectionHelper.is_contains() 方法。)
+        :param object_data:
+        :param member_name:
+        :return:
+        """
+
+        return member_name in object_data
+    pass

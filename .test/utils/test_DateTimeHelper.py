@@ -91,3 +91,21 @@ def test_get_format():
     expected = "%y%m%d"
     actual = DateTimeHelper.get_format(data)
     assert actual == expected
+
+def test_get_weekday_cn():
+    data = "2023-9-12 00:34:25"
+    actual = DateTimeHelper.get_weekday_cn(data)
+    expected = "星期二"
+    assert actual == expected
+
+    data = DateTimeHelper.convert_from_string(data)
+    actual = DateTimeHelper.get_weekday_cn(data)
+    expected = "星期二"
+    assert actual == expected
+
+
+    data = "2023-9-13"
+    actual = DateTimeHelper.get_weekday_cn(data)
+    expected = "星期三"
+    assert actual == expected
+pass

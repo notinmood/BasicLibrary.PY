@@ -119,3 +119,52 @@ def test_get_type():
     actual = ObjectHelper.get_type(my_data)
     expected = str
     assert actual == expected
+
+
+def test_has_member1():
+    my_data = {"china": "beijing", "usa": "new york"}
+    actual = ObjectHelper.has_member(my_data, "china")
+    expected = True
+    assert actual == expected
+
+    my_data = {"china": "beijing", "usa": "new york"}
+    actual = ObjectHelper.has_member(my_data, "beijing")
+    expected = False
+    assert actual == expected
+
+    actual = ObjectHelper.has_member(my_data, "japan")
+    expected = False
+    assert actual == expected
+
+
+pass
+
+
+def test_has_member2():
+    my_data = ["china", "beijing", "usa", "new york"]
+    actual = ObjectHelper.has_member(my_data, "china")
+    expected = True
+    assert actual == expected
+
+    actual = ObjectHelper.has_member(my_data, "japan")
+    expected = False
+    assert actual == expected
+
+
+pass
+
+
+def test_has_member3():
+    my_data = dict()
+    my_data["china"] = "beijing"
+    my_data["usa"] = "new york"
+    actual = ObjectHelper.has_member(my_data, "china")
+    expected = True
+    assert actual == expected
+
+    actual = ObjectHelper.has_member(my_data, "japan")
+    expected = False
+    assert actual == expected
+
+
+pass

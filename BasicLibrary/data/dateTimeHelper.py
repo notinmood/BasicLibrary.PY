@@ -159,3 +159,21 @@ class DateTimeHelper:
             return "%y%m%d"
 
         return ""
+
+    @classmethod
+    def get_weekday_cn(cls, date_time_value=None):
+        """
+        获取给定日期的，中文星期表示（比如星期一、星期六等）
+        :param date_time_value:
+        :return:
+        """
+        if date_time_value is None:
+            date_time_value = datetime.now()
+
+        if ObjectHelper.get_type(date_time_value) is str:
+            date_time_value = cls.convert_from_string(date_time_value)
+
+        week_cn = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"]
+        return week_cn[date_time_value.weekday()]
+
+    pass
