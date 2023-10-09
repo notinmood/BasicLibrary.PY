@@ -28,6 +28,17 @@ def test_get_file_base_name():
     expected = "test_FileHelper.py"
     assert actual == expected
 
+def test_get_file_base_name_no_extension():
+    file_name = "test_FileHelper.py"
+    actual = FileHelper.get_base_name_no_extension(file_name)
+    expected = "test_FileHelper"
+    assert actual == expected
+
+    file_name = "test_FileHelper"
+    actual = FileHelper.get_base_name_no_extension(file_name)
+    expected = "test_FileHelper"
+    assert actual == expected
+pass
 
 def test_get_file_extension_name():
     file_name = "test_FileHelper.py"
@@ -44,6 +55,7 @@ def test_get_file_extension_name():
     actual = FileHelper.get_extension_name(file_name)
     expected = ""
     assert actual == expected
+
 
 
 def test_get_path_name():

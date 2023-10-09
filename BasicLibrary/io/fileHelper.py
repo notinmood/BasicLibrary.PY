@@ -11,6 +11,7 @@ import pathlib
 import shutil
 
 from BasicLibrary.data.randomHelper import RandomHelper
+from BasicLibrary.data.stringHelper import StringHelper
 from BasicLibrary.enums import RandomEnum
 from BasicLibrary.io.pathHelper import PathHelper
 
@@ -24,10 +25,22 @@ class FileHelper:
     def get_base_name(file_name):
         """
         获取给定路径的文件名称部分(带扩展名)
-        :param file_name:可用是文件的全名称也可以是部分名称
+        :param file_name:可以是文件的全名称也可以是部分名称
         :return:
         """
         return os.path.basename(file_name)
+
+    @classmethod
+    def get_base_name_no_extension(cls,file_name):
+        """
+        获取给定路径的文件名称部分(不带扩展名)
+        :param file_name:
+        :return:
+        """
+        base_name = cls.get_base_name(file_name)
+        extension_name = cls.get_extension_name(file_name)
+        return StringHelper.replace(base_name,extension_name,"")
+    pass
 
     @staticmethod
     def get_extension_name(file_name):
