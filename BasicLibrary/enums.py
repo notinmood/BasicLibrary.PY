@@ -8,6 +8,8 @@
 """
 from enum import Enum
 
+from BasicLibrary.data.enumBase import EnumBase
+
 
 class RandomEnum(Enum):
     """
@@ -19,7 +21,10 @@ class RandomEnum(Enum):
     Digits = "digits"
     Punctuation = "punctuation"
     All = "all"
+
+
 pass
+
 
 class OSNameEnum(Enum):
     """
@@ -28,9 +33,12 @@ class OSNameEnum(Enum):
     Windows = "Windows"
     Linux = "Linux"
     Other = "Other"
+
+
 pass
 
-class ImageTypeEnum(Enum):
+
+class ImageTypeEnum(EnumBase):
     """
     图像类型枚举
     """
@@ -39,12 +47,14 @@ class ImageTypeEnum(Enum):
     PBM = "pbm"  # ‘pbm’ 便携式位图文件
     PGM = "pgm"  # ‘pgm’ 便携式灰度图文件
     PPM = "ppm"  # ‘ppm’ 便携式像素表文件
-    TIFF = "tiff"# ‘tiff’ TIFF 文件
-    RAST = "rast"# ‘rast’ Sun 光栅文件
-    XBM = "xbm"# ‘xbm’ X 位图文件
-    JPEG = "jpeg"# ‘jpeg’ JFIF 或 Exif 格式的 JPEG 数据
-    BMP = "bmp"# ‘bmp’ BMP 文件
-    PNG = "png"# ‘png’ 便携式网络图像
-    WEBP = "webp"# ‘webp’ WebP 文件
-    EXR = "exr"# ‘exr’ OpenEXR 文件
+    TIFF = "tiff"  # ‘tiff’ TIFF 文件
+    RAST = "rast"  # ‘rast’ Sun 光栅文件
+    XBM = "xbm"  # ‘xbm’ X 位图文件
+    JPEG = "jpeg"  # ‘jpeg’ JFIF 或 Exif 格式的 JPEG 数据
+    BMP = "bmp"  # ‘bmp’ BMP 文件
+    PNG = "png"  # ‘png’ 便携式网络图像
+    WEBP = "webp"  # ‘webp’ WebP 文件
+    EXR = "exr"  # ‘exr’ OpenEXR 文件
+
+
 pass
