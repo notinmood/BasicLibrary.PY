@@ -209,8 +209,8 @@ class DateTimeHelper:
             result += "闰"
         pass
 
-        result += StringHelper.format("{0}月{1}日", ChineseData.ymc[lunar_date.getLunarMonth() - 1],
-                                      ChineseData.rmc[lunar_date.getLunarDay() - 1])
+        result += StringHelper.format("{0}月{1}日", ChineseData.YueM[lunar_date.getLunarMonth() - 1],
+                                      ChineseData.RiM[lunar_date.getLunarDay() - 1])
 
 
         return result

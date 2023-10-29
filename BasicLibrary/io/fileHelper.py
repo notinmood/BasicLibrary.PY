@@ -6,6 +6,7 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
+import imghdr
 import os
 import pathlib
 import shutil
@@ -13,6 +14,8 @@ import shutil
 from BasicLibrary.data.randomHelper import RandomHelper
 from BasicLibrary.data.stringHelper import StringHelper
 from BasicLibrary.enums import RandomEnum
+from BasicLibrary.io.imageHelper import ImageHelper
+
 from BasicLibrary.io.pathHelper import PathHelper
 
 
@@ -31,7 +34,7 @@ class FileHelper:
         return os.path.basename(file_name)
 
     @classmethod
-    def get_base_name_no_extension(cls,file_name):
+    def get_base_name_no_extension(cls, file_name):
         """
         获取给定路径的文件名称部分(不带扩展名)
         :param file_name:
@@ -39,7 +42,8 @@ class FileHelper:
         """
         base_name = cls.get_base_name(file_name)
         extension_name = cls.get_extension_name(file_name)
-        return StringHelper.replace(base_name,extension_name,"")
+        return StringHelper.replace(base_name, extension_name, "")
+
     pass
 
     @staticmethod
@@ -205,3 +209,18 @@ class FileHelper:
         if cls.is_exist(new_file_full_name):
             new_file_full_name += f'({RandomHelper.create(8, RandomEnum.UpperLetters)})'
         os.rename(old_file_full_name, new_file_full_name)
+
+    @staticmethod
+    def get_image_type_name(file, h=None):
+        return ImageHelper.get_image_type_name(file, h)
+
+    pass
+
+    @staticmethod
+    def is_image_type(file_full_name):
+        return ImageHelper.is_image_type(file_full_name)
+
+    pass
+
+
+pass

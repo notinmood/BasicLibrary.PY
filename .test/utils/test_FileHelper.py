@@ -10,7 +10,7 @@ import os.path
 
 from BasicLibrary.data.randomHelper import RandomHelper
 from BasicLibrary.data.stringHelper import StringHelper
-from BasicLibrary.enums import RandomEnum
+from BasicLibrary.enums import RandomEnum, ImageTypeEnum
 from BasicLibrary.io.fileHelper import FileHelper
 from BasicLibrary.io.ioHelper import IOHelper
 from BasicLibrary.io.pathHelper import PathHelper
@@ -198,4 +198,69 @@ def test_rename():
     FileHelper.remove(file_full_name_new)
     expected = True
     assert actual == expected
-    pass
+pass
+
+def test_get_image_type_name1():
+    file_path = ProjectHelper.get_root_physical_path()
+    file_full_name = PathHelper.combine(file_path,r".test\_res\images\testpng.png")
+    actual = FileHelper.get_image_type_name(file_full_name)
+    expected = "png"
+    assert actual == expected
+pass
+
+def test_get_image_type_name2():
+    file_path = ProjectHelper.get_root_physical_path()
+    file_full_name = PathHelper.combine(file_path,r".test\_res\images\testjpg.jpg")
+    actual = FileHelper.get_image_type_name(file_full_name)
+    expected = "jpeg"
+    assert actual == expected
+pass
+
+def test_is_image_type1():
+    file_path = ProjectHelper.get_root_physical_path()
+    file_full_name = PathHelper.combine(file_path,r".test\_res\images\testjpg.jpg")
+
+    actual = FileHelper.is_image_type(file_full_name)
+    expected = True
+    assert actual == expected
+pass
+
+
+def test_is_image_type2():
+    file_path = ProjectHelper.get_root_physical_path()
+    file_full_name = PathHelper.combine(file_path,r".test\_res\images\testtxt.txt")
+
+    actual = FileHelper.is_image_type(file_full_name)
+    expected = False
+    assert actual == expected
+pass
+
+
+def test_is_image_type3():
+    file_path = ProjectHelper.get_root_physical_path()
+    file_full_name = PathHelper.combine(file_path,r".test\_res\images\testpng.png")
+
+    actual = FileHelper.is_image_type(file_full_name)
+    expected = True
+    assert actual == expected
+pass
+
+
+def test_is_image_type4():
+    file_path = ProjectHelper.get_root_physical_path()
+    file_full_name = PathHelper.combine(file_path,r".test\_res\images\testwebp.webp")
+
+    actual = FileHelper.is_image_type(file_full_name)
+    expected = True
+    assert actual == expected
+pass
+
+# TODO:xiedali@20231029 应该加入对不存在文件的判断
+# def test_is_image_type5():
+#     file_path = ProjectHelper.get_root_physical_path()
+#     file_full_name = PathHelper.combine(file_path,r".test\_res\images\nofile.no")
+#
+#     actual = FileHelper.is_image_type(file_full_name)
+#     expected = True
+#     assert actual == expected
+# pass
