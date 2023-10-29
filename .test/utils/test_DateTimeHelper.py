@@ -109,3 +109,33 @@ def test_get_weekday_cn():
     expected = "星期三"
     assert actual == expected
 pass
+
+def test_get_date_lunar1():
+    data = "2023-10-23 00:34:25"
+    actual = DateTimeHelper.get_date_lunar(data)
+    expected = "癸卯年九月初九日"
+    assert actual == expected
+pass
+
+
+def test_get_date_lunar2():
+    data = "2023-10-23 00:34:25"
+    actual = DateTimeHelper.get_date_lunar(data,False)
+    expected = "九月初九日"
+    assert actual == expected
+pass
+
+
+def test_get_date_lunar3():
+    data = "2023-3-23"
+    actual = DateTimeHelper.get_date_lunar(data,True)
+    expected = "癸卯年闰二月初二日"
+    assert actual == expected
+pass
+
+def test_get_date_lunar4():
+    data = "2023-3-23"
+    actual = DateTimeHelper.get_date_lunar(data,False)
+    expected = "闰二月初二日"
+    assert actual == expected
+pass

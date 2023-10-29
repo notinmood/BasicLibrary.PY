@@ -1,7 +1,9 @@
 import re
 from datetime import datetime, timedelta, date
-
+import sxtwl
 from BasicLibrary import ObjectHelper
+from BasicLibrary.data import ChineseData
+from BasicLibrary.data.stringHelper import StringHelper
 
 
 # +--------------------------------------------------------------------------
@@ -175,5 +177,42 @@ class DateTimeHelper:
 
         week_cn = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"]
         return week_cn[date_time_value.weekday()]
+
+    pass
+
+    @classmethod
+    def get_date_lunar(cls, solar_date=None, result_with_year=True):
+        """
+        获取给定阳历日期的阴历表示（比如）
+        :param result_with_year:结果中是否包含用干支表示的年份
+        :param solar_date:待转换的公历日期
+        :return:
+        """
+        if solar_date is None:
+            solar_date = datetime.now()
+
+        if ObjectHelper.get_type(solar_date) is str:
+            solar_date = cls.convert_from_string(solar_date)
+
+
+        lunar_date = sxtwl.fromSolar(solar_date.year, solar_date.month, solar_date.day)
+
+
+        result = ""
+        if result_with_year is True:
+            lunar_year = lunar_date.getYearGZ()
+            lunar_year_string = ChineseData.TianG[lunar_year.tg] + ChineseData.Diz[lunar_year.dz]
+            result = StringHelper.format("{0}年", lunar_year_string)
+        pass
+
+        if lunar_date.isLunarLeap():
+            result += "闰"
+        pass
+
+        result += StringHelper.format("{0}月{1}日", ChineseData.ymc[lunar_date.getLunarMonth() - 1],
+                                      ChineseData.rmc[lunar_date.getLunarDay() - 1])
+
+
+        return result
 
     pass
