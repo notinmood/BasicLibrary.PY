@@ -139,3 +139,11 @@ def test_get_date_lunar4():
     expected = "闰二月初二日"
     assert actual == expected
 pass
+
+
+def test_get_date_lunar5():
+    data = "2024-1-20"
+    actual = DateTimeHelper.get_date_lunar(data,False)
+    expected = "腊月初十日"
+    assert actual == expected
+pass

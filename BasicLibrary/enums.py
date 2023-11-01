@@ -7,8 +7,12 @@
  * @company: HiLand & RainyTop
 """
 from enum import Enum
-
 from BasicLibrary.data.enumBase import EnumBase
+
+"""
+说明：如果要使用枚举上的某些静态快捷方法，需要继承EnumBase；
+否则，直接继承Enum即可。
+"""
 
 
 class RandomEnum(Enum):
