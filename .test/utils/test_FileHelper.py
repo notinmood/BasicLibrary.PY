@@ -28,6 +28,7 @@ def test_get_file_base_name():
     expected = "test_FileHelper.py"
     assert actual == expected
 
+
 def test_get_file_base_name_no_extension():
     file_name = "test_FileHelper.py"
     actual = FileHelper.get_base_name_no_extension(file_name)
@@ -38,7 +39,10 @@ def test_get_file_base_name_no_extension():
     actual = FileHelper.get_base_name_no_extension(file_name)
     expected = "test_FileHelper"
     assert actual == expected
+
+
 pass
+
 
 def test_get_file_extension_name():
     file_name = "test_FileHelper.py"
@@ -55,7 +59,6 @@ def test_get_file_extension_name():
     actual = FileHelper.get_extension_name(file_name)
     expected = ""
     assert actual == expected
-
 
 
 def test_get_path_name():
@@ -198,61 +201,102 @@ def test_rename():
     FileHelper.remove(file_full_name_new)
     expected = True
     assert actual == expected
+
+
 pass
+
 
 def test_get_image_type_name1():
     file_path = ProjectHelper.get_root_physical_path()
-    file_full_name = PathHelper.combine(file_path,r".test\_res\images\testpng.png")
+    file_full_name = PathHelper.combine(file_path, r".test\_res\images\testpng.png")
     actual = FileHelper.get_image_type_name(file_full_name)
     expected = "png"
     assert actual == expected
+
+
 pass
+
 
 def test_get_image_type_name2():
     file_path = ProjectHelper.get_root_physical_path()
-    file_full_name = PathHelper.combine(file_path,r".test\_res\images\testjpg.jpg")
+    file_full_name = PathHelper.combine(file_path, r".test\_res\images\testjpg.jpg")
     actual = FileHelper.get_image_type_name(file_full_name)
     expected = "jpeg"
     assert actual == expected
+
+
 pass
+
 
 def test_is_image_type1():
     file_path = ProjectHelper.get_root_physical_path()
-    file_full_name = PathHelper.combine(file_path,r".test\_res\images\testjpg.jpg")
+    file_full_name = PathHelper.combine(file_path, r".test\_res\images\testjpg.jpg")
 
     actual = FileHelper.is_image_type(file_full_name)
     expected = True
     assert actual == expected
+
+
 pass
 
 
 def test_is_image_type2():
     file_path = ProjectHelper.get_root_physical_path()
-    file_full_name = PathHelper.combine(file_path,r".test\_res\images\testtxt.txt")
+    file_full_name = PathHelper.combine(file_path, r".test\_res\images\testtxt.txt")
 
     actual = FileHelper.is_image_type(file_full_name)
     expected = False
     assert actual == expected
+
+
 pass
 
 
 def test_is_image_type3():
     file_path = ProjectHelper.get_root_physical_path()
-    file_full_name = PathHelper.combine(file_path,r".test\_res\images\testpng.png")
+    file_full_name = PathHelper.combine(file_path, r".test\_res\images\testpng.png")
 
     actual = FileHelper.is_image_type(file_full_name)
     expected = True
     assert actual == expected
+
+
 pass
 
 
 def test_is_image_type4():
     file_path = ProjectHelper.get_root_physical_path()
-    file_full_name = PathHelper.combine(file_path,r".test\_res\images\testwebp.webp")
+    file_full_name = PathHelper.combine(file_path, r".test\_res\images\testwebp.webp")
 
     actual = FileHelper.is_image_type(file_full_name)
     expected = True
     assert actual == expected
+
+
+pass
+
+
+def test_modify():
+    current_random = RandomHelper.create()
+
+    def local_modify_content(content: str):
+        content += "\n" + current_random
+        return content
+
+    pass
+
+    root = ProjectHelper.get_root_physical_path()
+    local_path = r'.test/_res/file4modify.txt'
+    file_full_name = PathHelper.combine(root, local_path)
+    actual = FileHelper.modify(file_full_name, local_modify_content)
+
+    expected = "这是一个为测试文件修改功能的文本。"
+    assert expected in actual
+
+    expected = current_random
+    assert expected in actual
+
+
 pass
 
 # TODO:xiedali@20231029 应该加入对不存在文件的判断

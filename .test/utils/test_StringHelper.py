@@ -211,6 +211,15 @@ def test_replace():
     pass
 
 
+# def test_replace2():
+#     whole = "https://upload-images.jianshu.io/upload_images/2084912-c0dfb8b34ebc4e2c.png?x-oss-process=image/resize,w_360,h_240"
+#     old = r'C:\\Users\\Administrator\\Downloads\\app_27931104'
+#     new = r'E:\\MyImages\\美女图片未整理\\app_27931105'
+#     actual = StringHelper.replace(whole, old, new)
+#     expected = "E:\\MyImages\\美女图片未整理\\app_26822737\\db0e400fad35ba8e18fcac06bd9bd99f2752.jpeg"
+#     assert actual == expected
+# pass
+
 def test_sub_string1():
     whole = "男人为什么不能嫖娼？ 人生道路上，有许多迷雾难以剖析。"
     start = 1

@@ -10,6 +10,7 @@ import imghdr
 import os
 import pathlib
 import shutil
+import types
 
 from BasicLibrary.data.randomHelper import RandomHelper
 from BasicLibrary.data.stringHelper import StringHelper
@@ -219,6 +220,29 @@ class FileHelper:
     @staticmethod
     def is_image_type(file_full_name):
         return ImageHelper.is_image_type(file_full_name)
+
+    pass
+
+    @classmethod
+    def modify(cls, file_full_name: str, fn: types.FunctionType):
+        """
+        修改文件名
+        :param fn:对文件内容进行操作的函数，参数为文件的内容，返回值是修改后的内容
+        :param file_full_name: 带全路径的文件名称
+        :return:修改后的文件内容
+        """
+        result_content = ''
+        # 读取和写入文件
+        with open(file_full_name, 'r', encoding='utf-8') as r:
+            content = r.read()
+            # 对文件内容进行操作
+            result_content = fn(content)
+            # 回写文件
+            with open(file_full_name, 'w', encoding='utf-8') as w:
+                w.write(result_content)
+            pass
+        pass
+        return result_content
 
     pass
 
