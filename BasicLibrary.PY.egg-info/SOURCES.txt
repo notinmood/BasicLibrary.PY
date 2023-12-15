@@ -16,10 +16,13 @@ BasicLibrary.PY.egg-info/top_level.txt
 BasicLibrary/biz/__init__.py
 BasicLibrary/biz/stockHelper.py
 BasicLibrary/biz/tencentHelper.py
+BasicLibrary/data/ChineseData.py
 BasicLibrary/data/__init__.py
 BasicLibrary/data/collectionHelper.py
 BasicLibrary/data/dateTimeHelper.py
 BasicLibrary/data/dictHelper.py
+BasicLibrary/data/enumBase.py
+BasicLibrary/data/enumHelper.py
 BasicLibrary/data/htmlHelper.py
 BasicLibrary/data/listHelper.py
 BasicLibrary/data/numberHelper.py
@@ -50,10 +53,12 @@ BasicLibrary/dataBase/MySql/pool.py
 BasicLibrary/environment/__init__.py
 BasicLibrary/environment/consoleHelper.py
 BasicLibrary/environment/envHelper.py
+BasicLibrary/environment/inspectHelper.py
 BasicLibrary/io/__init__.py
 BasicLibrary/io/dirHelper.py
 BasicLibrary/io/fileHelper.py
 BasicLibrary/io/fileShadowUsing.py
+BasicLibrary/io/imageHelper.py
 BasicLibrary/io/ioHelper.py
 BasicLibrary/io/pathHelper.py
 BasicLibrary/model/__init__.py

@@ -10,7 +10,7 @@ import os.path
 
 from BasicLibrary.data.randomHelper import RandomHelper
 from BasicLibrary.data.stringHelper import StringHelper
-from BasicLibrary.enums import RandomEnum, ImageTypeEnum
+from BasicLibrary.enums import RandomEnum
 from BasicLibrary.io.fileHelper import FileHelper
 from BasicLibrary.io.ioHelper import IOHelper
 from BasicLibrary.io.pathHelper import PathHelper
@@ -294,6 +294,58 @@ def test_modify():
     assert expected in actual
 
     expected = current_random
+    assert expected in actual
+
+
+pass
+
+
+def test_get_encoding1():
+    root = ProjectHelper.get_root_physical_path()
+    local_path = r'.test/_res/txt/encodingWithUTF-8.txt'
+    file_full_name = PathHelper.combine(root, local_path)
+
+    actual = FileHelper.get_encoding(file_full_name=file_full_name)
+    expected = 'utf-8'
+    assert actual == expected
+
+
+pass
+
+
+def test_get_encoding2():
+    root = ProjectHelper.get_root_physical_path()
+    local_path = r'.test/_res/txt/encodingWithGBK.txt'
+    file_full_name = PathHelper.combine(root, local_path)
+
+    actual = FileHelper.get_encoding(file_full_name=file_full_name)
+    expected = 'GB2312'
+    assert actual == expected
+
+
+pass
+
+
+def test_get_encoding3():
+    root = ProjectHelper.get_root_physical_path()
+    local_path = r'.test/_res/txt/00.README.txt'
+    file_full_name = PathHelper.combine(root, local_path)
+
+    actual = FileHelper.get_encoding(file_full_name=file_full_name)
+    expected = 'GB2312'
+    assert actual == expected
+
+
+pass
+
+
+def test_load():
+    root = ProjectHelper.get_root_physical_path()
+    local_path = r'.test/_res/txt/00.README.txt'
+    file_full_name = PathHelper.combine(root, local_path)
+
+    actual = FileHelper.load(file_full_name=file_full_name)
+    expected = '▌绿杨带雨垂垂重，五色新丝缠角粽；'
     assert expected in actual
 
 

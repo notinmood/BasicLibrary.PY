@@ -95,11 +95,25 @@ def __callback_excel(book_mate):
 
 def test_operate_sheet():
     file_full_name = PathHelper.combine(ProjectHelper.get_root_physical_path(), r".test\_res\source\myExcel.xlsx")
-    ExcelHelper.operate_sheet(file_full_name, __callback_sheet, 1)
+    ExcelHelper.operate_sheet(file_full_name, __callback_sheet, 1, 'xdl', 23, my_city="Qingdao", my_job="ITer")
 
 
-def __callback_sheet(sheet_mate):
+def __callback_sheet(sheet_mate, *args, **kwargs):
     sheet_name = sheet_mate.get_name()
     actual = sheet_name
     expected = "表B"
     assert actual == expected
+
+    my_city = kwargs.get("my_city")
+    actual = my_city
+    expected = "Qingdao"
+    assert actual == expected
+
+    actual = len(args)
+    expected = 2
+    assert actual == expected
+
+    actual = args[0]
+    expected = 'xdl'
+    assert actual == expected
+

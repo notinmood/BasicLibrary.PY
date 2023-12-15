@@ -1,12 +1,11 @@
 Metadata-Version: 2.1
 Name: BasicLibrary.PY
-Version: 0.5.15
+Version: 0.5.20
 Summary: 企业级的 PYTHON 库
 Home-page: https://github.com/notinmood/BasicLibrary.PY
 Author: xiedali
 Author-email: 9727005@qq.com
 License: MIT
-Platform: UNKNOWN
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Programming Language :: Python
 Classifier: Programming Language :: Python :: 3
@@ -68,5 +67,3 @@ pip install BasicLibrary.PY -U -i https://pypi.org/simple
 
    2. 如果有敏感信息(比如账号口令等)不适合写在 ini 文件内的，可以将 `.env.default` 文件拷贝到文件 `_projectConfig.ini` 所在的项目根目录,然后改名为 `.env`,然后在 .env 文件内配置这些信息. (
       ini 文件是嵌入到 vcs 系统的，但 .env 是不嵌入 vcs 系统的)
-
-

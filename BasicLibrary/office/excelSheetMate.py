@@ -6,10 +6,8 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-import string
 
-from BasicLibrary.data.stringHelper import StringHelper
-from BasicLibrary.office.excelMisc import _calc_range_marker, _calc_cell_marker
+from BasicLibrary.office.excelMisc import _calc_cell_marker
 
 
 class ExcelSheetMate:
@@ -28,7 +26,7 @@ class ExcelSheetMate:
         self.range_selected = None
         self.style = []
 
-    def get_column_count(self):
+    def get_column_count(self) -> int:
         """
         获取行数
         :return:
@@ -36,7 +34,7 @@ class ExcelSheetMate:
         col_value = self.original_sheet.used_range.last_cell.column
         return col_value
 
-    def get_row_count(self):
+    def get_row_count(self) -> int:
         """
         获取列数
         :return:
@@ -49,8 +47,9 @@ class ExcelSheetMate:
         获取指定区块内的数值(get方法的别名)
         :param range_marker:区块的标志信息，可以取值如下几种之一：
             1. "A1"  # 返回单个单元格内的值信息 '姓名'
-            2. "A1:A2" # 一维数组 ['姓名', '张三']
-            3. "A1:B2" # 二维数组 [['姓名', '年龄'], ['张三', 20.0]]
+            2. "A1:A2" # 返回一维数组 ['姓名', '张三']
+            3. "A1:B2" # 返回二维数组 [['姓名', '年龄'], ['张三', 20.0]]
+            4. None # 通過二维數組的方式返回全部數據
         :return:
         """
         return self.get(range_marker)
@@ -62,7 +61,7 @@ class ExcelSheetMate:
             1. "A1"  # 返回单个单元格内的值信息 '姓名'
             2. "A1:A2" # 一维数组 ['姓名', '张三']
             3. "A1:B2" # 二维数组 [['姓名', '年龄'], ['张三', 20.0]]
-            4. None # 通過二維數組的方式返回全部數據
+            4. None # 通過二维數組的方式返回全部數據
         :return:
         """
         if range_marker is None:
@@ -116,7 +115,7 @@ class ExcelSheetMate:
         self.original_sheet.range(range_marker).value = range_data
         return
 
-    def rename(self, sheet_new_name):
+    def rename(self, sheet_new_name: str):
         """
         sheet重命名
         :param sheet_new_name:
