@@ -274,8 +274,12 @@ class FileHelper:
 
     pass
 
-    @staticmethod
-    def get_encoding(file_full_name: str):
+    @classmethod
+    def get_encoding(cls, file_full_name: str):
+        if not file_full_name or not cls.is_exist(file_full_name):
+            return 'utf-8'
+        pass
+
         with open(file_full_name, 'rb') as f:
             text = f.read()
 
