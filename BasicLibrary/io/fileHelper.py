@@ -281,7 +281,7 @@ class FileHelper:
 
         file_encoding = chardet.detect(text)['encoding']
         file_encoding_little = StringHelper.lower_all_chars(file_encoding)
-        if file_encoding_little == 'gb2312' or 'gbk':
+        if file_encoding_little == 'gb2312' or file_encoding_little == 'gbk':
             file_encoding = 'ANSI'
         pass
 

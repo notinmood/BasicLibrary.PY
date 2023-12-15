@@ -341,7 +341,7 @@ pass
 
 def test_load():
     root = ProjectHelper.get_root_physical_path()
-    local_path = r'.test/_res/txt/00.README.txt'
+    local_path = r'.test/_res/txt/00.README-ANSI.txt'
     file_full_name = PathHelper.combine(root, local_path)
 
     actual = FileHelper.load(file_full_name=file_full_name)
