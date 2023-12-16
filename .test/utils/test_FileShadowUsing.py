@@ -17,7 +17,7 @@ def test_shadow_generated_and_removed():
     source_file_full_name = r'.test/_res/myContent.txt'
     source_file_full_name = PathHelper.combine(root_path, source_file_full_name)
 
-    file_shadow_outer= ""
+    file_shadow_outer = ""
     with (FileShadowUsing(source_file_full_name)) as file_shadow:
         file_shadow_outer = file_shadow
         # 验证影子文件确实已经生成了
@@ -30,6 +30,8 @@ def test_shadow_generated_and_removed():
     actual = FileHelper.is_exist(file_shadow_outer)
     expected = False
     assert actual == expected
+
+
 pass
 
 
@@ -37,5 +39,6 @@ def test_func_name(*args):
     actual = True
     expected = True
     assert actual == expected
+
 
 pass

@@ -319,7 +319,7 @@ def test_get_encoding2():
     file_full_name = PathHelper.combine(root, local_path)
 
     actual = FileHelper.get_encoding(file_full_name=file_full_name)
-    expected = 'GB2312'
+    expected = 'ANSI'
     assert actual == expected
 
 
@@ -328,18 +328,18 @@ pass
 
 def test_get_encoding3():
     root = ProjectHelper.get_root_physical_path()
-    local_path = r'.test/_res/txt/00.README.txt'
+    local_path = r'.test/_res/txt/00.README-ANSI.txt'
     file_full_name = PathHelper.combine(root, local_path)
 
     actual = FileHelper.get_encoding(file_full_name=file_full_name)
-    expected = 'GB2312'
+    expected = 'ANSI'
     assert actual == expected
 
 
 pass
 
 
-def test_load():
+def test_load2():
     root = ProjectHelper.get_root_physical_path()
     local_path = r'.test/_res/txt/00.README-ANSI.txt'
     file_full_name = PathHelper.combine(root, local_path)
@@ -347,6 +347,32 @@ def test_load():
     actual = FileHelper.load(file_full_name=file_full_name)
     expected = '▌绿杨带雨垂垂重，五色新丝缠角粽；'
     assert expected in actual
+
+
+pass
+
+
+def test_get_size1():
+    root = ProjectHelper.get_root_physical_path()
+    local_path = r'.test/_res/images4getsize/size0.txt'
+    file_full_name = PathHelper.combine(root, local_path)
+
+    actual = FileHelper.get_size(file_full_name)
+    expected = 0
+    assert actual == expected
+
+
+pass
+
+
+def test_get_size2():
+    root = ProjectHelper.get_root_physical_path()
+    local_path = r'.test/_res/images4getsize/size6.02.xlsx'
+    file_full_name = PathHelper.combine(root, local_path)
+
+    actual = FileHelper.get_size(file_full_name)
+    expected = 6174
+    assert actual == expected
 
 
 pass
