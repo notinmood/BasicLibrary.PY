@@ -15,8 +15,13 @@ class TypeHelper(object):
     def get_type(data):
         if type(data) is int:
             return TypeEnum.INT
+        pass
 
         if type(data) is float:
             return TypeEnum.FLOAT
+        pass
+
     pass
+
+
 pass

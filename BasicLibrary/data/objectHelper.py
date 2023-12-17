@@ -17,23 +17,32 @@ class ObjectHelper:
             _type = type(data)
             if _type is str and data == "":
                 result = True
+            pass
 
             if _type is bool and data is False:
                 result = True
+            pass
 
             if _type is list and data == []:
                 result = True
+            pass
 
             if (_type is set or _type is dict) and data == {}:
                 result = True
+            pass
 
             if _type is tuple and data == ():
                 result = True
+            pass
 
             if ObjectHelper.is_number(data) and data == 0:
                 result = True
+            pass
+        pass
 
         return result
+
+    pass
 
     @staticmethod
     def is_exist(data):
@@ -41,6 +50,8 @@ class ObjectHelper:
             return False
         else:
             return True
+        pass
+    pass
 
     @staticmethod
     def is_index_exist(collection, index):
@@ -64,6 +75,7 @@ class ObjectHelper:
                 pass
             pass
         pass
+
     pass
 
     @staticmethod
@@ -87,6 +99,7 @@ class ObjectHelper:
             pass
 
         return False
+
     pass
 
     @staticmethod
@@ -98,6 +111,7 @@ class ObjectHelper:
         :return:
         """
         return type(data)
+    pass
 
     @staticmethod
     def get_length(data):
@@ -107,6 +121,7 @@ class ObjectHelper:
         :return:
         """
         return len(data)
+    pass
 
     @staticmethod
     def is_instance(object_data, class_data):
@@ -117,6 +132,7 @@ class ObjectHelper:
         :return:
         """
         return isinstance(object_data, class_data)
+    pass
 
     @staticmethod
     def get_summary(object_data):
@@ -127,10 +143,11 @@ class ObjectHelper:
         """
         summary = DataSummary(object_data)
         return summary
+
     pass
 
     @staticmethod
-    def has_member(object_data,member_name):
+    def has_member(object_data, member_name):
         """
         判断目标对象是否包含指定名称的成员
         (如果是判断集合内是否存在某成员，请使用 CollectionHelper.is_contains() 方法。)
@@ -140,4 +157,5 @@ class ObjectHelper:
         """
 
         return member_name in object_data
+
     pass

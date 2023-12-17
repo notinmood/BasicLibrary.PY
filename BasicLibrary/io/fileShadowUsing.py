@@ -22,14 +22,22 @@ class FileShadowUsing:
     def file_shadow_full_name(self):
         return self._file_shadow_full_name
 
+    pass
+
     def __init__(self, file_full_name):
         self._file_shadow_full_name = self.generate_file_shadow(file_full_name)
+
+    pass
 
     def __enter__(self):
         return self._file_shadow_full_name
 
+    pass
+
     def __exit__(self, exc_type, exc_val, exc_tb):
         FileHelper.remove(self._file_shadow_full_name)
+
+    pass
 
     @staticmethod
     def generate_file_shadow(source_file_full_name):
@@ -42,3 +50,6 @@ class FileShadowUsing:
         return target_file_full_name
 
     pass
+
+
+pass

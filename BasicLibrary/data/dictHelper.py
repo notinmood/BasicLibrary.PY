@@ -19,6 +19,9 @@ class DictHelper:
             return True
         else:
             return False
+        pass
+
+    pass
 
     @classmethod
     def get_value(cls, whole_dict, key_name, default_value=None):
@@ -33,6 +36,9 @@ class DictHelper:
             return whole_dict[key_name]
         else:
             return default_value
+        pass
+
+    pass
 
     @classmethod
     def is_contains_value(cls, whole_dict, value):
@@ -45,8 +51,12 @@ class DictHelper:
         for key in whole_dict:
             if whole_dict[key] == value:
                 return True
+            pass
+        pass
 
         return False
+
+    pass
 
     @classmethod
     def get_summary(cls, dict_data):
@@ -58,6 +68,8 @@ class DictHelper:
         summary = DataSummary(dict_data)
         return summary
 
+    pass
+
     @staticmethod
     def merge(*args):
         """
@@ -68,5 +80,11 @@ class DictHelper:
         result = {}
         for key in args:
             result.update(key)
+        pass
 
         return result
+
+    pass
+
+
+pass

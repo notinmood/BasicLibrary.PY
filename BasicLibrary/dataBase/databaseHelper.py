@@ -35,21 +35,27 @@ class DatabaseHelper:
                 if StringHelper.is_contains(key, "$") is False:
                     last_key = key
                     need_operator = True
+                pass
 
                 if key == "$gte":
                     operator = " >= "
+                pass
 
                 if key == "$gt":
                     operator = " > "
+                pass
 
                 if key == "$lte":
                     operator = " <= "
+                pass
 
                 if key == "$lt":
                     operator = " < "
+                pass
 
                 if key == "$like":
                     operator = " like "
+                pass
 
                 value = condition_dict[key]
                 if type(value) is dict:
@@ -61,8 +67,14 @@ class DatabaseHelper:
                         result += " AND `{0}` = {1} ".format(last_key, value)
                     else:
                         result += " AND `{0}` {1} {2}".format(last_key, operator, value)
+                    pass
+                pass
+            pass
 
         return result
+        pass
+
+    pass
 
     @classmethod
     def build_insert_clause(cls, table_name, entity_dict_or_list):
@@ -85,11 +97,17 @@ class DatabaseHelper:
                         result += "," + values_sql
                     else:
                         result = single_sql
+                    pass
+                pass
 
                 result = result + ";"
                 return result
             else:
                 return ""
+            pass
+        pass
+
+    pass
 
     @classmethod
     def __build_insert_clause_detail(cls, table_name, entity_dict):
@@ -104,13 +122,17 @@ class DatabaseHelper:
         for key in entity_dict:
             keys += "`{0}`,".format(key)
             values += cls.wrap_sql_value(entity_dict[key]) + ","
+        pass
 
         if StringHelper.is_end_with(keys, ","):
             keys = keys[:-1]
             values = values[:-1]
+        pass
 
         sql = "INSERT INTO `{0}` ({1}) VALUES ({2});".format(table_name, keys, values)
         return sql
+
+    pass
 
     @classmethod
     def build_delete_clause(cls, table_name, condition_dict):
@@ -124,7 +146,11 @@ class DatabaseHelper:
         if ObjectHelper.is_exist(condition_dict):
             where = cls.build_where_clause(condition_dict)
             sql += " WHERE " + where + ";"
+        pass
+
         return sql
+
+    pass
 
     @classmethod
     def build_update_clause(cls, table_name, fixing_dict, condition_dict):
@@ -139,15 +165,21 @@ class DatabaseHelper:
         for key in fixing_dict:
             value = cls.wrap_sql_value(fixing_dict[key])
             set_clause += "`{0}`={1},".format(key, value)
+        pass
 
         if StringHelper.is_end_with(set_clause, ","):
             set_clause = set_clause[:-1]
+        pass
 
         sql = "UPDATE `{0}` SET {1}".format(table_name, set_clause)
         if ObjectHelper.is_exist(condition_dict):
             where = cls.build_where_clause(condition_dict)
             sql += " WHERE " + where + ";"
+        pass
+
         return sql
+
+    pass
 
     @classmethod
     def build_select_clause(cls, table_name, condition_dict, data_field_collection=None):
@@ -162,13 +194,17 @@ class DatabaseHelper:
             data_field_collection = "*"
         else:
             data_field_collection = StringHelper.implode(data_field_collection)
+        pass
 
         sql = "SELECT {0} FROM `{1}` ".format(data_field_collection, table_name)
         if ObjectHelper.is_exist(condition_dict):
             where_clause = cls.build_where_clause(condition_dict)
             sql += " WHERE " + where_clause
+        pass
 
         return sql
+
+    pass
 
     @classmethod
     def wrap_sql_value(cls, data):
@@ -183,3 +219,9 @@ class DatabaseHelper:
             return '"{0}"'.format(data)
         else:
             return "{0}".format(data)
+        pass
+
+    pass
+
+
+pass

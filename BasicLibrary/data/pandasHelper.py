@@ -12,18 +12,27 @@ class PandasHelper:
             return True
         else:
             return False
+        pass
+
+    pass
 
     @staticmethod
     def is_empty(dataframe):
         return dataframe.empty
 
+    pass
+
     @staticmethod
     def get_column_count(dataframe):
         return dataframe.columns.size
 
+    pass
+
     @staticmethod
     def get_row_count(dataframe):
         return len(dataframe)
+
+    pass
 
     @staticmethod
     def get_column_names(dataframe):
@@ -33,6 +42,8 @@ class PandasHelper:
         :return:
         """
         return dataframe.columns.tolist()
+
+    pass
 
     @staticmethod
     def get_element(dataframe, row_info, column_info):
@@ -47,15 +58,21 @@ class PandasHelper:
             row = dataframe.iloc[row_info]
         else:
             row = dataframe.loc[row_info]
+        pass
 
         if type(column_info) is int:
             return row.iat[column_info]
         else:
             return row.at[column_info]
+        pass
+
+    pass
 
     @staticmethod
     def convert_cursor_to_dataframe(cursor):
         return pd.DataFrame(list(cursor))
+
+    pass
 
     @staticmethod
     def loop_data_frame(data, func4item, *args, **kwargs):
@@ -70,8 +87,11 @@ class PandasHelper:
         result_4_loops = None
         for my_index, my_item in data.iterrows():
             result_4_loops = func4item(my_item, result_4_loops, *args, **kwargs)
+        pass
 
         return result_4_loops
+
+    pass
 
     @staticmethod
     def get_union(df_a, df_b):
@@ -79,11 +99,15 @@ class PandasHelper:
         union_result = pd.merge(df_a, df_b, how='outer')
         return union_result
 
+    pass
+
     @staticmethod
     def get_intersection(df_a, df_b):
         # 取交集：既在df1中，也在df2中
         intersection_result = pd.merge(df_a, df_b)
         return intersection_result
+
+    pass
 
     # TODO:求取差集并集交集的方法，需要重新考虑命名，以求更简洁直白
     @staticmethod
@@ -104,3 +128,8 @@ class PandasHelper:
 
         df_a = df_a.drop_duplicates(keep=False)
         return df_a
+
+    pass
+
+
+pass

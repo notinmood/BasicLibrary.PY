@@ -32,6 +32,10 @@ class DateTimeHelper:
                 return date_time_string
             else:
                 return None
+            pass
+        pass
+
+    pass
 
     @staticmethod
     def convert_from_compact_string(date_time_string):
@@ -42,6 +46,8 @@ class DateTimeHelper:
         """
         return DateTimeHelper.convert_from_string(date_time_string, "%Y%m%d")
 
+    pass
+
     @staticmethod
     def get_compact_string(date_time_value=None):
         """
@@ -51,6 +57,8 @@ class DateTimeHelper:
         """
         return DateTimeHelper.get_string(date_time_value, "%Y%m%d")
 
+    pass
+
     @classmethod
     def get_compact_date_string(cls, date_time_value=None):
         """
@@ -59,7 +67,8 @@ class DateTimeHelper:
         :return:
         """
         return cls.get_compact_string(date_time_value)
-        pass
+
+    pass
 
     @classmethod
     def get_compact_date_time_string(cls, date_time_value=None):
@@ -69,7 +78,8 @@ class DateTimeHelper:
         :return:
         """
         return DateTimeHelper.get_string(date_time_value, "%Y%m%d%H%M%S")
-        pass
+
+    pass
 
     @staticmethod
     def get_short_string(date_time_value=None, formatter="%Y-%m-%d"):
@@ -81,6 +91,8 @@ class DateTimeHelper:
         """
         return DateTimeHelper.get_string(date_time_value, formatter)
 
+    pass
+
     @staticmethod
     def get_standard_string(date_time_value=None):
         """
@@ -89,6 +101,8 @@ class DateTimeHelper:
         :return:
         """
         return DateTimeHelper.get_string(date_time_value, "%Y-%m-%d %H:%M:%S")
+
+    pass
 
     @classmethod
     def get_string(cls, date_time_value=None, formatter="%Y-%m-%d %H:%M:%S"):
@@ -100,12 +114,16 @@ class DateTimeHelper:
         """
         if date_time_value is None:
             date_time_value = datetime.now()
+        pass
 
         if ObjectHelper.get_type(date_time_value) is str:
             date_time_value = cls.convert_from_string(date_time_value)
+        pass
 
         result = date_time_value.strftime(formatter)
         return result
+
+    pass
 
     @staticmethod
     def add_days(original_date=None, delta=1, original_date_formatter="%Y%m%d"):
@@ -119,15 +137,20 @@ class DateTimeHelper:
         _delta = timedelta(days=delta)
         if original_date is None:
             original_date = datetime.now()
+        pass
 
         if type(original_date) is str:
             original_date = DateTimeHelper.convert_from_string(original_date, original_date_formatter)
+        pass
 
         _type = type(original_date)
         if _type is datetime or _type is date:
             return original_date + _delta
         else:
             return None
+        pass
+
+    pass
 
     @staticmethod
     def get_format(datetime_string):
@@ -139,28 +162,36 @@ class DateTimeHelper:
         regex = r'(\d{4}-\d{1,2}-\d{1,2} \d{1,2}:\d{1,2}:\d{1,2})'
         if re.search(regex, datetime_string):
             return "%Y-%m-%d %H:%M:%S"
+        pass
 
         regex = r'(\d{2}-\d{1,2}-\d{1,2} \d{1,2}:\d{1,2}:\d{1,2})'
         if re.search(regex, datetime_string):
             return "%y-%m-%d %H:%M:%S"
+        pass
 
         regex = r'(\d{4}\d{1,2}\d{1,2}\d{1,2}\d{1,2}\d{1,2})'
         if re.search(regex, datetime_string):
             return "%Y%m%d%H%M%S"
+        pass
 
         regex = r'(\d{4}-\d{1,2}-\d{1,2})'
         if re.search(regex, datetime_string):
             return "%Y-%m-%d"
+        pass
 
         regex = r'(\d{4}\d{2}\d{2})'
         if re.search(regex, datetime_string):
             return "%Y%m%d"
+        pass
 
         regex = r'(\d{2}\d{2}\d{2})'
         if re.search(regex, datetime_string):
             return "%y%m%d"
+        pass
 
         return ""
+
+    pass
 
     @classmethod
     def get_weekday_cn(cls, date_time_value=None):
@@ -171,9 +202,11 @@ class DateTimeHelper:
         """
         if date_time_value is None:
             date_time_value = datetime.now()
+        pass
 
         if ObjectHelper.get_type(date_time_value) is str:
             date_time_value = cls.convert_from_string(date_time_value)
+        pass
 
         week_cn = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"]
         return week_cn[date_time_value.weekday()]
@@ -190,18 +223,18 @@ class DateTimeHelper:
         """
         if solar_date is None:
             solar_date = datetime.now()
+        pass
 
         if ObjectHelper.get_type(solar_date) is str:
             solar_date = cls.convert_from_string(solar_date)
-
+        pass
 
         lunar_date = sxtwl.fromSolar(solar_date.year, solar_date.month, solar_date.day)
-
 
         result = ""
         if result_with_year is True:
             lunar_year = lunar_date.getYearGZ()
-            lunar_year_string = ChineseData.TianG[lunar_year.tg] + ChineseData.Diz[lunar_year.dz]
+            lunar_year_string = ChineseData.TianG[lunar_year.tg] + ChineseData.DiZ[lunar_year.dz]
             result = StringHelper.format("{0}年", lunar_year_string)
         pass
 
@@ -212,7 +245,9 @@ class DateTimeHelper:
         result += StringHelper.format("{0}月{1}日", ChineseData.YueM[lunar_date.getLunarMonth() - 1],
                                       ChineseData.RiM[lunar_date.getLunarDay() - 1])
 
-
         return result
 
     pass
+
+
+pass

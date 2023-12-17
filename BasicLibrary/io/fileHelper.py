@@ -198,6 +198,9 @@ class FileHelper:
             target_file_full_name = PathHelper.combine(target_dir_full_name, target_file_base_name)
 
             shutil.copy(source_file_full_name, target_file_full_name)  # 复制文件
+        pass
+
+    pass
 
     @classmethod
     def move(cls, source_file_full_name: PathLike, target_dir_full_name: PathLike, target_file_base_name: str = ""):
@@ -211,6 +214,8 @@ class FileHelper:
         cls.copy(source_file_full_name, target_dir_full_name, target_file_base_name)
         cls.remove(source_file_full_name)
 
+    pass
+
     @classmethod
     def is_exist(cls, file_full_name: PathLike) -> bool:
         """
@@ -219,6 +224,7 @@ class FileHelper:
         :return:
         """
         return os.path.isfile(file_full_name)
+    pass
 
     @classmethod
     def rename(cls, old_file_full_name: PathLike, new_file_name: str):
@@ -236,6 +242,8 @@ class FileHelper:
         pass
 
         os.rename(old_file_full_name, new_file_full_name)
+
+    pass
 
     @staticmethod
     def get_image_type_name(file: PathLike, h=None):
@@ -279,11 +287,6 @@ class FileHelper:
 
     @classmethod
     def get_encoding(cls, file_full_name: PathLike):
-        """
-        获取文件的编码格式
-        :param file_full_name:
-        :return: (特别注意：如果是GBK或者GB2312，那么返回ANSI)
-        """
         if not file_full_name or not cls.is_exist(file_full_name):
             return 'utf-8'
         pass
@@ -292,9 +295,11 @@ class FileHelper:
             text = f.read()
 
         file_encoding = chardet.detect(text)['encoding']
-        file_encoding_little = StringHelper.lower_all_chars(file_encoding)
-        if file_encoding_little == 'gb2312' or file_encoding_little == 'gbk':
-            file_encoding = 'ANSI'
+        if file_encoding:
+            file_encoding_little = StringHelper.lower_all_chars(file_encoding)
+            if file_encoding_little == 'gb2312' or file_encoding_little == 'gbk':
+                file_encoding = 'ANSI'
+            pass
         pass
 
         return file_encoding

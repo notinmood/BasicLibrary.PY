@@ -17,6 +17,8 @@ class RegexHelper:
         patten = r"</?[^>]+>"
         return patten
 
+    pass
+
     @classmethod
     def get_items(cls, whole, pattern):
         """
@@ -40,6 +42,8 @@ class RegexHelper:
         regex = re.compile(pattern)
         return regex.findall(whole)
 
+    pass
+
     @classmethod
     def determine_is_matched(cls, whole, pattern):
         """
@@ -50,6 +54,8 @@ class RegexHelper:
         """
         matched = cls.get_matched_items(whole, pattern)
         return ObjectHelper.is_exist(matched)
+
+    pass
 
     @staticmethod
     def replace(whole, pattern, new_sub_string):
@@ -67,3 +73,8 @@ class RegexHelper:
         """
         regex = re.compile(pattern)
         return regex.sub(new_sub_string, whole)
+
+    pass
+
+
+pass

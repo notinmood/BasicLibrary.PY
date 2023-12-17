@@ -22,8 +22,11 @@ class IOHelper:
         if include_separator:
             normal.append("\\")
             normal.append("/")
+        pass
 
         return normal
+
+    pass
 
     @classmethod
     def get_file_system_safe_name(cls, filename, safe_char="_", include_path_separator=True):
@@ -34,14 +37,19 @@ class IOHelper:
         :param include_path_separator: 是否可以包含 路径分隔符（此参数目前暂时未做判断）
         :return:
         """
-        # chars = cls.get_illegal_chars_in_file_system(include_separator)
+        # chars = cls.get_illegal_chars_in_file_system(include_path_separator)
         # for c in chars:
         #     filename = filename.replace(c, safe_char)
+
+        # noinspection all
+        include_path_separator = include_path_separator
 
         # 目前采用以下方法，可以清除更多非法字符
         filename = re.sub('[^\u4e00-\u9fa5a-zA-Z0-9_]+', safe_char, filename)
 
         return filename
+
+    pass
 
     @staticmethod
     def get_using_memory(data):
@@ -52,9 +60,17 @@ class IOHelper:
         """
         return sys.getsizeof(data)
 
+    pass
+
     @staticmethod
     def remove(path):
         if os.path.isfile(path):
             FileHelper.remove(path)
         else:
             DirHelper.remove(path)
+        pass
+
+    pass
+
+
+pass

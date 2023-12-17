@@ -40,3 +40,8 @@ class RandomHelper:
                 allowed_chars = string.digits + string.ascii_letters + string.punctuation
 
         return ''.join(random.choice(allowed_chars) for x in range(size))
+
+    pass
+
+
+pass

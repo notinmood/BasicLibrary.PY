@@ -22,9 +22,11 @@ class StringHelper:
             padding_format = r'{}\1'.format(padding)
         else:
             padding_format = r'\1{}'.format(padding)
+        pass
 
         result = re.sub("({})".format(patten), padding_format, original_content)
         return result
+    pass
 
     @staticmethod
     def get_before_content(whole, separator):
@@ -39,6 +41,9 @@ class StringHelper:
             return whole[0:pos]
         else:
             return whole
+        pass
+    pass
+
 
     @staticmethod
     def get_after_content(whole, separator):
@@ -49,10 +54,13 @@ class StringHelper:
             return result
         else:
             return whole
+        pass
+    pass
 
     @staticmethod
     def get_length(data):
         return len(data)
+    pass
 
     @staticmethod
     def set_padding(original, all_length, padding_char='0', pad_at_before=True):
@@ -75,8 +83,11 @@ class StringHelper:
                 result = padding_char * char_count + original
             else:
                 result = original + padding_char * char_count
+            pass
+        pass
 
         return result
+    pass
 
     @staticmethod
     def remove_head(whole, head=" "):
@@ -84,6 +95,8 @@ class StringHelper:
             return whole[len(head):]
         else:
             return whole
+        pass
+    pass
 
     @staticmethod
     def remove_tail(whole, tail=" "):
@@ -91,6 +104,8 @@ class StringHelper:
             return whole[:-len(tail)]
         else:
             return whole
+        pass
+    pass
 
     @staticmethod
     def reverse(original):
@@ -100,14 +115,17 @@ class StringHelper:
         :return:
         """
         return original[::-1]
+    pass
 
     @staticmethod
     def is_end_with(whole, sub_string):
         return str.endswith(whole, sub_string)
+    pass
 
     @staticmethod
     def is_start_with(whole, sub_string):
         return str.startswith(whole, sub_string)
+    pass
 
     @staticmethod
     def is_contains(whole, sub_string):
@@ -119,6 +137,7 @@ class StringHelper:
         """
         result = whole.find(sub_string) >= 0
         return result
+    pass
 
     @staticmethod
     def is_empty(data):
@@ -131,6 +150,8 @@ class StringHelper:
             return True
         else:
             return False
+        pass
+    pass
 
     @staticmethod
     def implode(collection_data, separator=','):
@@ -141,6 +162,7 @@ class StringHelper:
         :return:
         """
         return separator.join(collection_data)
+    pass
 
     @staticmethod
     def explode(string_data, separator=","):
@@ -151,6 +173,7 @@ class StringHelper:
         :return:
         """
         return string_data.split(separator)
+    pass
 
     @staticmethod
     def format(original_with_placeholder, *args, **kwargs):
@@ -177,6 +200,7 @@ class StringHelper:
         print(whole)
         """
         return original_with_placeholder.format(*args, **kwargs)
+    pass
 
     @staticmethod
     def upper_all_chars(original_string):
@@ -186,6 +210,7 @@ class StringHelper:
         :return:
         """
         return original_string.upper()
+    pass
 
     @staticmethod
     def lower_all_chars(original_string):
@@ -195,6 +220,7 @@ class StringHelper:
         :return:
         """
         return original_string.lower()
+    pass
 
     @staticmethod
     def upper_first_char(original_string):
@@ -204,6 +230,7 @@ class StringHelper:
         :return:
         """
         return original_string[:1].upper() + original_string[1:]
+    pass
 
     @staticmethod
     def lower_first_char(original_string):
@@ -213,6 +240,7 @@ class StringHelper:
         :return:
         """
         return original_string[:1].lower() + original_string[1:]
+    pass
 
     @staticmethod
     def upper_first_char_every_word(original_string):
@@ -225,6 +253,7 @@ class StringHelper:
         :return:
         """
         return original_string.title()
+    pass
 
     @staticmethod
     def replace(whole_string, old_sub_string, new_sub_string):
@@ -242,6 +271,7 @@ class StringHelper:
         """
         # return whole_string.replace(old_sub_string, new_sub_string)
         return RegexHelper.replace(whole_string, old_sub_string, new_sub_string)
+    pass
 
     @staticmethod
     def sub_string(whole_string, start_position=0, length=0):

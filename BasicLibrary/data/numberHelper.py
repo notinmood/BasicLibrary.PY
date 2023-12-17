@@ -27,6 +27,8 @@ class NumberHelper(object):
         """
         return cls.__get_division_result_by_math(whole, by)[1]
 
+    pass
+
     @classmethod
     def get_division_result_after_dot(cls, whole, by):
         """
@@ -37,12 +39,17 @@ class NumberHelper(object):
         """
         return cls.__get_division_result_by_math(whole, by)[0]
 
+    pass
+
     @staticmethod
     def __get_division_result_by_math(whole, by):
         if by == 0:
             return False
         else:
             return math.modf(whole / by)
+        pass
+
+    pass
 
     @staticmethod
     def get_division_result(whole, by, precision_width=2):
@@ -54,3 +61,8 @@ class NumberHelper(object):
         :return:
         """
         return round(whole / by, precision_width)
+
+    pass
+
+
+pass

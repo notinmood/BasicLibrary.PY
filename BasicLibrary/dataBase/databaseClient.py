@@ -47,6 +47,9 @@ class DatabaseClient:
                 return mate
             else:
                 return None
+            pass
+        pass
+    pass
 
     @classmethod
     def get_ddl(cls):
@@ -60,11 +63,13 @@ class DatabaseClient:
         if ddl is None:
             ddl = cls.__get_ddl_detail()
             Container.set_item(ddl_key, ddl)
+        pass
 
         if isinstance(ddl, DatabaseDDL):
             return ddl
         else:
             return None
+    pass
 
     @classmethod
     def __get_ddl_detail(cls):
@@ -73,6 +78,7 @@ class DatabaseClient:
         module = __import__(package_name, fromlist=["DDL"])
         ddl = module.DDL()
         return ddl
+    pass
 
 # if __name__ == '__main__':
 #     print(__MateContainer.mate_dict)

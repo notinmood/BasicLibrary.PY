@@ -35,6 +35,9 @@ class DatabaseUnitTest:
         """
         if self.auto_dispose:
             self.dispose()
+        pass
+
+    pass
 
     def dispose(self):
         """
@@ -42,3 +45,8 @@ class DatabaseUnitTest:
         :return:
         """
         self.ddl.drop_table(self.new_table_name)
+
+    pass
+
+
+pass

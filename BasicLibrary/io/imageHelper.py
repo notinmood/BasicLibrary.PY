@@ -26,6 +26,10 @@ class ImageHelper:
         https://blog.51cto.com/u_15127617/3265040
         https://bugs.python.org/issue28591
         """
+        # 以下是为了屏蔽对变量f的warning
+        # noinspection all
+        f = f
+
         if h[6:10] in (b'JFIF', b'Exif') or h[:2] == b'\xff\xd8':
             return 'jpeg'
 

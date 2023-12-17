@@ -25,6 +25,9 @@ class ReflectHelper:
             return None
         else:
             return result
+        pass
+
+    pass
 
     @staticmethod
     def get_current_file_name():
@@ -34,3 +37,8 @@ class ReflectHelper:
         """
         result = inspect.stack()[1].filename
         return result
+
+    pass
+
+
+pass

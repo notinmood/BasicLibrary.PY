@@ -26,6 +26,8 @@ class PathHelper:
         """
         return os.path.join(*args)
 
+    pass
+
     @classmethod
     def get_dir_name(cls, path, up_level=1):
         """
@@ -36,8 +38,11 @@ class PathHelper:
         """
         for key in range(0, up_level):
             path = os.path.dirname(path)
+        pass
 
         return path
+
+    pass
 
     @staticmethod
     def get_root_path():
@@ -46,6 +51,8 @@ class PathHelper:
         :return:
         """
         return ProjectHelper.get_root_physical_path()
+
+    pass
 
     @staticmethod
     def ensure_exist(path):
@@ -56,6 +63,9 @@ class PathHelper:
         """
         if os.path.exists(path) is False:
             os.makedirs(path)
+        pass
+
+    pass
 
     @staticmethod
     def determine_is_exist(path):
@@ -66,6 +76,8 @@ class PathHelper:
         """
         return os.path.exists(path)
 
+    pass
+
     @staticmethod
     def get_formatted_path(path):
         """
@@ -75,6 +87,8 @@ class PathHelper:
         """
         return os.path.realpath(path)
 
+    pass
+
     @staticmethod
     def get_path_separator():
         """
@@ -83,4 +97,7 @@ class PathHelper:
         """
         return EnvHelper.get_path_separator()
 
+    pass
 
+
+pass

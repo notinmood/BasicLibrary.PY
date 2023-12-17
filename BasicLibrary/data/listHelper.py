@@ -26,6 +26,10 @@ class ListHelper:
                     return default_value
                 else:
                     return list_data[index]
+                pass
+            pass
+        pass
+    pass
 
     @staticmethod
     def get_index(list_data, value, item_property=None):
@@ -38,17 +42,21 @@ class ListHelper:
         """
         if type(list_data) is not enumerate:
             list_data = enumerate(list_data)
+        pass
 
         for index, item in list_data:
             if item_property:
                 comparing_data = item[item_property]
             else:
                 comparing_data = item
+            pass
 
             if comparing_data == value:
                 return index
+            pass
 
         return None
+    pass
 
     @staticmethod
     def remove_duplication_item(data):
@@ -58,6 +66,7 @@ class ListHelper:
         :return:
         """
         return list(set(data))
+    pass
 
     # 以下获取交集并集差集的算法，只支持元素为简单类型的list
     @staticmethod
@@ -69,6 +78,7 @@ class ListHelper:
         :return:
         """
         return list(set(list_a).union(set(list_b)))
+    pass
 
     @staticmethod
     def get_intersection(list_a, list_b):
@@ -79,6 +89,7 @@ class ListHelper:
         :return:
         """
         return list(set(list_a).intersection(set(list_b)))
+    pass
 
     @staticmethod
     def get_difference_only_in_left(list_left, list_right):
@@ -89,6 +100,7 @@ class ListHelper:
         :return:
         """
         return list(set(list_left).difference(set(list_right)))
+    pass
 
     @staticmethod
     def get_difference_only_in_right(list_left, list_right):
@@ -99,6 +111,7 @@ class ListHelper:
         :return:
         """
         return list(set(list_right).difference(set(list_left)))
+    pass
 
     @staticmethod
     def get_difference_all(list_left, list_right):
@@ -109,6 +122,7 @@ class ListHelper:
         :return:
         """
         return list(set(list_left) ^ set(list_right))
+    pass
 
     @staticmethod
     def sort(list_data, callback_in__list__item_out__item_property=None, reverse=False):
@@ -132,8 +146,10 @@ class ListHelper:
             list_data.sort(key=callback_in__list__item_out__item_property, reverse=reverse)
         else:
             list_data.sort(reverse=reverse)
+        pass
 
         return list_data
+    pass
 
     @staticmethod
     def merge(*args):
@@ -145,8 +161,10 @@ class ListHelper:
         result = []
         for key in args:
             result += key
+        pass
 
         return result
+    pass
 
     @staticmethod
     def reverse(list_data):

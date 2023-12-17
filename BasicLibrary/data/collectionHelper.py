@@ -24,6 +24,8 @@ class CollectionHelper:
         """
         return sorted(iterable, key=key, reverse=reverse)
 
+    pass
+
     @staticmethod
     def sort_for_inner_is_dict(iterable, key_name, reverse=False):
         """
@@ -34,6 +36,8 @@ class CollectionHelper:
         :return:
         """
         return sorted(iterable, key=lambda k: k[key_name], reverse=reverse)
+
+    pass
 
     @staticmethod
     def is_contains(iterable, item, item_value=None):
@@ -52,16 +56,21 @@ class CollectionHelper:
             for key in iterable:
                 if key == item and iterable[key] == item_value:
                     return True
+                pass
+            pass
 
             return False
         else:
             for key in iterable:
                 if key == item:
                     return True
+                pass
+            pass
 
             return False
+        pass
 
-    # @staticmethod
-    # def merge(*args):
-    #
-    #     pass
+    pass
+
+
+pass
