@@ -227,16 +227,16 @@ class FileHelper:
     pass
 
     @classmethod
-    def rename(cls, old_file_full_name: PathLike, new_file_name: str):
+    def rename(cls, old_file_full_name: PathLike, new_file_base_name: str):
         """
 
         :param old_file_full_name: 旧有的带路径的文件全名称
-        :param new_file_name: 要改名的新的名称（不带文件路径）
+        :param new_file_base_name: 要改名的新的名称（不带文件路径）
         :return:
         """
         # TODO:xiedali@20230608 需要加入一个当新文件存在时的处理策略的功能
         file_path = cls.get_path_name(old_file_full_name)
-        new_file_full_name = PathHelper.combine(file_path, new_file_name)
+        new_file_full_name = PathHelper.combine(file_path, new_file_base_name)
         if cls.is_exist(new_file_full_name):
             new_file_full_name += f'({RandomHelper.create(8, RandomEnum.UpperLetters)})'
         pass
