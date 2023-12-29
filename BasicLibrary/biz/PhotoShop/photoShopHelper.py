@@ -77,4 +77,3 @@ class PhotoShopHelper(object):
 
 
 pass
-

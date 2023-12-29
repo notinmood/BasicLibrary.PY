@@ -16,9 +16,15 @@ from BasicLibrary.projectHelper import ProjectHelper
 
 
 def test_remove():
-    dir_full_name = r"E:\myworkspace\BasicLibrary.PY\.test\_res\target\sSlzdeVX"
-    DirHelper.remove(dir_full_name)
+    root_path = ProjectHelper.get_root_physical_path()
+    dir_base_name = RandomHelper.create(10)
+    dir_full_name = PathHelper.combine(root_path, ".test", "_res", "target", dir_base_name)
+    DirHelper.ensure_exist(dir_full_name)
+    actual = os.path.isdir(dir_full_name)
+    expected = True
+    assert actual == expected
 
+    DirHelper.remove(dir_full_name)
     actual = os.path.isdir(dir_full_name)
     expected = False
     assert actual == expected
@@ -40,3 +46,18 @@ def test_ensure_exist():
     actual = PathHelper.determine_is_exist(target_dir)
     expected = False
     assert actual == expected
+
+
+def test_get_sub_dirs():
+    root_path = ProjectHelper.get_root_physical_path()
+    local_path = ".test/_res/目录结构测试基础设施"
+    target_dir = PathHelper.combine(root_path, local_path)
+
+    actual = DirHelper.get_sub_dirs(target_dir)
+    expected = [PathHelper.combine(root_path, local_path, "目录A"),
+                PathHelper.combine(root_path, local_path, "目录B"),
+                PathHelper.combine(root_path, local_path, "目录C")]
+    assert actual == expected
+
+
+pass

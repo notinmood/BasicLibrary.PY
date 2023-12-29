@@ -47,6 +47,18 @@ class DirHelper:
 
     pass
 
+    @classmethod
+    def get_sub_dirs(cls, dir_full_path: PathLike) -> list:
+        dirs: list = []
+        for item in os.listdir(dir_full_path):
+            item_full_path = os.path.join(dir_full_path, item)
+            if os.path.isdir(item_full_path):
+                dirs.append(item_full_path)
+            pass
+        pass
+
+        return dirs
+
     @staticmethod
     def ensure_exist(dir_full_path: PathLike):
         """
@@ -78,7 +90,7 @@ class DirHelper:
     pass
 
     @staticmethod
-    def walk_files(dir_full_name: PathLike, deal_file_func: callable):
+    def walk_files(dir_full_name: PathLike, deal_file_func: callable, *args, **kwargs):
         """
         遍历目录下的文件
         :param dir_full_name:
@@ -87,9 +99,11 @@ class DirHelper:
         """
         for dir_full_path, dir_names, file_names in os.walk(dir_full_name):
             for file_base_name in file_names:
-                deal_file_func(file_base_name, dir_full_path)
+                deal_file_func(file_base_name, dir_full_path, *args, **kwargs)
             pass
         pass
 
     pass
+
+
 pass

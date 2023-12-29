@@ -19,4 +19,6 @@ class Singleton(object):
     def __call__(self):
         if self._cls not in self._instance:
             self._instance[self._cls] = self._cls()
+        pass
+
         return self._instance[self._cls]
