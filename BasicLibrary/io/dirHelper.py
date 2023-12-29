@@ -82,7 +82,26 @@ class DirHelper:
     pass
 
     @staticmethod
+    def move(source_dir_full_name: PathLike, dest_dir_full_name: PathLike) -> None:
+        """
+        移动目录(如果原目录不存在，本方法不会执行任何动作)
+        :param source_dir_full_name: 原目录的全名称
+        :param dest_dir_full_name: 新目录的全名称
+        :return:
+        """
+        if os.path.isdir(source_dir_full_name):
+            os.rename(source_dir_full_name, dest_dir_full_name)
+        pass
+
+    pass
+
+    @staticmethod
     def remove(dir_full_name: PathLike):
+        """
+        删除目录(如果目录不存在，本方法不会执行任何动作)
+        :param dir_full_name:
+        :return:
+        """
         if os.path.isdir(dir_full_name):
             shutil.rmtree(dir_full_name)
         pass
