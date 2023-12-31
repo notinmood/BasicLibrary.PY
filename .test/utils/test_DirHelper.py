@@ -7,6 +7,7 @@
  * @company: HiLand & RainyTop
 """
 import os.path
+from os import path
 
 from BasicLibrary.data.randomHelper import RandomHelper
 from BasicLibrary.io.dirHelper import DirHelper
@@ -57,6 +58,39 @@ def test_get_sub_dirs():
     expected = [PathHelper.combine(root_path, local_path, "目录A"),
                 PathHelper.combine(root_path, local_path, "目录B"),
                 PathHelper.combine(root_path, local_path, "目录C")]
+    assert actual == expected
+
+
+pass
+
+
+def test_is_exist1():
+    root_path = ProjectHelper.get_root_physical_path()
+    dir_full_name = path.join(root_path, ".test/_res/target")
+    actual = DirHelper.is_dir(dir_full_name)
+    expected = True
+    assert actual == expected
+
+
+pass
+
+
+def test_is_exist2():
+    root_path = ProjectHelper.get_root_physical_path()
+    dir_full_name = path.join(root_path, ".test/_res/target_xx")
+    actual = DirHelper.is_dir(dir_full_name)
+    expected = False
+    assert actual == expected
+
+
+pass
+
+
+def test_is_exist3():
+    root_path = ProjectHelper.get_root_physical_path()
+    dir_full_name = path.join(root_path, ".test/_res/target/ww.pp")
+    actual = DirHelper.is_dir(dir_full_name)
+    expected = False
     assert actual == expected
 
 

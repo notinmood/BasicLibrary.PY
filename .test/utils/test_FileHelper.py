@@ -189,6 +189,15 @@ def test_is_exist2():
     assert actual == expected
 
 
+def test_is_exist3():
+    root_path = ProjectHelper.get_root_physical_path()
+
+    file_full_name = PathHelper.combine(root_path, ".test/_res")
+    actual = FileHelper.is_exist(file_full_name)
+    expected = False
+    assert actual == expected
+
+
 def test_rename():
     root_path = ProjectHelper.get_root_physical_path()
     file_name_old = RandomHelper.create() + ".txt"

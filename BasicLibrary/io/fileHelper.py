@@ -66,13 +66,13 @@ class FileHelper:
         :param file_name:
         :return:
         """
-        filepath, filename = os.path.split(file_name)
+        filepath, _ = os.path.split(file_name)
         return filepath
 
     @classmethod
-    def load(cls, file_full_name: PathLike) -> object:
+    def load(cls, file_full_name: PathLike) -> bytes | str:
         """
-
+        读取文件内容
         :param file_full_name:
         :return:
         """
@@ -83,6 +83,15 @@ class FileHelper:
         pass
 
         return data
+
+    @classmethod
+    def get(cls, file_full_name: PathLike) -> bytes | str:
+        """
+        读取文件内容（load方法的别名）
+        :param file_full_name:
+        :return:
+        """
+        return cls.load(file_full_name)
 
     @classmethod
     def load_with_lines(cls, file_full_name: PathLike) -> list[str]:
@@ -122,7 +131,17 @@ class FileHelper:
     @classmethod
     def create(cls, file_full_name: PathLike, content: str = ""):
         """
-        在目标位置创建文件
+        在目标位置创建文件(store方法的别名)
+        :param str content: 待保存内容
+        :param str file_full_name:待创建文件的全路径名称
+        :return:
+        """
+        cls.store(file_full_name, content)
+
+    @classmethod
+    def save(cls, file_full_name: PathLike, content: str = ""):
+        """
+        在目标位置创建文件(store方法的别名)
         :param str content: 待保存内容
         :param str file_full_name:待创建文件的全路径名称
         :return:
@@ -186,7 +205,7 @@ class FileHelper:
         :return:
         """
         if os.path.isfile(source_file_full_name):
-            file_path_name, file_base_name = os.path.split(source_file_full_name)  # 分离文件名和路径
+            _, file_base_name = os.path.split(source_file_full_name)  # 分离文件名和路径
             if not os.path.exists(target_dir_full_name):
                 os.makedirs(target_dir_full_name)  # 创建路径
             pass
@@ -203,16 +222,25 @@ class FileHelper:
     pass
 
     @classmethod
-    def move(cls, source_file_full_name: PathLike, target_dir_full_name: PathLike, target_file_base_name: str = ""):
+    def move(cls, source_file_full_name: PathLike, dest_dir_full_name: PathLike, dest_file_base_name: str = ""):
         """
         移动文件
         :param source_file_full_name:
-        :param target_dir_full_name:
-        :param target_file_base_name:
+        :param dest_dir_full_name:
+        :param dest_file_base_name:
         :return:
         """
-        cls.copy(source_file_full_name, target_dir_full_name, target_file_base_name)
+        cls.copy(source_file_full_name, dest_dir_full_name, dest_file_base_name)
         cls.remove(source_file_full_name)
+        # TODO:xiedali@2023-12-31 需要通过单元测试以下方法，然后代替上面的实现
+        # if os.path.isfile(source_file_full_name):
+        #     if not dest_file_base_name:
+        #         dest_file_base_name = os.path.basename(source_file_full_name)
+        #     pass
+        #
+        #     dest_file_full_name = PathHelper.combine(dest_dir_full_name, dest_file_base_name)
+        #     os.rename(source_file_full_name, dest_file_full_name)
+        # pass
 
     pass
 
@@ -224,6 +252,18 @@ class FileHelper:
         :return:
         """
         return os.path.isfile(file_full_name)
+
+    pass
+
+    @classmethod
+    def is_file(cls, file_full_name: PathLike) -> bool:
+        """
+        判断为文件是否存在(is_exist的别名)
+        :param file_full_name: 带全路径的文件名称
+        :return:
+        """
+        return cls.is_exist(file_full_name)
+
     pass
 
     @classmethod

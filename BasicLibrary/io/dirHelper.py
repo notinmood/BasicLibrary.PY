@@ -71,6 +71,28 @@ class DirHelper:
     pass
 
     @classmethod
+    def is_exist(cls, dir_full_path: PathLike) -> bool:
+        """
+        判断为文件夹是否存在
+        :param dir_full_path: 带全路径的文件夹名称
+        :return:
+        """
+        return os.path.isdir(dir_full_path)
+
+    pass
+
+    @classmethod
+    def is_dir(cls, dir_full_path: PathLike) -> bool:
+        """
+        判断为文件夹是否存在(is_exist的别名)
+        :param dir_full_path: 带全路径的文件夹名称
+        :return:
+        """
+        return cls.is_exist(dir_full_path)
+
+    pass
+
+    @classmethod
     def make(cls, dir_full_path: PathLike):
         """
         创建目录

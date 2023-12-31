@@ -13,6 +13,7 @@ from setuptools import find_packages, setup, Command
 
 # Package meta-data.
 
+# TODO:xiedali@2023-12-31 本文件需要重新梳理
 
 NAME = 'BasicLibrary.PY'
 DESCRIPTION = '企业级的 PYTHON 库'
@@ -20,7 +21,7 @@ URL = 'https://github.com/notinmood/BasicLibrary.PY'
 EMAIL = '9727005@qq.com'
 AUTHOR = 'xiedali'
 REQUIRES_PYTHON = '>=3.6.0'
-VERSION = '0.5.22'
+VERSION = '0.5.23'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
@@ -85,9 +86,17 @@ class UploadCommand(Command):
         print('\033[1m{0}\033[0m'.format(s))
 
     def initialize_options(self):
+        """
+
+        :return:
+        """
         pass
 
     def finalize_options(self):
+        """
+
+        :return:
+        """
         pass
 
     def run(self):
