@@ -15,7 +15,7 @@ from BasicLibrary.io.pathHelper import PathHelper
 
 class DirHelper:
     """
-
+    目录操作助手
     """
 
     @classmethod

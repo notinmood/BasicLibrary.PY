@@ -6,7 +6,9 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
+import inspect
 import os.path
+from os import PathLike
 
 from BasicLibrary.environment.envHelper import EnvHelper
 from BasicLibrary.projectHelper import ProjectHelper
@@ -29,14 +31,20 @@ class PathHelper:
     pass
 
     @classmethod
-    def get_dir_name(cls, path, up_level=1):
+    def get_dir_name(cls, path=None | PathLike, up_level=1):
         """
         获取给定路径的目录部分
-        :param up_level: 求向上多少级的目录
-        :param str path:
+        :param int up_level: 求向上多少级的目录。如果不指定本参数，那么
+            将获取当前主动调用方文件所在的目录。
+        :param str|PathLike path: 给定的目录结构。如果不指定本参数，那么
+            将从当前主动调用方文件所在的目录开始向上查找。
         :return:
         """
-        for key in range(0, up_level):
+        if path is None:
+            path = inspect.stack()[1].filename
+        pass
+
+        for _ in range(0, up_level):
             path = os.path.dirname(path)
         pass
 
@@ -51,6 +59,16 @@ class PathHelper:
         :return:
         """
         return ProjectHelper.get_root_physical_path()
+
+    pass
+
+    @staticmethod
+    def get_current_physical_path():
+        """
+        获取主动调用本方法的模块的物理路径
+        :return:
+        """
+        return os.path.abspath(os.path.dirname(inspect.stack()[1].filename))
 
     pass
 

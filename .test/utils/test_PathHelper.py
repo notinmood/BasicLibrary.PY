@@ -24,20 +24,21 @@ def test_combine():
     assert actual == expected
 
 
-def test_get_dir_name():
-    p = "E:\\workspace\\Project-python\\Comprehensive.PY"
-    actual = PathHelper.get_dir_name(p)
-    expected = "E:\\workspace\\Project-python"
-    assert actual == expected
-
-
 def test_get_root_path():
     actual = PathHelper.get_root_path()
     expected = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
     assert actual == expected
 
 
-def test_get_dir_name():
+def test_get_dir_name1():
+    actual = PathHelper.get_dir_name()
+
+    root = PathHelper.get_root_path()
+    expected = "{}\\.test\\utils".format(root)
+    assert actual == expected
+
+
+def test_get_dir_name2():
     data = "E:\\myworkspace\\BasicLibrary.PY\\.test\\utils\\test_PathHelper.py"
     actual = PathHelper.get_dir_name(data)
     expected = "E:\\myworkspace\\BasicLibrary.PY\\.test\\utils"
@@ -58,3 +59,12 @@ def test_real_path():
     expected = StringHelper.replace(file_name, "/", EnvHelper.get_path_separator())
     expected = StringHelper.replace(expected, "\\", EnvHelper.get_path_separator())
     assert actual == expected
+
+
+def test_get_current_physical_path():
+    actual = PathHelper.get_current_physical_path()
+    expected = os.path.join(PathHelper.get_root_path(), ".test\\utils")
+    assert actual == expected
+
+
+pass
