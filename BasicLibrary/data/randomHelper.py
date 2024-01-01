@@ -14,8 +14,8 @@ from BasicLibrary.enums import RandomEnum
 
 class RandomHelper:
     """
-
-        """
+    随机字符串生成器
+    """
 
     @staticmethod
     def create(size=8, random_type=RandomEnum.AllLetters):
