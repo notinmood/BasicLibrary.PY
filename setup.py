@@ -21,7 +21,7 @@ URL = 'https://github.com/notinmood/BasicLibrary.PY'
 EMAIL = '9727005@qq.com'
 AUTHOR = 'xiedali'
 REQUIRES_PYTHON = '>=3.6.0'
-VERSION = '0.5.24'
+VERSION = '0.5.28'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
@@ -45,6 +45,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 try:
     with io.open(os.path.join(here, 'README.md'), encoding='utf-8') as f:
         long_description = '\n' + f.read()
+    pass
 except FileNotFoundError:
     long_description = DESCRIPTION
 
@@ -54,10 +55,11 @@ if not VERSION:
     project_slug = NAME.lower().replace("-", "_").replace(" ", "_")
     with open(os.path.join(here, project_slug, '__version__.py')) as f:
         exec(f.read(), about)
+    pass
 else:
     about['__version__'] = VERSION
     # DESCRIPTION = DESCRIPTION + "@"
-
+pass
 
 # def delete_original_dist():
 #     physical_root = os.getcwd()
