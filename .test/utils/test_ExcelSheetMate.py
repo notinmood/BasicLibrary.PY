@@ -6,7 +6,7 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from _res.usingCopiedExcel import UsingCopiedExcel
+from _res.usingLocalExcelCopied import UsingLocalExcelCopied
 from BasicLibrary.data.randomHelper import RandomHelper
 from BasicLibrary.io.fileHelper import FileHelper
 from BasicLibrary.io.pathHelper import PathHelper
@@ -101,35 +101,39 @@ def test_get_set():
 
 
 def test_rename():
-    with UsingCopiedExcel() as excel:
+    with UsingLocalExcelCopied() as excel:
         my_sheet = excel.get_sheet()
         my_sheet.rename("Table A")
         actual = my_sheet.get_name()
         expected = "Table A"
         assert actual == expected
+    pass
 
 
 def test_get_row_count():
-    with UsingCopiedExcel() as excel:
+    with UsingLocalExcelCopied() as excel:
         my_sheet = excel.get_sheet()
         actual = my_sheet.get_row_count()
         expected = 5
         assert actual == expected
+    pass
 
 
 def test_get_column_count():
-    with UsingCopiedExcel() as excel:
+    with UsingLocalExcelCopied() as excel:
         my_sheet = excel.get_sheet()
         actual = my_sheet.get_column_count()
         expected = 4
         assert actual == expected
+    pass
 
 
 def test_copy_paste():
-    with UsingCopiedExcel() as excel:
+    with UsingLocalExcelCopied() as excel:
         my_sheet = excel.get_sheet()
         actual = my_sheet.copy("A1:C2")
         my_sheet.paste("F10")
         expected = my_sheet.get("F10:H11")
         print(expected)
         assert actual == expected
+    pass

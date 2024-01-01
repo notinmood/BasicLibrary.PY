@@ -12,7 +12,7 @@ from BasicLibrary.office.excelShadowUsing import ExcelShadowUsing
 from BasicLibrary.projectHelper import ProjectHelper
 
 
-class UsingCopiedExcel(ExcelShadowUsing):
+class UsingLocalExcelCopied(ExcelShadowUsing):
     """
     辅助验证Excel操作功能的，具体的Excel文件的影子
     """
@@ -20,7 +20,6 @@ class UsingCopiedExcel(ExcelShadowUsing):
     def __init__(self):
         source_file_full_name = PathHelper.combine(ProjectHelper.get_root_physical_path(),
                                                    r".test\_res\source\myExcel.xlsx")
-
         super().__init__(source_file_full_name)
 
     pass

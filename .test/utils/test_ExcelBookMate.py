@@ -9,7 +9,7 @@
 from xlwings import Sheet
 
 from BasicLibrary.projectHelper import ProjectHelper
-from _res.usingCopiedExcel import UsingCopiedExcel
+from _res.usingLocalExcelCopied import UsingLocalExcelCopied
 from BasicLibrary.data.objectHelper import ObjectHelper
 from BasicLibrary.io.fileHelper import FileHelper
 from BasicLibrary.io.pathHelper import PathHelper
@@ -54,14 +54,14 @@ def test_save():
 
 
 def test_get_sheets_count():
-    with UsingCopiedExcel() as excel:
+    with UsingLocalExcelCopied() as excel:
         actual = excel.get_sheets_count()
         expected = 3
         assert actual == expected
 
 
 def test_get_sheet():
-    with UsingCopiedExcel() as excel:
+    with UsingLocalExcelCopied() as excel:
         my_sheet = excel.get_sheet()
 
         actual = ObjectHelper.is_instance(my_sheet.original_sheet, Sheet)
@@ -87,7 +87,7 @@ def test_with():
 
 
 def test_add_sheet1():
-    with UsingCopiedExcel() as excel:
+    with UsingLocalExcelCopied() as excel:
         excel.add_sheet("第四个表")
         actual = excel.get_sheets_count()
         expected = 4
@@ -98,7 +98,7 @@ def test_add_sheet1():
 
 
 def test_add_sheet2():
-    with UsingCopiedExcel() as excel:
+    with UsingLocalExcelCopied() as excel:
         excel.add_sheet("WPS", 3)
         for key in excel.get_sheets():
             print(key.original_sheet.name)
@@ -112,7 +112,7 @@ def test_add_sheet2():
 
 
 def test_add_sheet3():
-    with UsingCopiedExcel() as excel:
+    with UsingLocalExcelCopied() as excel:
         new_sheet = excel.add_sheet("我的yop", 4)
 
         actual = new_sheet.get_name()
@@ -135,7 +135,7 @@ def test_add_sheet3():
 
 
 def test_exist_sheet():
-    with UsingCopiedExcel() as excel:
+    with UsingLocalExcelCopied() as excel:
         actual = excel.determine_exist_sheet(0)
         expected = True
         assert actual == expected
@@ -154,7 +154,7 @@ def test_exist_sheet():
 
 
 def test_remove_sheet():
-    with UsingCopiedExcel() as excel:
+    with UsingLocalExcelCopied() as excel:
         excel.remove_sheet("表A")
         actual = excel.get_sheets_count()
         expected = 2
@@ -182,7 +182,7 @@ def test_remove_sheet():
 
 
 def test_rename_sheet():
-    with UsingCopiedExcel() as excel:
+    with UsingLocalExcelCopied() as excel:
         actual = excel.rename_sheet("表A", "Table A")
         expected = True
         assert actual == expected
@@ -203,7 +203,7 @@ def test_rename_sheet():
 
 
 def test_copy_paste():
-    with UsingCopiedExcel() as excel:
+    with UsingLocalExcelCopied() as excel:
         actual = excel.copy(0, "A1:C2")
         excel.paste("表B", "F10")
         expected = excel.get_sheet("表B").get("F10:H11")
