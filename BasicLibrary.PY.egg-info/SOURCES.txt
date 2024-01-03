@@ -13,10 +13,8 @@ BasicLibrary.PY.egg-info/SOURCES.txt
 BasicLibrary.PY.egg-info/dependency_links.txt
 BasicLibrary.PY.egg-info/top_level.txt
 BasicLibrary/biz/__init__.py
-BasicLibrary/biz/PhotoShop/__init__.py
-BasicLibrary/biz/PhotoShop/photoShopHelper.py
-BasicLibrary/biz/photoShop/__init__.py
-BasicLibrary/biz/photoShop/photoShopHelper.py
+BasicLibrary/biz/adobe/__init__.py
+BasicLibrary/biz/adobe/photoShopHelper.py
 BasicLibrary/biz/stock/__init__.py
 BasicLibrary/biz/stock/stockHelper.py
 BasicLibrary/data/ChineseData.py

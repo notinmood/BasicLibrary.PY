@@ -2,7 +2,7 @@ import re
 from datetime import datetime, timedelta, date
 import sxtwl
 from BasicLibrary import ObjectHelper
-from BasicLibrary.data import ChineseData
+from BasicLibrary.data.chineseData import ChineseData
 from BasicLibrary.data.stringHelper import StringHelper
 
 
@@ -23,16 +23,17 @@ class DateTimeHelper:
         """
         if formatter == "":
             formatter = DateTimeHelper.get_format(date_time_string)
+        pass
 
         _type = type(date_time_string)
         if _type is str:
             return datetime.strptime(date_time_string, formatter)
+        pass
+
+        if _type is datetime:
+            return date_time_string
         else:
-            if _type is datetime:
-                return date_time_string
-            else:
-                return None
-            pass
+            return None
         pass
 
     pass
@@ -120,8 +121,7 @@ class DateTimeHelper:
             date_time_value = cls.convert_from_string(date_time_value)
         pass
 
-        result = date_time_value.strftime(formatter)
-        return result
+        return date_time_value.strftime(formatter)
 
     pass
 

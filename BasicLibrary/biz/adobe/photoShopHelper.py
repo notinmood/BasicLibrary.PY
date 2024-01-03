@@ -6,7 +6,13 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
+from os import PathLike
+
+from photoshop import Session
+from photoshop.api import ActionDescriptor
+
 from BasicLibrary.data.stringHelper import StringHelper
+from BasicLibrary.io.fileHelper import FileHelper
 
 
 class PhotoShopHelper(object):
@@ -72,6 +78,52 @@ class PhotoShopHelper(object):
             return None
 
         return find_layer_recursive(layers, layer_path.split(layer_path_seperator))
+
+    pass
+
+    @classmethod
+    def replace_image(cls, psd_full_name: PathLike, layer_code: str, new_image_full_name: PathLike,
+                      is_auto_close: bool = True):
+        """
+        替换psd文件中的图层图片
+        :param psd_full_name: psd文件的全路径
+        :param layer_code: 图层的代码：图层的名称、索引号或者图层的路径
+        :param new_image_full_name: 新的图片文件的全路径
+        :param is_auto_close: 是否自动关闭psd文件
+        :return:
+        """
+        if not FileHelper.is_file(new_image_full_name):
+            return
+        pass
+
+        if not FileHelper.is_file(psd_full_name):
+            return
+        pass
+
+        with Session(psd_full_name, action="open") as ps:
+            app = ps.app
+            document = ps.active_document
+
+            # 查找并设置活动图层
+            layer_matched = cls.find_layer(document.layers, layer_code)
+            if not layer_matched:
+                return
+            pass
+
+            document.activeLayer = layer_matched
+            replace_contents = app.stringIDToTypeID("placedLayerReplaceContents")
+            id_null = app.charIDToTypeID("null")
+            action_descriptor = ActionDescriptor()
+            action_descriptor.putPath(id_null, new_image_full_name)
+            app.executeAction(replace_contents, action_descriptor)
+
+            document.save()
+
+            if is_auto_close:
+                document.close()
+                ps.close()
+            pass
+        pass
 
     pass
 
