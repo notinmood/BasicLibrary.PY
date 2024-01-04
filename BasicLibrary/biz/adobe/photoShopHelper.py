@@ -7,10 +7,7 @@
  * @company: HiLand & RainyTop
 """
 from os import PathLike
-
-from photoshop import Session
 from photoshop.api import ActionDescriptor
-
 from BasicLibrary.data.stringHelper import StringHelper
 from BasicLibrary.io.fileHelper import FileHelper
 
@@ -23,7 +20,23 @@ class PhotoShopHelper(object):
     """
 
     @classmethod
-    def find_layer(cls, layers, layer_code, layer_path_seperator="//"):
+    def find_layer(cls, document, layer_code, layer_path_seperator="//"):
+        """
+        根据图层名称遍历（包括嵌套图层）各图层查找目标图层
+        :param layer_path_seperator:如果layer_code是图层的路径，则需要本参数指定路径的分隔符，默认为"//"
+        :param document:PSD文件构成的文档对象（在此文档内查找相应图层）
+        :param layer_code:图层的名字name（字符串）或者图层的索引号index（数字），
+                           1. 如果为字符串，可以包含用双斜线分割的图层路径，如：layer1//layer2//layer3；也可以是仅仅图层的名字（系统会自动迭代查找）。
+                           2. 如果为数字，则表示图层的索引号，从0开始。
+        :return:
+        """
+        layers = document.layers
+        return cls.__find_layer(layers, layer_code, layer_path_seperator)
+
+    pass
+
+    @classmethod
+    def __find_layer(cls, layers, layer_code, layer_path_seperator="//"):
         """
         根据图层名称遍历（包括嵌套图层）各图层查找目标图层
         :param layer_path_seperator:如果layer_code是图层的路径，则需要本参数指定路径的分隔符，默认为"//"
@@ -52,9 +65,9 @@ class PhotoShopHelper(object):
 
                 # 如果当前图层是一个图层组，递归查找子图层
                 if layer.blendMode == 1:  # blendMode为1表示图层组；blendMode为2表示一个普通图层
-                    found_layer = cls.find_layer(layer.layers, layer_code)
-                    if found_layer:
-                        return found_layer
+                    layer_found = cls.__find_layer(layer.layers, layer_code)
+                    if layer_found:
+                        return layer_found
                     pass
                 pass
             pass
@@ -82,48 +95,86 @@ class PhotoShopHelper(object):
     pass
 
     @classmethod
-    def replace_image(cls, psd_full_name: PathLike, layer_code: str, new_image_full_name: PathLike,
-                      is_auto_close: bool = True):
+    def replace_image(cls, document, layer_code: str, new_image_full_name: PathLike):
         """
         替换psd文件中的图层图片
-        :param psd_full_name: psd文件的全路径
+        :param document: psd文件对应的文档对象
         :param layer_code: 图层的代码：图层的名称、索引号或者图层的路径
         :param new_image_full_name: 新的图片文件的全路径
-        :param is_auto_close: 是否自动关闭psd文件
         :return:
         """
+        app = document.app
+
         if not FileHelper.is_file(new_image_full_name):
             return
         pass
 
-        if not FileHelper.is_file(psd_full_name):
+        # 查找并设置活动图层
+        layer_matched = cls.__find_layer(document.layers, layer_code)
+        if not layer_matched:
             return
         pass
 
-        with Session(psd_full_name, action="open") as ps:
-            app = ps.app
-            document = ps.active_document
+        document.activeLayer = layer_matched
+        replace_contents = app.stringIDToTypeID("placedLayerReplaceContents")
+        id_null = app.charIDToTypeID("null")
+        action_descriptor = ActionDescriptor()
+        action_descriptor.putPath(id_null, new_image_full_name)
+        app.executeAction(replace_contents, action_descriptor)
 
-            # 查找并设置活动图层
-            layer_matched = cls.find_layer(document.layers, layer_code)
-            if not layer_matched:
-                return
+        document.save()
+
+    pass
+
+    @classmethod
+    def unlock(cls, document, layer_code, layer_path_seperator="//"):
+        """
+        解锁图层
+        :param document:
+        :param layer_code:
+        :param layer_path_seperator:
+        :return:
+        """
+        layer_matched = cls.find_layer(document, layer_code, layer_path_seperator)
+
+        def release_lock_recursive(layer):
+            if layer:
+                try:
+                    layer.positionLocked = False
+                except:
+                    pass
+                pass
+
+                try:
+                    layer.pixelsLocked = False
+                except:
+                    pass
+                pass
+
+                try:
+                    layer.transparentPixelsLocked = False
+                except:
+                    pass
+                pass
+
+                try:
+                    layer.allLocked = False
+                except:
+                    pass
+                pass
             pass
 
-            document.activeLayer = layer_matched
-            replace_contents = app.stringIDToTypeID("placedLayerReplaceContents")
-            id_null = app.charIDToTypeID("null")
-            action_descriptor = ActionDescriptor()
-            action_descriptor.putPath(id_null, new_image_full_name)
-            app.executeAction(replace_contents, action_descriptor)
-
-            document.save()
-
-            if is_auto_close:
-                document.close()
-                ps.close()
+            try:
+                if layer.parent:
+                    release_lock_recursive(layer.parent)
+                pass
+            except:
+                pass
             pass
+
         pass
+
+        release_lock_recursive(layer_matched)
 
     pass
 

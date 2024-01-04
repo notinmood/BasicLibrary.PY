@@ -19,6 +19,7 @@ BasicLibrary/biz/stock/__init__.py
 BasicLibrary/biz/stock/stockHelper.py
 BasicLibrary/data/ChineseData.py
 BasicLibrary/data/__init__.py
+BasicLibrary/data/chineseData.py
 BasicLibrary/data/collectionHelper.py
 BasicLibrary/data/dateTimeHelper.py
 BasicLibrary/data/dictHelper.py
