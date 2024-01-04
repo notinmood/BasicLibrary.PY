@@ -95,15 +95,16 @@ class PhotoShopHelper(object):
     pass
 
     @classmethod
-    def replace_image(cls, document, layer_code: str, new_image_full_name: PathLike):
+    def replace_image(cls, application, document, layer_code: str, new_image_full_name: PathLike):
         """
         替换psd文件中的图层图片
+        :param application:打开psd文件的app对象
         :param document: psd文件对应的文档对象
         :param layer_code: 图层的代码：图层的名称、索引号或者图层的路径
         :param new_image_full_name: 新的图片文件的全路径
         :return:
         """
-        app = document.app
+        app = application
 
         if not FileHelper.is_file(new_image_full_name):
             return
