@@ -1,4 +1,5 @@
 import re
+import time
 from datetime import datetime, timedelta, date
 import sxtwl
 from BasicLibrary import ObjectHelper
@@ -246,6 +247,17 @@ class DateTimeHelper:
                                       ChineseData.RiM[lunar_date.getLunarDay() - 1])
 
         return result
+
+    pass
+
+    @staticmethod
+    def sleep(seconds: float):
+        """
+        线程休眠
+        :param seconds:
+        :return:
+        """
+        time.sleep(seconds)
 
     pass
 

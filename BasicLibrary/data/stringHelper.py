@@ -5,7 +5,7 @@ from BasicLibrary.data.regexHelper import RegexHelper
 
 class StringHelper:
     """
-
+    字符串处理工具类
     """
 
     @staticmethod
@@ -26,6 +26,7 @@ class StringHelper:
 
         result = re.sub("({})".format(patten), padding_format, original_content)
         return result
+
     pass
 
     @staticmethod
@@ -42,8 +43,8 @@ class StringHelper:
         else:
             return whole
         pass
-    pass
 
+    pass
 
     @staticmethod
     def get_after_content(whole, separator):
@@ -55,11 +56,13 @@ class StringHelper:
         else:
             return whole
         pass
+
     pass
 
     @staticmethod
     def get_length(data):
         return len(data)
+
     pass
 
     @staticmethod
@@ -87,6 +90,7 @@ class StringHelper:
         pass
 
         return result
+
     pass
 
     @staticmethod
@@ -96,6 +100,7 @@ class StringHelper:
         else:
             return whole
         pass
+
     pass
 
     @staticmethod
@@ -105,6 +110,7 @@ class StringHelper:
         else:
             return whole
         pass
+
     pass
 
     @staticmethod
@@ -115,16 +121,19 @@ class StringHelper:
         :return:
         """
         return original[::-1]
+
     pass
 
     @staticmethod
     def is_end_with(whole, sub_string):
         return str.endswith(whole, sub_string)
+
     pass
 
     @staticmethod
     def is_start_with(whole, sub_string):
         return str.startswith(whole, sub_string)
+
     pass
 
     @staticmethod
@@ -137,6 +146,7 @@ class StringHelper:
         """
         result = whole.find(sub_string) >= 0
         return result
+
     pass
 
     @staticmethod
@@ -151,6 +161,7 @@ class StringHelper:
         else:
             return False
         pass
+
     pass
 
     @staticmethod
@@ -162,6 +173,7 @@ class StringHelper:
         :return:
         """
         return separator.join(collection_data)
+
     pass
 
     @staticmethod
@@ -173,6 +185,7 @@ class StringHelper:
         :return:
         """
         return string_data.split(separator)
+
     pass
 
     @staticmethod
@@ -200,6 +213,7 @@ class StringHelper:
         print(whole)
         """
         return original_with_placeholder.format(*args, **kwargs)
+
     pass
 
     @staticmethod
@@ -210,6 +224,7 @@ class StringHelper:
         :return:
         """
         return original_string.upper()
+
     pass
 
     @staticmethod
@@ -220,6 +235,7 @@ class StringHelper:
         :return:
         """
         return original_string.lower()
+
     pass
 
     @staticmethod
@@ -230,6 +246,7 @@ class StringHelper:
         :return:
         """
         return original_string[:1].upper() + original_string[1:]
+
     pass
 
     @staticmethod
@@ -240,6 +257,7 @@ class StringHelper:
         :return:
         """
         return original_string[:1].lower() + original_string[1:]
+
     pass
 
     @staticmethod
@@ -253,6 +271,7 @@ class StringHelper:
         :return:
         """
         return original_string.title()
+
     pass
 
     @staticmethod
@@ -261,7 +280,7 @@ class StringHelper:
         字符串替换
         :param whole_string:
         :param old_sub_string:被替换掉的字符串或者是正则表达式
-        :param new_sub_string:新字符串（可以带由 pattern 形成的分组号，分组号用 \1 \2 这的格式表示）
+        :param new_sub_string:新字符串（可以带由 pattern 形成的分组号，分组号用 \1 \2 这样的格式表示（正则表达式中分组号是从1开始的，不是0））
         :return:替换后的新字符串
         :example:
         text = '今天是：11/28/2018'
@@ -269,8 +288,8 @@ class StringHelper:
         expected = '今天是：2018年11月28日'
         assert actual == expected
         """
-        # return whole_string.replace(old_sub_string, new_sub_string)
         return RegexHelper.replace(whole_string, old_sub_string, new_sub_string)
+
     pass
 
     @staticmethod

@@ -45,7 +45,7 @@ class IOHelper:
         include_path_separator = include_path_separator
 
         # 目前采用以下方法，可以清除更多非法字符
-        filename = re.sub('[^\u4e00-\u9fa5a-zA-Z0-9_]+', safe_char, filename)
+        filename = re.sub('[^\u4e00-\u9fa5a-zA-Z0-9_.]+', safe_char, filename)
 
         return filename
 

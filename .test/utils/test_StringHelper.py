@@ -208,17 +208,30 @@ def test_replace():
     actual = StringHelper.replace(whole, old, new)
     expected = "E:\\MyImages\\美女图片未整理\\app_26822737\\db0e400fad35ba8e18fcac06bd9bd99f2752.jpeg"
     assert actual == expected
-    pass
 
 
-# def test_replace2():
-#     whole = "https://upload-images.jianshu.io/upload_images/2084912-c0dfb8b34ebc4e2c.png?x-oss-process=image/resize,w_360,h_240"
-#     old = r'C:\\Users\\Administrator\\Downloads\\app_27931104'
-#     new = r'E:\\MyImages\\美女图片未整理\\app_27931105'
-#     actual = StringHelper.replace(whole, old, new)
-#     expected = "E:\\MyImages\\美女图片未整理\\app_26822737\\db0e400fad35ba8e18fcac06bd9bd99f2752.jpeg"
-#     assert actual == expected
-# pass
+pass
+
+
+def test_replace2():
+    text = '今天是：11/28/2018'
+    actual = StringHelper.replace(text, r"(\d{2})/(\d{2})/(\d{4})", r"\3年\1月\2日")
+    expected = '今天是：2018年11月28日'
+    assert actual == expected
+
+
+pass
+
+
+def test_replace3():
+    text = '-->_1_金句摘抄｜关于奋斗_1.png.ocr.txt<--'
+    actual = StringHelper.replace(text, r"-->(.*).ocr.txt<--", r"[\1](\1)")
+    expected = '[_1_金句摘抄｜关于奋斗_1.png](_1_金句摘抄｜关于奋斗_1.png)'
+    assert actual == expected
+
+
+pass
+
 
 def test_sub_string1():
     whole = "男人为什么不能嫖娼？ 人生道路上，有许多迷雾难以剖析。"
