@@ -6,7 +6,7 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-
+import base64
 import imghdr
 
 from BasicLibrary.data.enumHelper import EnumHelper
@@ -61,6 +61,21 @@ class ImageHelper:
         file_type = cls.what(file, h)
 
         return EnumHelper.is_exist_value(ImageTypeEnum, file_type)
+
+    pass
+
+    @staticmethod
+    def get_base64(image_file_full_name: str):
+        """
+        获取图片的base64编码
+        :param image_file_full_name:
+        :return:
+        """
+        with open(image_file_full_name, "rb") as image_file:
+            image_data = base64.b64encode(image_file.read()).decode('utf-8')
+        pass
+
+        return image_data
 
     pass
 

@@ -10,6 +10,10 @@ import os
 import shutil
 
 from os import PathLike
+
+from BasicLibrary.data.randomHelper import RandomHelper
+from BasicLibrary.enums import RandomEnum
+from BasicLibrary.io.ioEnums import ObjectHasExistedDealStrategyEnum
 from BasicLibrary.io.pathHelper import PathHelper
 
 
@@ -103,17 +107,46 @@ class DirHelper:
 
     pass
 
-    @staticmethod
-    def move(source_dir_full_name: PathLike, dest_dir_full_name: PathLike) -> None:
+    @classmethod
+    def rename(cls, parent_dir_full_name, old_dir_base_name: PathLike, new_dir_base_name: str, **kwargs):
+        """
+        给指定文件夹下的某个子文件夹重新命名（即将 parent-path-full-name/subA改名为parent-path-full-name/subB）
+        :param parent_dir_full_name: 父文件夹的完整路径
+        :param old_dir_base_name: 旧有的文件夹基本名称
+        :param new_dir_base_name: 要改名的新文件夹基本名称
+        :return:
+        """
+        old_dir_full_name = os.path.join(parent_dir_full_name, old_dir_base_name)
+        new_dir_full_name = os.path.join(parent_dir_full_name, new_dir_base_name)
+        cls.move(old_dir_full_name, new_dir_full_name, **kwargs)
+
+    pass
+
+    @classmethod
+    def move(cls, source_dir_full_name: PathLike, dest_dir_full_name: PathLike, **kwargs) -> None:
         """
         移动目录(如果原目录不存在，本方法不会执行任何动作)
         :param source_dir_full_name: 原目录的全名称
         :param dest_dir_full_name: 新目录的全名称
         :return:
         """
-        if os.path.isdir(source_dir_full_name):
-            os.rename(source_dir_full_name, dest_dir_full_name)
+        if not cls.is_exist(source_dir_full_name):
+            return
         pass
+
+        # TODO:xiedali@20230608 需要加入一个目标文件夹已经存在时的处理策略的功能
+        if cls.is_exist(dest_dir_full_name):
+            # object_has_existed_deal_strategy = kwargs.get('ObjectHasExistedDealStrategy',
+            #                                               ObjectHasExistedDealStrategyEnum.RenameNew)
+
+            # if object_has_existed_deal_strategy == ObjectHasExistedDealStrategyEnum.RenameNew:
+            #     new_dir_full_name += f'({RandomHelper.create(8, RandomEnum.UpperLetters)})'
+            # pass
+
+            dest_dir_full_name += f'({RandomHelper.create(8, RandomEnum.UpperLetters)})'
+        pass
+
+        os.rename(source_dir_full_name, dest_dir_full_name)
 
     pass
 
