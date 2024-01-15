@@ -139,23 +139,37 @@ class FileHelper:
         cls.store(file_full_name, content)
 
     @classmethod
-    def save(cls, file_full_name: PathLike, content: str = ""):
+    def save(cls, file_full_name: PathLike, content: str = "", is_append=False, file_encoding=None):
         """
         在目标位置创建文件(store方法的别名)
-        :param str content: 待保存内容
+        :param file_encoding:
+        :param is_append: 新内容如是附加在原内容的后面，还是替代掉原内容（默认是替换）
+        :param str content: 待保存的内容
         :param str file_full_name:待创建文件的全路径名称
         :return:
         """
-        cls.store(file_full_name, content)
+        cls.store(file_full_name, content, is_append, file_encoding)
 
     @classmethod
-    def store(cls, file_full_name: PathLike, content, is_append=True, file_encoding=None):
+    def append(cls, file_full_name: PathLike, content: str = ""):
+        """
+        向目标文件的末尾追加内容
+        :param file_full_name:待追加内容文件的全路径名称
+        :param content:待追加的内容
+        :return:
+        """
+        cls.store(file_full_name, content, is_append=True)
+
+    pass
+
+    @classmethod
+    def store(cls, file_full_name: PathLike, content, is_append=False, file_encoding=None):
         """
         保存文件在磁盘中
         :param file_encoding:
         :param str file_full_name:待保存文件的全路径名称
         :param content:待保存内容
-        :param bool is_append: 新内容如是附加在原内容的后面，还是替代掉原内容（默认是附加在原内容后面）
+        :param bool is_append: 新内容如是附加在原内容的后面，还是替代掉原内容（默认是替换）
         :return:
         """
         path_name = cls.get_path_name(file_full_name)
