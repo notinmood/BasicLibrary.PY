@@ -62,12 +62,14 @@ BasicLibrary/io/dirHelper.py
 BasicLibrary/io/fileHelper.py
 BasicLibrary/io/fileShadowUsing.py
 BasicLibrary/io/imageHelper.py
+BasicLibrary/io/ioEnums.py
 BasicLibrary/io/ioHelper.py
 BasicLibrary/io/pathHelper.py
 BasicLibrary/model/__init__.py
 BasicLibrary/model/container.py
 BasicLibrary/model/dataCompare.py
 BasicLibrary/model/kvPair.py
+BasicLibrary/model/returnResult.py
 BasicLibrary/model/stopWatcher.py
 BasicLibrary/office/__init__.py
 BasicLibrary/office/excelBookMate.py

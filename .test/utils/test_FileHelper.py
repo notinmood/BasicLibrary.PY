@@ -163,7 +163,7 @@ def __line_callback(line_content):
 def test_store():
     new_content = RandomHelper.create(6, RandomEnum.AllLetters)
     file_full_name = PathHelper.combine(ProjectHelper.get_root_physical_path(), r".test\_res\target\abcde.txt")
-    FileHelper.store(file_full_name, new_content)
+    FileHelper.store(file_full_name, new_content, is_append=True)
     file_all_content = FileHelper.load(file_full_name)
 
     actual = StringHelper.is_contains(file_all_content, new_content)
@@ -202,7 +202,7 @@ def test_rename():
     root_path = ProjectHelper.get_root_physical_path()
     file_name_old = RandomHelper.create() + ".txt"
     file_full_name_old = PathHelper.combine(root_path, ".test\\_res\\", file_name_old)
-    FileHelper.store(file_full_name_old, "123")
+    FileHelper.store(file_full_name_old, "123", is_append=True)
     file_name_new = RandomHelper.create() + ".txt"
     file_full_name_new = PathHelper.combine(root_path, ".test\\_res\\", file_name_new)
     FileHelper.rename(file_full_name_old, file_name_new)
@@ -386,6 +386,7 @@ def test_get_size2():
 
 pass
 
+
 # TODO:xiedali@20231029 应该加入对不存在文件的判断
 # def test_is_image_type5():
 #     file_path = ProjectHelper.get_root_physical_path()
@@ -395,3 +396,70 @@ pass
 #     expected = True
 #     assert actual == expected
 # pass
+
+
+def test_is_match_extension_name1():
+    actual = FileHelper.is_match_extension_name(
+        r"Z:\BD素材同步\BillFish素材库\RMRB.人民日报\00.Published\202401\微信.A.句子之美.A8\20240117\00.Cover.png",
+        ".jpg;.png")
+    expected = True
+    assert actual == expected
+
+
+def test_is_match_extension_name2():
+    actual = FileHelper.is_match_extension_name(
+        r"A8\20240117\00.Cover.png",
+        ".jpg;png")
+    expected = True
+    assert actual == expected
+
+
+pass
+
+
+def test_is_match_extension_name3():
+    actual = FileHelper.is_match_extension_name(
+        r"A8\20240117\00.Cover.png",
+        ".jpg;bmp")
+    expected = False
+    assert actual == expected
+
+
+pass
+
+
+def test_is_match_extension_name4():
+    actual = FileHelper.is_match_extension_name(
+        r"A8\20240117\00.Cover.png",
+        "*")
+    expected = True
+    assert actual == expected
+
+    actual = FileHelper.is_match_extension_name(
+        r"A8\20240117\00.Cover.png",
+        ".*")
+    expected = True
+    assert actual == expected
+
+
+pass
+
+
+def test_is_match_extension_name5():
+    actual = FileHelper.is_match_extension_name(
+        r"A8\20240117\00.Cover.png",
+        "cover.png")
+    expected = True
+    assert actual == expected
+
+    actual = FileHelper.is_match_extension_name(
+        r"A8\20240117\00.Cover.png",
+        ".cover.png")
+    expected = True
+    assert actual == expected
+
+    actual = FileHelper.is_match_extension_name(
+        r"A8\20240117\00.Cover.png",
+        "over.png")
+    expected = False
+    assert actual == expected

@@ -13,6 +13,7 @@ from os import PathLike
 
 from BasicLibrary.data.randomHelper import RandomHelper
 from BasicLibrary.enums import RandomEnum
+from BasicLibrary.io.fileHelper import FileHelper
 from BasicLibrary.io.ioEnums import ObjectHasExistedDealStrategyEnum
 from BasicLibrary.io.pathHelper import PathHelper
 
@@ -23,29 +24,32 @@ class DirHelper:
     """
 
     @classmethod
-    def get_files(cls, dir_full_path: PathLike, include_sub_dir=True):
+    def get_files(cls, dir_full_path: PathLike, include_sub_dir=True, extension_names=".*"):
         """
         获取某目录下的带完整路径的文件全名称
+        :param extension_names: 文件扩展名，多个扩展名之间用逗号分隔。默认为".*"（所有文件）
         :param dir_full_path:
         :param include_sub_dir: 是否包含子目录（缺省是True，包含）
         :return:
         """
         result = []
-        cls.__list_dir(dir_full_path, result, include_sub_dir)
+        cls.__list_dir(dir_full_path, result, include_sub_dir, extension_names)
         return result
 
     pass
 
     @classmethod
-    def __list_dir(cls, dir_full_path: PathLike, list_name, include_sub_dir=True):  # 传入存储的list
+    def __list_dir(cls, dir_full_path: PathLike, list_name, include_sub_dir=True, extension_names=".*"):
         for item in os.listdir(dir_full_path):
             item_full_path = os.path.join(dir_full_path, item)
             if os.path.isdir(item_full_path):
                 if include_sub_dir is True:
-                    cls.__list_dir(item_full_path, list_name)
+                    cls.__list_dir(item_full_path, list_name, include_sub_dir, extension_names)
                 pass
             else:
-                list_name.append(item_full_path)
+                if FileHelper.is_match_extension_name(item_full_path, extension_names):
+                    list_name.append(item_full_path)
+                pass
             pass
         pass
 

@@ -18,7 +18,6 @@ from BasicLibrary.data.randomHelper import RandomHelper
 from BasicLibrary.data.stringHelper import StringHelper
 from BasicLibrary.enums import RandomEnum
 from BasicLibrary.io.imageHelper import ImageHelper
-
 from BasicLibrary.io.pathHelper import PathHelper
 
 
@@ -368,6 +367,33 @@ class FileHelper:
         :return:
         """
         return os.path.getsize(file_full_name)
+
+    pass
+
+    @staticmethod
+    def is_match_extension_name(file_name: str, extension_names=".*"):
+        """
+        检查文件名是否匹配指定的扩展名列表。
+        :param file_name:全名称或者基本名称
+        :param extension_names:文件的扩展名列表，多个扩展名用分号分隔
+        :return:
+        """
+        extension_names = StringHelper.lower_all_chars(extension_names)
+        file_name = StringHelper.lower_all_chars(file_name)
+        extension_name_list = StringHelper.explode(extension_names, ";")
+        extension_name_list_fixed = []
+        for _item in extension_name_list:
+            if not _item.startswith("."):
+                _item = "." + _item
+            pass
+            extension_name_list_fixed.append(_item)
+        pass
+
+        if extension_name_list_fixed.__contains__(".*"):
+            return True
+        pass
+
+        return file_name.endswith(tuple(extension_name_list_fixed))
 
     pass
 

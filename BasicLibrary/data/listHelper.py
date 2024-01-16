@@ -29,6 +29,7 @@ class ListHelper:
                 pass
             pass
         pass
+
     pass
 
     @staticmethod
@@ -56,6 +57,7 @@ class ListHelper:
             pass
 
         return None
+
     pass
 
     @staticmethod
@@ -66,6 +68,7 @@ class ListHelper:
         :return:
         """
         return list(set(data))
+
     pass
 
     # 以下获取交集并集差集的算法，只支持元素为简单类型的list
@@ -78,6 +81,7 @@ class ListHelper:
         :return:
         """
         return list(set(list_a).union(set(list_b)))
+
     pass
 
     @staticmethod
@@ -89,6 +93,7 @@ class ListHelper:
         :return:
         """
         return list(set(list_a).intersection(set(list_b)))
+
     pass
 
     @staticmethod
@@ -100,6 +105,7 @@ class ListHelper:
         :return:
         """
         return list(set(list_left).difference(set(list_right)))
+
     pass
 
     @staticmethod
@@ -111,6 +117,7 @@ class ListHelper:
         :return:
         """
         return list(set(list_right).difference(set(list_left)))
+
     pass
 
     @staticmethod
@@ -122,6 +129,7 @@ class ListHelper:
         :return:
         """
         return list(set(list_left) ^ set(list_right))
+
     pass
 
     @staticmethod
@@ -149,6 +157,7 @@ class ListHelper:
         pass
 
         return list_data
+
     pass
 
     @staticmethod
@@ -164,6 +173,7 @@ class ListHelper:
         pass
 
         return result
+
     pass
 
     @staticmethod
@@ -174,5 +184,29 @@ class ListHelper:
         :return:
         """
         return list(reversed(list_data))
+
+    pass
+
+    @staticmethod
+    def remove_item(list_data: list, item: any = ""):
+        """
+        移除 list 中的 所有的符合条件的item项目
+        :param list list_data:
+        :param item:
+        :return:
+        """
+        return list(filter(lambda x: x != item, list_data))
+
+    pass
+
+    @staticmethod
+    def remove_item_by_index(list_data: list, index: int):
+        """
+        移除 list 中的 item
+        :param list list_data:
+        :param index:
+        :return:
+        """
+        del list_data[index]
 
     pass
