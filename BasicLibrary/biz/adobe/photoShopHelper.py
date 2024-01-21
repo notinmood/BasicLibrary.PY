@@ -128,7 +128,7 @@ class PhotoShopHelper(object):
     pass
 
     @classmethod
-    def unlock(cls, document, layer_code, layer_path_seperator="//"):
+    def release_lock_by_layer_code(cls, document, layer_code, layer_path_seperator="//"):
         """
         解锁图层
         :param document:
@@ -138,46 +138,48 @@ class PhotoShopHelper(object):
         """
         layer_matched = cls.find_layer(document, layer_code, layer_path_seperator)
 
-        def release_lock_recursive(layer):
-            if layer:
-                try:
-                    layer.positionLocked = False
-                except:
-                    pass
-                pass
+        cls.release_lock_by_layer(layer_matched)
 
-                try:
-                    layer.pixelsLocked = False
-                except:
-                    pass
-                pass
+    pass
 
-                try:
-                    layer.transparentPixelsLocked = False
-                except:
-                    pass
-                pass
+    @classmethod
+    def release_lock_by_layer(cls, layer):
 
-                try:
-                    layer.allLocked = False
-                except:
-                    pass
-                pass
-            pass
-
+        if layer:
             try:
-                if layer.parent:
-                    release_lock_recursive(layer.parent)
-                pass
+                layer.positionLocked = False
             except:
                 pass
             pass
 
+            try:
+                layer.pixelsLocked = False
+            except:
+                pass
+            pass
+
+            try:
+                layer.transparentPixelsLocked = False
+            except:
+                pass
+            pass
+
+            try:
+                layer.allLocked = False
+            except:
+                pass
+            pass
         pass
 
-        release_lock_recursive(layer_matched)
+        try:
+            if layer.parent:
+                cls.release_lock_by_layer(layer.parent)
+            pass
+        except:
+            pass
+        pass
+
 
     pass
-
 
 pass
