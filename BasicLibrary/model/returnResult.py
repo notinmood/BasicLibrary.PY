@@ -6,6 +6,7 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
+from BasicLibrary.data.dateTimeHelper import DateTimeHelper
 
 
 class ReturnResult[T]:
@@ -19,6 +20,16 @@ class ReturnResult[T]:
     @staticmethod
     def Empty() -> "ReturnResult[T]":
         return ReturnResult(False, "", None)
+
+    @staticmethod
+    def Ok() -> "ReturnResult[T]":
+        content = f"✅处理成功-{DateTimeHelper.get_string()}"
+        return ReturnResult(True, content, None)
+
+    @staticmethod
+    def Bad() -> "ReturnResult[T]":
+        content = f"❌处理失败-{DateTimeHelper.get_string()}"
+        return ReturnResult(False, content, None)
 
     def __init__(self, status: bool = True, message: str = "", data: T = None):
         self.status: bool = status
