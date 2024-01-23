@@ -11,6 +11,7 @@
 class Singleton(object):
     """
     单例装饰器
+    使用方法:在目标类上加上@Singleton即可以实现单例效果
     """
     def __init__(self, cls):
         self._cls = cls

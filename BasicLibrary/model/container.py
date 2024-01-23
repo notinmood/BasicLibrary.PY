@@ -19,9 +19,11 @@ class Container(object):
         """
         if ObjectHelper.is_empty(name):
             name = "__default__20210410__"
+        pass
 
         if not DictHelper.is_contains_key(Container.dicts, name):
             Container.dicts[name] = default_value
+        pass
 
         result = Container.dicts[name]
         return result
@@ -44,3 +46,4 @@ class Container(object):
             return result
         else:
             return None
+        pass

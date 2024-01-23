@@ -10,6 +10,7 @@ import os
 import shutil
 
 from os import PathLike
+from typing import Callable
 
 from BasicLibrary.data.randomHelper import RandomHelper
 from BasicLibrary.enums import RandomEnum
@@ -24,7 +25,7 @@ class DirHelper:
     """
 
     @classmethod
-    def get_files(cls, dir_full_path: PathLike, include_sub_dir=True, extension_names=".*"):
+    def get_files(cls, dir_full_path: PathLike | str, include_sub_dir=True, extension_names=".*"):
         """
         获取某目录下的带完整路径的文件全名称
         :param extension_names: 文件扩展名，多个扩展名之间用逗号分隔。默认为".*"（所有文件）
@@ -39,7 +40,7 @@ class DirHelper:
     pass
 
     @classmethod
-    def __list_dir(cls, dir_full_path: PathLike, list_name, include_sub_dir=True, extension_names=".*"):
+    def __list_dir(cls, dir_full_path: PathLike | str, list_name, include_sub_dir=True, extension_names=".*"):
         for item in os.listdir(dir_full_path):
             item_full_path = os.path.join(dir_full_path, item)
             if os.path.isdir(item_full_path):
@@ -56,7 +57,7 @@ class DirHelper:
     pass
 
     @classmethod
-    def get_sub_dirs(cls, dir_full_path: PathLike) -> list:
+    def get_sub_dirs(cls, dir_full_path: PathLike | str) -> list:
         dirs: list = []
         for item in os.listdir(dir_full_path):
             item_full_path = os.path.join(dir_full_path, item)
@@ -68,7 +69,7 @@ class DirHelper:
         return dirs
 
     @staticmethod
-    def ensure_exist(dir_full_path: PathLike):
+    def ensure_exist(dir_full_path: PathLike | str):
         """
         确保目录存在，如果不存在就创建
         :param dir_full_path:
@@ -79,7 +80,7 @@ class DirHelper:
     pass
 
     @classmethod
-    def is_exist(cls, dir_full_path: PathLike) -> bool:
+    def is_exist(cls, dir_full_path: PathLike | str) -> bool:
         """
         判断为文件夹是否存在
         :param dir_full_path: 带全路径的文件夹名称
@@ -90,7 +91,7 @@ class DirHelper:
     pass
 
     @classmethod
-    def is_dir(cls, dir_full_path: PathLike) -> bool:
+    def is_dir(cls, dir_full_path: PathLike | str) -> bool:
         """
         判断为文件夹是否存在(is_exist的别名)
         :param dir_full_path: 带全路径的文件夹名称
@@ -101,7 +102,7 @@ class DirHelper:
     pass
 
     @classmethod
-    def make(cls, dir_full_path: PathLike):
+    def make(cls, dir_full_path: PathLike | str):
         """
         创建目录
         :param dir_full_path:
@@ -112,7 +113,8 @@ class DirHelper:
     pass
 
     @classmethod
-    def rename(cls, parent_dir_full_name, old_dir_base_name: PathLike, new_dir_base_name: str, **kwargs):
+    def rename(cls, parent_dir_full_name: PathLike | str, old_dir_base_name: PathLike | str,
+               new_dir_base_name: PathLike | str, **kwargs):
         """
         给指定文件夹下的某个子文件夹重新命名（即将 parent-path-full-name/subA改名为parent-path-full-name/subB）
         :param parent_dir_full_name: 父文件夹的完整路径
@@ -127,13 +129,17 @@ class DirHelper:
     pass
 
     @classmethod
-    def move(cls, source_dir_full_name: PathLike, dest_dir_full_name: PathLike, **kwargs) -> None:
+    def move(cls, source_dir_full_name: PathLike | str, dest_dir_full_name: PathLike | str, **kwargs) -> None:
         """
         移动目录(如果原目录不存在，本方法不会执行任何动作)
         :param source_dir_full_name: 原目录的全名称
         :param dest_dir_full_name: 新目录的全名称
         :return:
         """
+        # 以下是为了消除ide参数未使用的警告而做的PolyFill
+        # noinspection all
+        kwargs = kwargs
+
         if not cls.is_exist(source_dir_full_name):
             return
         pass
@@ -155,7 +161,7 @@ class DirHelper:
     pass
 
     @staticmethod
-    def remove(dir_full_name: PathLike):
+    def remove(dir_full_name: PathLike | str):
         """
         删除目录(如果目录不存在，本方法不会执行任何动作)
         :param dir_full_name:
@@ -168,11 +174,11 @@ class DirHelper:
     pass
 
     @staticmethod
-    def walk_files(dir_full_name: PathLike, deal_file_func: callable, *args, **kwargs):
+    def walk_files[** P](dir_full_name: PathLike | str, deal_file_func: Callable[[str, str, P], None], *args, **kwargs):
         """
         遍历目录下的文件
         :param dir_full_name:
-        :param deal_file_func:处理每一个文件使用的函数。（两个参数分别为文件的基本名称和文件所在的全路径）
+        :param deal_file_func:处理每一个文件使用的函数。（参数分别为文件的基本名称和文件所在的全路径,以及*args和**kwargs）
         :return:
         """
         for dir_full_path, dir_names, file_names in os.walk(dir_full_name):

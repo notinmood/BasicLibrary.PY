@@ -31,7 +31,7 @@ class PathHelper:
     pass
 
     @classmethod
-    def get_dir_name(cls, path=None | PathLike, up_level=1):
+    def get_dir_name(cls, path=None | PathLike | str, up_level=1):
         """
         获取给定路径的目录部分
         :param int up_level: 求向上多少级的目录。如果不指定本参数，那么
@@ -73,7 +73,7 @@ class PathHelper:
     pass
 
     @staticmethod
-    def ensure_exist(path):
+    def ensure_exist(path: PathLike | str):
         """
         取保目录存在，如果不存在就创建
         :param path:
@@ -86,7 +86,7 @@ class PathHelper:
     pass
 
     @staticmethod
-    def determine_is_exist(path):
+    def determine_is_exist(path: PathLike | str):
         """
         判断给定的路径是否存在
         :param path:
@@ -97,7 +97,7 @@ class PathHelper:
     pass
 
     @staticmethod
-    def get_formatted_path(path):
+    def get_formatted_path(path: PathLike | str):
         """
         获取跟 os 相关的格式化的路径（Windows下用 “\\”;linux 下用 "/"）
         :param path:

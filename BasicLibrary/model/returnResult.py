@@ -22,14 +22,20 @@ class ReturnResult[T]:
         return ReturnResult(False, "", None)
 
     @staticmethod
-    def Ok() -> "ReturnResult[T]":
-        content = f"✅处理成功-{DateTimeHelper.get_string()}"
-        return ReturnResult(True, content, None)
+    def Ok(message="") -> "ReturnResult[T]":
+        if not message:
+            message = f"✅处理成功-({DateTimeHelper.get_string()})"
+        pass
+
+        return ReturnResult(True, message, None)
 
     @staticmethod
-    def Bad() -> "ReturnResult[T]":
-        content = f"❌处理失败-{DateTimeHelper.get_string()}"
-        return ReturnResult(False, content, None)
+    def Bad(message="") -> "ReturnResult[T]":
+        if not message:
+            message = f"❌处理失败-({DateTimeHelper.get_string()})"
+        pass
+
+        return ReturnResult(False, message, None)
 
     def __init__(self, status: bool = True, message: str = "", data: T = None):
         self.status: bool = status

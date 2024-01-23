@@ -28,7 +28,7 @@ class FileHelper:
     """
 
     @staticmethod
-    def get_base_name(file_name: str) -> str:
+    def get_base_name(file_name: PathLike | str) -> str:
         """
         获取给定路径的文件名称部分(带扩展名)
         :param file_name:可以是文件的全名称也可以是部分名称
@@ -37,7 +37,7 @@ class FileHelper:
         return os.path.basename(file_name)
 
     @classmethod
-    def get_base_name_no_extension(cls, file_name: str) -> str:
+    def get_base_name_no_extension(cls, file_name: PathLike | str) -> str:
         """
         获取给定路径的文件名称部分(不带扩展名)
         :param file_name:
@@ -50,7 +50,7 @@ class FileHelper:
     pass
 
     @staticmethod
-    def get_extension_name(file_name: str) -> str:
+    def get_extension_name(file_name: PathLike | str) -> str:
         """
         获取文件的扩展名(带符号“.”)
         :param file_name:可以是文件的全名称也可以是基本名称
@@ -59,7 +59,7 @@ class FileHelper:
         return pathlib.Path(file_name).suffix
 
     @staticmethod
-    def get_path_name(file_name: str | PathLike) -> str:
+    def get_path_name(file_name: PathLike | str) -> str:
         """
         获取文件的路径部分
         :param file_name:
@@ -69,7 +69,7 @@ class FileHelper:
         return filepath
 
     @classmethod
-    def load(cls, file_full_name: PathLike) -> bytes | str:
+    def load(cls, file_full_name: PathLike | str) -> bytes | str:
         """
         读取文件内容
         :param file_full_name:
@@ -84,7 +84,7 @@ class FileHelper:
         return data
 
     @classmethod
-    def get(cls, file_full_name: PathLike) -> bytes | str:
+    def get(cls, file_full_name: PathLike | str) -> bytes | str:
         """
         读取文件内容（load方法的别名）
         :param file_full_name:
@@ -93,7 +93,7 @@ class FileHelper:
         return cls.load(file_full_name)
 
     @classmethod
-    def load_with_lines(cls, file_full_name: PathLike) -> list[str]:
+    def load_with_lines(cls, file_full_name: PathLike | str) -> list[str]:
         """
         按照行的方式读取文件，返回行信息的list
         :param file_full_name:
@@ -108,7 +108,7 @@ class FileHelper:
         return data
 
     @classmethod
-    def load_with_line(cls, file_full_name: PathLike, line_callback: callable) -> None:
+    def load_with_line(cls, file_full_name: PathLike | str, line_callback: callable) -> None:
         """
         按行读取文件，每读取一行进行一次处理（调用line_callback）,对大文件尤其有效
         :param str file_full_name:
@@ -128,7 +128,7 @@ class FileHelper:
         pass
 
     @classmethod
-    def create(cls, file_full_name: PathLike, content: str = ""):
+    def create(cls, file_full_name: PathLike | str, content: str = ""):
         """
         在目标位置创建文件(store方法的别名)
         :param str content: 待保存内容
@@ -138,7 +138,7 @@ class FileHelper:
         cls.store(file_full_name, content)
 
     @classmethod
-    def save(cls, file_full_name: PathLike, content: str = "", is_append=False, file_encoding=None):
+    def save(cls, file_full_name: PathLike | str, content: str = "", is_append=False, file_encoding=None):
         """
         在目标位置创建文件(store方法的别名)
         :param file_encoding:
@@ -150,7 +150,7 @@ class FileHelper:
         cls.store(file_full_name, content, is_append, file_encoding)
 
     @classmethod
-    def append(cls, file_full_name: PathLike, content: str = ""):
+    def append(cls, file_full_name: PathLike | str, content: str = ""):
         """
         向目标文件的末尾追加内容
         :param file_full_name:待追加内容文件的全路径名称
@@ -162,7 +162,7 @@ class FileHelper:
     pass
 
     @classmethod
-    def store(cls, file_full_name: PathLike, content, is_append=False, file_encoding=None):
+    def store(cls, file_full_name: PathLike | str, content, is_append=False, file_encoding=None):
         """
         保存文件在磁盘中
         :param file_encoding:
@@ -187,7 +187,7 @@ class FileHelper:
         pass
 
     @staticmethod
-    def remove(file_full_name: PathLike):
+    def remove(file_full_name: PathLike | str):
         """
         删除文件
         :param file_full_name:
@@ -200,7 +200,7 @@ class FileHelper:
         pass
 
     @classmethod
-    def delete(cls, file_full_name: PathLike):
+    def delete(cls, file_full_name: PathLike | str):
         """
         删除文件（remove方法的别名）
         :param file_full_name:
@@ -209,7 +209,7 @@ class FileHelper:
         cls.remove(file_full_name)
 
     @staticmethod
-    def copy(source_file_full_name: PathLike, target_dir_full_name: PathLike, target_file_base_name: str = ""):
+    def copy(source_file_full_name: PathLike | str, target_dir_full_name: PathLike | str, target_file_base_name: str = ""):
         """
         复制文件
         :param source_file_full_name:带全路径的源文件
@@ -235,7 +235,7 @@ class FileHelper:
     pass
 
     @classmethod
-    def move(cls, source_file_full_name: PathLike, dest_dir_full_name: PathLike, dest_file_base_name: str = ""):
+    def move(cls, source_file_full_name: PathLike | str, dest_dir_full_name: PathLike | str, dest_file_base_name: str = ""):
         """
         移动文件
         :param source_file_full_name:
@@ -258,7 +258,7 @@ class FileHelper:
     pass
 
     @classmethod
-    def is_exist(cls, file_full_name: PathLike) -> bool:
+    def is_exist(cls, file_full_name: PathLike | str) -> bool:
         """
         判断为文件是否存在
         :param file_full_name: 带全路径的文件名称
@@ -269,7 +269,7 @@ class FileHelper:
     pass
 
     @classmethod
-    def is_file(cls, file_full_name: PathLike) -> bool:
+    def is_file(cls, file_full_name: PathLike | str) -> bool:
         """
         判断为文件是否存在(is_exist的别名)
         :param file_full_name: 带全路径的文件名称
@@ -280,7 +280,7 @@ class FileHelper:
     pass
 
     @classmethod
-    def rename(cls, old_file_full_name: PathLike, new_file_base_name: str):
+    def rename(cls, old_file_full_name: PathLike | str, new_file_base_name: str):
         """
 
         :param old_file_full_name: 旧有的带路径的文件全名称
@@ -299,19 +299,19 @@ class FileHelper:
     pass
 
     @staticmethod
-    def get_image_type_name(file: PathLike, h=None):
+    def get_image_type_name(file: PathLike | str, h=None):
         return ImageHelper.get_image_type_name(file, h)
 
     pass
 
     @staticmethod
-    def is_image_type(file_full_name: str) -> bool:
+    def is_image_type(file_full_name: PathLike | str) -> bool:
         return ImageHelper.is_image_type(file_full_name)
 
     pass
 
     @classmethod
-    def modify(cls, file_full_name: PathLike, func: callable, file_encoding=None):
+    def modify(cls, file_full_name: PathLike | str, func: callable, file_encoding=None):
         """
         修改文件名
         :param file_encoding: 文件的编码格式。如果不指定的话，那么系统自动判定
@@ -339,7 +339,7 @@ class FileHelper:
     pass
 
     @classmethod
-    def get_encoding(cls, file_full_name: PathLike):
+    def get_encoding(cls, file_full_name: PathLike | str):
         if not file_full_name or not cls.is_exist(file_full_name):
             return 'utf-8'
         pass
@@ -360,7 +360,7 @@ class FileHelper:
     pass
 
     @staticmethod
-    def get_size(file_full_name: PathLike) -> int:
+    def get_size(file_full_name: PathLike | str) -> int:
         """
         它以字节为单位返回指定路径的大小。如果文件不存在或无法访问，则引发OSError。
         :param file_full_name:
@@ -371,7 +371,7 @@ class FileHelper:
     pass
 
     @staticmethod
-    def is_match_extension_name(file_name: str, extension_names=".*"):
+    def is_match_extension_name(file_name: PathLike | str, extension_names=".*"):
         """
         检查文件名是否匹配指定的扩展名列表。
         :param file_name:全名称或者基本名称

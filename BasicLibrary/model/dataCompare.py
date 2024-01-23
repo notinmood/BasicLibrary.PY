@@ -27,17 +27,22 @@ class DataSummary:
         else:
             self.length = target_length
             self.type = target_type
+        pass
 
     def compare(self, comparing_data):
         if isinstance(comparing_data, DataSummary):
             if self.length != comparing_data.length:
                 return False
+            pass
+
             if self.type != comparing_data.type:
                 return False
+            pass
 
             return True
         else:
             return False
+        pass
 
 
 class DataCompare:

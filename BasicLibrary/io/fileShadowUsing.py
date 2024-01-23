@@ -6,6 +6,7 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
+from os import PathLike
 
 from BasicLibrary.data.randomHelper import RandomHelper
 from BasicLibrary.io.fileHelper import FileHelper
@@ -24,7 +25,7 @@ class FileShadowUsing:
 
     pass
 
-    def __init__(self, file_full_name, is_auto_destroy=True):
+    def __init__(self, file_full_name:PathLike | str, is_auto_destroy=True):
         """
         通过给定的原始文件，生成一个影子文件。
         :param file_full_name: 原始文件的文件全名称。
@@ -46,7 +47,7 @@ class FileShadowUsing:
     pass
 
     @staticmethod
-    def __generate_file_shadow(source_file_full_name):
+    def __generate_file_shadow(source_file_full_name:PathLike | str):
         target_dir_full_name = PathHelper.get_dir_name(source_file_full_name)
         target_file_ext_name = FileHelper.get_extension_name(source_file_full_name)
         target_file_base_name = RandomHelper.create() + target_file_ext_name

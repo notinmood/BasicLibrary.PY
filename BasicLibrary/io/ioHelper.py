@@ -29,7 +29,7 @@ class IOHelper:
     pass
 
     @classmethod
-    def get_file_system_safe_name(cls, filename, safe_char="_", include_path_separator=True):
+    def get_file_system_safe_name(cls, filename: os.PathLike | str, safe_char="_", include_path_separator=True):
         """
         在文件系统内获取安全可用的名称
         :param filename:
@@ -63,7 +63,7 @@ class IOHelper:
     pass
 
     @staticmethod
-    def remove(path):
+    def remove(path: os.PathLike | str):
         if os.path.isfile(path):
             FileHelper.remove(path)
         else:

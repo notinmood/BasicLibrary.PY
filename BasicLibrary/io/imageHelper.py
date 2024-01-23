@@ -8,6 +8,7 @@
 """
 import base64
 import imghdr
+from os import PathLike
 
 from BasicLibrary.data.enumHelper import EnumHelper
 from BasicLibrary.enums import ImageTypeEnum
@@ -65,7 +66,7 @@ class ImageHelper:
     pass
 
     @staticmethod
-    def get_base64(image_file_full_name: str):
+    def get_base64(image_file_full_name: PathLike | str):
         """
         获取图片的base64编码
         :param image_file_full_name:
