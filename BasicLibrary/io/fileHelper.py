@@ -69,28 +69,32 @@ class FileHelper:
         return filepath
 
     @classmethod
-    def load(cls, file_full_name: PathLike | str) -> bytes | str:
+    def load(cls, file_full_name: PathLike | str, encoding: str = "") -> bytes | str:
         """
         读取文件内容
+        :param encoding:
         :param file_full_name:
         :return:
         """
-        file_encoding = cls.get_encoding(file_full_name)
+        if not encoding:
+            encoding = cls.get_encoding(file_full_name)
+        pass
 
-        with open(file_full_name, "r", encoding=file_encoding) as file_pointer:
+        with open(file_full_name, "r", encoding=encoding) as file_pointer:
             data = file_pointer.read()
         pass
 
         return data
 
     @classmethod
-    def get(cls, file_full_name: PathLike | str) -> bytes | str:
+    def get(cls, file_full_name: PathLike | str, encoding: str = "") -> bytes | str:
         """
         读取文件内容（load方法的别名）
+        :param encoding:
         :param file_full_name:
         :return:
         """
-        return cls.load(file_full_name)
+        return cls.load(file_full_name, encoding)
 
     @classmethod
     def load_with_lines(cls, file_full_name: PathLike | str) -> list[str]:
@@ -209,7 +213,8 @@ class FileHelper:
         cls.remove(file_full_name)
 
     @staticmethod
-    def copy(source_file_full_name: PathLike | str, target_dir_full_name: PathLike | str, target_file_base_name: str = ""):
+    def copy(source_file_full_name: PathLike | str, target_dir_full_name: PathLike | str,
+             target_file_base_name: str = ""):
         """
         复制文件
         :param source_file_full_name:带全路径的源文件
@@ -235,7 +240,8 @@ class FileHelper:
     pass
 
     @classmethod
-    def move(cls, source_file_full_name: PathLike | str, dest_dir_full_name: PathLike | str, dest_file_base_name: str = ""):
+    def move(cls, source_file_full_name: PathLike | str, dest_dir_full_name: PathLike | str,
+             dest_file_base_name: str = ""):
         """
         移动文件
         :param source_file_full_name:
