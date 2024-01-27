@@ -129,3 +129,14 @@ def test_reverser():
 
 
 pass
+
+
+def test_remove_item():
+    original_list = ["", "a", "\n", "b", "c", "", "\n"]
+
+    actual = ListHelper.remove_item(original_list, "", "\n")
+    expected = ['a', 'b', 'c']
+    assert actual == expected
+
+
+pass

@@ -188,14 +188,22 @@ class ListHelper:
     pass
 
     @staticmethod
-    def remove_item(list_data: list, item: any = ""):
+    def remove_item(list_data: list, *item_args: any):
         """
         移除 list 中的 所有的符合条件的item项目
         :param list list_data:
-        :param item:
+        :param item_args:
         :return:
         """
-        return list(filter(lambda x: x != item, list_data))
+        if not item_args:
+            return list_data
+        pass
+
+        for _item in item_args:
+            list_data = list(filter(lambda x: x != _item, list_data))
+        pass
+
+        return list_data
 
     pass
 
