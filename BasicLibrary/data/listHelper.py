@@ -1,3 +1,5 @@
+from typing import Callable
+
 from BasicLibrary import ObjectHelper
 
 
@@ -7,7 +9,7 @@ class ListHelper:
     """
 
     @staticmethod
-    def get(list_data, index, default_value=None):
+    def get[T](list_data: list[T], index: int, default_value: T = None):
         """
         安装索引，安全地从数组中获取元素
         :param default_value:
@@ -33,27 +35,27 @@ class ListHelper:
     pass
 
     @staticmethod
-    def get_index(list_data, value, item_property=None):
+    def get_index(list_data, item, item_property_name: str = None) -> int | None:
         """
         获取某个元素在list中的index
         :param list_data:
-        :param value:
-        :param item_property:
+        :param item:
+        :param item_property_name:
         :return:
         """
         if type(list_data) is not enumerate:
             list_data = enumerate(list_data)
         pass
 
-        for index, item in list_data:
-            if item_property:
-                comparing_data = item[item_property]
+        for _index, _item in list_data:
+            if item_property_name:
+                comparing_data = _item[item_property_name]
             else:
-                comparing_data = item
+                comparing_data = _item
             pass
 
-            if comparing_data == value:
-                return index
+            if comparing_data == item:
+                return _index
             pass
 
         return None
@@ -133,14 +135,14 @@ class ListHelper:
     pass
 
     @staticmethod
-    def sort(list_data, callback_in__list__item_out__item_property=None, reverse=False):
+    def sort[T](list_data: list[T], callback_func: Callable[[T], any] = None, reverse=False):
         """
-        对数组内的元素进行排序
+        对列表内的元素进行排序
         :param reverse:
         :param list_data:
-        :param callback_in__list__item_out__item_property: 排序规则的回调函数
-            入参为:数组的元素
-            返回值为：数组元素的某个属性名称字符串
+        :param callback_func: 排序规则的回调函数（复合列表下使用。复合列表就是父级list的子元素是其他复杂数据类型的情形，比如子元素是字典等。）
+            入参为:列表的元素
+            返回值为：依据列表元素计算出的一个可比较（Compare）的值，比如列表元素的某个属性对应的值。（Python内没有类似ICompare接口？如果有，需要将返回值类型any进行替换）
         :return:
         :example:
             actual = ListHelper.sort(cars, lambda item: item["year"])
@@ -150,8 +152,8 @@ class ListHelper:
                         {'car': 'Porsche', 'year': 2023}]
             assert actual == expected
         """
-        if callback_in__list__item_out__item_property:
-            list_data.sort(key=callback_in__list__item_out__item_property, reverse=reverse)
+        if callback_func:
+            list_data.sort(key=callback_func, reverse=reverse)
         else:
             list_data.sort(reverse=reverse)
         pass
@@ -177,7 +179,7 @@ class ListHelper:
     pass
 
     @staticmethod
-    def reverse(list_data):
+    def reverse(list_data: list):
         """
         返回翻转顺序的 list（翻转的list，不影响原来输入的list）
         :param list_data:
