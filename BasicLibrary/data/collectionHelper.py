@@ -27,7 +27,7 @@ class CollectionHelper:
     pass
 
     @staticmethod
-    def sort_for_inner_is_dict(iterable, key_name, reverse=False):
+    def sort_dict(iterable, key_name, reverse=False):
         """
         为内部成员为字典的可迭代对象，按指定的字典键名进行排序
         :param iterable:

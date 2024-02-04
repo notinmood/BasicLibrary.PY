@@ -220,3 +220,31 @@ class ListHelper:
         del list_data[index]
 
     pass
+
+    @staticmethod
+    def is_contains(list_data: list, item):
+        """
+        判断 list 是否包含 item
+        :param list_data:
+        :param item:
+        :return:
+        """
+        if item in list_data:
+            return True
+        else:
+            return False
+        pass
+
+    @classmethod
+    def has(cls, list_data: list, item):
+        """
+        判断 list 是否包含 item(is_contains的别名)
+        :param list_data:
+        :param item:
+        :return:
+        """
+        return cls.is_contains(list_data, item)
+
+    pass
+
+    pass

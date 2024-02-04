@@ -67,13 +67,13 @@ def test_sort_for_inner_dict():
     my_list = [{"name": "zhangsan", "age": 20, "score": 93},
                {"name": "lisi", "age": 19, "score": 94},
                {"name": "wangwu", "age": 21, "score": 92}]
-    actual = CollectionHelper.sort_for_inner_is_dict(my_list, "age")
+    actual = CollectionHelper.sort_dict(my_list, "age")
     expected = [{'name': 'lisi', 'age': 19, 'score': 94},
                 {'name': 'zhangsan', 'age': 20, 'score': 93},
                 {'name': 'wangwu', 'age': 21, 'score': 92}]
     assert actual == expected
 
-    actual = CollectionHelper.sort_for_inner_is_dict(my_list, "score")
+    actual = CollectionHelper.sort_dict(my_list, "score")
     expected = [{'name': 'wangwu', 'age': 21, 'score': 92},
                 {'name': 'zhangsan', 'age': 20, 'score': 93},
                 {'name': 'lisi', 'age': 19, 'score': 94}]
