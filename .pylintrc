@@ -1,0 +1,12 @@
+[MESSAGES CONTROL]
+# disable=all
+# enable=C0103
+
+disable =
+    non-ascii-file-name,
+    line-too-long,
+    invalid-name,
+    unnecessary-pass,
+    too-few-public-methods,
+    import-error,
+    too-many-public-methods,

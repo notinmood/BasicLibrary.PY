@@ -1,3 +1,11 @@
+"""
+ * @file   : **.py
+ * @time   : 16:26
+ * @date   : 2021/11/8
+ * @mail   : 9727005@qq.com
+ * @creator: ShanDong Xiedali
+ * @company: HiLand & RainyTop
+"""
 import re
 
 from BasicLibrary.data.regexHelper import RegexHelper
@@ -19,12 +27,12 @@ class StringHelper:
         :return:
         """
         if prefix is True:
-            padding_format = r'{}\1'.format(padding)
+            padding_format = rf'{padding}\1'
         else:
-            padding_format = r'\1{}'.format(padding)
+            padding_format = rf'\1{padding}'
         pass
 
-        result = re.sub("({})".format(patten), padding_format, original_content)
+        result = re.sub(f"({patten})", padding_format, original_content)
         return result
 
     pass
@@ -40,27 +48,38 @@ class StringHelper:
         pos = str.find(whole, separator)
         if pos >= 0:
             return whole[0:pos]
-        else:
-            return whole
         pass
+
+        return whole
 
     pass
 
     @staticmethod
     def get_after_content(whole, separator):
+        """
+        在指定的字符串中获取分隔符后面的内容
+        :param whole:
+        :param separator:
+        :return:
+        """
         pos = str.find(whole, separator)
         if pos >= 0:
             pos += len(separator)
             result = whole[pos:]
             return result
-        else:
-            return whole
         pass
+
+        return whole
 
     pass
 
     @staticmethod
     def get_length(data):
+        """
+        获取数据的长度
+        :param data:
+        :return:
+        """
         return len(data)
 
     pass
@@ -95,21 +114,33 @@ class StringHelper:
 
     @staticmethod
     def remove_head(whole, head=" "):
+        """
+        移除字符串头部指定的字符，如果字符串头部不是指定的字符，则返回原字符串
+        :param whole:
+        :param head:
+        :return:
+        """
         if StringHelper.is_start_with(whole, head):
             return whole[len(head):]
-        else:
-            return whole
         pass
+
+        return whole
 
     pass
 
     @staticmethod
     def remove_tail(whole, tail=" "):
+        """
+        移除字符串尾部指定的字符，如果字符串尾部不是指定的字符，则返回原字符串
+        :param whole:
+        :param tail:
+        :return:
+        """
         if StringHelper.is_end_with(whole, tail):
             return whole[:-len(tail)]
-        else:
-            return whole
         pass
+
+        return whole
 
     pass
 
@@ -126,12 +157,24 @@ class StringHelper:
 
     @staticmethod
     def is_end_with(whole, sub_string):
+        """
+        判断字符串是否以指定的子字符串结尾
+        :param whole:
+        :param sub_string:
+        :return:
+        """
         return str.endswith(whole, sub_string)
 
     pass
 
     @staticmethod
     def is_start_with(whole, sub_string):
+        """
+        判断字符串是否以指定的子字符串开头
+        :param whole:
+        :param sub_string:
+        :return:
+        """
         return str.startswith(whole, sub_string)
 
     pass
@@ -139,7 +182,7 @@ class StringHelper:
     @staticmethod
     def is_contains(whole, sub_string):
         """
-
+        判断字符串是否包含指定的子字符串
         :param whole:
         :param sub_string:
         :return:
@@ -156,11 +199,12 @@ class StringHelper:
         :param data:
         :return:
         """
-        if data is None or data == "":
-            return True
-        else:
-            return False
-        pass
+        # if data is None or data == "":
+        #     return True
+        # else:
+        #     return False
+        # pass
+        return not data
 
     pass
 
@@ -284,7 +328,7 @@ class StringHelper:
         :return:替换后的新字符串
         :example:
         text = '今天是：11/28/2018'
-        actual = StringHelper.replace(text, r"(\d{2})/(\d{2})/(\d{4})", r"\3年\1月\2日")
+        actual = StringHelper.replace(text, r"(\\d{2})/(\\d{2})/(\\d{4})", r"\3年\1月\2日")
         expected = '今天是：2018年11月28日'
         assert actual == expected
         """
@@ -308,13 +352,12 @@ class StringHelper:
             if abs(end_position) > all_length + 1:
                 end_position = 0 - all_length
             pass
+
             return whole_string[end_position:start_position]
-        else:
-            end_position = start_position + length
-            if end_position > all_length:
-                end_position = all_length
-            pass
-            return whole_string[start_position: end_position]
         pass
+
+        end_position = start_position + length
+        end_position = min(end_position, all_length)
+        return whole_string[start_position: end_position]
 
     pass

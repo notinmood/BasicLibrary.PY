@@ -6,7 +6,7 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from BasicLibrary.data.stringHelper import *
+from BasicLibrary.data.stringHelper import StringHelper
 
 
 def test_reverse():
@@ -39,10 +39,13 @@ def test_implode1():
     """
     _data = {'qingdao', 'beijing', 'shanghai'}
 
-    """
-    因为集合内的元素是无序的，所以通过implode得到字符串不是确定
-    我们断言的时候，只能判断某个元素是否存在拼接后的字符串内
-    """
+    # +--------------------------------------------------------------------------
+    # |::::TIPS::::| 本代码的使用说明
+    # ---------------------------------------------------------------------------
+    # 因为集合内的元素是无序的，所以通过implode得到字符串不是确定
+    # 我们断言的时候，只能判断某个元素是否存在拼接后的字符串内
+    #
+    # +--------------------------------------------------------------------------
     actual = StringHelper.implode(_data)
     assert actual.__contains__("qingdao")
     assert actual.__contains__("beijing")
@@ -202,11 +205,11 @@ def test_upper_first_char_every_word():
 
 
 def test_replace():
-    whole = 'C:\\Users\\Administrator\\Downloads\\app_26822737\\db0e400fad35ba8e18fcac06bd9bd99f2752.jpeg'
+    whole = 'C:\\Users\\Administrator\\Downloads\\app_26822737\\db0e400fad35ba8e18ac06bd9bd99f2752.jpeg'
     old = r'C:\\Users\\Administrator\\Downloads\\app_26822737'
     new = r'E:\\MyImages\\美女图片未整理\\app_26822737'
     actual = StringHelper.replace(whole, old, new)
-    expected = "E:\\MyImages\\美女图片未整理\\app_26822737\\db0e400fad35ba8e18fcac06bd9bd99f2752.jpeg"
+    expected = "E:\\MyImages\\美女图片未整理\\app_26822737\\db0e400fad35ba8e18ac06bd9bd99f2752.jpeg"
     assert actual == expected
 
 

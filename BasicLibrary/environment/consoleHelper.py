@@ -1,3 +1,11 @@
+"""
+ * @file   : **.py
+ * @time   : 16:26
+ * @date   : 2021/11/8
+ * @mail   : 9727005@qq.com
+ * @creator: ShanDong Xiedali
+ * @company: HiLand & RainyTop
+"""
 import sys
 
 from BasicLibrary.environment.envHelper import EnvHelper
@@ -5,7 +13,7 @@ from BasicLibrary.environment.envHelper import EnvHelper
 
 class ConsoleHelper:
     """
-
+    本类提供一些与系统交互的函数。
     """
 
     @staticmethod
@@ -39,8 +47,9 @@ class ConsoleHelper:
         """
         if EnvHelper.determine_is_windows():
             return "\r\n"
-        else:
-            return "\n"
+        pass
+
+        return "\n"
 
     @staticmethod
     def get_console_args():
@@ -61,5 +70,6 @@ class ConsoleHelper:
         if args_len > index:
             arg_value = sys.argv[index]
             return arg_value
-        else:
-            return None
+        pass
+
+        return None

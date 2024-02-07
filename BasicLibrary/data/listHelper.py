@@ -1,3 +1,11 @@
+"""
+ * @file   : test_DateTimeHelper.py
+ * @time   : 16:26
+ * @date   : 2021/11/8
+ * @mail   : 9727005@qq.com
+ * @creator: ShanDong Xiedali
+ * @company: HiLand & RainyTop
+"""
 from typing import Callable
 
 from BasicLibrary import ObjectHelper
@@ -5,7 +13,7 @@ from BasicLibrary import ObjectHelper
 
 class ListHelper:
     """
-
+    列表助手
     """
 
     @staticmethod
@@ -19,18 +27,18 @@ class ListHelper:
         """
         if ObjectHelper.is_empty(list_data):
             return default_value
-        else:
-            list_length = ObjectHelper.get_length(list_data)
-            if list_length == 0:
-                return default_value
-            else:
-                if index >= list_length:
-                    return default_value
-                else:
-                    return list_data[index]
-                pass
-            pass
         pass
+
+        list_length = ObjectHelper.get_length(list_data)
+        if list_length == 0:
+            return default_value
+        pass
+
+        if index >= list_length:
+            return default_value
+        pass
+
+        return list_data[index]
 
     pass
 
@@ -43,7 +51,7 @@ class ListHelper:
         :param item_property_name:
         :return:
         """
-        if type(list_data) is not enumerate:
+        if not isinstance(list_data, enumerate):
             list_data = enumerate(list_data)
         pass
 
@@ -142,7 +150,8 @@ class ListHelper:
         :param list_data:
         :param callback_func: 排序规则的回调函数（复合列表下使用。复合列表就是父级list的子元素是其他复杂数据类型的情形，比如子元素是字典等。）
             入参为:列表的元素
-            返回值为：依据列表元素计算出的一个可比较（Compare）的值，比如列表元素的某个属性对应的值。（Python内没有类似ICompare接口？如果有，需要将返回值类型any进行替换）
+            返回值为：依据列表元素计算出的一个可比较（Compare）的值，比如列表元素的某个属性对应的值。（Python内没有类似ICompare接口？
+            如果有，需要将返回值类型any进行替换）
         :return:
         :example:
             actual = ListHelper.sort(cars, lambda item: item["year"])
@@ -229,11 +238,7 @@ class ListHelper:
         :param item:
         :return:
         """
-        if item in list_data:
-            return True
-        else:
-            return False
-        pass
+        return item in list_data
 
     @classmethod
     def has(cls, list_data: list, item):
