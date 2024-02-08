@@ -44,12 +44,11 @@ def test_implode1():
     # ---------------------------------------------------------------------------
     # 因为集合内的元素是无序的，所以通过implode得到字符串不是确定
     # 我们断言的时候，只能判断某个元素是否存在拼接后的字符串内
-    #
     # +--------------------------------------------------------------------------
     actual = StringHelper.implode(_data)
-    assert actual.__contains__("qingdao")
-    assert actual.__contains__("beijing")
-    assert actual.__contains__("shanghai")
+    assert actual.index("qingdao") >= 0
+    assert actual.index("beijing") >= 0
+    assert actual.index("shanghai") >= 0
 
 
 def test_implode2():

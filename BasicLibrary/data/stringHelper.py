@@ -209,7 +209,7 @@ class StringHelper:
     pass
 
     @staticmethod
-    def implode(collection_data, separator=','):
+    def implode(collection_data, separator=',') -> str:
         """
         将集合类型的各个元素聚合成用分隔符分割的字符串
         :param collection_data: 集合类型，可以是set，list
@@ -221,7 +221,7 @@ class StringHelper:
     pass
 
     @staticmethod
-    def explode(string_data, separator=","):
+    def explode(string_data: str, separator=",") -> list:
         """
         将字符串类型按照分隔符分割成list
         :param string_data:
