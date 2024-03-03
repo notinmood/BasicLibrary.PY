@@ -11,9 +11,10 @@ import os
 import pathlib
 import shutil
 
+from os import PathLike
 import chardet
 
-from os import PathLike
+from BasicLibrary.data.listHelper import ListHelper
 from BasicLibrary.data.randomHelper import RandomHelper
 from BasicLibrary.data.stringHelper import StringHelper
 from BasicLibrary.enums import RandomEnum
@@ -306,12 +307,23 @@ class FileHelper:
 
     @staticmethod
     def get_image_type_name(file: PathLike | str, h=None):
+        """
+        获取图片类型名称
+        :param file:
+        :param h:
+        :return:
+        """
         return ImageHelper.get_image_type_name(file, h)
 
     pass
 
     @staticmethod
     def is_image_type(file_full_name: PathLike | str) -> bool:
+        """
+        判断是否为图片类型
+        :param file_full_name:
+        :return:
+        """
         return ImageHelper.is_image_type(file_full_name)
 
     pass
@@ -364,7 +376,7 @@ class FileHelper:
         pass
 
         file_encoding_little = StringHelper.lower_all_chars(file_encoding)
-        if file_encoding_little == 'gb2312' or file_encoding_little == 'gbk':
+        if file_encoding_little in ('gb2312', 'gbk'):
             file_encoding = 'ANSI'
         pass
 
@@ -402,7 +414,11 @@ class FileHelper:
             extension_name_list_fixed.append(_item)
         pass
 
-        if extension_name_list_fixed.__contains__(".*"):
+        # if extension_name_list_fixed.__contains__(".*"):
+        #     return True
+        # pass
+
+        if ListHelper.has(extension_name_list_fixed, ".*"):
             return True
         pass
 

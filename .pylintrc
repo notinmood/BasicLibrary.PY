@@ -1,3 +1,8 @@
+[MASTER]
+# 添加要跳脱pylint检测的目录
+ignore=.test/*
+# ignore-patterns=**/3rd-part/**/*.py
+
 [MESSAGES CONTROL]
 # disable=all
 # enable=C0103
