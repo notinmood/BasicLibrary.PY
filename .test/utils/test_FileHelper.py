@@ -348,6 +348,19 @@ def test_get_encoding3():
 pass
 
 
+def test_get_encoding4():
+    root = ProjectHelper.get_root_physical_path()
+    local_path = r'.test/_res/txt/00.README-UTF8.txt'
+    file_full_name = PathHelper.combine(root, local_path)
+
+    actual = FileHelper.get_encoding(file_full_name=file_full_name)
+    expected = 'utf-8'
+    assert actual == expected
+
+
+pass
+
+
 def test_load2():
     root = ProjectHelper.get_root_physical_path()
     local_path = r'.test/_res/txt/00.README-ANSI.txt'

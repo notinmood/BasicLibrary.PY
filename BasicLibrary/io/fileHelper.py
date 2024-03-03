@@ -346,6 +346,11 @@ class FileHelper:
 
     @classmethod
     def get_encoding(cls, file_full_name: PathLike | str):
+        """
+        获取文件编码格式（如果是中文本地语言区域的文件编码，统一返回为ANSI）
+        :param file_full_name:
+        :return:
+        """
         if not file_full_name or not cls.is_exist(file_full_name):
             return 'utf-8'
         pass
@@ -354,11 +359,13 @@ class FileHelper:
             text = f.read()
 
         file_encoding = chardet.detect(text)['encoding']
-        if file_encoding:
-            file_encoding_little = StringHelper.lower_all_chars(file_encoding)
-            if file_encoding_little == 'gb2312' or file_encoding_little == 'gbk':
-                file_encoding = 'ANSI'
-            pass
+        if not file_encoding:
+            return 'utf-8'
+        pass
+
+        file_encoding_little = StringHelper.lower_all_chars(file_encoding)
+        if file_encoding_little == 'gb2312' or file_encoding_little == 'gbk':
+            file_encoding = 'ANSI'
         pass
 
         return file_encoding
