@@ -15,3 +15,4 @@ disable =
     too-few-public-methods,
     import-error,
     too-many-public-methods,
+    fixme,# 取消掉todo等注释的提示

@@ -331,7 +331,8 @@ class FileHelper:
     pass
 
     @classmethod
-    def modify(cls, file_full_name: PathLike | str, func: Callable[[str], str], file_encoding=None):
+    def modify[P](cls, file_full_name: PathLike | str, func: Callable[[str, P], str], file_encoding=None,
+                  **kwargs_for_func):
         """
         修改文件内容
         :param file_encoding: 文件的编码格式。如果不指定的话，那么系统自动判定
@@ -343,17 +344,26 @@ class FileHelper:
             file_encoding = cls.get_encoding(file_full_name)
         pass
 
-        # #  result_content = ''
+        # content = ''
+        # result_content = ''
+
         # 读取和写入文件
         with open(file_full_name, 'r', encoding=file_encoding) as r:
             content = r.read()
             # 对文件内容进行操作
-            result_content = func(content)
-            # 回写文件
-            with open(file_full_name, 'w', encoding=file_encoding) as w:
-                w.write(result_content)
-            pass
+            result_content = func(content, **kwargs_for_func)
         pass
+
+        # 如果文件内容没有变化，那么直接返回
+        if result_content == content:
+            return result_content
+        pass
+
+        # 回写文件
+        with open(file_full_name, 'w', encoding=file_encoding) as w:
+            w.write(result_content)
+        pass
+
         return result_content
 
     pass
