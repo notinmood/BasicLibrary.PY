@@ -28,7 +28,7 @@ class DirHelper:
     def get_files(cls, dir_full_path: PathLike | str, include_sub_dir=True, extension_names=".*"):
         """
         获取某目录下的带完整路径的文件全名称
-        :param extension_names: 文件扩展名，多个扩展名之间用逗号分隔。默认为".*"（所有文件）
+        :param extension_names: 文件扩展名，多个扩展名之间用逗号（或者分号）分隔。默认为".*"（所有文件）
         :param dir_full_path:
         :param include_sub_dir: 是否包含子目录（缺省是True，包含）
         :return:

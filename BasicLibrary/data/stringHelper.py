@@ -319,9 +319,10 @@ class StringHelper:
     pass
 
     @staticmethod
-    def replace(whole_string, old_sub_string, new_sub_string):
+    def replace(whole_string: str, old_sub_string: str, new_sub_string: str, use_regex_mode=True) -> str:
         """
         字符串替换
+        :param use_regex_mode: 使用正则表达式模式
         :param whole_string:
         :param old_sub_string:被替换掉的字符串或者是正则表达式
         :param new_sub_string:新字符串（可以带由 pattern 形成的分组号，分组号用 \1 \2 这样的格式表示（正则表达式中分组号是从1开始的，不是0））
@@ -332,7 +333,11 @@ class StringHelper:
         expected = '今天是：2018年11月28日'
         assert actual == expected
         """
-        return RegexHelper.replace(whole_string, old_sub_string, new_sub_string)
+        if use_regex_mode:
+            return RegexHelper.replace(whole_string, old_sub_string, new_sub_string)
+        pass
+
+        return whole_string.replace(old_sub_string, new_sub_string)
 
     pass
 

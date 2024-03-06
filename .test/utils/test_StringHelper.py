@@ -216,6 +216,15 @@ pass
 
 
 def test_replace2():
+    whole = r'C:\Users\Administrator\db0e400fad35ba8e18ac06bd9bd99f2752.jpeg'
+    old = r'C:\Users\Administrator'
+    new = r'E:\MyImages\美女图片未整理\app_26822737'
+    actual = StringHelper.replace(whole, old, new, False)
+    expected = r"E:\MyImages\美女图片未整理\app_26822737\db0e400fad35ba8e18ac06bd9bd99f2752.jpeg"
+    assert actual == expected
+
+
+def test_replace3():
     text = '今天是：11/28/2018'
     actual = StringHelper.replace(text, r"(\d{2})/(\d{2})/(\d{4})", r"\3年\1月\2日")
     expected = '今天是：2018年11月28日'
