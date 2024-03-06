@@ -12,6 +12,8 @@ import pathlib
 import shutil
 
 from os import PathLike
+from typing import Callable
+
 import chardet
 
 from BasicLibrary.data.listHelper import ListHelper
@@ -329,11 +331,11 @@ class FileHelper:
     pass
 
     @classmethod
-    def modify(cls, file_full_name: PathLike | str, func: callable, file_encoding=None):
+    def modify(cls, file_full_name: PathLike | str, func: Callable[[str], str], file_encoding=None):
         """
-        修改文件名
+        修改文件内容
         :param file_encoding: 文件的编码格式。如果不指定的话，那么系统自动判定
-        :param func:对文件内容进行操作的函数，参数为文件的内容，返回值是修改后的内容
+        :param func:对文件内容进行操作的函数，参数为文件原来的内容，返回值是修改后的内容
         :param file_full_name: 带全路径的文件名称
         :return:修改后的文件内容
         """
