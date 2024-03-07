@@ -67,4 +67,23 @@ def test_get_current_physical_path():
     assert actual == expected
 
 
+def test_get_disk_name1():
+    actual = PathHelper.get_disk_name(r"C:/test_path")
+    expected = "C:"
+    assert actual == expected
+
+
+def test_get_disk_name2():
+    actual = PathHelper.get_disk_name(r"/box/test_path")
+    expected = ""
+    assert actual == expected
+
+
+def test_get_disk_name3():
+    actual = PathHelper.get_disk_name(r"//host/computer/dir")
+    expected = "//host/computer"
+    assert actual == expected
+
+
+pass
 pass

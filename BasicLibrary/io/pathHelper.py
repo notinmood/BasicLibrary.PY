@@ -117,5 +117,16 @@ class PathHelper:
 
     pass
 
+    @staticmethod
+    def get_disk_name(path: str | PathLike):
+        """
+        获取给定路径的磁盘名称（在没有驱动器概念的系统上，本函数将返回空字符串。）
+        :param path:
+        :return:
+        """
+        return os.path.splitdrive(path)[0]
+
+    pass
+
 
 pass

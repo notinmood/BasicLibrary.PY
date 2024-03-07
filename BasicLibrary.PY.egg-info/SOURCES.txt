@@ -55,6 +55,7 @@ BasicLibrary/dataBase/MySql/mate.py
 BasicLibrary/dataBase/MySql/pool.py
 BasicLibrary/environment/__init__.py
 BasicLibrary/environment/consoleHelper.py
+BasicLibrary/environment/dynamicImporter.py
 BasicLibrary/environment/envHelper.py
 BasicLibrary/environment/inspectHelper.py
 BasicLibrary/io/__init__.py
