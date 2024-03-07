@@ -198,4 +198,26 @@ def test_get_date_lunar5():
     assert actual == expected
 
 
+def test_get_timestamp1():
+    actual = DateTimeHelper.get_timestamp(None, 10.6) * 1_000_000
+    actual = len(str(int(actual)))
+    expected = 16
+    assert actual == expected
+
+    actual = len(str(DateTimeHelper.get_timestamp(None, 16)))
+    # actual = DateTimeHelper.get_timestamp(None, 16)
+    expected = 16
+    assert actual == expected
+
+    actual = len(str(DateTimeHelper.get_timestamp(None, 13)))
+    # actual = DateTimeHelper.get_timestamp(None, 13)
+    expected = 13
+    assert actual == expected
+
+    actual = len(str(DateTimeHelper.get_timestamp(None, 10)))
+    # actual = DateTimeHelper.get_timestamp(None, 10)
+    expected = 10
+    assert actual == expected
+
+
 pass

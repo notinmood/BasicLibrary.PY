@@ -261,5 +261,39 @@ class DateTimeHelper:
 
     pass
 
+    @staticmethod
+    def get_timestamp(target_date: datetime = None, formatter: float = 10.6) -> float | int:
+        """
+        获取时间戳（从1970年1月1日0时0分0秒开始计算，到目标时刻的总共时间计量单位（秒、毫秒、微秒等）数）
+        :param target_date:
+        :param formatter:通常使用以下三种格式：
+                    1、 10.6 这是标准格式，前10位表示总共的秒数，后6位表示微秒数
+                    2、 10 表示使用秒计量总共的时间耗时
+                    3、 13 表示使用毫秒计量总共的时间耗时
+                    4、 16 表示使用微秒计量总共的时间耗时
+        :return:
+        """
+
+        if target_date is None:
+            target_date = datetime.now()
+        pass
+
+        if formatter == 10:
+            return int(target_date.timestamp())
+        pass
+
+        if formatter == 13:
+            return int(target_date.timestamp() * 1_000)
+        pass
+
+        if formatter == 16:
+            return int(target_date.timestamp() * 1_000_000)
+        pass
+
+        # 其余要求，全部返回默认的"10.6"格式
+        return target_date.timestamp()
+
+
+pass
 
 pass
