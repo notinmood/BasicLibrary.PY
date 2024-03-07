@@ -15,7 +15,6 @@ from typing import Callable
 from BasicLibrary.data.randomHelper import RandomHelper
 from BasicLibrary.enums import RandomEnum
 from BasicLibrary.io.fileHelper import FileHelper
-from BasicLibrary.io.ioEnums import ObjectHasExistedDealStrategyEnum
 from BasicLibrary.io.pathHelper import PathHelper
 
 
@@ -186,6 +185,28 @@ class DirHelper:
                 deal_file_func(file_base_name, dir_full_path, *args, **kwargs)
             pass
         pass
+
+    pass
+
+    @staticmethod
+    def change_working_dir(target_dir: str | PathLike):
+        """
+        改变当前工作目录
+        :param target_dir:
+        :return:
+        """
+        os.chdir(target_dir)
+        return os.getcwd()
+
+    pass
+
+    @staticmethod
+    def get_working_dir():
+        """
+        获取当前工作目录
+        :return:
+        """
+        return os.getcwd()
 
     pass
 

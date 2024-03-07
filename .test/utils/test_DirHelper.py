@@ -128,4 +128,15 @@ def test_get_files():
     assert actual == expected
 
 
-pass
+def test_get_working_dir():
+    actual = DirHelper.get_working_dir()
+    root_path = ProjectHelper.get_root_physical_path()
+
+    expected = os.path.join(root_path, ".test")
+    assert actual == expected
+
+
+def test_change_working_dir():
+    actual = DirHelper.change_working_dir("C:\\")
+    expected = "C:\\"
+    assert actual == expected
