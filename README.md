@@ -27,35 +27,46 @@
 
 ## 【一】发布步骤：
 
-1. 打开本项目的"终端"窗口(或者通过 windows 的资源管理器定位到本项目 setup.py 所在的目录)
-2. 打开修改 setup.py 文件 `VERSION = '0.4.3'`为新的值
-3. 运行命令 `python setup.py sdist`
-4. 运行命令 `twine upload dist/*`
+1. 打开文件`pyproject.toml`,修改`version = '0.4.3'`为新的值
+2. 打开本项目的"终端"窗口(或者通过 windows 的资源管理器定位到本项目根目录所在的位置)
+3. 打包项目。运行命令：`poetry build`
+4. 发布项目。运行命令：`poetry publish`
 
 ## 【二】其他
 
-将本项目需求的第三方软件包统一组织在 requirements.txt 文件内。
+将本项目需求的第三方软件包统一组织在 `pyproject.toml` 文件内。
 
-1. 组织第三方软件包进入文件的命令是：`pip freeze > requirements.txt`
-2. 重新安装所需的各第三方包的命令为：`pip install -r requirements.txt`
+1. 安装第三方软件包。运行命令：`poetry add 包名`
+2. 更新第三方软件包。运行命令：`poetry update 包名`
+3. 删除第三方软件包。运行命令：`poetry remove 包名`
+4. 查看已安装的第三方软件包。运行命令：`poetry show`
 
-## 【三】部署
-
+## 【三】本库的使用说明
 
 ### 1. 库安装（更新）说明
+
 更新公司类库 BasicLibrary.PY 的命令：
 
-```
-pip install BasicLibrary.PY -U
-# (因为本地的pip通常都为了加速，进行过换源处理了，换源之后缓存更新会比较慢。
-# 所以为了使用最新的库功能，可以使用原始的PIPY源，代码如下：)
-pip install BasicLibrary.PY -U -i https://pypi.org/simple
-```
+1. 传统pip方式
+    ```shell
+    pip install BasicLibrary.PY -U
+    # (因为本地的pip通常都为了加速，进行过换源处理了，换源之后缓存更新会比较慢。
+    # 所以为了使用最新的库功能，可以使用原始的PIPY源，代码如下：)
+    pip install BasicLibrary.PY -U -i https://pypi.org/simple
+    ```
+2. poetry方式
+    ```shell
+    poetry add BasicLibrary.PY
+    poetry update BasicLibrary.PY
+    poetry remove BasicLibrary.PY
+    ```
+
 ### 2. 库使用说明
 
-   1. 以下两个文件复制到项目根目录下
-       1. `__projectConfig.ini` 改名为 `_projectConfig.ini`
-       2. `__projectHelper.py` 改名为 `_projectHelper.py`
+1. 以下两个文件复制到项目根目录下
+    1. `__projectConfig.ini` 改名为 `_projectConfig.ini`
+    2. `__projectHelper.py` 改名为 `_projectHelper.py`
 
-   2. 如果有敏感信息(比如账号口令等)不适合写在 ini 文件内的，可以将 `.env.default` 文件拷贝到文件 `_projectConfig.ini` 所在的项目根目录,然后改名为 `.env`,然后在 .env 文件内配置这些信息. (
-      ini 文件是嵌入到 vcs 系统的，但 .env 是不嵌入 vcs 系统的)
+2. 如果有敏感信息(比如账号口令等)不适合写在 ini 文件内的，可以将 `.env.default` 文件拷贝到文件 `_projectConfig.ini`
+   所在的项目根目录,然后改名为 `.env`,然后在 .env 文件内配置这些信息. (
+   ini 文件是嵌入到 vcs 系统的，但 .env 是不嵌入 vcs 系统的)
