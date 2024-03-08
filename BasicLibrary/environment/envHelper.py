@@ -44,3 +44,21 @@ class EnvHelper:
         :return:
         """
         return os.path.sep
+
+    @staticmethod
+    def get_python_version() -> str:
+        """
+        将 Python 版本以字符串 'major.minor.patchlevel' 形式返回
+        :return:
+        """
+        return platform.python_version()
+
+    @staticmethod
+    def get_python_version_tuple() -> tuple[str, str, str]:
+        """
+        将 Python 版本以字符串元组 (major, minor, patchlevel) 形式返回
+        :return:
+        """
+        return platform.python_version_tuple()
+
+    pass
