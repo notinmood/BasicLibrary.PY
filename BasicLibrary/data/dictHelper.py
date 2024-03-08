@@ -73,13 +73,13 @@ class DictHelper:
     @staticmethod
     def merge(*args):
         """
-
+        将多部字典合并为一部字典
         :param dict args:
         :return:
         """
         result = {}
-        for key in args:
-            result.update(key)
+        for item in args:
+            result.update(item)
         pass
 
         return result
