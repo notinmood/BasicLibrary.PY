@@ -13,14 +13,7 @@ from BasicLibrary.data.typeEnum import TypeEnum
 class TypeHelper(object):
     @staticmethod
     def get_type(data):
-        if type(data) is int:
-            return TypeEnum.INT
-        pass
-
-        if type(data) is float:
-            return TypeEnum.FLOAT
-        pass
-
+        return type(data)
     pass
 
 

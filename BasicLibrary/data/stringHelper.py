@@ -8,6 +8,8 @@
 """
 import re
 
+from BasicLibrary import ObjectHelper
+from BasicLibrary.data.listHelper import ListHelper
 from BasicLibrary.data.regexHelper import RegexHelper
 
 
@@ -221,14 +223,37 @@ class StringHelper:
     pass
 
     @staticmethod
-    def explode(string_data: str, separator=",") -> list:
+    def explode(string_data: str, separators: str | list[str] = ",") -> list:
         """
         将字符串类型按照分隔符分割成list
         :param string_data:
-        :param separator:
+        :param separators:
         :return:
         """
-        return string_data.split(separator)
+        if ObjectHelper.get_type(separators) is str:
+            separators = [separators]
+        pass
+
+        if len(separators) < 1:
+            return [string_data]
+        pass
+
+        result = string_data.split(separators[0])
+        for _index, delimiter in enumerate(separators):
+            if _index > 0:
+                for result_item in result:
+                    temp = result_item.split(delimiter)
+                    if len(temp) > 1:
+                        result.remove(result_item)
+                        result = ListHelper.merge(result, temp)
+                    pass
+                pass
+            pass
+        pass
+
+        return result
+
+        # return string_data.split(separators)
 
     pass
 

@@ -156,15 +156,30 @@ def test_set_padding():
     assert actual == expected
 
 
-def test_explode():
-    whole = "hello,china"
+def test_explode1():
+    whole = "hello,china,boy"
     actual = StringHelper.explode(whole, ",")
-    expected = ["hello", "china"]
+    expected = ["hello", "china", 'boy']
     assert actual == expected
 
     whole = "hello,china"
     actual = StringHelper.explode(whole, ".")
     expected = ["hello,china"]
+    assert actual == expected
+
+
+def test_explode2():
+    whole = "hello,china.boy"
+    actual = StringHelper.explode(whole, [",", "."])
+    expected = ['hello', 'china', 'boy']
+    assert actual == expected
+
+
+def test_explode3():
+    whole = "hello,china.boy;"
+    actual = StringHelper.explode(whole, [",", ".", ";"])
+    expected = ['hello', 'china', 'boy', '']
+    expected = expected
     assert actual == expected
 
 
@@ -234,7 +249,7 @@ def test_replace3():
 pass
 
 
-def test_replace3():
+def test_replace4():
     text = '-->_1_金句摘抄｜关于奋斗_1.png.ocr.txt<--'
     actual = StringHelper.replace(text, r"-->(.*).ocr.txt<--", r"[\1](\1)")
     expected = '[_1_金句摘抄｜关于奋斗_1.png](_1_金句摘抄｜关于奋斗_1.png)'

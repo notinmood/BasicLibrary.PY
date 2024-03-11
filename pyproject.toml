@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "BasicLibrary.PY"
+version = "0.6.1"
+description = ""
+authors = ["解大劦 <9727005@qq.com>"]
+readme = "README.md"
+packages = [{include = "basiclibrary"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
