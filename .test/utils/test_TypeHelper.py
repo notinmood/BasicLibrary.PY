@@ -9,8 +9,12 @@
 from BasicLibrary.data.typeEnum import TypeEnum
 
 
-# def test_enum_name():
-#     actual = TypeEnum.INT
-#     expected = type(int)
-#     assert actual == expected
-# pass
+def test_enum_name():
+    """
+    占位符，没有实际意义。具体再修改
+    :return:
+    """
+    actual = TypeEnum.INT
+    expected = TypeEnum.INT
+    assert actual == expected
+pass

@@ -31,7 +31,7 @@ class StockHelper:
         :param stock_code:
         :return:
         """
-        pattern = r"[0|3|6|7|9]\d{5}"
+        pattern = r"[0|3|6|7|8|9]\d{5}"
         matched = re.search(pattern, stock_code)
         if matched:
             return matched.group(0)
@@ -65,7 +65,7 @@ class StockHelper:
             """
             明确指定的都转换为小写的交易所名称
             """
-            target = re.sub(r"\[sen\]", stock_exchange_name_lower, target)
+            target = re.sub(r"\[sen]", stock_exchange_name_lower, target)
 
             """
             添加其他替换过滤条件
@@ -74,4 +74,4 @@ class StockHelper:
             """
             其他非明确指定的都换成大写交易所的名称
             """
-            return re.sub(r"\[SEN\]", stock_exchange_name_upper, target, 0, re.IGNORECASE)
+            return re.sub(r"\[SEN]", stock_exchange_name_upper, target, 0, re.IGNORECASE)

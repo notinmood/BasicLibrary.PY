@@ -9,10 +9,12 @@
 from BasicLibrary.model.returnResult import ReturnResult
 
 
-# def test_empty():
-#     actual = ReturnResult.Empty()
-#     expected = ReturnResult(False, "", None)
-#     assert actual == expected
+def test_empty():
+    actual = ReturnResult.Empty()
+    expected = ReturnResult(False, "", None)
+    assert actual.message == expected.message
+    assert actual.status == expected.status
+    assert actual.data == expected.data
 
 
 pass

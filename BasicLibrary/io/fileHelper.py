@@ -308,14 +308,14 @@ class FileHelper:
     pass
 
     @staticmethod
-    def get_image_type_name(file: PathLike | str, h=None):
+    def get_image_type_name(file: PathLike | str):
         """
         获取图片类型名称
         :param file:
         :param h:
         :return:
         """
-        return ImageHelper.get_image_type_name(file, h)
+        return ImageHelper.get_image_type_name(file)
 
     pass
 

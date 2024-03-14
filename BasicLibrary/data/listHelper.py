@@ -17,7 +17,7 @@ class ListHelper:
     """
 
     @staticmethod
-    def get[T](list_data: list[T], index: int, default_value: T = None):
+    def get[T](list_data: list[T] | None, index: int, default_value: T = None):
         """
         安装索引，安全地从数组中获取元素
         :param default_value:

@@ -31,7 +31,7 @@ class PathHelper:
     pass
 
     @classmethod
-    def get_dir_name(cls, path=None | PathLike | str, up_level=1):
+    def get_dir_name(cls, path: PathLike | str = None, up_level=1):
         """
         获取给定路径的目录部分
         :param int up_level: 求向上多少级的目录。如果不指定本参数，那么

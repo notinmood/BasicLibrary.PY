@@ -34,7 +34,7 @@ def test_get_dir_name1():
     actual = PathHelper.get_dir_name()
 
     root = PathHelper.get_root_path()
-    expected = "{}\\.test\\utils".format(root)
+    expected = f"{root}\\.test\\utils"
     assert actual == expected
 
 
@@ -56,8 +56,8 @@ def test_get_dir_name2():
 def test_real_path():
     file_name = "E:/myworkspace/BasicLibrary.PY\\.test\\utils\\test_FileHelper.py"
     actual = PathHelper.get_formatted_path(file_name)
-    expected = StringHelper.replace(file_name, "/", EnvHelper.get_path_separator())
-    expected = StringHelper.replace(expected, "\\", EnvHelper.get_path_separator())
+    expected = StringHelper.replace(file_name, "/", EnvHelper.get_path_separator(), False)
+    expected = StringHelper.replace(expected, "\\", EnvHelper.get_path_separator(), False)
     assert actual == expected
 
 
