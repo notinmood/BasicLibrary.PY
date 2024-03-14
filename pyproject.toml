@@ -4,11 +4,16 @@ version = "0.6.1"
 description = ""
 authors = ["解大劦 <9727005@qq.com>"]
 readme = "README.md"
-packages = [{include = "basiclibrary"}]
+packages = [{include = "BasicLibrary"}]
 
 [tool.poetry.dependencies]
 python = "^3.12"
+pillow = "^10.2.0"
 
+
+[tool.poetry.dev-dependencies]
+pytest-mock = "^3.12.2"
+pytest = "^8.0"
 
 [build-system]
 requires = ["poetry-core"]

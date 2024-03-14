@@ -39,6 +39,19 @@ class StringHelper:
 
     pass
 
+    # TODO:xiedali@2024/03/11 需要为add_seperator添加单元测试
+    @staticmethod
+    def add_seperator(whole: str, seperator='\n', every=14):
+        """
+        在指定的字符串中每隔every个字符添加分隔符
+        :param whole:
+        :param seperator:
+        :param every:
+        :return:
+        """
+        return seperator.join(whole[i:i + every] for i in range(0, len(whole), every))
+    pass
+
     @staticmethod
     def get_before_content(whole, separator):
         """
