@@ -3,8 +3,8 @@ import pandas as pd
 
 class PandasHelper:
     """
-
-        """
+    Pandas Helper
+    """
 
     @staticmethod
     def is_exist_column(dataframe, column_name):
@@ -109,27 +109,20 @@ class PandasHelper:
 
     pass
 
-    # TODO:求取差集并集交集的方法，需要重新考虑命名，以求更简洁直白
     @staticmethod
-    def get_difference_single(df_a, df_b):
+    def get_difference(df_a, df_b):
         """
-        对于有同样Index的a,b两个DataFrame，如果现在要求a对b的差集，
-        那么可以
-        （1)连续两次扩充a，使用append方法
-        （2）然后使用drop_duplicates方法对a进行去重，并且参数keep=False。
-        原理很简单，也很巧妙，连续扩充2次a，那么新扩充完后的DataFrame中来自b的row肯定是重复的，
-        去重时候，b全部被删除，与此同时，a中跟b重复的row也会顺带着被删除。
+        求a对b的差集
         :param df_a:
         :param df_b:
         :return:
         """
-        df_a = df_a.append(df_b)
-        df_a = df_a.append(df_b)
-
-        df_a = df_a.drop_duplicates(keep=False)
-        return df_a
+        diff = pd.concat([df_a, df_b, df_b]).drop_duplicates(keep=False)
+        return diff
 
     pass
+
+    # TODO:xiedali@2024/03/15 求双向差集
 
 
 pass

@@ -23,14 +23,14 @@ def gen_data():
 
 def test_get_difference_single(gen_data):
     pd_a, pd_b = gen_data
-    pd_s = PandasHelper.get_difference_single(pd_a, pd_b)
+    pd_s = PandasHelper.get_difference(pd_a, pd_b)
 
     item0 = pd_s[0]
     actual = len(item0)
     expected = 3
     assert actual == expected
 
-    pd_s = PandasHelper.get_difference_single(pd_b, pd_a)
+    pd_s = PandasHelper.get_difference(pd_b, pd_a)
     item0 = pd_s[0]
     actual = len(item0)
     expected = 1
