@@ -19,9 +19,37 @@ class StringHelper:
     """
 
     @staticmethod
-    def add_padding(original_content, patten, padding, prefix=True):
+    def add_padding(original, all_length, padding_char='0', pad_at_before=True):
         """
-        在匹配的字符前（或者后）方添加新的字符
+        用字符填充前(或者后)端位置，获取固定长度的字符串
+        :param original:
+        :param all_length:
+        :param padding_char:
+        :param pad_at_before:
+        :return:
+        """
+        original = str(original)
+        current_length = len(original)
+
+        if current_length >= all_length:
+            result = original
+        else:
+            char_count = all_length - current_length
+            if pad_at_before is True:
+                result = padding_char * char_count + original
+            else:
+                result = original + padding_char * char_count
+            pass
+        pass
+
+        return result
+
+    pass
+
+    @staticmethod
+    def insert_fixer(original_content, patten, padding, prefix=True):
+        """
+        在给定的字符串中匹配符号模式的字符，在匹配到的字符前（或者后）方添加新的字符缀
         :param original_content:
         :param patten:正则表达式的模式字符串
         :param padding:待填充进去的字符串
@@ -50,6 +78,7 @@ class StringHelper:
         :return:
         """
         return seperator.join(whole[i:i + every] for i in range(0, len(whole), every))
+
     pass
 
     @staticmethod
@@ -96,34 +125,6 @@ class StringHelper:
         :return:
         """
         return len(data)
-
-    pass
-
-    @staticmethod
-    def set_padding(original, all_length, padding_char='0', pad_at_before=True):
-        """
-        用字符填充前(或者后)端位置，获取固定长度的字符串
-        :param original:
-        :param all_length:
-        :param padding_char:
-        :param pad_at_before:
-        :return:
-        """
-        original = str(original)
-        current_length = len(original)
-
-        if current_length >= all_length:
-            result = original
-        else:
-            char_count = all_length - current_length
-            if pad_at_before is True:
-                result = padding_char * char_count + original
-            else:
-                result = original + padding_char * char_count
-            pass
-        pass
-
-        return result
 
     pass
 

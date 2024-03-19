@@ -12,7 +12,7 @@ from BasicLibrary.data.stringHelper import StringHelper
 from BasicLibrary.io.fileHelper import FileHelper
 
 
-class PhotoShopHelper(object):
+class PhotoShopHelper:
     """
     Photoshop辅助类
     本类方法适用于Photoshop软件的第三方类库`photoshop_python_api`，使用前请先安装本类库（`pip install photoshop_python_api`）；

@@ -58,6 +58,16 @@ def test_convert_from_string():
     expected = datetime(2021, 10, 11)
     assert actual == expected
 
+    data = "20211011"
+    actual = DateTimeHelper.convert_from_string(data)
+    expected = datetime(2021, 10, 11)
+    assert actual == expected
+
+    data = "20211011152532"
+    actual = DateTimeHelper.convert_from_string(data)
+    expected = datetime(2021, 10, 11,15, 25, 32)
+    assert actual == expected
+
 
 def test_get_compact_date_time_string():
     """

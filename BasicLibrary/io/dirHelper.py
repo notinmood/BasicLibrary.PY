@@ -24,7 +24,7 @@ class DirHelper:
     """
 
     @classmethod
-    def get_files(cls, dir_full_path: PathLike | str, include_sub_dir=True, extension_names=".*"):
+    def get_files(cls, dir_full_path: PathLike | str, include_sub_dir=True, extension_names=".*") -> list[str]:
         """
         获取某目录下的带完整路径的文件全名称
         :param extension_names: 文件扩展名，多个扩展名之间用逗号（或者分号）分隔。默认为".*"（所有文件）
@@ -56,7 +56,7 @@ class DirHelper:
     pass
 
     @classmethod
-    def get_sub_dirs(cls, dir_full_path: PathLike | str) -> list:
+    def get_sub_dirs(cls, dir_full_path: PathLike | str) -> list[str]:
         dirs: list = []
         for item in os.listdir(dir_full_path):
             item_full_path = os.path.join(dir_full_path, item)
@@ -189,7 +189,7 @@ class DirHelper:
     pass
 
     @staticmethod
-    def change_working_dir(target_dir: str | PathLike):
+    def change_working_dir(target_dir: str | PathLike) -> str:
         """
         改变当前工作目录
         :param target_dir:
@@ -201,7 +201,7 @@ class DirHelper:
     pass
 
     @staticmethod
-    def get_working_dir():
+    def get_working_dir() -> str:
         """
         获取当前工作目录
         :return:

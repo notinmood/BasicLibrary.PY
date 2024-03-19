@@ -4,3 +4,4 @@
 /.test/_res/target/*.*
 __pycache__
 *.pyc
+*.lock

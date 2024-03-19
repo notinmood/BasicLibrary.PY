@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "BasicLibrary.PY"
-version = "0.6.4"
+version = "0.6.7"
 description = ""
 authors = ["解大劦 <9727005@qq.com>"]
 readme = "README.md"
@@ -10,6 +10,8 @@ packages = [{include = "BasicLibrary"}]
 python = "^3.12"
 pillow = "^10.2.0"
 pandas = "^2.2.1"
+sxtwl = "^2.0.6"
+chardet = "^5.2.0"
 
 
 [tool.poetry.dev-dependencies]

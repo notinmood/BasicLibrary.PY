@@ -115,19 +115,19 @@ def test_get_after_content():
     assert actual == expected
 
 
-def test_add_padding():
+def test_insert_fixer():
     whole = "hello,china"
-    actual = StringHelper.add_padding(whole, "w", "-")
+    actual = StringHelper.insert_fixer(whole, "w", "-")
     expected = "hello,china"
     assert actual == expected
 
     whole = "hello,china"
-    actual = StringHelper.add_padding(whole, ",", "-")
+    actual = StringHelper.insert_fixer(whole, ",", "-")
     expected = "hello-,china"
     assert actual == expected
 
     whole = "hello,china"
-    actual = StringHelper.add_padding(whole, ",", "-", False)
+    actual = StringHelper.insert_fixer(whole, ",", "-", False)
     expected = "hello,-china"
     assert actual == expected
 
@@ -139,19 +139,19 @@ def test_get_length():
     assert actual == expected
 
 
-def test_set_padding():
+def test_add_padding():
     whole = "qingdao"
-    actual = StringHelper.set_padding(whole, 5)
+    actual = StringHelper.add_padding(whole, 5)
     expected = "qingdao"
     assert actual == expected
 
     whole = "qingdao"
-    actual = StringHelper.set_padding(whole, 10)
+    actual = StringHelper.add_padding(whole, 10)
     expected = "000qingdao"
     assert actual == expected
 
     whole = "qingdao"
-    actual = StringHelper.set_padding(whole, 10, "-", False)
+    actual = StringHelper.add_padding(whole, 10, "-", False)
     expected = "qingdao---"
     assert actual == expected
 
