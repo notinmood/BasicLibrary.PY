@@ -4,7 +4,7 @@ version = "0.6.11"
 description = ""
 authors = ["解大劦 <9727005@qq.com>"]
 readme = "README.md"
-packages = [{include = "BasicLibrary"}]
+packages = [{ include = "BasicLibrary" }]
 
 [tool.poetry.dependencies]
 python = "^3.12"
@@ -14,9 +14,8 @@ sxtwl = "^2.0.6"
 chardet = "^5.2.0"
 python-dotenv = "^1.0.1"
 
-
-
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
+pylint = "^3.1.0"
 pytest = "^8.0"
 
 [build-system]

@@ -10,11 +10,11 @@ from BasicLibrary.data.regexHelper import RegexHelper
 
 
 def test_get_matched_items():
-    whole = "I am in Tengzhou(0632),and I love Qingdao(0532)!"
+    whole = "I am in overseas(+01),and I love Qingdao(0532)!"
     pattern = r"\d+"
 
     actual = RegexHelper.get_matched_items(whole, pattern)
-    expected = ['0632', '0532']
+    expected = ['01', '0532']
     assert actual == expected
 
     pattern = r"^\d+"
@@ -35,4 +35,11 @@ def test_replace():
     text = '今天是：11/28/2018'
     actual = RegexHelper.replace(text, r"(\d{2})/(\d{2})/(\d{4})", r"\3年\1月\2日")
     expected = '今天是：2018年11月28日'
+    assert actual == expected
+
+
+def test_keep_prototypical():
+    text = "(xx).png.txt"
+    actual = RegexHelper.keep_prototypical(text)
+    expected = r"\(xx\)\.png\.txt"
     assert actual == expected

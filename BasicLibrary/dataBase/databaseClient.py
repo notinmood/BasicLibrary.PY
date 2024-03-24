@@ -6,7 +6,7 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from BasicLibrary.configHelper import ConfigHelper as ch
+from BasicLibrary.configHelper import ConfigHelper
 from BasicLibrary.data.dictHelper import DictHelper
 from BasicLibrary.dataBase.databaseDDL import DatabaseDDL
 from BasicLibrary.dataBase.databaseMate import DatabaseMate
@@ -20,7 +20,7 @@ class DatabaseClient:
 
     @classmethod
     def __get_db_type_name(cls):
-        type_name = ch.get_item("db_type", "type_name", "MySql")
+        type_name = ConfigHelper.get_item("db_type", "type_name", "MySql")
         return type_name
 
     @classmethod
@@ -37,7 +37,7 @@ class DatabaseClient:
             return mate_dict[table_name]
         else:
             type_name = cls.__get_db_type_name()
-            package_name = "hilandBasicLibrary.dataBase.{0}.mate".format(type_name)
+            package_name = "BasicLibrary.dataBase.{0}.mate".format(type_name)
             module = __import__(package_name, fromlist=["Mate"])
 
             mate = module.Mate(table_name)
@@ -49,6 +49,7 @@ class DatabaseClient:
                 return None
             pass
         pass
+
     pass
 
     @classmethod
@@ -69,6 +70,7 @@ class DatabaseClient:
             return ddl
         else:
             return None
+
     pass
 
     @classmethod
@@ -78,6 +80,7 @@ class DatabaseClient:
         module = __import__(package_name, fromlist=["DDL"])
         ddl = module.DDL()
         return ddl
+
     pass
 
 # if __name__ == '__main__':

@@ -16,7 +16,7 @@ class RegexHelper:
         :return:
         """
         # All_Meta_Chars = ["*", "+", "?", "$", "^", ".", "|", "\\", "(", ")", "{", "}", "[", "]"]
-        return r"\^$*+?.([{|"
+        return r"\^$*+?.()[]{}|"
 
     pass
 
@@ -27,8 +27,9 @@ class RegexHelper:
         :param some_string:
         :return:
         """
-        escaped_meta_chars = "".join(["\\" + c for c in cls.get_all_meta_chars()])
-        return some_string.replace(cls.get_all_meta_chars(), escaped_meta_chars)
+
+        # 以下代码r"\\\1"中，前两个\\表示“\”,最后一个\是跟1在一起的，表示“\1”，即捕获匹配后的第一个分组。
+        return re.sub(r"([\^\$\.\*\+\?\(\)\|\[\]\{\}\\])", r"\\\1", some_string)
 
     pass
 
