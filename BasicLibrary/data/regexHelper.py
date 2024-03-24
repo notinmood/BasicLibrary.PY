@@ -5,8 +5,32 @@ from BasicLibrary import ObjectHelper
 
 class RegexHelper:
     """
-
+    正则表达式帮助类
     """
+
+    @staticmethod
+    def get_all_meta_chars():
+        """
+        正则表达式所有的元字符
+        如果要使用数组形式的元字符串，可以list(get_all_meta_chars())
+        :return:
+        """
+        # All_Meta_Chars = ["*", "+", "?", "$", "^", ".", "|", "\\", "(", ")", "{", "}", "[", "]"]
+        return r"\^$*+?.([{|"
+
+    pass
+
+    @classmethod
+    def keep_prototypical(cls, some_string: str):
+        """
+        保留正则表达式的原义（即把正则表达式的各个元字符当做普通字符数使用）
+        :param some_string:
+        :return:
+        """
+        escaped_meta_chars = "".join(["\\" + c for c in cls.get_all_meta_chars()])
+        return some_string.replace(cls.get_all_meta_chars(), escaped_meta_chars)
+
+    pass
 
     @staticmethod
     def get_patten_of_html_tag():
@@ -65,12 +89,13 @@ class RegexHelper:
         :param str pattern:要匹配的模式
         :param str new_sub_string:新字符串（可以带由 pattern 形成的分组号，分组号用 \1 \2 这的格式表示）
         :return str:替换后的新字符串
-        :example:
-        text = '今天是：11/28/2018'
-        actual = RegexHelper.replace(text, r"(\d{2})/(\d{2})/(\d{4})", r"\3年\1月\2日")
-        expected = '今天是：2018年11月28日'
-        assert actual == expected
         """
+        # :example:
+        # text = '今天是：11/28/2018'
+        # actual = RegexHelper.replace(text, r"(\d{2})/(\d{2})/(\d{4})", r"\3年\1月\2日")
+        # expected = '今天是：2018年11月28日'
+        # assert actual == expected
+
         regex = re.compile(pattern)
         return regex.sub(new_sub_string, whole)
 

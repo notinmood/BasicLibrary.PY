@@ -67,6 +67,8 @@ class ConfigHelper:
             if default_value is not None:
                 item_type = type(default_value)
                 item_value = item_type(item_value)
+            pass
+        pass
 
         return item_value
 
@@ -83,6 +85,7 @@ class ConfigHelper:
             config_ini_parser.read(file, encoding='utf-8')
 
             Container.set_item(config_ini_key, config_ini_parser)
+        pass
 
         return config_ini_parser
 
@@ -96,5 +99,6 @@ class ConfigHelper:
             env_path = PathHelper.combine(root, '.env')
             env_parser = dotenv.dotenv_values(env_path)
             Container.set_item(env_parser_key, env_parser)
+        pass
 
         return env_parser

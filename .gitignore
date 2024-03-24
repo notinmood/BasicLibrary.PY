@@ -5,4 +5,5 @@
 __pycache__
 *.pyc
 *.lock
-!/poetry.lock
+poetry.lock
+

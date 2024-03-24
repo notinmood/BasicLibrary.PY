@@ -18,7 +18,7 @@ class Base64Helper(object):
     @staticmethod
     def encode_string(original_data: str, encoding="utf-8") -> bytes:
         """
-
+        对字符串进行Base64编码
         :param original_data:
         :param encoding:
         :return:
@@ -28,7 +28,7 @@ class Base64Helper(object):
     @staticmethod
     def decode_string(encoded_data: bytes, encoding="utf-8") -> str:
         """
-
+        对Base64编码的字符串进行解码
         :param encoded_data:
         :param encoding:
         :return:
