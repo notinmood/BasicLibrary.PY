@@ -29,6 +29,8 @@ class RegexHelper:
         """
 
         # 以下代码r"\\\1"中，前两个\\表示“\”,最后一个\是跟1在一起的，表示“\1”，即捕获匹配后的第一个分组。
+        # 以下是为了消除ide的警告而做的PolyFill
+        # noinspection all
         return re.sub(r"([\^\$\.\*\+\?\(\)\|\[\]\{\}\\])", r"\\\1", some_string)
 
     pass
