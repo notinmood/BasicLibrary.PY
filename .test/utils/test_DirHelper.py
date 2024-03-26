@@ -11,6 +11,7 @@ from os import path
 
 from BasicLibrary.data.randomHelper import RandomHelper
 from BasicLibrary.io.dirHelper import DirHelper
+from BasicLibrary.io.fileHelper import FileHelper
 from BasicLibrary.io.ioHelper import IOHelper
 from BasicLibrary.io.pathHelper import PathHelper
 from BasicLibrary.projectHelper import ProjectHelper
@@ -125,6 +126,63 @@ def test_get_files():
     _files_gotten = DirHelper.get_files(target_dir, True, ".mp3")
     actual = len(_files_gotten)
     expected = 0
+    assert actual == expected
+
+
+def test_get_files2():
+    root_path = ProjectHelper.get_root_physical_path()
+    local_path = ".test/_res/for_get_files_sort"
+    target_dir = PathHelper.combine(root_path, local_path)
+    result = DirHelper.get_files(target_dir)
+    result = list(map(lambda x: FileHelper.get_base_name(x), result))
+    actual = result
+    expected = ['.README.md',
+                '01.a.txt',
+                '02.a.txt',
+                '05.txt',
+                '10.txt',
+                '3.a.txt',
+                '4.a.txt',
+                '6.txt',
+                '7.txt',
+                '8.txt',
+                '9.txt',
+                'a10.txt']
+    assert actual == expected
+
+    result = DirHelper.get_files(target_dir,sort_direction="DESC")
+    result = list(map(lambda x: FileHelper.get_base_name(x), result))
+    actual = result
+    expected = ['a10.txt',
+                '9.txt',
+                '8.txt',
+                '7.txt',
+                '6.txt',
+                '4.a.txt',
+                '3.a.txt',
+                '10.txt',
+                '05.txt',
+                '02.a.txt',
+                '01.a.txt',
+                '.README.md']
+    assert actual == expected
+
+    # 除了ASC、Desc之外，其他不认识的字符，都按系统默认的规则排序（有可能是升序，由系统决定）
+    result = DirHelper.get_files(target_dir,sort_direction="xx")
+    result = list(map(lambda x: FileHelper.get_base_name(x), result))
+    actual = result
+    expected = ['.README.md',
+                '01.a.txt',
+                '02.a.txt',
+                '05.txt',
+                '10.txt',
+                '3.a.txt',
+                '4.a.txt',
+                '6.txt',
+                '7.txt',
+                '8.txt',
+                '9.txt',
+                'a10.txt']
     assert actual == expected
 
 

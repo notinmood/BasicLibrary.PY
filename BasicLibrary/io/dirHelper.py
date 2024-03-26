@@ -24,9 +24,11 @@ class DirHelper:
     """
 
     @classmethod
-    def get_files(cls, dir_full_path: PathLike | str, include_sub_dir=True, extension_names=".*") -> list[str]:
+    def get_files(cls, dir_full_path: PathLike | str, include_sub_dir=True, extension_names=".*",
+                  sort_direction: str = "ASC") -> list[str]:
         """
         获取某目录下的带完整路径的文件全名称
+        :param sort_direction:根据文件名称进行排序，默认是"ASC"（升序），也可以设置为"DESC"（降序）
         :param extension_names: 文件扩展名，多个扩展名之间用逗号（或者分号）分隔。默认为".*"（所有文件）
         :param dir_full_path:
         :param include_sub_dir: 是否包含子目录（缺省是True，包含）
@@ -34,6 +36,17 @@ class DirHelper:
         """
         result = []
         cls.__list_dir(dir_full_path, result, include_sub_dir, extension_names)
+
+        if isinstance(sort_direction, str):
+            sort_direction = sort_direction.upper()
+
+            if sort_direction == "ASC":
+                result.sort()
+            elif sort_direction == "DESC":
+                result.sort(reverse=True)
+            pass
+        pass
+
         return result
 
     pass
