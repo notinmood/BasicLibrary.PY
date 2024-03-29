@@ -10,7 +10,7 @@
       <excludeFolder url="file://$MODULE_DIR$/.test/_res/target/ABDXyEXG" />
       <excludeFolder url="file://$MODULE_DIR$/.test/_res/target/ZuksxiUp" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.12 (BasicLibrary.PY)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Poetry (BasicLibrary.PY)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="PackageRequirementsSettings">
