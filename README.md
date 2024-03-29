@@ -70,3 +70,20 @@
 2. 如果有敏感信息(比如账号口令等)不适合写在 ini 文件内的，可以将 `.env.default` 文件拷贝到文件 `_projectConfig.ini`
    所在的项目根目录,然后改名为 `.env`,然后在 .env 文件内配置这些信息. (
    ini 文件是嵌入到 vcs 系统的，但 .env 是不嵌入 vcs 系统的)
+
+
+## 【四】类库自动更新版本号的说明
+以下两种方式任选其一，即可。
+
+### 4.1. 每次提交git的时候，自动更新类库的版本号功能的实现与使用
+1. 复制`BasicLibrary/_res/pre-commit.auto-increase-version`到`.git/hooks`目录下，
+   并改名为`pre-commit`
+2. 适当修改文件中的个别信息
+3. 由于本脚本会被系统环境变量path内定义的Python执行，因此要在这个Python所在的目录内安装类库“pip install -U BasicLibrary.PY”,然后本段脚本才能使用。
+4. 每次提交git的时候，就会自动更新类库的版本号
+
+### 4.2. 每次提交git的时候，自动更新类库的版本号的功能的实现与使用
+1. 在项目根目录下创建文件 `.pre-commit-config.yaml`
+2. 尚未完成 # TODO:xiedali@2024/03/30 需要自己写一个库，供pre-commit调用？
+
+

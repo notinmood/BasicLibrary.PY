@@ -9,8 +9,14 @@
 import os
 
 import tomlkit
-from BasicLibrary.io.fileHelper import FileHelper
 from tomlkit import TOMLDocument
+
+# +--------------------------------------------------------------------------
+# |::::TIPS::::| 本代码的使用说明
+# ---------------------------------------------------------------------------
+# 因为有可能被系统目录上的Python调用，因此本包，除了tomlkit之外，只能使用系统内置的类型和方法；
+# 不允许使用其他第三方包，以及BasicLibrary.PY下的其他子包。
+# +--------------------------------------------------------------------------
 
 
 class TomlMate(object):
@@ -22,7 +28,10 @@ class TomlMate(object):
         self.toml_file_full_name = toml_file_full_name
 
         if not os.path.isfile(toml_file_full_name):
-            FileHelper.create(toml_file_full_name)
+            # 创建文件
+            with open(toml_file_full_name, "w", encoding="utf-8") as file_pointer:
+                file_pointer.write("")
+            pass
         pass
 
         with open(toml_file_full_name, 'r', encoding="utf-8") as file:

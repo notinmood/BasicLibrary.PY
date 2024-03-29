@@ -1,0 +1,24 @@
+#!/usr/bin/env python
+# 这是一个在提交代码前，调用Python程序修改pyproject.toml内版本号信息的脚本。
+# 由于本脚本会被系统环境变量path内定义的Python执行，因此要在这个Python所在的目录内安装类库“pip install -U BasicLibrary.PY”,然后本段脚本才能使用。
+# 使用方法：将本脚本拷贝到 .git/hooks目录，并修改名称为"pre-commit"（无扩展名）。然后当我们执行git commit命令，即可在提交代码前自动修改版本号。
+import os.path
+
+from BasicLibrary.data.tomlMate import TomlMate
+from BasicLibrary.data.versionHelper import VersionHelper
+
+here = os.path.abspath(os.path.dirname(__file__))
+
+root_path = os.path.dirname(os.path.dirname(here))
+toml_file_full_name = os.path.join(root_path, "pyproject.toml")
+
+mate = TomlMate(toml_file_full_name)
+
+node_path = "tool/poetry/version"
+old_version = mate.get(node_path)
+
+new_version = VersionHelper.increase_patch(old_version)
+mate.set(node_path, new_version)
+print(f"version changed,from old - [{old_version}] to: new - [{new_version}]")
+
+exit(0)
