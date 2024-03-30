@@ -16,7 +16,7 @@ from BasicLibrary.projectHelper import ProjectHelper
 
 class PathHelper:
     """
-
+    路径辅助类
     """
 
     @staticmethod

@@ -1,24 +1,47 @@
 #!/usr/bin/env python
-# 这是一个在提交代码前，调用Python程序修改pyproject.toml内版本号信息的脚本。
-# 由于本脚本会被系统环境变量path内定义的Python执行，因此要在这个Python所在的目录内安装类库“pip install -U BasicLibrary.PY”,然后本段脚本才能使用。
+# 这是一个在提交代码前，调用Python程序修改pyproject.toml内版本号信息的脚本。纯粹Python内置类库和函数实现，不需要安装其他第三方类库。
 # 使用方法：将本脚本拷贝到 .git/hooks目录，并修改名称为"pre-commit"（无扩展名）。然后当我们执行git commit命令，即可在提交代码前自动修改版本号。
-import os.path
+import re
+import sys
+import os
 
-from BasicLibrary.data.tomlMate import TomlMate
-from BasicLibrary.data.versionHelper import VersionHelper
+# 定义 TOML 文件路径
+pyproject_toml_path = 'pyproject.toml'
 
-here = os.path.abspath(os.path.dirname(__file__))
+# 检查文件是否存在
+if not os.path.isfile(pyproject_toml_path):
+    print(f"Error: {pyproject_toml_path} 文件不存在。")
+    sys.exit(1)
 
-root_path = os.path.dirname(os.path.dirname(here))
-toml_file_full_name = os.path.join(root_path, "pyproject.toml")
+# 读取原始文件内容
+with open(pyproject_toml_path, 'r', encoding="utf-8") as file:
+    file_content = file.read()
 
-mate = TomlMate(toml_file_full_name)
+# 正则表达式匹配版本号
+version_pattern = re.compile(r'version\s*=\s*"(\d+\.\d+\.\d+)"')
+match = version_pattern.search(file_content)
 
-node_path = "tool/poetry/version"
-old_version = mate.get(node_path)
+if not match:
+    print("Error: 无法找到版本号。")
+    sys.exit(1)
 
-new_version = VersionHelper.increase_patch(old_version)
-mate.set(node_path, new_version)
-print(f"version changed,from old - [{old_version}] to: new - [{new_version}]")
+# 获取当前版本号并分割
+current_version = match.group(1).split('.')
+major, minor, patch = current_version[0], current_version[1], current_version[2]
+
+# 增加修正版本号
+patch = str(int(patch) + 1)
+
+# 构造新版本号
+new_version = f"{major}.{minor}.{patch}"
+
+# 生成新的 TOML 内容
+new_content = version_pattern.sub(f'version = "{new_version}"', file_content)
+
+# 将修改后的内容写回文件
+with open(pyproject_toml_path, 'w', encoding="utf-8") as file:
+    file.write(new_content)
+
+print(f">>> version changed,from old - [{match.group(1)}] to: new - [{new_version}]")
 
 exit(0)
