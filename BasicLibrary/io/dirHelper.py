@@ -223,5 +223,14 @@ class DirHelper:
 
     pass
 
+    @staticmethod
+    def get_base_name(target_dir: str | PathLike) -> str:
+        """
+        获取给定目录路径的文件夹基础名称(带扩展名)
+        :param target_dir:可以是路径的全名称也可以是部分名称
+        :return:
+        """
+        return os.path.basename(target_dir)
+
 
 pass
