@@ -426,6 +426,30 @@ def test_is_match_extension_name2():
     expected = True
     assert actual == expected
 
+    actual = FileHelper.is_match_extension_name(
+        r"A8\20240117\00.Cover.png",
+        [".jpg", "png"])
+    expected = True
+    assert actual == expected
+
+    actual = FileHelper.is_match_extension_name(
+        r"A8\20240117\00.Cover.png",
+        (".jpg", "png"))
+    expected = True
+    assert actual == expected
+
+    actual = FileHelper.is_match_extension_name(
+        r"A8\20240117\00.Cover.png",
+        [".jpg", "png2"])
+    expected = False
+    assert actual == expected
+
+    actual = FileHelper.is_match_extension_name(
+        r"A8\20240117\00.Cover.png",
+        (".jpg", "png2"))
+    expected = False
+    assert actual == expected
+
 
 pass
 

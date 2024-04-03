@@ -123,6 +123,14 @@ def test_get_files():
     expected = 6
     assert actual == expected
 
+    actual = len(DirHelper.get_files(target_dir, True, [".txt", "md"]))
+    expected = 6
+    assert actual == expected
+
+    actual = len(DirHelper.get_files(target_dir, True, (".txt", "md")))
+    expected = 6
+    assert actual == expected
+
     _files_gotten = DirHelper.get_files(target_dir, True, ".mp3")
     actual = len(_files_gotten)
     expected = 0
@@ -150,7 +158,7 @@ def test_get_files2():
                 'a10.txt']
     assert actual == expected
 
-    result = DirHelper.get_files(target_dir,sort_direction="DESC")
+    result = DirHelper.get_files(target_dir, sort_direction="DESC")
     result = list(map(lambda x: FileHelper.get_base_name(x), result))
     actual = result
     expected = ['a10.txt',
@@ -168,7 +176,7 @@ def test_get_files2():
     assert actual == expected
 
     # 除了ASC、Desc之外，其他不认识的字符，都按系统默认的规则排序（有可能是升序，由系统决定）
-    result = DirHelper.get_files(target_dir,sort_direction="xx")
+    result = DirHelper.get_files(target_dir, sort_direction="xx")
     result = list(map(lambda x: FileHelper.get_base_name(x), result))
     actual = result
     expected = ['.README.md',

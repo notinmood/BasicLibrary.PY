@@ -14,7 +14,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="PackageRequirementsSettings">
-    <option name="requirementsPath" value="E:\myworkspace\BasicLibrary.PY\requirements.txt" />
+    <option name="requirementsPath" value="" />
     <option name="removeUnused" value="true" />
     <option name="modifyBaseFiles" value="true" />
   </component>
@@ -23,5 +23,8 @@
   </component>
   <component name="SonarLintModuleSettings">
     <option name="uniqueId" value="00338e01-194e-4a09-bf1e-407e389f1b49" />
+  </component>
+  <component name="TestRunnerService">
+    <option name="PROJECT_TEST_RUNNER" value="py.test" />
   </component>
 </module>

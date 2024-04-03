@@ -24,7 +24,8 @@ class DirHelper:
     """
 
     @classmethod
-    def get_files(cls, dir_full_path: PathLike | str, include_sub_dir=True, extension_names=".*",
+    def get_files(cls, dir_full_path: PathLike | str, include_sub_dir=True,
+                  extension_names: str | list[str] | tuple[str, ...] = ".*",
                   sort_direction: str = "ASC") -> list[str]:
         """
         获取某目录下的带完整路径的文件全名称
@@ -52,7 +53,8 @@ class DirHelper:
     pass
 
     @classmethod
-    def __list_dir(cls, dir_full_path: PathLike | str, list_name, include_sub_dir=True, extension_names=".*"):
+    def __list_dir(cls, dir_full_path: PathLike | str, list_name, include_sub_dir=True,
+                   extension_names: str | list[str] | tuple[str, ...] = ".*"):
         for item in os.listdir(dir_full_path):
             item_full_path = os.path.join(dir_full_path, item)
             if os.path.isdir(item_full_path):
