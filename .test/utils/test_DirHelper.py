@@ -107,31 +107,31 @@ def test_get_files():
     expected = 8
     assert actual == expected
 
-    actual = len(DirHelper.get_files(target_dir, False))
+    actual = len(DirHelper.get_files(target_dir,  include_sub_dir=False))
     expected = 6
     assert actual == expected
 
-    actual = len(DirHelper.get_files(target_dir, False, ".txt"))
+    actual = len(DirHelper.get_files(target_dir, ".txt", False))
     expected = 2
     assert actual == expected
 
-    actual = len(DirHelper.get_files(target_dir, False, ".txt;md"))
+    actual = len(DirHelper.get_files(target_dir, ".txt;md", False))
     expected = 4
     assert actual == expected
 
-    actual = len(DirHelper.get_files(target_dir, True, ".txt;md"))
+    actual = len(DirHelper.get_files(target_dir, ".txt;md", True))
     expected = 6
     assert actual == expected
 
-    actual = len(DirHelper.get_files(target_dir, True, [".txt", "md"]))
+    actual = len(DirHelper.get_files(target_dir, [".txt", "md"], True))
     expected = 6
     assert actual == expected
 
-    actual = len(DirHelper.get_files(target_dir, True, (".txt", "md")))
+    actual = len(DirHelper.get_files(target_dir, (".txt", "md"), True))
     expected = 6
     assert actual == expected
 
-    _files_gotten = DirHelper.get_files(target_dir, True, ".mp3")
+    _files_gotten = DirHelper.get_files(target_dir, ".mp3", True)
     actual = len(_files_gotten)
     expected = 0
     assert actual == expected

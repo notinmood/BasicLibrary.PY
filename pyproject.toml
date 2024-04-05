@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "BasicLibrary.PY"
-version = "0.6.17"
+version = "0.6.18"
 description = ""
 authors = ["解大劦 <9727005@qq.com>"]
 readme = "README.md"
@@ -21,3 +21,9 @@ pytest = "^8.0"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+# 使用国内的类库镜像源
+[[tool.poetry.source]]
+name = "mirrors"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple/"
+priority = "default"
