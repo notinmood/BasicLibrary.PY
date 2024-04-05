@@ -36,6 +36,10 @@ class DirHelper:
         :param include_sub_dir: 是否包含子目录（缺省是True，包含）
         :return:
         """
+        if not cls.is_dir(dir_full_path):
+            return []
+        pass
+
         result = []
         cls.__list_dir(dir_full_path, result, include_sub_dir, extension_names)
 
