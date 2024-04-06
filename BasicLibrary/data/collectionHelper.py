@@ -72,5 +72,28 @@ class CollectionHelper:
 
     pass
 
+    @staticmethod
+    def format(iterable: any, target_type: type = tuple, **kwargs):
+        """
+        将可迭代对象转换为指定类型
+        如果转换的类型是字符串，则可以通过关键字参数“seperator”，指定字符串分隔符
+        :param iterable:
+        :param target_type:
+        :return:
+        """
+        seperator = kwargs.get("seperator", None)
+
+        if isinstance(iterable, str):
+            if seperator:
+                iterable = iterable.split(seperator)
+            else:
+                iterable = iterable.replace(";", ",")
+                iterable = iterable.split(",")
+            pass
+
+        return target_type(iterable)
+
+    pass
+
 
 pass
