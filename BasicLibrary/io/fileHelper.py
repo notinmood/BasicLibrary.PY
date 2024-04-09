@@ -79,6 +79,10 @@ class FileHelper:
         :param file_full_name:
         :return:
         """
+        if not os.path.isfile(file_full_name):
+            return None
+        pass
+
         if not encoding:
             encoding = cls.get_encoding(file_full_name)
         pass
@@ -106,6 +110,10 @@ class FileHelper:
         :param file_full_name:
         :return: 行信息的list
         """
+        if not os.path.isfile(file_full_name):
+            return None
+        pass
+
         file_encoding = cls.get_encoding(file_full_name)
 
         with open(file_full_name, "r", encoding=file_encoding) as file_pointer:
@@ -122,6 +130,10 @@ class FileHelper:
         :param function line_callback: 在每行上进行回调的函数，类似：line_callback(line),其中参数 line 为读出的每行的内容
         :return:
         """
+        if not os.path.isfile(file_full_name):
+            return None
+        pass
+
         file_encoding = cls.get_encoding(file_full_name)
         with open(file_full_name, "r", encoding=file_encoding) as file_pointer:
             while True:
