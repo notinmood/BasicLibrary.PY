@@ -131,8 +131,8 @@ class DateTimePlaceHolderHelper:
         pass
 
         lunar_date = DateTimeHelper.get_lunar(target_date)
-        week = DateTimeHelper.get_weekday(target_date, format_type="{weekday}")
-        week_cn = DateTimeHelper.get_weekday_cn(target_date, format_type="{weekday}")
+        week = DateTimeHelper.get_weekday(target_date, formatter="{weekday}")
+        week_cn = DateTimeHelper.get_weekday_cn(target_date, formatter="{weekday}")
 
         biz_string = StringHelper.format(
             biz_string_with_placeholder,
