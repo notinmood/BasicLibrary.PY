@@ -18,6 +18,7 @@ class EnumBase(Enum):
                 return True
             pass
         pass
+
         return False
 
     pass

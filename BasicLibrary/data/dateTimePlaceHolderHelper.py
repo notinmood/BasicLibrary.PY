@@ -6,7 +6,7 @@
  * @creator: ShanDong Xiedali
  * @company: HiLand & RainyTop
 """
-from datetime import timedelta
+from datetime import timedelta, datetime
 from typing import Callable, ParamSpec
 
 from BasicLibrary.data.collectionHelper import CollectionHelper
@@ -115,27 +115,47 @@ class DateTimePlaceHolderHelper:
     pass
 
     @staticmethod
-    def replace_placeholder(biz_string_with_placeholder: str, date_string: str) -> str:
+    def replace_placeholder(biz_string_with_placeholder: str, target_date: str | datetime | None = None) -> str:
         """
         替换字符串内占位符为实际日期时间
         :param biz_string_with_placeholder:
-        :param date_string:
+        :param target_date:日期或者标准格式的日期字符串，如：20210101
         :return:
         """
+        if not target_date:
+            target_date = datetime.now()
+        pass
+
+        if isinstance(target_date, datetime):
+            target_date = DateTimeHelper.get_compact_date_string(target_date)
+        pass
+
+        lunar_date = DateTimeHelper.get_lunar(target_date)
+        week = DateTimeHelper.get_weekday(target_date, format_type="{weekday}")
+        week_cn = DateTimeHelper.get_weekday_cn(target_date, format_type="{weekday}")
+
         biz_string = StringHelper.format(
             biz_string_with_placeholder,
-            dir_ymd=date_string[0:8],
-            dir_ym=date_string[0:6],
-            yyyymmdd=date_string[0:8],
-            yymmdd=date_string[2:8],
-            ymmdd=date_string[3:8],
-            yyyymm=date_string[0:6],
-            mmdd=date_string[4:8],
-            yyyy=date_string[0:4],
-            yy=date_string[2:4],
-            y=date_string[3:4],
-            mm=date_string[4:6],
-            dd=date_string[6:8],
+            dir_ymd=target_date[0:8],
+            dir_ym=target_date[0:6],
+            yyyymmdd=target_date[0:8],
+            yymmdd=target_date[2:8],
+            ymmdd=target_date[3:8],
+            yyyymm=target_date[0:6],
+            mmdd=target_date[4:8],
+            yyyy=target_date[0:4],
+            yy=target_date[2:4],
+            y=target_date[3:4],
+            mm=target_date[4:6],
+            dd=target_date[6:8],
+            nn=lunar_date.year,  # 农历年份
+            n=lunar_date.year,  # 农历年份
+            uu=lunar_date.month,  # 农历月份
+            u=lunar_date.month,  # 农历月份
+            rr=lunar_date.day,  # 农历日
+            r=lunar_date.day,  # 农历日
+            w=week,  # 星期
+            ww=week_cn,  # 星期中文
         )
 
         return biz_string

@@ -147,7 +147,7 @@ def test_get_date_lunar1():
     :return:
     """
     data = "2023-10-23 00:34:25"
-    actual = DateTimeHelper.get_date_lunar(data)
+    actual = DateTimeHelper.get_lunar_string(data)
     expected = "癸卯年九月初九日"
     assert actual == expected
 
@@ -161,7 +161,7 @@ def test_get_date_lunar2():
     :return:
     """
     data = "2023-10-23 00:34:25"
-    actual = DateTimeHelper.get_date_lunar(data, False)
+    actual = DateTimeHelper.get_lunar_string(data, False)
     expected = "九月初九日"
     assert actual == expected
 
@@ -175,7 +175,7 @@ def test_get_date_lunar3():
     :return:
     """
     data = "2023-3-23"
-    actual = DateTimeHelper.get_date_lunar(data, True)
+    actual = DateTimeHelper.get_lunar_string(data, True)
     expected = "癸卯年闰二月初二日"
     assert actual == expected
 
@@ -189,7 +189,7 @@ def test_get_date_lunar4():
     :return:
     """
     data = "2023-3-23"
-    actual = DateTimeHelper.get_date_lunar(data, False)
+    actual = DateTimeHelper.get_lunar_string(data, False)
     expected = "闰二月初二日"
     assert actual == expected
 
@@ -203,7 +203,7 @@ def test_get_date_lunar5():
     :return:
     """
     data = "2024-1-20"
-    actual = DateTimeHelper.get_date_lunar(data, False)
+    actual = DateTimeHelper.get_lunar_string(data, False)
     expected = "腊月初十日"
     assert actual == expected
 

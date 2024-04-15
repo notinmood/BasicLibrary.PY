@@ -25,7 +25,7 @@ class FileShadowUsing:
 
     pass
 
-    def __init__(self, file_full_name:PathLike | str, is_auto_destroy=True):
+    def __init__(self, file_full_name: PathLike | str, is_auto_destroy=True):
         """
         通过给定的原始文件，生成一个影子文件。
         :param file_full_name: 原始文件的文件全名称。
@@ -33,6 +33,7 @@ class FileShadowUsing:
         """
         self._file_shadow_full_name = self.__generate_file_shadow(file_full_name)
         self._is_auto_destroy = is_auto_destroy
+
     pass
 
     def __enter__(self):
@@ -44,10 +45,11 @@ class FileShadowUsing:
         if self._is_auto_destroy:
             FileHelper.remove(self._file_shadow_full_name)
         pass
+
     pass
 
     @staticmethod
-    def __generate_file_shadow(source_file_full_name:PathLike | str):
+    def __generate_file_shadow(source_file_full_name: PathLike | str):
         target_dir_full_name = PathHelper.get_dir_name(source_file_full_name)
         target_file_ext_name = FileHelper.get_extension_name(source_file_full_name)
         target_file_base_name = RandomHelper.create() + target_file_ext_name
