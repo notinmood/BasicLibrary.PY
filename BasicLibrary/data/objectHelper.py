@@ -8,41 +8,16 @@ class ObjectHelper:
 
     @staticmethod
     def is_empty(data):
-        # TODO:xiedali@2022/3/17 改成即时返回的方式，减少时间浪费
-        result = False
-
-        if data is None:
-            result = True
+        """
+        判断给定的数据是否为空，包括 None、空字符串、空列表、空字典、空元组等。
+        :param data:
+        :return:
+        """
+        if not data:
+            return True
         else:
-            _type = type(data)
-            if _type is str and data == "":
-                result = True
-            pass
-
-            if _type is bool and data is False:
-                result = True
-            pass
-
-            if _type is list and data == []:
-                result = True
-            pass
-
-            if (_type is set or _type is dict) and data == {}:
-                result = True
-            pass
-
-            if _type is tuple and data == ():
-                result = True
-            pass
-
-            if ObjectHelper.is_number(data) and data == 0:
-                result = True
-            pass
+            return False
         pass
-
-        return result
-
-    pass
 
     @staticmethod
     def is_exist(data):
@@ -51,6 +26,7 @@ class ObjectHelper:
         else:
             return True
         pass
+
     pass
 
     @staticmethod
@@ -111,6 +87,7 @@ class ObjectHelper:
         :return:
         """
         return type(data)
+
     pass
 
     @staticmethod
@@ -121,6 +98,7 @@ class ObjectHelper:
         :return:
         """
         return len(data)
+
     pass
 
     @staticmethod
@@ -132,6 +110,7 @@ class ObjectHelper:
         :return:
         """
         return isinstance(object_data, class_data)
+
     pass
 
     @staticmethod

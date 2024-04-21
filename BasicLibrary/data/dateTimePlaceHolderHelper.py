@@ -154,8 +154,10 @@ class DateTimePlaceHolderHelper:
             u=lunar_date.month,  # 农历月份
             rr=lunar_date.day,  # 农历日
             r=lunar_date.day,  # 农历日
-            w=week,  # 星期
             ww=week_cn,  # 星期中文
+            w=week,  # 星期
+            W=week_cn,  # 星期中文
+
         )
 
         return biz_string

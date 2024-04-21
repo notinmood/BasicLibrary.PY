@@ -50,6 +50,16 @@ def test_is_empty():
     expected = True
     assert actual == expected
 
+    data = ()
+    actual = ObjectHelper.is_empty(data)
+    expected = True
+    assert actual == expected
+
+    data = {}
+    actual = ObjectHelper.is_empty(data)
+    expected = True
+    assert actual == expected
+
 
 def test_is_exist():
     data = 0
