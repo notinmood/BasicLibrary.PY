@@ -107,7 +107,7 @@ def test_get_files():
     expected = 8
     assert actual == expected
 
-    actual = len(DirHelper.get_files(target_dir,  include_sub_dir=False))
+    actual = len(DirHelper.get_files(target_dir, include_sub_dir=False))
     expected = 6
     assert actual == expected
 

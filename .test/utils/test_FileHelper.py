@@ -419,6 +419,14 @@ def test_is_match_extension_name1():
     assert actual == expected
 
 
+def test_is_match_extension_name10():
+    actual = FileHelper.is_match_extension_name(
+        r"Z:\BD素材同步\BillFish素材库\RMRB.人民日报\00.Published\202401\微信.A.句子之美.A8\20240117\00.Cover.png",
+        "00.Cover.png")
+    expected = True
+    assert actual == expected
+
+
 def test_is_match_extension_name2():
     actual = FileHelper.is_match_extension_name(
         r"A8\20240117\00.Cover.png",
@@ -498,5 +506,5 @@ def test_is_match_extension_name5():
     actual = FileHelper.is_match_extension_name(
         r"A8\20240117\00.Cover.png",
         "over.png")
-    expected = False
+    expected = True
     assert actual == expected

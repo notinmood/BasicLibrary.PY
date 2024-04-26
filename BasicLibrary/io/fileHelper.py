@@ -434,12 +434,13 @@ class FileHelper:
             file_name = StringHelper.lower_all_chars(file_name)
             extension_name_list = StringHelper.explode(extension_names, ";")
 
-            for _item in extension_name_list:
-                if not _item.startswith("."):
-                    _item = "." + _item
-                pass
-                extension_name_list_fixed.append(_item)
-            pass
+            # for _item in extension_name_list:
+            #     if not _item.startswith("."):
+            #         _item = "." + _item
+            #     pass
+            #     extension_name_list_fixed.append(_item)
+            # pass
+            extension_name_list_fixed = extension_name_list
         pass
 
         if isinstance(extension_names, list):
@@ -447,6 +448,10 @@ class FileHelper:
         pass
 
         if ListHelper.has(extension_name_list_fixed, ".*"):
+            return True
+        pass
+
+        if ListHelper.has(extension_name_list_fixed, "*"):
             return True
         pass
 

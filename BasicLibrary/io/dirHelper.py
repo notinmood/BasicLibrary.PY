@@ -31,7 +31,7 @@ class DirHelper:
         """
         获取某目录下的带完整路径的文件全名称
         :param sort_direction:根据文件名称进行排序，默认是"ASC"（升序），也可以设置为"DESC"（降序）
-        :param extension_names: 文件扩展名，多个扩展名之间用逗号（或者分号）分隔。默认为".*"（所有文件）
+        :param extension_names: 文件扩展名（可以是真实的扩展名，也可以是逻辑上的扩展名（如".txt"、"txt"、".readme.txt"、"a.txt"等），多个扩展名之间用逗号（或者分号）分隔。默认为".*"（所有文件）
         :param dir_full_path:
         :param include_sub_dir: 是否包含子目录（缺省是True，包含）
         :return:

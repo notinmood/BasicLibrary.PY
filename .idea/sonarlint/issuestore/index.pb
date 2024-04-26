@@ -81,3 +81,7 @@ Q
 !BasicLibrary/data/objectHelper.py,3\a\3ace5d27a99f66f58300efb34e781736d646d7a3
 >
 pyproject.toml,5\d\5d07e7d72637aa0d59c89d381fe6dc4cf46e2491
+Q
+!BasicLibrary/data/stringHelper.py,f\b\fbbd639bdefd10309d02d9820c917d26eadfcbd9
+P
+ BasicLibrary/data/regexHelper.py,2\c\2ca75382b2a92a7d1a54fc692f323464838a348a

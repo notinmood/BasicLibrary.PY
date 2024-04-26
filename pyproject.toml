@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "BasicLibrary.PY"
-version = "0.6.26"
+version = "0.6.27"
 description = ""
 authors = ["解大劦 <9727005@qq.com>"]
 readme = "README.md"
