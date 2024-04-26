@@ -9,16 +9,6 @@
 from BasicLibrary.data.objectHelper import *
 
 
-def test_is_number():
-    actual = ObjectHelper.is_number(0)
-    expected = True
-    assert actual == expected
-
-    actual = ObjectHelper.is_number({})
-    expected = False
-    assert actual == expected
-
-
 def test_is_empty():
     data = 0
     actual = ObjectHelper.is_empty(data)
@@ -110,12 +100,24 @@ def test_is_index_exist():
 
 
 def test_is_number():
+    actual = ObjectHelper.is_number(0)
+    expected = True
+    assert actual == expected
+
+    actual = ObjectHelper.is_number(2.3)
+    expected = True
+    assert actual == expected
+
+    actual = ObjectHelper.is_number("5.3")
+    expected = False
+    assert actual == expected
+
     actual = ObjectHelper.is_number("qingdao")
     expected = False
     assert actual == expected
 
-    actual = ObjectHelper.is_number(2)
-    expected = True
+    actual = ObjectHelper.is_number({})
+    expected = False
     assert actual == expected
 
 

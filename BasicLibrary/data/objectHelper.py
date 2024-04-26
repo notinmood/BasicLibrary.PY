@@ -61,20 +61,21 @@ class ObjectHelper:
         :param data:
         :return:
         """
-        try:
-            float(data)
-            return True
-        except (TypeError, ValueError):
-            pass
-
-        try:
-            import unicodedata
-            unicodedata.numeric(data)
-            return True
-        except (TypeError, ValueError):
-            pass
-
-        return False
+        return isinstance(data, (int, float, complex))
+        # try:
+        #     float(data)
+        #     return True
+        # except (TypeError, ValueError):
+        #     pass
+        #
+        # try:
+        #     import unicodedata
+        #     unicodedata.numeric(data)
+        #     return True
+        # except (TypeError, ValueError):
+        #     pass
+        #
+        # return False
 
     pass
 

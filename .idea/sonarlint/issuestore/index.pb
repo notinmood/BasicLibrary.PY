@@ -29,8 +29,6 @@ n
 i.test/_res/目录结构测试基础设施/本目录下的各个子目录请勿手动添加修改删除.md,f\b\fb869d5892e278055e8c828c3767d7ba9d0da9fa
 9
 	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
-8
-setup.py,8\e\8e2edce0d507e1297474f25c00cae94258db38d8
 T
 $BasicLibrary.PY.egg-info/SOURCES.txt,9\2\92813c3314494e4324b0ebd57980faa3d933602b
 N
@@ -63,9 +61,6 @@ L
 BasicLibrary/biz/__init__.py,f\0\f0f8015a102ecc0842da141aaca2ad5092b3ba83
 R
 "BasicLibrary/biz/stock/__init__.py,d\7\d7fc6b0a13d96a9e26d3c5f65d2e61f179afee45
-:
-
-publish.py,a\5\a538e960cdb785bbc7ec07a59d8fa12037e12723
 G
 BasicLibrary/.README.md,2\2\2211f40543412aa8b3659c8394cf2fdb54e227e7
 P
@@ -80,3 +75,9 @@ Y
 )BasicLibrary/biz/adobe/photoShopHelper.py,d\c\dce92433353f25b8547efbde82fed5945c50a662
 R
 "BasicLibrary/biz/adobe/__init__.py,d\8\d8ae39d2b16aa471d2598f54e0a185337eeae983
+P
+ .test/utils/test_ObjectHelper.py,0\6\0673eef123e32fac688fcb12df67798324ab3657
+Q
+!BasicLibrary/data/objectHelper.py,3\a\3ace5d27a99f66f58300efb34e781736d646d7a3
+>
+pyproject.toml,5\d\5d07e7d72637aa0d59c89d381fe6dc4cf46e2491
