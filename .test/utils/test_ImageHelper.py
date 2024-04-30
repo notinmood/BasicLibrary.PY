@@ -52,3 +52,15 @@ def test_get_format():
     actual = ImageHelper.get_format(file_full_name)
     expected = None
     assert actual == expected
+
+
+def test_return_type_tuple():
+    expected_result = ('.webp', '.bmp', '.dib', '.png', '.jpg', '.jpeg', '.pbm', '.pgm', '.ppm', '.tif', '.tiff')
+    result = ImageHelper.get_common_extension_names()
+    assert result == expected_result
+
+
+def test_return_type_list():
+    expected_result = ['.webp', '.bmp', '.dib', '.png', '.jpg', '.jpeg', '.pbm', '.pgm', '.ppm', '.tif', '.tiff']
+    result = ImageHelper.get_common_extension_names("list")
+    assert result == expected_result
