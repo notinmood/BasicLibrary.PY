@@ -73,3 +73,26 @@ class ConsoleHelper:
         pass
 
         return None
+
+    @staticmethod
+    def get_seperator_line(add_new_line="both", seperator_char="─", seperator_length=18):
+        """
+        获取分隔线
+        :return:
+        """
+        seperator_line = seperator_char * seperator_length
+
+        if add_new_line == "both":  # 在前后都加一行
+            return "\n" + seperator_line + "\n"
+        pass
+
+        if add_new_line == "before":  # 在前面加一行
+            return "\n" + seperator_line
+        pass
+
+        if add_new_line == "after":  # 在后面加一行
+            return seperator_line + "\n"
+        pass
+
+        # 其他情况，都不加新行
+        return seperator_line
