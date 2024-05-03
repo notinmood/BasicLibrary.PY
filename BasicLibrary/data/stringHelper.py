@@ -9,6 +9,7 @@
 import re
 
 from BasicLibrary import ObjectHelper
+from BasicLibrary.data.collectionHelper import CollectionHelper
 from BasicLibrary.data.listHelper import ListHelper
 from BasicLibrary.data.regexHelper import RegexHelper
 
@@ -172,39 +173,49 @@ class StringHelper:
     pass
 
     @staticmethod
-    def is_end_with(whole, sub_string):
+    def is_end_with(whole: str, sub_string: str | tuple[str, ...] | list[str]):
         """
         判断字符串是否以指定的子字符串结尾
         :param whole:
         :param sub_string:
         :return:
         """
-        return str.endswith(whole, sub_string)
+        return whole.endswith(sub_string)
 
     pass
 
     @staticmethod
-    def is_start_with(whole, sub_string):
+    def is_start_with(whole: str, sub_string: str | tuple[str, ...] | list[str]):
         """
         判断字符串是否以指定的子字符串开头
         :param whole:
         :param sub_string:
         :return:
         """
-        return str.startswith(whole, sub_string)
+        if isinstance(sub_string, list):
+            sub_string = tuple(sub_string)
+        pass
+
+        return whole.startswith(sub_string)
 
     pass
 
     @staticmethod
-    def is_contains(whole, sub_string):
+    def is_contains(whole: str, sub_string: str | tuple[str, ...] | list[str]):
         """
         判断字符串是否包含指定的子字符串
         :param whole:
         :param sub_string:
         :return:
         """
-        result = whole.find(sub_string) >= 0
-        return result
+        sub_string_fixed = CollectionHelper.format(sub_string, tuple)
+        for _item in sub_string_fixed:
+            if whole.find(_item) >= 0:
+                return True
+            pass
+        pass
+
+        return False
 
     pass
 

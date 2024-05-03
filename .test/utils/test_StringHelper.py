@@ -25,6 +25,10 @@ def test_is_contains():
     actual = StringHelper.is_contains("beijing", "dao")
     assert actual != expected
 
+    expected = True
+    actual = StringHelper.is_contains("qingdao", ("dao", "qi"))
+    assert actual == expected
+
 
 def test_format():
     expected = "张三你好，欢迎来到中国。"
