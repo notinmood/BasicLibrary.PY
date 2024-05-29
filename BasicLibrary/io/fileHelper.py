@@ -16,6 +16,7 @@ from typing import Callable
 
 import chardet
 
+from BasicLibrary.data.collectionHelper import CollectionHelper
 from BasicLibrary.data.listHelper import ListHelper
 from BasicLibrary.data.randomHelper import RandomHelper
 from BasicLibrary.data.stringHelper import StringHelper
@@ -419,47 +420,31 @@ class FileHelper:
     pass
 
     @staticmethod
-    def is_match_extension_name(file_name: PathLike | str, extension_names: str | list[str] | tuple[str, ...] = ".*"):
+    def is_match_extension_name(file_name: PathLike | str, extension_names: str | list[str] | tuple[str, ...] = ".*",
+                                ignore_case=True):
         """
         检查文件名是否匹配指定的扩展名列表。
+        :param ignore_case: 比较时是否忽略大小写
         :param file_name:全名称或者基本名称
         :param extension_names:文件的扩展名列表，可以是多个扩展名用逗号或者分号分隔的字符串，或者数组、元组
         :return:
         """
-        extension_name_list_fixed = []
+        extension_names = CollectionHelper.format(extension_names)
 
-        if isinstance(extension_names, str):
-            extension_names = StringHelper.replace(extension_names, ",", ";")
-            extension_names = StringHelper.lower_all_chars(extension_names)
+        if ".*" in extension_names or "*" in extension_names:
+            return True
+        pass
+
+        if ignore_case:
             file_name = StringHelper.lower_all_chars(file_name)
-            extension_name_list = StringHelper.explode(extension_names, ";")
-
-            # for _item in extension_name_list:
-            #     if not _item.startswith("."):
-            #         _item = "." + _item
-            #     pass
-            #     extension_name_list_fixed.append(_item)
-            # pass
-            extension_name_list_fixed = extension_name_list
+            temp_list = []
+            for _item in extension_names:
+                temp_list.append(StringHelper.lower_all_chars(_item))
+            pass
+            extension_names = tuple(temp_list)
         pass
 
-        if isinstance(extension_names, list):
-            extension_name_list_fixed = extension_names
-        pass
-
-        if ListHelper.has(extension_name_list_fixed, ".*"):
-            return True
-        pass
-
-        if ListHelper.has(extension_name_list_fixed, "*"):
-            return True
-        pass
-
-        if isinstance(extension_names, tuple):
-            return file_name.endswith(extension_names)
-        else:
-            return file_name.endswith(tuple(extension_name_list_fixed))
-        pass
+        return file_name.endswith(extension_names)
 
     pass
 

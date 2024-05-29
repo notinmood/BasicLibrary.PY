@@ -321,3 +321,33 @@ def test_sub_string5():
 
 
 pass
+
+
+def test_happy_path():
+    result = StringHelper.split_with_keeping_delimiter("abc.def.ghi", ".")
+    assert result == ['abc.', 'def.', 'ghi']
+
+
+def test_edge_case_empty_string():
+    result = StringHelper.split_with_keeping_delimiter("", ".")
+    assert result == ['']
+
+
+def test_edge_case_null_string():
+    result = StringHelper.split_with_keeping_delimiter(None, ".")
+    assert result == ['']
+
+
+def test_edge_case_no_delimiter():
+    result = StringHelper.split_with_keeping_delimiter("abcde", ".")
+    assert result == ['abcde']
+
+
+def test_edge_case_multiple_delimiters():
+    result = StringHelper.split_with_keeping_delimiter("a.b.c.d", ".")
+    assert result == ['a.', 'b.', 'c.', 'd']
+
+
+def test_edge_case_multiple_delimiters2():
+    result = StringHelper.split_with_keeping_delimiter("a.b.c.d.", ".")
+    assert result == ['a.', 'b.', 'c.', 'd.']

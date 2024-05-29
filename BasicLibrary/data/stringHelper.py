@@ -416,3 +416,47 @@ class StringHelper:
         return whole_string[start_position: end_position]
 
     pass
+
+    @staticmethod
+    def split_with_keeping_delimiter(whole_string: str, delimiters: str | list[str] | tuple[str, ...]):
+        """
+        按照给定的分隔符拆分字符串，保留分隔符，并将其与前面的内容放在一起。
+
+        参数:
+        whole_string (str): 要拆分的长字符串。
+        delimiter (str | list[str] | tuple[str, ...]): 分隔符。
+
+        返回:
+        list: 包含分隔符的字符串数组，分隔符与前面的内容在一起。
+        """
+        if not whole_string:
+            return [""]
+        pass
+
+        if not delimiters:
+            return [whole_string]
+        pass
+
+        # 将分隔符转换为元组，方便后续统一操作
+        delimiters = CollectionHelper.format(delimiters, tuple)
+
+        # 初始化结果列表和临时字符串
+        result = []
+        temp_str = ""
+
+        # 遍历字符串，找到分隔符的索引
+        for i, char in enumerate(whole_string):
+            temp_str += char
+            if temp_str.endswith(delimiters):
+                # 如果当前字符是分隔符，添加到结果列表并重置临时字符串
+                result.append(temp_str)
+                temp_str = ""
+            pass
+        pass
+
+        # 添加剩余的字符串到结果列表（如果有的话）
+        if temp_str:
+            result.append(temp_str)
+        pass
+
+        return result
