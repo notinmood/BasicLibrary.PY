@@ -53,6 +53,25 @@ class ImageHelper:
 
     pass
 
+    @staticmethod
+    def get_dpi(image_full_path: str | Path) -> tuple[int, int]:
+        """
+        获取图片的dpi解析度（每英寸的点数），返回一个元组:（width解析度, height解析度）
+        :param image_full_path:
+        :return:一个元组:（width解析度, height解析度）
+        """
+        image = Image.open(image_full_path)
+
+        # 获取图片的DPI信息
+        dpi = image.info.get('dpi')
+
+        if dpi:
+            return dpi
+        else:
+            return 0, 0
+
+    pass
+
     @classmethod
     def get_format(cls, image_full_path: str | Path) -> str | None:
         """

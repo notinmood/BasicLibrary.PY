@@ -43,5 +43,15 @@ class RandomHelper:
 
     pass
 
+    @staticmethod
+    def get_samples(collection, count=10):
+        """
+        从集合中随机获取指定数量的元素
+        :param collection:
+        :param count:
+        :return:
+        """
+        return random.sample(collection, count)
+
 
 pass
