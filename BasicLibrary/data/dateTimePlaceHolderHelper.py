@@ -164,5 +164,34 @@ class DateTimePlaceHolderHelper:
 
     pass
 
+    @staticmethod
+    def get_full_biz_strings(biz_string_with_placeholder: str, start_date: str | datetime,
+                             end_date: str | datetime) -> list[str]:
+        """
+        获取给定日期范围内的所有日期对应的完整业务字符串
+        :param end_date: 日期或者标准格式的日期字符串，如：20210101
+        :param start_date: 日期或者标准格式的日期字符串，如：20210101
+        :param biz_string_with_placeholder:
+        :return:
+        """
+        if isinstance(start_date, str):
+            start_date = DateTimeHelper.convert_from_compact_string(start_date)
+        pass
+
+        if isinstance(end_date, str):
+            end_date = DateTimeHelper.convert_from_compact_string(end_date)
+        pass
+
+        biz_strings = []
+        current_date = start_date
+        while current_date <= end_date:
+            current_date_string = DateTimeHelper.get_compact_date_string(current_date)
+            biz_string = DateTimePlaceHolderHelper.replace_placeholder(biz_string_with_placeholder, current_date_string)
+            biz_strings.append(biz_string)
+            current_date = DateTimeHelper.add_days(current_date)
+        pass
+
+        return biz_strings
+
 
 pass

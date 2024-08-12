@@ -52,6 +52,15 @@ class ConsoleHelper:
         return "\n"
 
     @staticmethod
+    def get_standard_new_line_symbol():
+        """
+        获取标准换行标志（现代各种系统都使用"\n"这个标志）
+        TODO:需要判断是 cli 还是 web
+        :return:
+        """
+        return "\n"
+
+    @staticmethod
     def get_console_args():
         """
         获取控制台上输入的所有参数(包括命令本身和传递给命令的参数)
