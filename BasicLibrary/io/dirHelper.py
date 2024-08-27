@@ -155,9 +155,7 @@ class DirHelper:
         :param dest_dir_full_name: 新目录的全名称
         :return:
         """
-        # 以下是为了消除ide参数未使用的警告而做的PolyFill
-        # noinspection all
-        kwargs = kwargs
+        _kwargs = kwargs
 
         if not cls.is_exist(source_dir_full_name):
             return

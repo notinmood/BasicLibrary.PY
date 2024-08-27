@@ -460,3 +460,27 @@ class StringHelper:
         pass
 
         return result
+
+    @staticmethod
+    def to_bytes(string_data: str, encoding: str = 'utf-8') -> bytes:
+        """
+        将字符串转换为字节数组
+        :param encoding: 字符串编码格式（默认是utf-8）
+        :param string_data:待转换的字符串
+        :return:
+        """
+        return string_data.encode(encoding)
+
+    pass
+
+    @staticmethod
+    def from_bytes(bytes_data: bytes, encoding: str = 'utf-8') -> str:
+        """
+        将字节数组转换为字符串
+        :param encoding: 字符串编码格式（默认是utf-8）
+        :param bytes_data: 待转换的字节数组
+        :return:
+        """
+        return bytes_data.decode(encoding)
+
+    pass
