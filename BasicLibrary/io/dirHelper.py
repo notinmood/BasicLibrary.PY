@@ -173,7 +173,9 @@ class DirHelper:
             dest_dir_full_name += f'({RandomHelper.create(8, RandomEnum.UpperLetters)})'
         pass
 
-        os.rename(source_dir_full_name, dest_dir_full_name)
+        # os.rename不能跨驱动器移动文件，因此此处修改为shutil.move
+        # os.rename(source_dir_full_name, dest_dir_full_name)
+        shutil.move(source_dir_full_name, dest_dir_full_name)
 
     pass
 
