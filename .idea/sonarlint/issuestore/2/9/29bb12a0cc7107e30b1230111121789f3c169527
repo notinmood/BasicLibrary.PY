@@ -1,4 +1,0 @@
-
-ªpython:S5886S"eReturn a value of type "Union[bytes, str]" instead of "NoneType" or update function "load" type hint.(ò¤Ÿù8úÅÆ¿ñ1J$e85e4259-7ab1-4c9d-8125-5d5b45f431f0
-­python:S5886r"hReturn a value of type "list[str]" instead of "NoneType" or update function "load_with_lines" type hint.(ò¤Ÿù8ûÅÆ¿ñ1J$cce6e52e-a48f-45c4-9e1f-257cbd1cbedf
-python:S1763Î"GDelete this unreachable code or refactor the code to make it reachable.(ã‘Û¾8½ÇÆ¿ñ1J$9e79c321-dd43-4a5e-9834-9c8fe48bb70c
