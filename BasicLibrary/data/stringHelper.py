@@ -90,6 +90,10 @@ class StringHelper:
         :param separator:分隔符
         :return:分隔符前面的子字符串
         """
+        if not separator:
+            return whole
+        pass
+
         pos = str.find(whole, separator)
         if pos >= 0:
             return whole[0:pos]

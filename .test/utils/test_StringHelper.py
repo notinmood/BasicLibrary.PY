@@ -106,6 +106,11 @@ def test_get_before_content():
     expected = "he"
     assert actual == expected
 
+    whole = "hello,china"
+    actual = StringHelper.get_before_content(whole, "")
+    expected = "hello,china"
+    assert actual == expected
+
 
 def test_get_after_content():
     whole = "hello,china"

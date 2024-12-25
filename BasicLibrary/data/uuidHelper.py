@@ -8,7 +8,6 @@
 """
 import ulid
 
-
 class UUIDHelper:
     """
     使用ulid生成UUID。
@@ -18,9 +17,8 @@ class UUIDHelper:
     3. 可以保证UUID的随机性。
     说明：
     格式如下：t*10+r*16
-    其中：    t is Timestamp；    r is Randomness
+    其中：t is Timestamp；r is Randomness。
     """
-
     def __init__(self):
         pass
 
