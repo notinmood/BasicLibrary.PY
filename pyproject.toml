@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "BasicLibrary.PY"
-version = "0.6.39"
+version = "0.6.40"
 description = ""
 authors = ["解大劦 <9727005@qq.com>"]
 readme = "README.md"
@@ -28,4 +28,4 @@ build-backend = "poetry.core.masonry.api"
 [[tool.poetry.source]]
 name = "mirrors"
 url = "https://pypi.tuna.tsinghua.edu.cn/simple/"
-priority = "default"
+priority = "primary"

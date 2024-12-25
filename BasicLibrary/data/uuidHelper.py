@@ -21,6 +21,9 @@ class UUIDHelper:
     其中：    t is Timestamp；    r is Randomness
     """
 
+    def __init__(self):
+        pass
+
     @staticmethod
     def new():
         return ulid.new()

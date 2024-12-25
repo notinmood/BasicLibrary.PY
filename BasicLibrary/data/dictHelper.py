@@ -7,6 +7,9 @@ from BasicLibrary.model.dataCompare import DataSummary
 # +--------------------------------------------------------------------------
 
 class DictHelper:
+    def __init__(self):
+        pass
+
     @staticmethod
     def is_contains_key(whole_dict, key_name):
         """
